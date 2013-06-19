@@ -1,0 +1,9 @@
+#mc4wp_admin hr{ margin:20px 0; background-color:lightGray; border:0; height:1px; }
+#mc4wp_admin h2{ padding-bottom: 0; }
+#mc4wp_admin span.status{ padding:3px; color:white; font-size:12px; }
+#mc4wp_admin span.status.connected{ background-color:green; }
+#mc4wp_admin span.status.not_connected{ background-color:lightGrey; }
+#mc4wp_admin td.desc{ font-style:italic; font-size:10px; }
+
+#mc4wp_admin .alert{ border:1px solid black; padding:5px; width:auto; }
+#mc4wp_admin .alert.warning{ background:#FCF8E3; color:#C09853; border:1px solid #FBEED5; }
