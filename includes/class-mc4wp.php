@@ -64,6 +64,7 @@ class MC4WP
 		}
 
 		if(isset($data['name'])) {
+			$name = $data['name'];
 			$merge_vars['NAME'] = $name;
 
 			// try to fill first and last name fields as well

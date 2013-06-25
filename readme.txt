@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, newsletter, mailinglist, checkbox, email, mailchimp api,email list
 Requires at least: 3.1
 Tested up to: 3.5.1
-Stable tag: 0.1
+Stable tag: 0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,10 @@ Your theme probably does not support the necessary comment hook this plugin uses
 1. The MC4WP options page.
 
 == Changelog ==
+
+= 0.2 =
+* Fixed small bug where name of comment author was not correctly assigned
+* Improved CSS reset for checkbox
 
 = 0.1 =
 * BETA release
