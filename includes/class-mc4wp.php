@@ -9,7 +9,8 @@ class MC4WP
 	private $options = array();
 	private $defaults = array(
 		'mailchimp_api_key' => '', 'mailchimp_lists' => array(), 'mailchimp_double_optin' => 1,
-		'checkbox_label' => 'Sign me up for the newsletter!', 'checkbox_precheck' => 1, 'checkbox_css' => 0, 'checkbox_show_at_comment_form' => 0, 'checkbox_show_at_registration_form' => 0
+		'checkbox_label' => 'Sign me up for the newsletter!', 'checkbox_precheck' => 1, 'checkbox_css' => 0, 
+		'checkbox_show_at_comment_form' => 0, 'checkbox_show_at_registration_form' => 0, 'checkbox_show_at_ms_form' => 0, 'checkbox_show_at_bp_form' => 0
 	);
 
 	public static function get_instance()
@@ -30,8 +31,9 @@ class MC4WP
 			$this->commentSubscriber = new MC4WP_CommentSubscriber($this);
 		}
 
-		if($opts['checkbox_show_at_registration_form']) {
-			// TODO
+		if($opts['checkbox_show_at_registration_form'] || $opts['checkbox_show_at_bp_form'] || $opts['checkbox_show_at_ms_form']) {
+			require 'class-mc4wp-registrationsubscriber.php';
+			$this->registrationSubscriber = new MC4WP_RegistrationSubscriber($this);
 		}
 
 	}

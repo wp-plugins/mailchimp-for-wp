@@ -7,6 +7,7 @@ class MC4WP_Admin
 	private static $instance;
 	private $MC4WP;
 	private $options = array();
+	private $runs_buddypress = false;
 
 	public function __construct(MC4WP $MC4WP)
 	{
@@ -15,6 +16,7 @@ class MC4WP_Admin
 
 		add_action('admin_init', array($this, 'register_settings'));
 		add_action('admin_menu', array($this, 'build_menu'));
+		add_action( 'bp_include', array($this, 'set_buddypress_var'));
 	}
 
 	public function register_settings()
@@ -42,6 +44,7 @@ class MC4WP_Admin
 	{
 		$opts = $this->options;
 		$api = $this->MC4WP->get_mc_api();
+		$runs_buddypress = $this->runs_buddypress;
 
 		$connected = ($api->ping() === "Everything's Chimpy!");
 
@@ -49,6 +52,13 @@ class MC4WP_Admin
 			$lists = $api->lists();
 		}
 		
+		var_dump($this->runs_buddypress);
+
 		require 'views/dashboard.php';
+	}
+
+	public function set_buddypress_var()
+	{
+		$this->runs_buddypress = true;
 	}
 }

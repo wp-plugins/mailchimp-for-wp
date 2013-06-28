@@ -36,7 +36,7 @@ class MC4WP_CommentSubscriber
 
 	public function load_stylesheet()
 	{
-		wp_enqueue_style( 'mc4wp_checkbox_css', plugins_url('mailchimp-for-wp/css/checkbox.css') );
+		wp_enqueue_style( 'mc4wp-checkbox-reset', plugins_url('mailchimp-for-wp/css/checkbox.css') );
 	}
 
 	public function subscribe($cid, $comment = null)

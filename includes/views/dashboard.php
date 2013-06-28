@@ -56,7 +56,10 @@
 				<th scope="row">Add the checkbox to these forms</th>
 				<td colspan="2">
 					<label><input name="mc4wp[checkbox_show_at_comment_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_comment_form']) echo 'checked '; ?>> Comment form</label> &nbsp; 
-					<label><input disabled="true" type="checkbox" value="1" name="mc4wp[checkbox_show_at_registration_form]" <?php if($opts['checkbox_show_at_registration_form']) echo 'checked '; ?>> Registration form</label></td>
+					<label><input name="mc4wp[checkbox_show_at_registration_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_registration_form']) echo 'checked '; ?>> Registration form</label> &nbsp; 
+					<?php if(is_multisite()) { ?><label><input name="mc4wp[checkbox_show_at_ms_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_ms_form']) echo 'checked '; ?>> Multisite form</label> &nbsp; <?php } ?>
+					<?php if($runs_buddypress) { ?><label><input name="mc4wp[checkbox_show_at_bp_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_bp_form']) echo 'checked '; ?>> BuddyPress form</label> &nbsp; <?php } ?>
+				</td>
 			</tr>
 			<tr valign="top">
 				<th scope="row"><label for="mc4wp_checkbox_label">Checkbox label text</label></th>
