@@ -28,6 +28,7 @@ Commenters can be subscribed to your mailinglist(s) by just checking 1 simple ch
 
 **More info:**
 
+* [MailChimp for WordPress](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
 * Check out more [WordPress plugins](http://dannyvankooten.com/wordpress-plugins/) by Danny van Kooten
 * You should follow [Danny on Twitter](http://twitter.com/DannyvanKooten) for lightning fast support and updates.
 
@@ -41,6 +42,8 @@ Commenters can be subscribed to your mailinglist(s) by just checking 1 simple ch
 
 = What does this plugin do? =
 This plugin adds a checkbox to your comment form that makes it easy for commenters to subscribe to your MailChimp newsletter. All they have to do is check one checkbox and they will be added to your mailinglist(s).
+
+For a complete list of plugin features, take a look here: [MailChimp for WordPress](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/).
 
 = Why does the checkbox not show up? =
 Your theme probably does not support the necessary comment hook this plugin uses to add the checkbox to your comment form. You can manually place the checkbox by calling `<?php do_action('comment_form') ?>` inside the form tags of your theme's comment form. Usually this file can be found in your theme folder as `comments.php`. Your theme folder can be found by browsing to `/wp-content/themes/your-theme-name/`.
