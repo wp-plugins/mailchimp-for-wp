@@ -17,6 +17,15 @@ class MC4WP_Admin
 		add_action('admin_init', array($this, 'register_settings'));
 		add_action('admin_menu', array($this, 'build_menu'));
 		add_action( 'bp_include', array($this, 'set_buddypress_var'));
+
+		add_filter("plugin_action_links_mailchimp-for-wp/mailchimp-for-wp.php", array($this, 'add_settings_link'));
+	}
+
+	public function add_settings_link($links)
+	{
+		 $settings_link = '<a href="admin.php?page=mailchimp-for-wp">Settings</a>';
+         array_unshift($links, $settings_link);
+         return $links;
 	}
 
 	public function register_settings()
@@ -52,8 +61,6 @@ class MC4WP_Admin
 			$lists = $api->lists();
 		}
 		
-		var_dump($this->runs_buddypress);
-
 		require 'views/dashboard.php';
 	}
 

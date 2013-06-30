@@ -53,6 +53,11 @@ Your theme probably does not support the necessary comment hook this plugin uses
 1. The MC4WP options page.
 
 == Changelog ==
+= 0.4 =
+* Changed: dashboard now has different tabs for the different settings.
+* Fixed: debugging statements
+* Added: settings link on plugin page
+
 = 0.3 =
 * Fixed the missing argument bug when submitting a comment for some users.
 * Added support for regular, BuddyPress and MultiSite registration forms.
