@@ -90,24 +90,26 @@
 		<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
 	</p>
 
-	<h3>Form messages</h3>
-	<table class="form-table mc4wp-form-messages">
-		<tr valign="top">
-			<th scope="row"><label for="mc4wp_form_text_success">Success message</label></th>
-			<td><input type="text" size="100" id="mc4wp_form_text_success" name="mc4wp[form_text_success]" value="<?php echo $opts['form_text_success']; ?>" /></td>
-		</tr>
-		<tr valign="top">
-			<th scope="row"><label for="mc4wp_form_text_error">Error message</label></th>
-			<td><input type="text" size="100" id="mc4wp_form_text_error" name="mc4wp[form_text_error]" value="<?php echo $opts['form_text_error']; ?>" /></td>
-		</tr>
-		<tr valign="top">
-			<th scope="row"><label for="mc4wp_form_text_invalid_email">Invalid email address message</label></th>
-			<td><input type="text" size="100" id="mc4wp_form_text_invalid_email" name="mc4wp[form_text_invalid_email]" value="<?php echo $opts['form_text_invalid_email']; ?>" /></td>
-		</tr>
-	</table>
+	<div id="mc4wp_form_options_2" <?php if(!$opts['form_usage']) { ?>style="display:none;"<?php } ?>>
+		<h3>Form messages</h3>
+		<table class="form-table mc4wp-form-messages">
+			<tr valign="top">
+				<th scope="row"><label for="mc4wp_form_text_success">Success message</label></th>
+				<td><input type="text" size="100" id="mc4wp_form_text_success" name="mc4wp[form_text_success]" value="<?php echo $opts['form_text_success']; ?>" /></td>
+			</tr>
+			<tr valign="top">
+				<th scope="row"><label for="mc4wp_form_text_error">Error message</label></th>
+				<td><input type="text" size="100" id="mc4wp_form_text_error" name="mc4wp[form_text_error]" value="<?php echo $opts['form_text_error']; ?>" /></td>
+			</tr>
+			<tr valign="top">
+				<th scope="row"><label for="mc4wp_form_text_invalid_email">Invalid email address message</label></th>
+				<td><input type="text" size="100" id="mc4wp_form_text_invalid_email" name="mc4wp[form_text_invalid_email]" value="<?php echo $opts['form_text_invalid_email']; ?>" /></td>
+			</tr>
+		</table>
 
-	<p class="submit">
-		<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
-	</p>
+		<p class="submit">
+			<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
+		</p>
+	</div>
 
 </div>

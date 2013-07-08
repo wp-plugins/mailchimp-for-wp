@@ -29,10 +29,10 @@
 	});
 
 	$("#mc4wp_form_usage_1").click(function() { 
-		$("#mc4wp_form_options").fadeIn(); 
+		$("#mc4wp_form_options, #mc4wp_form_options_2").fadeIn(); 
 	});
 	$("#mc4wp_form_usage_0").click(function() { 
-		$("#mc4wp_form_options").fadeOut(); 
+		$("#mc4wp_form_options, #mc4wp_form_options_2").fadeOut(); 
 	});
 
 	FormDesigner = {
