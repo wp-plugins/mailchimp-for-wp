@@ -7,11 +7,6 @@ class MC4WP
 	private static $instance;
 	private static $mc_api;
 	private $options = array();
-	private $defaults = array(
-		'mailchimp_api_key' => '', 'mailchimp_lists' => array(), 'mailchimp_double_optin' => 1,
-		'checkbox_label' => 'Sign me up for the newsletter!', 'checkbox_precheck' => 1, 'checkbox_css' => 0, 
-		'checkbox_show_at_comment_form' => 0, 'checkbox_show_at_registration_form' => 0, 'checkbox_show_at_ms_form' => 0, 'checkbox_show_at_bp_form' => 0
-	);
 
 	public static function get_instance()
 	{
@@ -24,7 +19,16 @@ class MC4WP
 
 	public function __construct()
 	{
-		$this->options = $opts = array_merge($this->defaults, (array) get_option('mc4wp'));
+		$defaults = array(
+			'mailchimp_api_key' => '', 'mailchimp_lists' => array(), 'mailchimp_double_optin' => 1,
+			'checkbox_label' => 'Sign me up for the newsletter!', 'checkbox_precheck' => 1, 'checkbox_css' => 0, 
+			'checkbox_show_at_comment_form' => 0, 'checkbox_show_at_registration_form' => 0, 'checkbox_show_at_ms_form' => 0, 'checkbox_show_at_bp_form' => 0,
+			'form_usage' => 0, 'form_css' => 0, 'form_markup' => "<p>\n\t<label for=\"mc4wp_f%N%_email\">Email address: </label>\n\t<input type=\"email\" id=\"mc4wp_f%N%_email\" name=\"email\" required=\"true\" placeholder=\"Your email address\" />\n</p>\n\n<p>\n\t<input type=\"submit\" value=\"Sign up\" />\n</p>",
+			'form_text_success' => 'Thank you, your sign-up request was succesful! Please check your e-mail inbox.', 'form_text_error' => 'Oops. Something went wrong. Please try again later.',
+			'form_text_invalid_email' => 'Please provide a valid email address.'
+		);
+
+		$this->options = $opts = array_merge($defaults, (array) get_option('mc4wp'));
 
 		if($opts['checkbox_show_at_comment_form']) {
 			require 'class-mc4wp-commentsubscriber.php';
@@ -36,6 +40,10 @@ class MC4WP
 			$this->registrationSubscriber = new MC4WP_RegistrationSubscriber($this);
 		}
 
+		if($opts['form_usage']) {
+			require 'class-mc4wp-form.php';
+			$this->form = new MC4WP_Form($this);
+		}
 	}
 
 	public function get_options() 
@@ -71,8 +79,13 @@ class MC4WP
 
 			// try to fill first and last name fields as well
 			$strpos = strpos($name, ' ');
-			$merge_vars['FNAME'] = substr($name, 0, $strpos);
-			$merge_vars['LNAME'] = substr($name, $strpos);
+			if($strpos) {
+				$merge_vars['FNAME'] = substr($name, 0, $strpos);
+				$merge_vars['LNAME'] = substr($name, $strpos);
+			} else {
+				$merge_vars['FNAME'] = $name;
+				$merge_vars['LNAME'] = '.';
+			}
 		}
 
 		foreach($opts['mailchimp_lists'] as $list) {

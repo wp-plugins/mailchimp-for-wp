@@ -16,6 +16,7 @@ class MC4WP_Admin
 
 		add_action('admin_init', array($this, 'register_settings'));
 		add_action('admin_menu', array($this, 'build_menu'));
+		add_action( 'admin_enqueue_scripts', array($this, 'load_css_and_js') );
 		add_action( 'bp_include', array($this, 'set_buddypress_var'));
 
 		add_filter("plugin_action_links_mailchimp-for-wp/mailchimp-for-wp.php", array($this, 'add_settings_link'));
@@ -40,13 +41,22 @@ class MC4WP_Admin
 
 	public function build_menu()
 	{
-		$page = add_menu_page('MailChimp for WP', 'MailChimp for WP', 'manage_options', 'mailchimp-for-wp', array($this, 'page_dashboard'));
-		add_action( 'admin_print_styles-' . $page, array($this, 'load_css') );
+		$page = add_menu_page('MailChimp for WP', 'MailChimp for WP', 'manage_options', 'mailchimp-for-wp', array($this, 'page_dashboard'), plugins_url('mailchimp-for-wp/img/menu-icon.png'));
 	}
 
-	public function load_css()
+	public function load_css_and_js($hook)
 	{
-		wp_enqueue_style( 'mc4wp_css', plugins_url('mailchimp-for-wp/css/admin.css') );
+		if($hook != 'toplevel_page_mailchimp-for-wp') { return false; }
+
+		wp_register_script('mc4wp-js',  plugins_url('mailchimp-for-wp/js/admin.js'), array('jquery'), false, true);
+		wp_register_script('twitter-widgets', 'http://platform.twitter.com/widgets.js', null, false, true);
+		// css
+		wp_enqueue_style( 'mc4wp-css', plugins_url('mailchimp-for-wp/css/admin.css') );
+
+		// js
+		wp_enqueue_script( array('jquery', 'mc4wp-js', 'twitter-widgets') );
+		$translation_array = array( 'admin_page' => get_admin_url(null, 'admin.php?page=mailchimp-for-wp') );
+		wp_localize_script( 'mc4wp-js', 'mc4wp_urls', $translation_array );
 	}
 
 	public function page_dashboard()
@@ -61,6 +71,10 @@ class MC4WP_Admin
 			$lists = $api->lists();
 		}
 		
+		// tab shit
+		$tabs = array('api-settings', 'mailchimp-settings', 'checkbox-settings', 'form-settings');
+		$tab = (isset($_GET['tab'])) ? $_GET['tab'] : 'api-settings';
+
 		require 'views/dashboard.php';
 	}
 

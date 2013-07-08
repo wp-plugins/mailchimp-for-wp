@@ -1,0 +1,8 @@
+form.mc4wp-form{ clear:both; margin:20px 0; }
+form.mc4wp-form p{ clear:both; }
+form.mc4wp-form label{ display:block; font-weight:bold; }
+form.mc4wp-form input{ display:block; }
+form.mc4wp-form input[type=submit]{ }
+
+#mc4wp-success{ color:green; }
+#mc4wp-error{ color:red; }

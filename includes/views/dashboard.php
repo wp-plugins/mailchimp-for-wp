@@ -1,88 +1,100 @@
 <div id="mc4wp_admin" class="wrap">
-	<h1>Configuration</h1>
 
-	<form method="post" action="options.php">
-		<?php settings_fields( 'mc4wp_options_group' ); ?>
+	<h1>MailChimp for WordPress - Configuration</h1>
 
-		<h2>API Settings <?php if($connected) { ?><span class="status connected">CONNECTED</span> <?php } else { ?><span class="status not_connected">NOT CONNECTED</span><?php } ?></h2>
-		<table class="form-table">
+	<ul id="mc4wp-nav">
+		<li><a <?php if($tab == 'api-settings') echo 'class="active"'; ?> href="#api-settings">API settings</a></li>
+		<li><a <?php if($tab == 'mailchimp-settings') echo 'class="active"'; ?> href="#mailchimp-settings">MailChimp settings</a></li>
+		<li><a <?php if($tab == 'checkbox-settings') echo 'class="active"'; ?> href="#checkbox-settings">Checkbox settings</a></li>
+		<li><a <?php if($tab == 'form-settings') echo 'class="active"'; ?> href="#form-settings">Form settings</a></li>
+	</ul>
 
-			<tr valign="top">
-			    <th scope="row"><label for="mailchimp_api_key">MailChimp API Key</label> <a target="_blank" href="http://admin.mailchimp.com/account/api">(?)</a></th>
-			    <td><input type="text" size="50" placeholder="Your MailChimp API key" id="mailchimp_api_key" name="mc4wp[mailchimp_api_key]" value="<?php echo $opts['mailchimp_api_key']; ?>" /></td>
-			</tr>
+	<h2 style="display:none;"></h2>
+	<?php settings_errors(); ?>
 
-		</table>
+	<div style="float:left; width:70%;">
 
-		<hr />
-	    
+		<form method="post" action="options.php">
+				
+			<?php settings_fields( 'mc4wp_options_group' ); ?>
 
-	    <h2>MailChimp settings</h2>
-	    <?php if($connected) { ?>
+			<div id="mc4wp-tabs">
 
-	    	<?php if(empty($opts['mailchimp_lists'])) { ?>
-	    		<p class="alert warning"><b>Notice:</b> You must select atleast 1 list to which commenters should be subscribed.</p>
-	    	<?php } ?>
+				<?php 				
+					// include tab pages
+					foreach($tabs as $t) {
+						require "$t.php";
+					}
+						
+				?>
 
-		    <table class="form-table">
-				<tr valign="top">
-					<th scope="row">Lists</th>
-					<td>
-						<?php // loop through lists
-				    	foreach($lists['data'] as $l) {
-				    		?><input type="checkbox" id="list_<?php echo $l['id']; ?>_cb" name="mc4wp[mailchimp_lists][<?php echo $l['id']; ?>]" value="<?php echo $l['id']; ?>" <?php if(array_key_exists($l['id'], $opts['mailchimp_lists'])) echo 'checked="checked"'; ?>> <label for="list_<?php echo $l['id']; ?>_cb"><?php echo $l['name']; ?></label><br /><?php
-				    	} ?>
-					</td>
-					<td class="desc">Select the lists to which your commenters should be subscribed</td>
+			</div>
+
+		</form>
+
+		<p class="copyright-notice">I would like to remind you that this plugin is <b>not</b> developed by or affiliated with MailChimp in any way. My name is <a href="http://www.dannyvankooten.com/">Danny van Kooten</a>, I am a Dutch freelance webdeveloper thinking you might like a plugin like this. :-)</p>
+
+	</div>
+
+	<div style="width:26%; float:right; margin-left:3%;">
+		
+		<div class="box donatebox">
+			<h3>Donate $10, $20 or $50</h3>
+			<p>I spent countless hours developing this plugin for <b>FREE</b>. If you like it, consider donating a small token of your appreciation. It is much appreciated!</p>
+					
+			<form class="donate" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+				<input type="hidden" name="cmd" value="_donations">
+				<input type="hidden" name="business" value="AP87UHXWPNBBU">
+				<input type="hidden" name="lc" value="US">
+				<input type="hidden" name="item_name" value="Danny van Kooten">
+				<input type="hidden" name="item_number" value="MailChimp for WordPress">
+				<input type="hidden" name="currency_code" value="USD">
+				<input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHosted">
+				<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+				<img alt="" border="0" src="https://www.paypalobjects.com/nl_NL/i/scr/pixel.gif" width="1" height="1">
+			</form>
+
+			<p>Or you can: </p>
+            <ul>
+                <li><a href="http://wordpress.org/extend/plugins/mailchimp-for-wp/">Give a 5&#9733; review on WordPress.org</a></li>
+                <li><a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Blog about it and link to the plugin page</a></li>
+                <li style="vertical-align:bottom;"><a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/" data-text="Showing my appreciation to @DannyvanKooten for his #WordPress plugin: MailChimp for WP" data-count="none">Tweet</a></li>
+            </ul>
+        </div>
+
+        <?php if($tab == 'form-settings') { ?>
+		<div>
+			<h4>Notes regarding the form designer</h4>
+			<p>As a minimum, your form should include an email address field and a submit button field.</p>
+			<p>Add other fields if you like but make sure to match your MailChimp list requirements. 
+			All additional fields will be sent to MailChimp with the sign-up request. Data will be named like the 'name' attribute you've given to your fields.</p>
+			<p><b>For example:</b> suppose your list uses <em>FNAME</em> to collect first names of your list subscribers.
+				In this case you should create a text field with 'fname' as it's name attribute. Name attributes are case-insensitive.</p>
+			<h4>Special form strings</h4>
+			<table>
+				<tr>
+					<th>%N%</th><td>The form instance number. Useful when you have more than one form on a certain page.</td>
 				</tr>
-				<tr valign="top">
-					<th scope="row">Double opt-in?</th>
-					<td><input type="radio" id="mc4wp_double_optin_1" name="mc4wp[mailchimp_double_optin]" value="1" <?php if($opts['mailchimp_double_optin'] == 1) echo 'checked="checked"'; ?> /> <label for="mc4wp_double_optin_1">Yes</label> &nbsp; <input type="radio" id="mc4wp_double_optin_0" name="mc4wp[mailchimp_double_optin]" value="0" <?php if($opts['mailchimp_double_optin'] == 0) echo 'checked="checked"'; ?> /> <label for="mc4wp_double_optin_0">No</label></td>
-					<td class="desc"></td>
+				<tr>
+					<th>%IP_ADDRESS%</th><td>The IP adress of the visitor.</td>
 				</tr>
-
+				<tr>
+					<th>%DATE%</th><td>The current date (dd/mm/yyyy).</td>
+				</tr>
 			</table>
 
+			<p>Style the output of the form by applying CSS rules to <b>form.mc4wp-form</b> and its child elements. Add these CSS rules to your theme's stylesheet
+				 which can in most cases be found here: <em><?php echo get_stylesheet_directory(); ?>/style.css</em>.</p>
+		</div>
+		<?php } ?>
 
-	    <?php } else { ?>
-			<p>Please provide a valid API key first.</p>
-		<?php } // end if connected ?>
+		<div>
+			<h3>Looking for support?</h3>
+			<p>Please post your questions, bug reports or feature requests regarding MailChimp for WP in the <a href="http://wordpress.org/support/plugin/mailchimp-for-wp">WordPress support forums</a> so others might be able to benefit from this too. I will try to respond as soon as I possibly can.</p>
+		</div>
 
-		<hr />
+	</div>
 
-		<h2>Checkbox Settings</h2>		
-		<table class="form-table">
-			<tr valign="top">
-				<th scope="row">Add the checkbox to these forms</th>
-				<td colspan="2">
-					<label><input name="mc4wp[checkbox_show_at_comment_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_comment_form']) echo 'checked '; ?>> Comment form</label> &nbsp; 
-					<label><input name="mc4wp[checkbox_show_at_registration_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_registration_form']) echo 'checked '; ?>> Registration form</label> &nbsp; 
-					<?php if(is_multisite()) { ?><label><input name="mc4wp[checkbox_show_at_ms_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_ms_form']) echo 'checked '; ?>> Multisite form</label> &nbsp; <?php } ?>
-					<?php if($runs_buddypress) { ?><label><input name="mc4wp[checkbox_show_at_bp_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_bp_form']) echo 'checked '; ?>> BuddyPress form</label> &nbsp; <?php } ?>
-				</td>
-			</tr>
-			<tr valign="top">
-				<th scope="row"><label for="mc4wp_checkbox_label">Checkbox label text</label></th>
-				<td colspan="2"><input type="text" size="50" id="mc4wp_checkbox_label" name="mc4wp[checkbox_label]" value="<?php echo $opts['checkbox_label']; ?>" /></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Pre-check the checkbox?</th>
-				<td><input type="radio" id="mc4wp_checkbox_precheck_1" name="mc4wp[checkbox_precheck]" value="1" <?php if($opts['checkbox_precheck'] == 1) echo 'checked="checked"'; ?> /> <label for="mc4wp_checkbox_precheck_1">Yes</label> &nbsp; <input type="radio" id="mc4wp_checkbox_precheck_0" name="mc4wp[checkbox_precheck]" value="0" <?php if($opts['checkbox_precheck'] == 0) echo 'checked="checked"'; ?> /> <label for="mc4wp_checkbox_precheck_0">No</label></td>
-				<td class="desc"></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Load some default CSS?</th>
-				<td><input type="radio" id="mc4wp_checbox_css_1" name="mc4wp[checkbox_css]" value="1" <?php if($opts['checkbox_css'] == 1) echo 'checked="checked"'; ?> /> <label for="mc4wp_checbox_css_1">Yes</label> &nbsp; <input type="radio" id="mc4wp_checbox_css_0" name="mc4wp[checkbox_css]" value="0" <?php if($opts['checkbox_css'] == 0) echo 'checked="checked"'; ?> /> <label for="mc4wp_checbox_css_0">No</label></td>
-				<td class="desc">Tick "yes" if the checkbox appears in a weird place.</td>
-			</tr>
-			<tr valign="top">
-				<td colspan="3"><p>Custom or additional styling can be applied by styling the paragraph element with ID <b>#mc4wp-checkbox</b> or it's child elements.</p></td>
-			</tr>
-		</table>
-	    
-	    <p class="submit">
-	    	<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
-	    </p>
+	
 
-	</form>
 </div>
