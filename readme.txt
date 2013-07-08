@@ -45,9 +45,8 @@ Commenters and subscribers are valuable visitors who are most likely interested 
 
 == Installation ==
 
-1. In your WordPress admin panel, go to Plugins > New Plugin and search for "MailChimp for WP"
-1. Click "Install now"
-1. Or, download the plugin and upload the contents of mailchimp-for-wp.zip to your plugins directory, which usually is `/wp-content/plugins/`.
+1. In your WordPress admin panel, go to Plugins > New Plugin, search for "MailChimp for WP" and click "Install now"
+1. Alternatively, download the plugin and upload the contents of mailchimp-for-wp.zip to your plugins directory, which usually is `/wp-content/plugins/`.
 1. Activate the plugin
 1. Fill in your MailChimp API key in the plugin's options.
 1. Select at least one list to subscribe visitors to.
@@ -63,6 +62,9 @@ For a complete list of plugin features, take a look here: [MailChimp for WordPre
 
 = Why does the checkbox not show up at my comment form? =
 Your theme probably does not support the necessary comment hook this plugin uses to add the checkbox to your comment form. You can manually place the checkbox by calling `<?php do_action('comment_form') ?>` inside the form tags of your theme's comment form. Usually this file can be found in your theme folder as `comments.php`. Your theme folder can be found by browsing to `/wp-content/themes/your-theme-name/`.
+
+= Where can I find my MailChimp API key? =
+[http://kb.mailchimp.com/article/where-can-i-find-my-api-key](http://kb.mailchimp.com/article/where-can-i-find-my-api-key)
 
 == Screenshots ==
 
