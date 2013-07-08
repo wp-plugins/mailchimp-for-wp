@@ -45,9 +45,14 @@ Commenters and subscribers are valuable visitors who are most likely interested 
 
 == Installation ==
 
-1. Upload the contents of newsletter-sign-up.zip to your plugins directory.
+1. In your WordPress admin panel, go to Plugins > New Plugin and search for "MailChimp for WP"
+1. Click "Install now"
+1. Or, download the plugin and upload the contents of mailchimp-for-wp.zip to your plugins directory, which usually is `/wp-content/plugins/`.
 1. Activate the plugin
 1. Fill in your MailChimp API key in the plugin's options.
+1. Select at least one list to subscribe visitors to.
+1. (Optional) Select where the checkbox should show up.
+1. (Optional) Design a form and include it in your posts, pages or text widgets.
 
 == Frequently Asked Questions ==
 
