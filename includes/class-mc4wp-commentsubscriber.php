@@ -62,7 +62,7 @@ class MC4WP_CommentSubscriber
 					'ip' => $ip)
 				);
 
-				if($result) {
+				if($result === true) {
 					update_comment_meta($cid, 'mc4wp_subscribe', 'subscribed', 1);
 				}
 			}

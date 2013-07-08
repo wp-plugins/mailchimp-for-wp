@@ -79,12 +79,13 @@ class MC4WP
 			if(!isset($merge_vars['FNAME']) && !isset($merge_vars['LNAME'])) {
 				// try to fill first and last name fields as well
 				$strpos = strpos($name, ' ');
+
 				if($strpos) {
 					$merge_vars['FNAME'] = substr($name, 0, $strpos);
 					$merge_vars['LNAME'] = substr($name, $strpos);
 				} else {
 					$merge_vars['FNAME'] = $name;
-					$merge_vars['LNAME'] = '.';
+					$merge_vars['LNAME'] = '...';
 				}
 			}
 		}
@@ -100,12 +101,7 @@ class MC4WP
 			}
 
 			if($mc->errorCode >= 250 && $mc->errorCode <= 254 && current_user_can('manage_options')) {
-				die("
-					<h4>MailChimp for WordPress debug message (administrators only, don't worry).</h4> 
-					<p>There seems to be a problem with one of your merge fields. Maybe you forgot to add a required merge field to your form?</p>
-					<p>This is the error the MailChimp server returned: <em>{$mc->errorMessage}</em></p>
-					<p><a href=\"javascript:history.go(-1);\">&laquo; Go back.</a></p>
-				");
+				return 'merge_field_error';
 			}
 
 			return false;
@@ -115,5 +111,6 @@ class MC4WP
 		// this will only return the result of the last list a subscribe attempt has been sent to
 		return $result;
 	}
+
 
 }

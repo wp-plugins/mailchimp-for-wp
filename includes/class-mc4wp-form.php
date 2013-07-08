@@ -65,8 +65,17 @@ class MC4WP_Form
 			if(isset($opts['form_text_' . $this->error])) {
 				$content .= '<p id="mc4wp-error">' . $opts['form_text_' . $this->error] . '</p>';
 			} else {
-				$content .= '<p id="mc4wp-error">' . $opts['form_text_error'] . '</p>';
+				$content .= '<p id="mc4wp-error">' . $opts['form_text_error'];
+				
+				if(current_user_can('manage_options') && $this->error == 'merge_field_error') {
+					$content .= '<br /><br /><b>Admin only message: </b> there seems to be a problem with one of your merge fields. Maybe you forgot to add a required merge field to your form?';
+					$content .= '<br /><br /><b>MailChimp error: </b><em>'. $this->getMC4WP()->get_mc_api()->errorMessage . '</em>';
+				}
+
+				$content .= '</p>';
 			}
+
+			
 			
 		}
 
