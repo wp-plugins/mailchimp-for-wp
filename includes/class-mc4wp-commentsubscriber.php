@@ -57,7 +57,7 @@ class MC4WP_CommentSubscriber
 				$ip = $comment->comment_author_IP;
 				$name = $comment->comment_author;
 
-				$result = $this->getMC4WP()->subscribe($email, array(
+				$result = $this->getMC4WP()->subscribe($email, array(), array(
 					'name' => $name,
 					'ip' => $ip)
 				);

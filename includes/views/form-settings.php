@@ -98,12 +98,16 @@
 				<td><input type="text" size="100" id="mc4wp_form_text_success" name="mc4wp[form_text_success]" value="<?php echo $opts['form_text_success']; ?>" /></td>
 			</tr>
 			<tr valign="top">
-				<th scope="row"><label for="mc4wp_form_text_error">Error message</label></th>
+				<th scope="row"><label for="mc4wp_form_text_error">General error message</label></th>
 				<td><input type="text" size="100" id="mc4wp_form_text_error" name="mc4wp[form_text_error]" value="<?php echo $opts['form_text_error']; ?>" /></td>
 			</tr>
 			<tr valign="top">
 				<th scope="row"><label for="mc4wp_form_text_invalid_email">Invalid email address message</label></th>
 				<td><input type="text" size="100" id="mc4wp_form_text_invalid_email" name="mc4wp[form_text_invalid_email]" value="<?php echo $opts['form_text_invalid_email']; ?>" /></td>
+			</tr>
+			<tr valign="top">
+				<th scope="row"><label for="mc4wp_form_text_already_subscribed">Email address is already on list message</label></th>
+				<td><input type="text" size="100" id="mc4wp_form_text_already_subscribed" name="mc4wp[form_text_already_subscribed]" value="<?php echo $opts['form_text_already_subscribed']; ?>" /></td>
 			</tr>
 		</table>
 

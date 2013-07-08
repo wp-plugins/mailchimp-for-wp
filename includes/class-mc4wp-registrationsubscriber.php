@@ -77,7 +77,7 @@ class MC4WP_RegistrationSubscriber
 
 		}
 		
-		$result = $this->getMC4WP()->subscribe($email, array(
+		$result = $this->getMC4WP()->subscribe($email, array(), array(
 			'name' => $name
 			)
 		);

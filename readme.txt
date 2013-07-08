@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, newsletter, mailinglist, email, email list, form, widget form, sign-up form, subscribe form, comments, comment form, mailchimp widget, buddypress, multisite
 Requires at least: 3.1
 Tested up to: 3.5.2
-Stable tag: 0.4
+Stable tag: 0.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,11 @@ Your theme probably does not support the necessary comment hook this plugin uses
 1. The MC4WP form options page.
 
 == Changelog ==
+= 0.4.1 =
+* Fixed correct and more specific error messages
+* Added error message when email address was already on the list
+* Added debug message when there is a problem with one of the (required) merge fields
+
 = 0.4 =
 * Improved dashboard, it now has different tabs for the different settings.
 * Improved guessing of first and last name.

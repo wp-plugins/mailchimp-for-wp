@@ -9,7 +9,8 @@ class MC4WP_Form
 	private $form_instance_number = 1;
 	private $did_request = false;
 	private $request_succes = false; 
-	private $valid_email_address = false;
+	private $error = null;
+	private $success = null;
 
 	public function __construct(MC4WP $mc4wp) 
 	{
@@ -27,7 +28,7 @@ class MC4WP_Form
 		add_filter( 'widget_text', 'do_shortcode', 11);
 
 		if(isset($_POST['mc4wp_form_submit'])) {
-			$this->subscribe();
+			add_action('init', array($this, 'subscribe'), 99);
 		}
 	}
 
@@ -57,14 +58,16 @@ class MC4WP_Form
 
 		$content .= '<textarea name="mc4wp_required_but_not_really" style="display: none;"></textarea><input type="hidden" name="mc4wp_form_submit" value="1" />';
 
-		if($this->did_request) {
-			if($this->request_success) {
-				$content .= '<p id="mc4wp-success">' . $opts['form_text_success'] . '</p>';
-			} elseif(!$this->valid_email_address) {
-				$content .= '<p id="mc4wp-error">' . $opts['form_text_invalid_email'] . '</p>';
+		if($this->success) {
+			$content .= '<p id="mc4wp-success">' . $opts['form_text_success'] . '</p>';
+		} else if($this->error) {
+
+			if(isset($opts['form_text_' . $this->error])) {
+				$content .= '<p id="mc4wp-error">' . $opts['form_text_' . $this->error] . '</p>';
 			} else {
-				$content .= '<p id="mc4wp-error">'. $opts['form_text_error'] . '</p>';
+				$content .= '<p id="mc4wp-error">' . $opts['form_text_error'] . '</p>';
 			}
+			
 		}
 
 		$content .= "</form>";
@@ -79,8 +82,8 @@ class MC4WP_Form
 	{
 		if(!isset($_POST['email']) || !is_email($_POST['email'])) { 
 			// no (valid) e-mail address has been given
-			$this->did_request = true;
-			$this->valid_email_address = false;
+
+			$this->error = 'invalid_email';
 			return false;
 		}
 
@@ -105,10 +108,20 @@ class MC4WP_Form
 
 		$result = $this->getMC4WP()->subscribe($email, $merge_vars);
 
-		$this->did_request = true;
-		$this->request_success = $result;
+
+		// empty $_POST vars, to prevent strange WP bug
+		if(isset($_POST['name'])) { $_POST['name'] = null; }
+		if(isset($_POST['email'])) { $_POST['email'] = null; }
+
+		if($result === true) { 
+			$this->success = true;
+			return true;
+		} else {
+			$this->error = true;
+			return false;
+		}
+
 		
-		return $result;
 	}
 
 	private function get_ip_address()
