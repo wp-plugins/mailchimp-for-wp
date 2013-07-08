@@ -67,6 +67,8 @@ Your theme probably does not support the necessary comment hook this plugin uses
 == Changelog ==
 = 0.4.1 =
 * Fixed correct and more specific error messages
+* Fixed form designer, hidden fields no longer wrapped in paragraph tags
+* Added text fields to form designer
 * Added error message when email address was already on the list
 * Added debug message when there is a problem with one of the (required) merge fields
 

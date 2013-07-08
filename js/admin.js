@@ -97,6 +97,7 @@
 				case 'hidden':
 					f.$type.val("hidden");
 					f.$all.find('.row-placeholder, .row-wrap-in-p, .row-label, .row-required').hide();
+					f.$wrap.prop('checked', false);
 				break;
 
 				case 'submit':

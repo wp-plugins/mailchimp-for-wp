@@ -34,7 +34,8 @@
 								<option value="fname">First name</option>
 								<option value="lname">Last name</option>
 								<option value="email">Email address</option>
-								<option value="hidden">Hidden</option>
+								<option value="text">Text field</option>
+								<option value="hidden">Hidden field</option>
 								<option value="submit">Submit button</option>
 							</select>
 						</p>
