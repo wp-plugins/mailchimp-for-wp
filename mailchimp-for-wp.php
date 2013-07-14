@@ -3,7 +3,7 @@
 Plugin Name: MailChimp for WP
 Plugin URI: http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/
 Description: Complete MailChimp integration for WordPress. Sign-up forms, widgets, comment checkboxes, etc..
-Version: 0.4.1
+Version: 0.5
 Author: Danny van Kooten
 Author URI: http://dannyvanKooten.com
 License: GPL v3

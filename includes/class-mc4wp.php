@@ -23,9 +23,10 @@ class MC4WP
 			'mailchimp_api_key' => '', 'mailchimp_lists' => array(), 'mailchimp_double_optin' => 1,
 			'checkbox_label' => 'Sign me up for the newsletter!', 'checkbox_precheck' => 1, 'checkbox_css' => 0, 
 			'checkbox_show_at_comment_form' => 0, 'checkbox_show_at_registration_form' => 0, 'checkbox_show_at_ms_form' => 0, 'checkbox_show_at_bp_form' => 0,
-			'form_usage' => 0, 'form_css' => 0, 'form_markup' => "<p>\n\t<label for=\"mc4wp_f%N%_email\">Email address: </label>\n\t<input type=\"email\" id=\"mc4wp_f%N%_email\" name=\"email\" required=\"true\" placeholder=\"Your email address\" />\n</p>\n\n<p>\n\t<input type=\"submit\" value=\"Sign up\" />\n</p>",
+			'form_usage' => 0, 'form_css' => 0, 'form_markup' => "<p>\n\t<label for=\"mc4wp_f%N%_email\">Email address: </label>\n\t<input type=\"email\" id=\"mc4wp_f%N%_email\" name=\"email\" required placeholder=\"Your email address\" />\n</p>\n\n<p>\n\t<input type=\"submit\" value=\"Sign up\" />\n</p>",
 			'form_text_success' => 'Thank you, your sign-up request was succesful! Please check your e-mail inbox.', 'form_text_error' => 'Oops. Something went wrong. Please try again later.',
-			'form_text_invalid_email' => 'Please provide a valid email address.', 'form_text_already_subscribed' => "Given email address is already subscribed, thank you!"
+			'form_text_invalid_email' => 'Please provide a valid email address.', 'form_text_already_subscribed' => "Given email address is already subscribed, thank you!", 
+			'form_redirect' => ''
 		);
 
 		$this->options = $opts = array_merge($defaults, (array) get_option('mc4wp'));
@@ -73,6 +74,7 @@ class MC4WP
 
 		// guess all three name kinds
 		if(isset($data['name'])) {
+			
 			$name = $data['name'];
 			$merge_vars['NAME'] = $name;
 

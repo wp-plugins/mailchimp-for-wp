@@ -45,7 +45,7 @@ class MC4WP_Form
 	{
 		$opts = $this->options;
 
-		$content = '<form method="post" action="'. $this->get_current_page_url() .'" id="mc4wp-form-'.$this->form_instance_number.'" class="mc4wp-form form">';
+		$content = '<form method="post" action="'. $this->get_current_page_url() .'#mc4wp-form" id="mc4wp-form-'.$this->form_instance_number.'" class="mc4wp-form form">';
 
 		$form_markup = $this->options['form_markup'];
 
@@ -89,6 +89,8 @@ class MC4WP_Form
 
 	public function subscribe()
 	{
+		$opts = $this->options; 
+
 		if(!isset($_POST['email']) || !is_email($_POST['email'])) { 
 			// no (valid) e-mail address has been given
 
@@ -124,6 +126,13 @@ class MC4WP_Form
 
 		if($result === true) { 
 			$this->success = true;
+
+			// check if we want to redirect the visitor
+			if(!empty($opts['form_redirect'])) {
+				wp_redirect($opts['form_redirect']);
+				exit;
+			}
+
 			return true;
 		} else {
 			$this->error = true;

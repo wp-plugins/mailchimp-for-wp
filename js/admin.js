@@ -61,7 +61,7 @@
 
 			// if placeholder is given, add it. Otherwise, omit it for W3C validity
 			if(f.$placeholder.val() != '') { fieldPreview += "placeholder=\""+ f.$placeholder.val() +"\" "; }
-			if(f.$required.is(":checked")) { fieldPreview += "required=\"true\"" ; }
+			if(f.$required.is(":checked")) { fieldPreview += "required" ; }
 			
 			// add closing trailing flash
 			fieldPreview += "/>";
