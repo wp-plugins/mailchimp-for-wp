@@ -1,5 +1,7 @@
 <?php
 
+if(class_exists("MCAPI")) { return; }
+
 class MCAPI {
     var $version = "1.3";
     var $errorMessage;

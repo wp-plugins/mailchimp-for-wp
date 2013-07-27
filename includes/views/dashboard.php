@@ -62,31 +62,31 @@
             </ul>
         </div>
 
-        <?php if($tab == 'form-settings') { ?>
-		<div>
-			<h4>Notes regarding the form designer</h4>
-			<p>As a minimum, your form should include an email address field and a submit button field.</p>
-			<p>Add other fields if you like but make sure to match your MailChimp list requirements. 
-			All additional fields will be sent to MailChimp with the sign-up request. Data will be named like the 'name' attribute you've given to your fields.</p>
-			<p><b>For example:</b> suppose your list uses <em>FNAME</em> to collect first names of your list subscribers.
-				In this case you should create a text field with 'fname' as it's name attribute. Name attributes are case-insensitive.</p>
-			<h4>Special form strings</h4>
-			<table>
-				<tr>
-					<th>%N%</th><td>The form instance number. Useful when you have more than one form on a certain page.</td>
-				</tr>
-				<tr>
-					<th>%IP_ADDRESS%</th><td>The IP adress of the visitor.</td>
-				</tr>
-				<tr>
-					<th>%DATE%</th><td>The current date (dd/mm/yyyy).</td>
-				</tr>
-			</table>
+        <div id="mc4wp-info-tabs">
+			<div class="info-tab info-tab-form-settings" <?php if($tab != 'form-settings') { echo 'style="display:none;"'; } ?>>
+				<h4>Notes regarding the form designer</h4>
+				<p>As a minimum, your form should include an email address field and a submit button field.</p>
+				<p>Add other fields if you like but make sure to match your MailChimp list requirements. 
+				All additional fields will be sent to MailChimp with the sign-up request. Data will be named like the 'name' attribute you've given to your fields.</p>
+				<p><b>For example:</b> suppose your list uses <em>FNAME</em> to collect first names of your list subscribers.
+					In this case you should create a text field with 'fname' as it's name attribute. Name attributes are case-insensitive.</p>
+				<h4>Special form strings</h4>
+				<table>
+					<tr>
+						<th>%N%</th><td>The form instance number. Useful when you have more than one form on a certain page.</td>
+					</tr>
+					<tr>
+						<th>%IP_ADDRESS%</th><td>The IP adress of the visitor.</td>
+					</tr>
+					<tr>
+						<th>%DATE%</th><td>The current date (dd/mm/yyyy).</td>
+					</tr>
+				</table>
 
-			<p>Style the output of the form by applying CSS rules to <b>form.mc4wp-form</b> and its child elements. Add these CSS rules to your theme's stylesheet
-				 which can in most cases be found here: <em><?php echo get_stylesheet_directory(); ?>/style.css</em>.</p>
+				<p>Style the output of the form by applying CSS rules to <b>form.mc4wp-form</b> and its child elements. Add these CSS rules to your theme's stylesheet
+					 which can in most cases be found here: <em><?php echo get_stylesheet_directory(); ?>/style.css</em>.</p>
+			</div>
 		</div>
-		<?php } ?>
 
 		<div>
 			<h3>Looking for support?</h3>

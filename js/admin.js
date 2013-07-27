@@ -6,13 +6,14 @@
 	$("#mc4wp-nav a").click(function(e) {
 		var target, wp_referer;
 
-		e.preventDefault();
-
 		target = $(this).attr('href').substr(1);
-		console.log("opening tab "+target);
-
 		$("#mc4wp-tabs .mc4wp-tab.active").removeClass('active');
 		$("#mc4wp-tab-" + target).addClass('active');
+
+		// show info tabs
+		$("#mc4wp-info-tabs .info-tab").hide();
+		$("#mc4wp-info-tabs .info-tab-" + target).show();
+
 		$("#mc4wp-nav .active").removeClass('active');
 		$(this).addClass('active');
 
@@ -25,7 +26,13 @@
 		// update WP hidden input field
 		$("input[name=_wp_http_referer]").val(mc4wp_urls.admin_page + "&tab=" + target);
 
-		return false;
+		if($("#mc4wp-tab-" + target).is(":visible")) {
+			e.preventDefault();
+			return false;
+		} else {
+			return true;
+		}
+		
 	});
 
 	$("#mc4wp_form_usage_1").click(function() { 
@@ -152,6 +159,10 @@
 	$("#mc4wp_ffd_add_to_form").click(function(e) { 
 		FormDesigner.transferCodeToForm();
 		return false;
+	});
+
+	FormDesigner.fields.$form.bind('copy', function(e) {
+		return alert("Use the [mc4wp-form] shortcode to render this form inside a page, post or widget.");
 	});
 
 

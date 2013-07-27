@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, newsletter, mailinglist, email, email list, form, widget form, sign-up form, subscribe form, comments, comment form, mailchimp widget, buddypress, multisite
 Requires at least: 3.1
 Tested up to: 3.5.2
-Stable tag: 0.5
+Stable tag: 0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,12 +66,31 @@ Your theme probably does not support the necessary comment hook this plugin uses
 = Where can I find my MailChimp API key? =
 [http://kb.mailchimp.com/article/where-can-i-find-my-api-key](http://kb.mailchimp.com/article/where-can-i-find-my-api-key)
 
+= How can I style the sign-up form? =
+You can use the following CSS selectors to style the sign-up form to your likings. Just add your CSS rules to your theme's stylesheet, usually found in `/wp-content/themes/your-theme-name/style.css`.
+
+`form.mc4wp-form{ ... } /* the form element */
+form.mc4wp-form p { ... } /* form paragraphs */
+form.mc4wp-form label { ... } /* labels */
+form.mc4wp-form input { ... } /* input fields */
+form.mc4wp-form input[type=submit] { ... } /* submit button */
+form.mc4wp-form p.success { ... } /* success message */
+form.mc4wp-form p.error { ... } /* error messages */` 
+
 == Screenshots ==
 
 1. The MC4WP options page.
 1. The MC4WP form options page.
 
 == Changelog ==
+
+= 0.6 =
+* Fixed: cannot redeclare class MCAPI
+* Fixed: scroll to form element
+* Added: notice when copying the form mark-up instead of using `[mc4wp-form]`
+* Added: CSS classes to form success and error message(s).
+* Removed: Static element ID on form success and error message(s) for W3C validity when more than one form on 1 page.
+
 = 0.5 =
 * Fixed W3C invalid value "true" for attribute "required"
 * Added scroll to form element after form submit.

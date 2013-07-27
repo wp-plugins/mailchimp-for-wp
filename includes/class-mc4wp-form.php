@@ -45,7 +45,7 @@ class MC4WP_Form
 	{
 		$opts = $this->options;
 
-		$content = '<form method="post" action="'. $this->get_current_page_url() .'#mc4wp-form" id="mc4wp-form-'.$this->form_instance_number.'" class="mc4wp-form form">';
+		$content = '<form method="post" action="'. $this->get_current_page_url() .'#mc4wp-form-'. $this->form_instance_number .'" id="mc4wp-form-'.$this->form_instance_number.'" class="mc4wp-form form">';
 
 		$form_markup = $this->options['form_markup'];
 
@@ -56,16 +56,17 @@ class MC4WP_Form
 
 		$content .= $form_markup;
 
+		// hidden fields
 		$content .= '<textarea name="mc4wp_required_but_not_really" style="display: none;"></textarea><input type="hidden" name="mc4wp_form_submit" value="1" />';
 
 		if($this->success) {
-			$content .= '<p id="mc4wp-success">' . $opts['form_text_success'] . '</p>';
+			$content .= '<p class="success">' . $opts['form_text_success'] . '</p>';
 		} else if($this->error) {
 
 			if(isset($opts['form_text_' . $this->error])) {
-				$content .= '<p id="mc4wp-error">' . $opts['form_text_' . $this->error] . '</p>';
+				$content .= '<p class="error">' . $opts['form_text_' . $this->error] . '</p>';
 			} else {
-				$content .= '<p id="mc4wp-error">' . $opts['form_text_error'];
+				$content .= '<p class="error">' . $opts['form_text_error'];
 				
 				if(current_user_can('manage_options') && $this->error == 'merge_field_error') {
 					$content .= '<br /><br /><b>Admin only message: </b> there seems to be a problem with one of your merge fields. Maybe you forgot to add a required merge field to your form?';

@@ -13,8 +13,8 @@
 #mc4wp-nav li a { font-weight:bold; display:block; padding: 6px 12px; margin:0 10px -1px 0; border:1px solid lightGray; text-decoration: none; font-size:14px; }
 #mc4wp-nav li a.active { background: white; border-bottom: 1px solid white; color:black; }
 
-#mc4wp-tabs .mc4wp-tab{ display:none; }
-#mc4wp-tabs .mc4wp-tab.active{ display:block; }
+#mc4wp-tabs .mc4wp-tab{ display:none !important; }
+#mc4wp-tabs .mc4wp-tab.active{ display:block !important; }
 
 #mc4wp_admin div.box{ padding:5px; }
 #mc4wp_admin div.box ul{ list-style:square; margin-left:25px; }

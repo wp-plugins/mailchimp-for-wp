@@ -27,6 +27,7 @@
 			<tr valign="top">
 				<td colspan="2">
 					<textarea cols="160" rows="20" id="mc4wp_form_markup" name="mc4wp[form_markup]"><?php echo $opts['form_markup']; ?></textarea>
+					<p><small>Use the <b>[mc4wp-form]</b> shortcode to render this form inside a widget, post or page.</small></p>
 				</td>
 				<td>
 					<form id="mc4wp_ffd">
