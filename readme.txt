@@ -69,13 +69,15 @@ Your theme probably does not support the necessary comment hook this plugin uses
 = How can I style the sign-up form? =
 You can use the following CSS selectors to style the sign-up form to your likings. Just add your CSS rules to your theme's stylesheet, usually found in `/wp-content/themes/your-theme-name/style.css`.
 
-`form.mc4wp-form{ ... } /* the form element */
+`
+form.mc4wp-form{ ... } /* the form element */
 form.mc4wp-form p { ... } /* form paragraphs */
 form.mc4wp-form label { ... } /* labels */
 form.mc4wp-form input { ... } /* input fields */
 form.mc4wp-form input[type=submit] { ... } /* submit button */
 form.mc4wp-form p.success { ... } /* success message */
-form.mc4wp-form p.error { ... } /* error messages */` 
+form.mc4wp-form p.error { ... } /* error messages */
+` 
 
 == Screenshots ==
 
