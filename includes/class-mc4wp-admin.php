@@ -34,9 +34,9 @@ class MC4WP_Admin
 		register_setting('mc4wp_options_group', 'mc4wp', array($this, 'validate_options'));
 	}
 
-	public function validate_options($options)
+	public function validate_options($opts)
 	{
-		return $options;
+		return $opts;
 	}
 
 	public function build_menu()

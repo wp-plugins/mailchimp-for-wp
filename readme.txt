@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, newsletter, mailinglist, email, email list, form, widget form, sign-up form, subscribe form, comments, comment form, mailchimp widget, buddypress, multisite
 Requires at least: 3.1
 Tested up to: 3.5.2
-Stable tag: 0.6
+Stable tag: 0.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,6 +75,7 @@ form.mc4wp-form p { ... } /* form paragraphs */
 form.mc4wp-form label { ... } /* labels */
 form.mc4wp-form input { ... } /* input fields */
 form.mc4wp-form input[type=submit] { ... } /* submit button */
+form.mc4wp-form p.alert { ... } /* success & error messages */
 form.mc4wp-form p.success { ... } /* success message */
 form.mc4wp-form p.error { ... } /* error messages */
 ` 
@@ -85,6 +86,11 @@ form.mc4wp-form p.error { ... } /* error messages */
 1. The MC4WP form options page.
 
 == Changelog ==
+
+= 0.6.1 =
+* Fixed: error notices
+* Added: some default CSS for success and error notices
+* Added: notice when form mark-up does not contain email field
 
 = 0.6 =
 * Fixed: cannot redeclare class MCAPI

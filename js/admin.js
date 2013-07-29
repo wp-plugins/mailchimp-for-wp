@@ -146,9 +146,25 @@
 		transferCodeToForm: function() {
 			f = this.fields;
 			f.$form.val(f.$form.val() + "\n" + f.$preview.val());
+		},
+		validateSettings: function() {
+			var html;
+
+			html = this.fields.$form.val();
+
+			// simple check to see if form mark-up contains the proper e-mail field
+			if(html.toLowerCase().indexOf('name="email"') == -1) {
+				return confirm('It seems that your form does not contain an input field for the email address.' + "\n\n"
+					+ 'Please make sure your form contains an input field with a name="email" attribute.' + "\n\n"
+					+ 'Example: <input type="text" name="email"....' + "\n\n"
+					+ 'Click OK to save settings nonetheless or cancel to go back and edit the form mark-up.');
+			}
+
+			return true;
 		}
 	}
 
+	// Events
 	$("#mc4wp_ffd_add_field").change(function() {
 		FormDesigner.setupFieldDesigner($(this).val());		
 	});
@@ -159,6 +175,9 @@
 	$("#mc4wp_ffd_add_to_form").click(function(e) { 
 		FormDesigner.transferCodeToForm();
 		return false;
+	});
+	$("#mc4wp-submit-form-settings").click(function(e) {
+		return FormDesigner.validateSettings();
 	});
 
 	FormDesigner.fields.$form.bind('copy', function(e) {

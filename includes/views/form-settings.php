@@ -18,7 +18,7 @@
 				<td class="desc">Tick "yes" for basic form formatting.</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row"><label for="mc4wp_form_redirect">Redirect to this URL after sign-up</label> <small>(leave empty if you don't want to redirect)</small></th>
+				<th scope="row"><label for="mc4wp_form_redirect">Redirect to this URL after a successful sign-up</label> <small>(leave empty if you don't want to redirect)</small></th>
 				<td><input colspan="2" type="text" size="50" name="mc4wp[form_redirect]" id="mc4wp_form_redirect" value="<?php echo $opts['form_redirect']; ?>" />
 			</tr>
 			<tr valign="top">
@@ -93,7 +93,7 @@
 	</table>
 
 	<p class="submit">
-		<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
+		<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" id="mc4wp-submit-form-settings" />
 	</p>
 
 	<div id="mc4wp_form_options_2" <?php if(!$opts['form_usage']) { ?>style="display:none;"<?php } ?>>

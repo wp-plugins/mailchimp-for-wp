@@ -60,17 +60,21 @@ class MC4WP_Form
 		$content .= '<textarea name="mc4wp_required_but_not_really" style="display: none;"></textarea><input type="hidden" name="mc4wp_form_submit" value="1" />';
 
 		if($this->success) {
-			$content .= '<p class="success">' . $opts['form_text_success'] . '</p>';
-		} else if($this->error) {
-
-			if(isset($opts['form_text_' . $this->error])) {
-				$content .= '<p class="error">' . $opts['form_text_' . $this->error] . '</p>';
+			$content .= '<p class="alert success">' . $opts['form_text_success'] . '</p>';
+		} elseif($this->error) {
+			
+			$e = $this->error;
+			if($e == 'already_subscribed') {
+				$text = (empty($opts['form_text_already_subscribed'])) ? $this->getMC4WP()->get_mc_api()->errorMessage : $opts['form_text_already_subscribed'];
+				$content .= '<p class="alert notice">'. $text .'</p>';
+			} elseif(isset($opts['form_text_' . $e]) && !empty($opts['form_text_'. $e] )) {
+				$content .= '<p class="alert error">' . $opts['form_text_' . $e] . '</p>';
 			} else {
-				$content .= '<p class="error">' . $opts['form_text_error'];
+				$content .= '<p class="alert error">' . $opts['form_text_error'];
 				
 				if(current_user_can('manage_options') && $this->error == 'merge_field_error') {
 					$content .= '<br /><br /><b>Admin only message: </b> there seems to be a problem with one of your merge fields. Maybe you forgot to add a required merge field to your form?';
-					$content .= '<br /><br /><b>MailChimp error: </b><em>'. $this->getMC4WP()->get_mc_api()->errorMessage . '</em>';
+					$content .= '<br /><br /><b>MailChimp returned the following error: </b><em>'. $this->getMC4WP()->get_mc_api()->errorMessage . '</em>';
 				}
 
 				$content .= '</p>';
@@ -120,7 +124,6 @@ class MC4WP_Form
 
 		$result = $this->getMC4WP()->subscribe($email, $merge_vars);
 
-
 		// empty $_POST vars, to prevent strange WP bug
 		if(isset($_POST['name'])) { $_POST['name'] = null; }
 		if(isset($_POST['email'])) { $_POST['email'] = null; }
@@ -136,7 +139,8 @@ class MC4WP_Form
 
 			return true;
 		} else {
-			$this->error = true;
+
+			$this->error = $result;
 			return false;
 		}
 
