@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, newsletter, mailinglist, email, email list, form, widget form, sign-up form, subscribe form, comments, comment form, mailchimp widget, buddypress, multisite
 Requires at least: 3.1
 Tested up to: 3.5.2
-Stable tag: 0.6.1
+Stable tag: 0.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,10 @@ form.mc4wp-form p.error { ... } /* error messages */
 1. The MC4WP form options page.
 
 == Changelog ==
+
+= 0.6.2 =
+* Fixed: Double quotes now enabled in text labels and success / error messages (which enables the use of JavaScript)
+* Fixed: Sign-up form failing silently without showing error.
 
 = 0.6.1 =
 * Fixed: error notices

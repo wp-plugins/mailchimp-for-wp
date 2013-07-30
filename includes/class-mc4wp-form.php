@@ -61,7 +61,7 @@ class MC4WP_Form
 
 		if($this->success) {
 			$content .= '<p class="alert success">' . $opts['form_text_success'] . '</p>';
-		} elseif($this->error) {
+		} elseif($this->error !== null) {
 			
 			$e = $this->error;
 			if($e == 'already_subscribed') {
@@ -72,7 +72,7 @@ class MC4WP_Form
 			} else {
 				$content .= '<p class="alert error">' . $opts['form_text_error'];
 				
-				if(current_user_can('manage_options') && $this->error == 'merge_field_error') {
+				if(current_user_can('manage_options') && $e == 'merge_field_error') {
 					$content .= '<br /><br /><b>Admin only message: </b> there seems to be a problem with one of your merge fields. Maybe you forgot to add a required merge field to your form?';
 					$content .= '<br /><br /><b>MailChimp returned the following error: </b><em>'. $this->getMC4WP()->get_mc_api()->errorMessage . '</em>';
 				}
@@ -105,6 +105,7 @@ class MC4WP_Form
 
 		if(isset($_POST['mc4wp_required_but_not_really']) && !empty($_POST['mc4wp_required_but_not_really'])) {
 			// spam bot filled the honeypot field
+
 			return false;
 		}
 

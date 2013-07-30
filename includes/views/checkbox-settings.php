@@ -12,7 +12,7 @@
 		</tr>
 		<tr valign="top">
 			<th scope="row"><label for="mc4wp_checkbox_label">Checkbox label text</label></th>
-			<td colspan="2"><input type="text" size="50" id="mc4wp_checkbox_label" name="mc4wp[checkbox_label]" value="<?php echo $opts['checkbox_label']; ?>" /></td>
+			<td colspan="2"><input type="text" size="50" id="mc4wp_checkbox_label" name="mc4wp[checkbox_label]" value="<?php echo esc_attr($opts['checkbox_label']); ?>" /></td>
 		</tr>
 		<tr valign="top">
 			<th scope="row">Pre-check the checkbox?</th>
