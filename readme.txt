@@ -88,6 +88,7 @@ form.mc4wp-form p.error { ... } /* error messages */
 1. The MC4WP form options page.
 
 == Changelog ==
+
 = 0.7 =
 * Improved: small backend JavaScript improvements / fixes
 * Improved: configuration tabs on options page now work with JavaScript disabled as well
