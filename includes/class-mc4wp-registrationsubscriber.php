@@ -56,6 +56,8 @@ class MC4WP_RegistrationSubscriber
 	*/
 	public function subscribe()
 	{
+		$opts = $this->options;
+
 		if($_POST['mc4wp-do-subscribe'] != 1) return;
 		
 		if(isset($_POST['user_email'])) {
@@ -63,9 +65,9 @@ class MC4WP_RegistrationSubscriber
 			// gather emailadress from user who WordPress registered
 			$email = $_POST['user_email'];
 			$name = $_POST['user_login'];
-		
+
 		} elseif(isset($_POST['signup_email'])) {
-		
+
 			// gather emailadress from user who BuddyPress registered
 			$email = $_POST['signup_email'];
 			$name = $_POST['signup_username'];
@@ -77,10 +79,27 @@ class MC4WP_RegistrationSubscriber
 
 		}
 		
-		$result = $this->getMC4WP()->subscribe($email, array(), array(
+		$result = $this->getMC4WP()->subscribe('checkbox', $email, array(), array(
 			'name' => $name
 			)
 		);
+
+		if($result === true ) {
+			// success
+		} else {
+			$error = $result;
+
+			// show error to admins only
+			if(current_user_can('manage_options')) {
+				if($error == 'no_lists_selected') {
+					die("
+						<h3>MailChimp for WordPress - configuration error</h3>
+						<p><strong>Error:</strong> No lists have been selected. Go to the <a href=\"". get_admin_url(null, "admin.php?page=mailchimp-for-wp&tab=checkbox-settings") ."\">MailChimp for WordPress options page</a> and select at least one list to subscribe commenters to.</p>
+						<p><em>PS. don't worry, this error message will only be shown to WP Administrators.</em></p>
+						"); 
+				}
+			}
+		}
 
 	}
 	
@@ -122,9 +141,12 @@ class MC4WP_RegistrationSubscriber
 		$email = $user->user_email;
 		$name = $user->first_name . ' ' . $user->last_name;
 		
-		$result = $this->getMC4WP()->subscribe($email, array(
+		$lists = $this->options['checkbox_list'];
+		$double_optin = $this->options['checkbox_double_optin'];
+
+		$result = $this->getMC4WP()->subscribe($lists, $email, array(
 			'name' => $name
-			)
+			), $double_optin
 		);
 	}
 

@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, newsletter, mailinglist, email, email list, form, widget form, sign-up form, subscribe form, comments, comment form, mailchimp widget, buddypress, multisite
 Requires at least: 3.1
 Tested up to: 3.5.2
-Stable tag: 0.6.2
+Stable tag: 0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,7 +61,9 @@ This plugin gives you the possibility to easily create a sign-up form and show t
 For a complete list of plugin features, take a look here: [MailChimp for WordPress](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/).
 
 = Why does the checkbox not show up at my comment form? =
-Your theme probably does not support the necessary comment hook this plugin uses to add the checkbox to your comment form. You can manually place the checkbox by calling `<?php do_action('comment_form') ?>` inside the form tags of your theme's comment form. Usually this file can be found in your theme folder as `comments.php`. Your theme folder can be found by browsing to `/wp-content/themes/your-theme-name/`.
+Your theme probably does not support the necessary comment hook this plugin uses to add the checkbox to your comment form. You can manually place the checkbox by placing the following code snippet inside the form tags of your theme's comment form.
+ `<?php if(function_exists('mc4wp_checkbox')) { mc4wp_checkbox(); }?>`
+ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-name/`.
 
 = Where can I find my MailChimp API key? =
 [http://kb.mailchimp.com/article/where-can-i-find-my-api-key](http://kb.mailchimp.com/article/where-can-i-find-my-api-key)
@@ -86,6 +88,12 @@ form.mc4wp-form p.error { ... } /* error messages */
 1. The MC4WP form options page.
 
 == Changelog ==
+= 0.7 =
+* Improved: small backend JavaScript improvements / fixes
+* Improved: configuration tabs on options page now work with JavaScript disabled as well
+* Added: form and checkbox can now subscribe to different lists
+* Added: Error messages for WP Administrators (for debugging)
+* Added: `mc4wp_checkbox()` function to manually add the checkbox to a comment form.
 
 = 0.6.2 =
 * Fixed: Double quotes now enabled in text labels and success / error messages (which enables the use of JavaScript)

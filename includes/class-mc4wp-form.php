@@ -64,9 +64,13 @@ class MC4WP_Form
 		} elseif($this->error !== null) {
 			
 			$e = $this->error;
+
+			// admin only error messages
 			if($e == 'already_subscribed') {
 				$text = (empty($opts['form_text_already_subscribed'])) ? $this->getMC4WP()->get_mc_api()->errorMessage : $opts['form_text_already_subscribed'];
 				$content .= '<p class="alert notice">'. $text .'</p>';
+			}elseif($e == 'no_lists_selected' && current_user_can('manage_options')) {
+				$content .= '<p class="alert error"><strong>WP Admins only:</strong> No MailChimp lists have been selected. Go to the MailChimp for WordPress settings page and select at least one list to subscribe to.</p>';
 			} elseif(isset($opts['form_text_' . $e]) && !empty($opts['form_text_'. $e] )) {
 				$content .= '<p class="alert error">' . $opts['form_text_' . $e] . '</p>';
 			} else {
@@ -123,7 +127,7 @@ class MC4WP_Form
 
 		}
 
-		$result = $this->getMC4WP()->subscribe($email, $merge_vars);
+		$result = $this->getMC4WP()->subscribe('form', $email, $merge_vars);
 
 		// empty $_POST vars, to prevent strange WP bug
 		if(isset($_POST['name'])) { $_POST['name'] = null; }

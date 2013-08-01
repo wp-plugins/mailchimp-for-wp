@@ -72,7 +72,7 @@ class MC4WP_Admin
 		}
 		
 		// tab shit
-		$tabs = array('api-settings', 'mailchimp-settings', 'checkbox-settings', 'form-settings');
+		$tabs = array('api-settings', 'checkbox-settings', 'form-settings');
 		$tab = (isset($_GET['tab'])) ? $_GET['tab'] : 'api-settings';
 
 		require 'views/dashboard.php';

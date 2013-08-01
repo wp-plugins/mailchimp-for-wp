@@ -6,7 +6,7 @@
 	$("#mc4wp-nav a").click(function(e) {
 		var target, wp_referer;
 
-		target = $(this).attr('href').substr(1);
+		target = $(this).attr('data-target');
 		$("#mc4wp-tabs .mc4wp-tab.active").removeClass('active');
 		$("#mc4wp-tab-" + target).addClass('active');
 
@@ -18,13 +18,13 @@
 		$(this).addClass('active');
 
 		// Change window location to add URL params
-		if (window.history && history.pushState) {
+		if (window.history && history.replaceState) {
 		  // NOTE: doesn't take into account existing params
-			history.replaceState("", "", "?page=mailchimp-for-wp&tab="+target);
+			history.replaceState("", "", $(this).attr('href'));
 		}
 
 		// update WP hidden input field
-		$("input[name=_wp_http_referer]").val(mc4wp_urls.admin_page + "&tab=" + target);
+		$('input[name="_wp_http_referer"]').val(mc4wp_urls.admin_page + "&tab=" + target);
 
 		if($("#mc4wp-tab-" + target).is(":visible")) {
 			e.preventDefault();
@@ -144,7 +144,7 @@
 			FormDesigner.updatePreviewCode();
 		},
 		transferCodeToForm: function() {
-			f = this.fields;
+			var f = this.fields;
 			f.$form.val(f.$form.val() + "\n" + f.$preview.val());
 		},
 		validateSettings: function() {

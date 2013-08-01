@@ -3,10 +3,9 @@
 	<h1>MailChimp for WordPress - Configuration</h1>
 
 	<ul id="mc4wp-nav">
-		<li><a <?php if($tab == 'api-settings') echo 'class="active"'; ?> href="#api-settings">API settings</a></li>
-		<li><a <?php if($tab == 'mailchimp-settings') echo 'class="active"'; ?> href="#mailchimp-settings">MailChimp settings</a></li>
-		<li><a <?php if($tab == 'checkbox-settings') echo 'class="active"'; ?> href="#checkbox-settings">Checkbox settings</a></li>
-		<li><a <?php if($tab == 'form-settings') echo 'class="active"'; ?> href="#form-settings">Form settings</a></li>
+		<li><a <?php if($tab == 'api-settings') echo 'class="active"'; ?> data-target="api-settings" href="admin.php?page=mailchimp-for-wp&tab=api-settings">API settings</a></li>
+		<li><a <?php if($tab == 'checkbox-settings') echo 'class="active"'; ?> data-target="checkbox-settings" href="admin.php?page=mailchimp-for-wp&tab=checkbox-settings">Checkbox settings</a></li>
+		<li><a <?php if($tab == 'form-settings') echo 'class="active"'; ?> data-target="form-settings" href="admin.php?page=mailchimp-for-wp&tab=form-settings">Form settings</a></li>
 	</ul>
 
 	<h2 style="display:none;"></h2>
