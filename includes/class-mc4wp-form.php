@@ -28,6 +28,10 @@ class MC4WP_Form
 		add_filter( 'widget_text', 'do_shortcode', 11);
 
 		if(isset($_POST['mc4wp_form_submit'])) {
+
+			// change $_POST['name'] to something else, to fix WP bug
+			// maybe later ok?
+
 			add_action('init', array($this, 'subscribe'), 99);
 		}
 	}
