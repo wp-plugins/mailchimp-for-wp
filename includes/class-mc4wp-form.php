@@ -1,11 +1,8 @@
 <?php
 
-if(class_exists("MC4WP_Form")) { return; }
-
 class MC4WP_Form
 {
 	private $options;
-	private $mc4wp;
 	private $form_instance_number = 1;
 	private $did_request = false;
 	private $request_succes = false; 
@@ -15,7 +12,6 @@ class MC4WP_Form
 	public function __construct(MC4WP $mc4wp) 
 	{
 		$this->options = $opts = $mc4wp->get_options();
-		$this->mc4wp = $mc4wp;
 
 		if($opts['form_css']) {
 			add_action( 'wp_enqueue_scripts', array($this, 'load_stylesheet') );
@@ -41,12 +37,9 @@ class MC4WP_Form
 		wp_enqueue_style( 'mc4wp-form-reset', plugins_url('mailchimp-for-wp/css/form.css') );
 	}
 
-	public function getMC4WP() {
-		return $this->mc4wp;
-	}
-
 	public function output_form($atts, $content = null)
 	{
+		$mc4wp = MC4WP::get_instance();
 		$opts = $this->options;
 
 		$content = '<form method="post" action="'. $this->get_current_page_url() .'#mc4wp-form-'. $this->form_instance_number .'" id="mc4wp-form-'.$this->form_instance_number.'" class="mc4wp-form form">';
@@ -71,7 +64,7 @@ class MC4WP_Form
 
 			// admin only error messages
 			if($e == 'already_subscribed') {
-				$text = (empty($opts['form_text_already_subscribed'])) ? $this->getMC4WP()->get_mc_api()->errorMessage : $opts['form_text_already_subscribed'];
+				$text = (empty($opts['form_text_already_subscribed'])) ? $mc4wp->get_mc_api()->errorMessage : $opts['form_text_already_subscribed'];
 				$content .= '<p class="alert notice">'. $text .'</p>';
 			}elseif($e == 'no_lists_selected' && current_user_can('manage_options')) {
 				$content .= '<p class="alert error"><strong>WP Admins only:</strong> No MailChimp lists have been selected. Go to the MailChimp for WordPress settings page and select at least one list to subscribe to.</p>';
@@ -82,7 +75,7 @@ class MC4WP_Form
 				
 				if(current_user_can('manage_options') && $e == 'merge_field_error') {
 					$content .= '<br /><br /><b>Admin only message: </b> there seems to be a problem with one of your merge fields. Maybe you forgot to add a required merge field to your form?';
-					$content .= '<br /><br /><b>MailChimp returned the following error: </b><em>'. $this->getMC4WP()->get_mc_api()->errorMessage . '</em>';
+					$content .= '<br /><br /><b>MailChimp returned the following error: </b><em>'. $mc4wp->get_mc_api()->errorMessage . '</em>';
 				}
 
 				$content .= '</p>';
@@ -102,18 +95,20 @@ class MC4WP_Form
 
 	public function subscribe()
 	{
+		$mc4wp = MC4WP::get_instance();
 		$opts = $this->options; 
 
 		if(!isset($_POST['email']) || !is_email($_POST['email'])) { 
 			// no (valid) e-mail address has been given
 
 			$this->error = 'invalid_email';
+			$_POST['name'] = null; // wp 404 fix
 			return false;
 		}
 
 		if(isset($_POST['mc4wp_required_but_not_really']) && !empty($_POST['mc4wp_required_but_not_really'])) {
 			// spam bot filled the honeypot field
-
+			$_POST['name'] = null; // wp 404 fix
 			return false;
 		}
 
@@ -131,11 +126,11 @@ class MC4WP_Form
 
 		}
 
-		$result = $this->getMC4WP()->subscribe('form', $email, $merge_vars);
+		// wp 404 fix
+		$_POST['name'] = null;
 
-		// empty $_POST vars, to prevent strange WP bug
-		if(isset($_POST['name'])) { $_POST['name'] = null; }
-		if(isset($_POST['email'])) { $_POST['email'] = null; }
+
+		$result = $mc4wp->subscribe('form', $email, $merge_vars);
 
 		if($result === true) { 
 			$this->success = true;

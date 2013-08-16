@@ -53,11 +53,11 @@
 				<img alt="" border="0" src="https://www.paypalobjects.com/nl_NL/i/scr/pixel.gif" width="1" height="1">
 			</form>
 
-			<p>Or you can: </p>
+			<p>Alternatively, you can: </p>
             <ul>
-                <li><a href="http://wordpress.org/extend/plugins/mailchimp-for-wp/">Give a 5&#9733; review on WordPress.org</a></li>
-                <li><a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Blog about it and link to the plugin page</a></li>
-                <li style="vertical-align:bottom;"><a href="http://twitter.com/share" class="twitter-share-button" data-url="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/" data-text="Showing my appreciation to @DannyvanKooten for his #WordPress plugin: MailChimp for WP" data-count="none">Tweet</a></li>
+                <li><a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/mailchim-for-wp?rate=5#postform">Give a 5&#9733; review on WordPress.org</a></li>
+                <li><a target="_blank" href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Link to the plugin page on my website</a></li>
+                <li><a target="_blank" href="http://twitter.com/?status=I%20manage%20my%20%23WordPress%20sign-up%20forms%20using%20MailChimp%20for%20WP%20and%20I%20love%20it%20-%20check%20it%20out!%20http%3A%2F%2Fwordpress.org%2Fplugins%2Fmailchimp-for-wp%2F">Tweet about MailChimp for WP</a></li>
             </ul>
         </div>
 

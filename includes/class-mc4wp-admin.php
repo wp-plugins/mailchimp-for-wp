@@ -5,14 +5,12 @@ if(class_exists("MC4WP_Admin")) { return; }
 class MC4WP_Admin
 {
 	private static $instance;
-	private $MC4WP;
 	private $options = array();
 	private $runs_buddypress = false;
 
-	public function __construct(MC4WP $MC4WP)
+	public function __construct(MC4WP $mc4wp)
 	{
-		$this->MC4WP = $MC4WP;
-		$this->options = $MC4WP->get_options();
+		$this->options = $mc4wp->get_options();
 
 		add_action('admin_init', array($this, 'register_settings'));
 		add_action('admin_menu', array($this, 'build_menu'));
@@ -62,7 +60,8 @@ class MC4WP_Admin
 	public function page_dashboard()
 	{
 		$opts = $this->options;
-		$api = $this->MC4WP->get_mc_api();
+		$mc4wp = MC4WP::get_instance();
+		$api = $mc4wp->get_mc_api();
 		$runs_buddypress = $this->runs_buddypress;
 
 		$connected = ($api->ping() === "Everything's Chimpy!");

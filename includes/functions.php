@@ -1,11 +1,11 @@
 <?php
 
-function mc4wp_checkbox()
+function mc4wp_show_checkbox()
 {
 	$mc4wp = MC4WP::get_instance();
 
-	if($mc4wp->commentSubscriber) {
-		$mc4wp->commentSubscriber->output_checkbox();
+	if($mc4wp->checkbox) {
+		$mc4wp->checkbox->output_checkbox();
 	}
 }
 

@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, newsletter, mailinglist, email, email list, form, widget form, sign-up form, subscribe form, comments, comment form, mailchimp widget, buddypress, multisite
 Requires at least: 3.1
 Tested up to: 3.6
-Stable tag: 0.7
+Stable tag: 0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,7 +62,7 @@ For a complete list of plugin features, take a look here: [MailChimp for WordPre
 
 = Why does the checkbox not show up at my comment form? =
 Your theme probably does not support the necessary comment hook this plugin uses to add the checkbox to your comment form. You can manually place the checkbox by placing the following code snippet inside the form tags of your theme's comment form.
- `<?php if(function_exists('mc4wp_checkbox')) { mc4wp_checkbox(); }?>`
+ `<?php if(function_exists('mc4wp_show_checkbox')) { mc4wp_show_checkbox(); }?>`
  Your theme folder can be found by browsing to `/wp-content/themes/your-theme-name/`.
 
 = Where can I find my MailChimp API key? =
@@ -82,6 +82,18 @@ form.mc4wp-form p.success { ... } /* success message */
 form.mc4wp-form p.error { ... } /* error messages */
 ` 
 
+= The shortcode [mc4wp-form] is not working. Why? =
+Make sure to go to **form settings** in the plugin settings screen. There you have to check a checkbox that says "load form functionality". This will make the plugin load the necessary code.
+
+= Can I add a checkbox to this form by plugin ...? =
+Yes, you can. Go to checkbox and tick the checkbox that says "show checkbox at other forms (manual)". Then, include ANY field with name attribute `mc4wp-do-subscribe` and the plugin will take care of the rest. 
+
+Example: `<input type="checkbox" name="mc4wp-do-subscribe" value="1" id="mc4wp-checkbox" /><label for="mc4wp-checkbox">Subscribe to our newsletter</label>`.
+
+Make sure your form contains an email field with any of the following names: `email, e-mail, emailaddress, user_email, your-email, your_email, signup_email, emailadres` 
+
+Note: when using Contact Form 7 you can use "[mc4wp_checkbox]" inside your CF7 form template.
+
 == Screenshots ==
 
 1. The MC4WP options page.
@@ -89,12 +101,24 @@ form.mc4wp-form p.error { ... } /* error messages */
 
 == Changelog ==
 
+= 0.8 =
+* Changed links to show your appreciation for this plugin.
+* Changed function name, `mc4wp_checkbox()` is now `mc4wp_show_checkbox()` (!!!)
+* Improved: CSS reset now works for registration forms as well.
+* Improved: Code, removed unnecessary code, only load classes when not existing yet, etc.
+* Improved: hooked into user_register to allow third-party registration form plugins.
+* Added: Shortcode for usage inside Contact Form 7 form templates `[mc4wp_checkbox]`
+* Added: Catch-all, hook into ANY form using ANY input field with name attribute `mc4wp-do-subscribe` and value `1`.
+* Fixed: Subscribe from Multisite sign-up
+* Fixed: 404 page when no e-mail given.
+
+
 = 0.7 =
 * Improved: small backend JavaScript improvements / fixes
 * Improved: configuration tabs on options page now work with JavaScript disabled as well
 * Added: form and checkbox can now subscribe to different lists
 * Added: Error messages for WP Administrators (for debugging)
-* Added: `mc4wp_checkbox()` function to manually add the checkbox to a comment form.
+* Added: `mc4wp_show_checkbox()` function to manually add the checkbox to a comment form.
 
 = 0.6.2 =
 * Fixed: Double quotes now enabled in text labels and success / error messages (which enables the use of JavaScript)

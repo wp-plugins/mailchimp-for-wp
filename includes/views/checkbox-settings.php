@@ -39,6 +39,7 @@
 					<label><input name="mc4wp[checkbox_show_at_registration_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_registration_form']) echo 'checked '; ?>> Registration form</label> &nbsp; 
 					<?php if(is_multisite()) { ?><label><input name="mc4wp[checkbox_show_at_ms_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_ms_form']) echo 'checked '; ?>> Multisite form</label> &nbsp; <?php } ?>
 					<?php if($runs_buddypress) { ?><label><input name="mc4wp[checkbox_show_at_bp_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_bp_form']) echo 'checked '; ?>> BuddyPress form</label> &nbsp; <?php } ?>
+					<label><input name="mc4wp[checkbox_show_at_other_forms]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_other_forms']) echo 'checked '; ?>> Other forms (manual)</label> &nbsp; 
 				</td>
 			</tr>
 			<tr valign="top">
