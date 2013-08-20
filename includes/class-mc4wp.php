@@ -24,9 +24,9 @@ class MC4WP
 			'checkbox_show_at_comment_form' => 0, 'checkbox_show_at_registration_form' => 0, 'checkbox_show_at_ms_form' => 0, 'checkbox_show_at_bp_form' => 0, 'checkbox_show_at_other_forms' => 0,
 			'checkbox_lists' => array(), 'checkbox_double_optin' => 1,
 			'form_usage' => 0, 'form_css' => 0, 'form_markup' => "<p>\n\t<label for=\"mc4wp_f%N%_email\">Email address: </label>\n\t<input type=\"email\" id=\"mc4wp_f%N%_email\" name=\"email\" required placeholder=\"Your email address\" />\n</p>\n\n<p>\n\t<input type=\"submit\" value=\"Sign up\" />\n</p>",
-			'form_text_success' => 'Thank you, your sign-up request was succesful! Please check your e-mail inbox.', 'form_text_error' => 'Oops. Something went wrong. Please try again later.',
+			'form_text_success' => 'Thank you, your sign-up request was successful! Please check your e-mail inbox.', 'form_text_error' => 'Oops. Something went wrong. Please try again later.',
 			'form_text_invalid_email' => 'Please provide a valid email address.', 'form_text_already_subscribed' => "Given email address is already subscribed, thank you!", 
-			'form_redirect' => '', 'form_lists' => array(), 'form_double_optin' => 1
+			'form_redirect' => '', 'form_lists' => array(), 'form_double_optin' => 1, 'form_hide_after_success' => 0
 		);
 
 		$this->options = $opts = array_merge($defaults, (array) get_option('mc4wp'));

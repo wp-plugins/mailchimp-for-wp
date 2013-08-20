@@ -28,7 +28,7 @@ class MC4WP_Form
 			// change $_POST['name'] to something else, to fix WP bug
 			// maybe later ok?
 
-			add_action('init', array($this, 'subscribe'), 99);
+			add_action('init', array($this, 'subscribe'));
 		}
 	}
 
@@ -42,27 +42,34 @@ class MC4WP_Form
 		$mc4wp = MC4WP::get_instance();
 		$opts = $this->options;
 
-		$content = '<form method="post" action="'. $this->get_current_page_url() .'#mc4wp-form-'. $this->form_instance_number .'" id="mc4wp-form-'.$this->form_instance_number.'" class="mc4wp-form form">';
+		// add some useful css classes
+		$css_classes = ' ';
+		if($this->error) $css_classes .= 'mc4wp-error ';
+		if($this->success) $css_classes .= 'mc4wp-success ';
 
-		$form_markup = $this->options['form_markup'];
+		$content = '<form method="post" action="'. $this->get_current_page_url() .'#mc4wp-form-'. $this->form_instance_number .'" id="mc4wp-form-'.$this->form_instance_number.'" class="mc4wp-form form'.$css_classes.'">';
 
-		// replace special values
-		$form_markup = str_replace('%N%', $this->form_instance_number, $form_markup);
-		$form_markup = str_replace('%IP_ADDRESS%', $this->get_ip_address(), $form_markup);
-		$form_markup = str_replace('%DATE%', date('dd/mm/yyyy'), $form_markup);
 
-		$content .= $form_markup;
+		// maybe hide the form
+		if(!($this->success && $opts['form_hide_after_success'])) {
+			$form_markup = $this->options['form_markup'];
+			// replace special values
+			$form_markup = str_replace('%N%', $this->form_instance_number, $form_markup);
+			$form_markup = str_replace('%IP_ADDRESS%', $this->get_ip_address(), $form_markup);
+			$form_markup = str_replace('%DATE%', date('dd/mm/yyyy'), $form_markup);
 
-		// hidden fields
-		$content .= '<textarea name="mc4wp_required_but_not_really" style="display: none;"></textarea><input type="hidden" name="mc4wp_form_submit" value="1" />';
+			$content .= $form_markup;
+
+			// hidden fields
+			$content .= '<textarea name="mc4wp_required_but_not_really" style="display: none;"></textarea><input type="hidden" name="mc4wp_form_submit" value="1" />';
+		}		
 
 		if($this->success) {
 			$content .= '<p class="alert success">' . $opts['form_text_success'] . '</p>';
-		} elseif($this->error !== null) {
+		} elseif($this->error) {
 			
 			$e = $this->error;
 
-			// admin only error messages
 			if($e == 'already_subscribed') {
 				$text = (empty($opts['form_text_already_subscribed'])) ? $mc4wp->get_mc_api()->errorMessage : $opts['form_text_already_subscribed'];
 				$content .= '<p class="alert notice">'. $text .'</p>';
@@ -79,10 +86,7 @@ class MC4WP_Form
 				}
 
 				$content .= '</p>';
-			}
-
-			
-			
+			}			
 		}
 
 		$content .= "</form>";
@@ -126,8 +130,7 @@ class MC4WP_Form
 
 		}
 
-		// wp 404 fix
-		$_POST['name'] = null;
+		$_POST['name'] = null; // wp 404 fix
 
 
 		$result = $mc4wp->subscribe('form', $email, $merge_vars);

@@ -47,10 +47,6 @@
 				<td class="desc">Tick "yes" for basic form formatting.</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row"><label for="mc4wp_form_redirect">Redirect to this URL after a successful sign-up</label> <small>(leave empty if you don't want to redirect)</small></th>
-				<td><input colspan="2" type="text" size="50" name="mc4wp[form_redirect]" id="mc4wp_form_redirect" value="<?php echo $opts['form_redirect']; ?>" />
-			</tr>
-			<tr valign="top">
 				<th scope="row" colspan="3">Form mark-up</th>
 			</tr>
 			<tr valign="top">
@@ -126,23 +122,36 @@
 	</p>
 
 	<div id="mc4wp_form_options_2" <?php if(!$opts['form_usage']) { ?>style="display:none;"<?php } ?>>
-		<h3>Form messages</h3>
+		<h3>Visual feedback to subscriber</h3>
 		<table class="form-table mc4wp-form-messages">
 			<tr valign="top">
+				<th scope="row"><label for="mc4wp_form_hide_after_success">Hide form after a successful sign-up?</label></th>
+				<td><input type="radio" id="mc4wp_form_hide_after_success_1" name="mc4wp[form_hide_after_success]" value="1" <?php if($opts['form_hide_after_success'] == 1) echo 'checked="checked"'; ?> /> <label for="mc4wp_form_hide_after_success_1">Yes</label> &nbsp; <input type="radio" id="mc4wp_form_hide_after_success_0" name="mc4wp[form_hide_after_success]" value="0" <?php if($opts['form_hide_after_success'] == 0) echo 'checked="checked"'; ?> /> <label for="mc4wp_form_hide_after_success_0">No</label></td>
+				<td class="desc">Tick "yes" to only show the success message after a successful sign-up.</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row"><label for="mc4wp_form_redirect">Redirect to this URL after a successful sign-up</label> <small>(empty = no redirection)</small></th>
+				<td colspan="2"><input type="text" size="50" name="mc4wp[form_redirect]" id="mc4wp_form_redirect" value="<?php echo $opts['form_redirect']; ?>" />
+			</tr>
+			<tr valign="top">
 				<th scope="row"><label for="mc4wp_form_text_success">Success message</label></th>
-				<td><input type="text" size="100" id="mc4wp_form_text_success" name="mc4wp[form_text_success]" value="<?php echo esc_attr($opts['form_text_success']); ?>" /></td>
+				<td colspan="2" ><input type="text" size="100" id="mc4wp_form_text_success" name="mc4wp[form_text_success]" value="<?php echo esc_attr($opts['form_text_success']); ?>" /></td>
 			</tr>
 			<tr valign="top">
 				<th scope="row"><label for="mc4wp_form_text_error">General error message</label></th>
-				<td><input type="text" size="100" id="mc4wp_form_text_error" name="mc4wp[form_text_error]" value="<?php echo esc_attr($opts['form_text_error']); ?>" /></td>
+				<td colspan="2" ><input type="text" size="100" id="mc4wp_form_text_error" name="mc4wp[form_text_error]" value="<?php echo esc_attr($opts['form_text_error']); ?>" /></td>
 			</tr>
 			<tr valign="top">
 				<th scope="row"><label for="mc4wp_form_text_invalid_email">Invalid email address message</label></th>
-				<td><input type="text" size="100" id="mc4wp_form_text_invalid_email" name="mc4wp[form_text_invalid_email]" value="<?php echo esc_attr($opts['form_text_invalid_email']); ?>" /></td>
+				<td colspan="2" ><input type="text" size="100" id="mc4wp_form_text_invalid_email" name="mc4wp[form_text_invalid_email]" value="<?php echo esc_attr($opts['form_text_invalid_email']); ?>" /></td>
 			</tr>
 			<tr valign="top">
 				<th scope="row"><label for="mc4wp_form_text_already_subscribed">Email address is already on list message</label></th>
-				<td><input type="text" size="100" id="mc4wp_form_text_already_subscribed" name="mc4wp[form_text_already_subscribed]" value="<?php echo esc_attr($opts['form_text_already_subscribed']); ?>" /></td>
+				<td colspan="2" ><input type="text" size="100" id="mc4wp_form_text_already_subscribed" name="mc4wp[form_text_already_subscribed]" value="<?php echo esc_attr($opts['form_text_already_subscribed']); ?>" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td colspan="2"><p><small>HTML tags like &lt;a&gt; and &lt;strong&gt; etc. are allowed in the message fields.</small></p></td>
 			</tr>
 		</table>
 
