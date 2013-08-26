@@ -64,12 +64,16 @@
         <div id="mc4wp-info-tabs">
 			<div class="info-tab info-tab-form-settings" <?php if($tab != 'form-settings') { echo 'style="display:none;"'; } ?>>
 				<h4>Notes regarding the form designer</h4>
-				<p>As a minimum, your form should include an email address field and a submit button field.</p>
-				<p>Add other fields if you like but make sure to match your MailChimp list requirements. 
-				All additional fields will be sent to MailChimp with the sign-up request. Data will be named like the 'name' attribute you've given to your fields.</p>
-				<p><b>For example:</b> suppose your list uses <em>FNAME</em> to collect first names of your list subscribers.
-					In this case you should create a text field with 'fname' as it's name attribute. Name attributes are case-insensitive.</p>
-				<h4>Special form strings</h4>
+				<p>At a minimum, your form should include an EMAIL field and a submit button.</p>
+				
+				<p>Add other fields if you like but keep in mind that...</p>
+					<ul class="ul-square">
+						<li>...all field names should be uppercased</li>
+						<li>... field names should match your MailChimp lists merge fields tags</li>
+					</ul>
+
+
+				<p><strong>Special form strings</strong></p>
 				<table>
 					<tr>
 						<th>%N%</th><td>The form instance number. Useful when you have more than one form on a certain page.</td>
@@ -82,14 +86,16 @@
 					</tr>
 				</table>
 
-				<p>Style the output of the form by applying CSS rules to <b>form.mc4wp-form</b> and its child elements. Add these CSS rules to your theme's stylesheet
+				<p><strong>Visual appearance</strong></p>
+				<p>Alter the visual appearance of the form by applying CSS rules to <b>form.mc4wp-form</b>. Add these CSS rules to your theme's stylesheet
 					 which can in most cases be found here: <em><?php echo get_stylesheet_directory(); ?>/style.css</em>.</p>
+					 <p>The <a href="http://wordpress.org/plugins/mailchimp-for-wp/faq/" target="_blank">MailChimp for WP FAQ</a> lists the various CSS selectors you can use to target the different elements.</p>
 			</div>
 		</div>
 
 		<div>
 			<h3>Looking for support?</h3>
-			<p>Please post your questions, bug reports or feature requests regarding MailChimp for WP in the <a href="http://wordpress.org/support/plugin/mailchimp-for-wp">WordPress support forums</a> so others might be able to benefit from this too. I will try to respond as soon as I possibly can.</p>
+        	<p>Having trouble? Please use the <a href="http://wordpress.org/support/plugin/mailchimp-for-wp">support forums</a> on WordPress.org.</p>
 		</div>
 
 	</div>

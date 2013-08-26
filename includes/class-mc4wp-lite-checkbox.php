@@ -1,11 +1,11 @@
 <?php
 
-class MC4WP_Checkbox
+class MC4WP_Lite_Checkbox
 {
 	private $options;
 	private $showed_checkbox = false;
 
-	public function __construct(MC4WP $mc4wp)
+	public function __construct(MC4WP_Lite $mc4wp)
 	{
 		$this->options = $opts = $mc4wp->get_options();
 
@@ -94,7 +94,7 @@ class MC4WP_Checkbox
 	{
 		$cid = (int) $cid;
 		$opts = $this->options;
-		$mc4wp = MC4WP::get_instance();
+		$mc4wp = MC4WP_Lite::get_instance();
 	
 		if ( !is_object($comment) )
 			$comment = get_comment($cid);
@@ -146,7 +146,7 @@ class MC4WP_Checkbox
 	/* Start registration form functions */
 	public function subscribe_from_registration($user_id)
 	{
-		$mc4wp = MC4WP::get_instance();
+		$mc4wp = MC4WP_Lite::get_instance();
 
 		if($_POST['mc4wp-do-subscribe'] != 1) { return false; }
 			
@@ -185,7 +185,7 @@ class MC4WP_Checkbox
 	/* Start BuddyPress functions */
 	public function subscribe_from_buddypress()
 	{
-		$mc4wp = MC4WP::get_instance();
+		$mc4wp = MC4WP_Lite::get_instance();
 
 		if($_POST['mc4wp-do-subscribe'] != 1) return;
 			
@@ -272,7 +272,7 @@ class MC4WP_Checkbox
 
 		// start running..
 		$opts = $this->options;
-		$mc4wp = MC4WP::get_instance();
+		$mc4wp = MC4WP_Lite::get_instance();
 		$email = $name = null;
 
 		// Smart field guessing

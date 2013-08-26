@@ -49,99 +49,133 @@
 			$type: $("#mc4wp_ffd_field_type"),
 			$name: $("#mc4wp_ffd_field_name"),
 			$all: $("#mc4wp_ffd_fields"),
-			$wrap: $("#mc4wp_ffd_wrap_in_p"),
+			$wrapInP: $("#mc4wp_ffd_wrap_in_p"),
 			$preview: $("#mc4wp_ffd_preview_field_code"),
 			$form: $("#mc4wp_form_markup"),
 			$required: $("#mc4wp_ffd_field_required"),
-			$label: $("#mc4wp_ffd_field_label")
+			$label: $("#mc4wp_ffd_field_label"),
+			$preset: $("#mc4wp_ffd_field_preset"),
+			$valueLabel: $("#mc4wp_ffd_field_value_label")
 		},
 		updatePreviewCode: function() {
 			var f = this.fields, fieldPreview = '';
 
+			var fieldId = "mc4wp_f%N%_"+ f.$name.val().toLowerCase();
+
 			// wrap in <p> tags if necessary
-			if(f.$wrap.is(':checked')) { fieldPreview += "<p>\n\t"; }
+			if(f.$wrapInP.is(':checked:visible')) { fieldPreview += "<p>\n\t"; }
 
 			// setup field code
-			if(f.$label.val() != '') { fieldPreview += "<label for=\"mc4wp_f%N%_"+ f.$name.val() +"\">"+ f.$label.val() +"</label>"; }
+			if(f.$label.is(':visible') && f.$label.val() != '') { fieldPreview += "<label for=\"" + fieldId +"\">"+ f.$label.val() +"</label>\n\t"; }
 
-			fieldPreview += "<input type=\""+ f.$type.val() + "\" name=\""+ f.$name.val() +"\" value=\""+ f.$value.val() +"\" ";
+			fieldPreview += "<input type=\""+ f.$type.val() + "\" ";
+
+			// add name attribute
+			if(f.$type.val() != "submit") {
+				fieldPreview += "name=\""+ f.$name.val() +"\" ";
+			}
+
+			// add value attribute
+			if(f.$value.val() != '') { fieldPreview += "value=\""+ f.$value.val() +"\" "; }
+
+			// add id attribute
+			if(f.$type.val() != 'hidden' && f.$type.val() != 'submit') {
+				fieldPreview += "id=\"" + fieldId + "\" ";
+			}
 
 			// if placeholder is given, add it. Otherwise, omit it for W3C validity
-			if(f.$placeholder.val() != '') { fieldPreview += "placeholder=\""+ f.$placeholder.val() +"\" "; }
-			if(f.$required.is(":checked")) { fieldPreview += "required" ; }
+			if(f.$placeholder.is(':visible') && f.$placeholder.val() != '') { fieldPreview += "placeholder=\""+ f.$placeholder.val() +"\" "; }
+			if(f.$required.is(':visible') && f.$required.is(":checked")) { fieldPreview += "required" ; }
 			
 			// add closing trailing flash
 			fieldPreview += "/>";
 
 			// add closing </p> tag, if necessary
-			if(f.$wrap.is(':checked')) { fieldPreview += "\n</p>"; }
+			if(f.$wrapInP.is(':checked:visible')) { fieldPreview += "\n</p>"; }
 
 			// show preview code
 			f.$preview.val(fieldPreview);
 		},
-		setupFieldDesigner: function(preset) {
+		setup: function(fieldType) {
 			var f = this.fields;
 			// reset
 			f.$all.hide();
-			f.$all.find('p').show();
+			f.$all.find('p.row').show();
+
 		
 			// set field defaults
-			f.$type.val("text");
 			f.$name.val('');
 			f.$value.val('');
 			f.$label.val('');
 			f.$placeholder.val('');
-			f.$wrap.prop('checked', true);
+			f.$preset.val('');
+			f.$wrapInP.prop('checked', true);
 			f.$required.prop('checked', false);
+			f.$valueLabel.html("Initial value");
 
-			// help by setting some defaults
-			switch(preset) {
-
-				case '': 
-					return false; 
-				break;
+			// hide or show some of the fields, depending on chosen fieldType
+			switch(fieldType) {
 
 				case 'hidden':
-					f.$type.val("hidden");
 					f.$all.find('.row-placeholder, .row-wrap-in-p, .row-label, .row-required').hide();
-					f.$wrap.prop('checked', false);
+					f.$wrapInP.prop('checked', false);
 				break;
 
 				case 'submit':
-					f.$type.val("submit");
-					f.$all.find('.row-placeholder, .row-name, .row-label, .row-required').hide();
+					f.$all.find('.row-placeholder, .row-name, .row-label, .row-required, .row-preset').hide();
+					f.$valueLabel.html("Button text");
 				break;
 
-				case 'fname':
-					f.$label.val('First name:');
-					f.$name.val('fname');
-					f.$placeholder.val("Your first name");
-				break;
-
-				case 'lname':
-					f.$label.val('Last name:');
-					f.$name.val('lname');
-					f.$placeholder.val("Your last name");
-				break;
-
-				case 'name':
-					f.$label.val('Name:');
-					f.$name.val('name');
-					f.$placeholder.val("Your name");
-				break;
-
-				case 'email':
-					f.$label.val("Email address");
-					f.$name.val('email');
-					f.$type.val('email');
-					f.$placeholder.val("Your email address");
-					f.$required.prop('checked', true);
+				case 'checkbox':
+					f.$all.find('.row-placeholder, .row-required, span.initial').hide();
+					f.$valueLabel.html("Value");
 				break;
 
 			}
 
 			f.$all.show();
+			FormDesigner.preset(f.$preset.val());
 			FormDesigner.updatePreviewCode();
+		},
+		validateFields: function() {
+			var f = this.fields;
+
+			f.$name.val(f.$name.val().trim().toUpperCase().replace(/\s+/g,''));
+		},
+		preset: function(preset) {
+			var f = this.fields;
+
+			switch(preset) {
+				case '': 
+					return false; 
+				break;
+				case 'email':
+					f.$label.val("Email address");
+					f.$name.val('EMAIL');
+					f.$placeholder.val("Your email address");
+					f.$required.prop('checked', true);
+				break;
+				case 'fname':
+					f.$label.val('First name:');
+					f.$name.val('FNAME');
+					f.$placeholder.val("Your first name");
+				break;
+				case 'lname':
+					f.$label.val('Last name:');
+					f.$name.val('LNAME');
+					f.$placeholder.val("Your last name");
+				break;
+				case 'name':
+					f.$label.val('Name:');
+					f.$name.val('NAME');
+					f.$placeholder.val("Your name");
+				break;
+				case 'group':
+					//f.$label.val('Group Name comes here');
+					//f.$name.val('Group ID comes here');
+				break;
+
+			}
 		},
 		transferCodeToForm: function() {
 			var f = this.fields;
@@ -153,10 +187,10 @@
 			html = this.fields.$form.val();
 
 			// simple check to see if form mark-up contains the proper e-mail field
-			if(html.toLowerCase().indexOf('name="email"') == -1) {
+			if(html.indexOf('="EMAIL"') == -1) {
 				return confirm('It seems that your form does not contain an input field for the email address.' + "\n\n"
-					+ 'Please make sure your form contains an input field with a name="email" attribute.' + "\n\n"
-					+ 'Example: <input type="text" name="email"....' + "\n\n"
+					+ 'Please make sure your form contains an input field with a name="EMAIL" attribute.' + "\n\n"
+					+ 'Example: <input type="text" name="EMAIL"....' + "\n\n"
 					+ 'Click OK to save settings nonetheless or cancel to go back and edit the form mark-up.');
 			}
 
@@ -165,17 +199,22 @@
 	}
 
 	// Events
-	$("#mc4wp_ffd_add_field").change(function() {
-		FormDesigner.setupFieldDesigner($(this).val());		
+	$("#mc4wp_ffd_field_type").change(function() {
+		FormDesigner.setup($(this).val());		
+	});
+	$("#mc4wp_ffd_field_preset").change(function() {
+		FormDesigner.preset($(this).val());
 	});
 
 	$("#mc4wp_ffd_fields :input").change(function() {
+		FormDesigner.validateFields();
 		FormDesigner.updatePreviewCode();
 	});
 	$("#mc4wp_ffd_add_to_form").click(function(e) { 
 		FormDesigner.transferCodeToForm();
 		return false;
 	});
+
 	$("#mc4wp-submit-form-settings").click(function(e) {
 		return FormDesigner.validateSettings();
 	});

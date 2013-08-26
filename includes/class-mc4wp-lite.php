@@ -1,6 +1,6 @@
 <?php
 
-class MC4WP 
+class MC4WP_Lite
 {
 	private static $instance;
 	private static $mc_api;
@@ -10,7 +10,7 @@ class MC4WP
 	public static function get_instance()
 	{
 		if(!isset(self::$instance)) {
-			self::$instance = new MC4WP();
+			self::$instance = new MC4WP_Lite();
 		}
 
 		return self::$instance;
@@ -23,7 +23,7 @@ class MC4WP
 			'checkbox_label' => 'Sign me up for the newsletter!', 'checkbox_precheck' => 1, 'checkbox_css' => 0, 
 			'checkbox_show_at_comment_form' => 0, 'checkbox_show_at_registration_form' => 0, 'checkbox_show_at_ms_form' => 0, 'checkbox_show_at_bp_form' => 0, 'checkbox_show_at_other_forms' => 0,
 			'checkbox_lists' => array(), 'checkbox_double_optin' => 1,
-			'form_usage' => 0, 'form_css' => 0, 'form_markup' => "<p>\n\t<label for=\"mc4wp_f%N%_email\">Email address: </label>\n\t<input type=\"email\" id=\"mc4wp_f%N%_email\" name=\"email\" required placeholder=\"Your email address\" />\n</p>\n\n<p>\n\t<input type=\"submit\" value=\"Sign up\" />\n</p>",
+			'form_usage' => 0, 'form_css' => 0, 'form_markup' => "<p>\n\t<label for=\"mc4wp_f%N%_email\">Email address: </label>\n\t<input type=\"email\" id=\"mc4wp_f%N%_email\" name=\"EMAIL\" required placeholder=\"Your email address\" />\n</p>\n\n<p>\n\t<input type=\"submit\" value=\"Sign up\" />\n</p>",
 			'form_text_success' => 'Thank you, your sign-up request was successful! Please check your e-mail inbox.', 'form_text_error' => 'Oops. Something went wrong. Please try again later.',
 			'form_text_invalid_email' => 'Please provide a valid email address.', 'form_text_already_subscribed' => "Given email address is already subscribed, thank you!", 
 			'form_redirect' => '', 'form_lists' => array(), 'form_double_optin' => 1, 'form_hide_after_success' => 0
@@ -41,14 +41,14 @@ class MC4WP
 		}
 
 		if($opts['checkbox_show_at_comment_form'] || $opts['checkbox_show_at_registration_form'] || $opts['checkbox_show_at_bp_form'] || $opts['checkbox_show_at_ms_form'] || $opts['checkbox_show_at_other_forms']) {
-			require_once 'class-mc4wp-checkbox.php';
-			$this->checkbox = new MC4WP_Checkbox($this);
+			require_once 'class-mc4wp-lite-checkbox.php';
+			$this->checkbox = new MC4WP_Lite_Checkbox($this);
 		}
 
 		// load form functionality
 		if($opts['form_usage']) {
-			require_once 'class-mc4wp-form.php';
-			$this->form = new MC4WP_Form($this);
+			require_once 'class-mc4wp-lite-form.php';
+			$this->form = new MC4WP_Lite_Form($this);
 		}
 
 	}
@@ -80,6 +80,7 @@ class MC4WP
 		$opts = $this->get_options();
 
 		$lists = $opts[$type . '_lists'];
+		
 		if(empty($lists)) {
 			return 'no_lists_selected';
 		}

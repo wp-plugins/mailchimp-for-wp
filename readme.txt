@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, newsletter, mailinglist, email, email list, form, widget form, sign-up form, subscribe form, comments, comment form, mailchimp widget, buddypress, multisite
 Requires at least: 3.1
 Tested up to: 3.6
-Stable tag: 0.8.1
+Stable tag: 0.8.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Thé ultimate MailChimp plugin! Includes a form shortcode, form widget and a com
 
 == Description ==
 
-= MailChimp for WordPress =
+= MailChimp for WordPress Lite =
 
 This plugin provides you with various ways to grow your MailChimp list(s). Add a form to your posts or pages by using the `[mc4wp-form]` shortcode, use this shortcode in your text widgets to show a form in your widget areas or add a "Sign-me up to our newsletter" checkbox to your comment or registration forms. 
 
@@ -100,12 +100,32 @@ Make sure your form contains an email field with any of the following names:
 
 Note: when using Contact Form 7 you can use "[mc4wp_checkbox]" inside your CF7 form template.
 
+= How do I add subscribers to certain interest groups? =
+The following snippet should get you started.
+
+`<input type="hidden" name="GROUPINGS[0][id]" value="INSERT GROUPING ID HERE" />
+<input type="hidden" name="GROUPINGS[0][groups]" value="INSERT GROUPING GROUP ID'S HERE (SEPARATED BY COMMA)" />`
+
+Alternatively, update to [MailChimp for WP Pro](#coming-soon) where you can manage interest groups from the settings screen.
+
 == Screenshots ==
 
 1. The MC4WP options page.
 1. The MC4WP form options page.
 
+== Upgrade Notice ==
+The CSS classes of the MC4WP form have been changed. Upgrade any custom CSS classes you might have in your theme's stylesheet. <em>(prefix <strong>mc4wp-</strong>)</em>
+
 == Changelog ==
+
+= 0.8.2 =
+* Improved: Namespaced form CSS classes
+* Improved: Improved error messages
+* Improved: It is now easier to add fields to your form mark-up by using the wizard. You can choose presets etc.
+* Improved: All field names that are of importance for MailChimp should now be uppercased (backwards compatibility is included)
+* Improved: Fields named added through the wizard are now validated and sanitized
+* Improved: Added caching to the backend which makes it way faster
+* Improved: Various usability improvements
 
 = 0.8.1 =
 * Fixed: typo in form success message
