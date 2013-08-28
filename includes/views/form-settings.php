@@ -1,4 +1,5 @@
 <div id="mc4wp-tab-form-settings" class="mc4wp-tab <?php if($tab == 'form-settings') { echo 'active'; } ?>">
+		
 	<h2>Form Settings</h2>		
 	
 	<p>MailChimp for WP comes packed with a neat shortcode you can use in your posts, pages or text widgets to display a sign-up form. Configure the form below, then paste <i>[mc4wp-form]</i> in a post, page or text widget and watch your list(s) grow!</p>
@@ -10,6 +11,8 @@
 	<?php if($opts['form_usage'] && empty($opts['form_lists'])) { ?>
 	<p class="alert warning"><b>Notice:</b> You must select atleast 1 list to subscribe to.</p>
 	<?php } ?>
+
+
 
 	<table class="form-table">
 		<tbody>
@@ -55,7 +58,7 @@
 					<div class="mc4wp-wrapper">
 
 						<div class="mc4wp-col mc4wp-col-2-3 mc4wp-first">
-							<textarea class="widefat" cols="160" rows="20" id="mc4wp_form_markup" name="mc4wp[form_markup]"><?php echo $opts['form_markup']; ?></textarea>
+							<textarea class="widefat" cols="160" rows="20" id="mc4wp_form_markup" name="mc4wp[form_markup]"><?php echo esc_textarea($opts['form_markup']); ?></textarea>
 							<p><small>Use the <b>[mc4wp-form]</b> shortcode to render this form inside a widget, post or page.</small></p>
 							<p class="submit">
 								<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" id="mc4wp-submit-form-settings" />
@@ -125,6 +128,7 @@
 			</tr>
 		</tbody>
 	</table>
+
 
 	
 

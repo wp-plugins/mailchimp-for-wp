@@ -22,7 +22,7 @@
 	<table class="wp-list-table widefat">
 		<thead>
 			<tr>
-				<th scope="col">ID</th><th scope="col">Name</th>
+				<th scope="col">ID</th><th scope="col">Name</th><th>Merge fields</th><th>Groupings</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -31,6 +31,8 @@
 			<tr valign="top">
 				<td><?php echo $l['id']; ?></td>
 				<td><?php echo $l['name']; ?></td>
+				<td><a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Only in Pro</a></td>
+				<td><a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Only in Pro</a></td>
 			</tr>
 			<?php } ?>
 			<?php } else { ?>

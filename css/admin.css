@@ -20,9 +20,9 @@
 #mc4wp_admin div.box ul{ list-style:square; margin-left:25px; }
 #mc4wp_admin div.box li{ margin:0; }
 
-#mc4wp_admin div.donatebox{ border:2px solid green; background:#CFC; }
-#mc4wp_admin div.donatebox h3{ color:green; margin:0; }
-#mc4wp_admin div.donatebox li{ line-height:22px; }
+#mc4wp_admin div.mc4wp-well{ border:1px solid #999; background:#efefef; padding:20px; }
+#mc4wp_admin div.buybox h3{ margin:0; }
+#mc4wp_admin div.buybox li{ line-height:22px; }
 
 #mc4wp_ffd_fields { display:none; }
 #mc4wp_ffd_fields p label{  }

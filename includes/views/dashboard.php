@@ -31,30 +31,24 @@
 
 		</form>
 
-		<p class="copyright-notice">I would like to remind you that this plugin is <b>not</b> developed by or affiliated with MailChimp in any way. My name is <a href="http://www.dannyvankooten.com/">Danny van Kooten</a>, I am a Dutch freelance webdeveloper thinking you might like a plugin like this. :-)</p>
+		<p class="copyright-notice">I would like to remind you that this plugin is <b>not</b> developed by or affiliated with MailChimp in any way. My name is <a href="http://dannyvankooten.com/">Danny van Kooten</a>, I am a young, Dutch webdeveloper who thought more people might like a plugin like this one.</p>
 
 	</div>
 
 	<div style="width:26%; float:right; margin-left:3%;">
 		
-		<div class="box donatebox">
-			<h3>Donate $10, $20 or $50</h3>
-			<p>I spent countless hours developing this plugin for <b>FREE</b>. If you like it, consider donating a small token of your appreciation. It is much appreciated!</p>
-					
-			<form class="donate" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-				<input type="hidden" name="cmd" value="_donations">
-				<input type="hidden" name="business" value="AP87UHXWPNBBU">
-				<input type="hidden" name="lc" value="US">
-				<input type="hidden" name="item_name" value="Danny van Kooten">
-				<input type="hidden" name="item_number" value="MailChimp for WordPress">
-				<input type="hidden" name="currency_code" value="USD">
-				<input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHosted">
-				<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-				<img alt="" border="0" src="https://www.paypalobjects.com/nl_NL/i/scr/pixel.gif" width="1" height="1">
-			</form>
+		<div class="box mc4wp-well buybox">
+			<h3>Get MailChimp for WP Pro</h3>
+			
+			<p>Enjoying this version of MailChimp for WP? Then you will <strong>LOVE</strong> MailChimp for WP Pro.</p>
+
+			<p>Pro features include multiple sign-up forms, even easier form creation, AJAX submission and premium support.</p>
+
+			<p style="text-align: center;"><a class="button button-primary" href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Buy MailChimp for WP Pro now!</a></p>
 
 			<p>Alternatively, you can: </p>
             <ul>
+            	<li><a target="_blank" href="http://dannyvankooten.com/donate/">Donate $5, $10 or $20</a> (although I recommend just buying Pro)</li>
                 <li><a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/mailchim-for-wp?rate=5#postform">Give a 5&#9733; review on WordPress.org</a></li>
                 <li><a target="_blank" href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Link to the plugin page on my website</a></li>
                 <li><a target="_blank" href="http://twitter.com/?status=I%20manage%20my%20%23WordPress%20sign-up%20forms%20using%20MailChimp%20for%20WP%20and%20I%20love%20it%20-%20check%20it%20out!%20http%3A%2F%2Fwordpress.org%2Fplugins%2Fmailchimp-for-wp%2F">Tweet about MailChimp for WP</a></li>

@@ -41,13 +41,13 @@ class MC4WP_Lite
 		}
 
 		if($opts['checkbox_show_at_comment_form'] || $opts['checkbox_show_at_registration_form'] || $opts['checkbox_show_at_bp_form'] || $opts['checkbox_show_at_ms_form'] || $opts['checkbox_show_at_other_forms']) {
-			require_once 'class-mc4wp-lite-checkbox.php';
+			require_once 'MC4WP_Lite_Checkbox.php';
 			$this->checkbox = new MC4WP_Lite_Checkbox($this);
 		}
 
 		// load form functionality
 		if($opts['form_usage']) {
-			require_once 'class-mc4wp-lite-form.php';
+			require_once 'MC4WP_Lite_Form.php';
 			$this->form = new MC4WP_Lite_Form($this);
 		}
 
@@ -65,7 +65,7 @@ class MC4WP_Lite
 			// Only load MailChimp API if it has not been loaded yet
 			// other plugins may have already at this point.
 			if(!class_exists("MCAPI")) {
-				require_once 'class-MCAPI.php';
+				require_once 'MCAPI.php';
 			}
 			
 			self::$mc_api = new MCAPI($this->options['mailchimp_api_key']);

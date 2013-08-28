@@ -113,7 +113,7 @@ class MC4WP_Lite_Form
 		foreach($_POST as $name => $value) {
 			// only uppercase variables which are not already uppercased
 			// skip the mc4wp necessary form vars
-	        if($name === strtoupper($name) || in_array($name, array('mc4wp_form_instance', 'mc4wp_required_but_not_really', 'mc4wp_form_submit'))) continue;
+			if($name === strtoupper($name) || in_array($name, array('mc4wp_form_instance', 'mc4wp_required_but_not_really', 'mc4wp_form_submit'))) continue;
 			$uppercased_name = strtoupper($name);
 
 			// set new (uppercased) $_POST variable
@@ -121,7 +121,7 @@ class MC4WP_Lite_Form
 
 			// unset old post variable
 			unset($_POST[$name]);			
-	    }
+		}
 
 		if(!isset($_POST['EMAIL']) || !is_email($_POST['EMAIL'])) { 
 			// no (valid) e-mail address has been given
@@ -148,6 +148,17 @@ class MC4WP_Lite_Form
 			$name = strtoupper($name);
 			$merge_vars[$name] = $value;
 
+		}
+
+		// Try to guess FNAME and LNAME if they are not given, but NAME is
+		if(isset($merge_vars['NAME']) && !isset($merge_vars['FNAME']) && !isset($merge_vars['LNAME'])) {
+			$strpos = strpos($merge_vars['NAME'], ' ');
+			if($strpos) {
+				$merge_vars['FNAME'] = substr($merge_vars['NAME'], 0, $strpos);
+				$merge_vars['LNAME'] = substr($merge_vars['NAME'], $strpos);
+			} else {
+				$request['merge_vars']['FNAME'] = $merge_vars['NAME'];
+			}
 		}
 
 		$result = $mc4wp->subscribe('form', $email, $merge_vars);
