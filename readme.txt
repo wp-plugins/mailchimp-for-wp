@@ -139,7 +139,7 @@ Sorry, this feature is only available in the premium version of the plugin.
 
 = 1.0 =
 * Added support for group checkboxes
-* Added support for paragraph elements in error messages, they are now wrapped in `<div>` tags. Update your custom CSS rules
+* Added support for paragraph elements in error and success messages, the messages are now wrapped in `<div>` instead. Update your custom CSS rules
 * Added some translation filters for qTranslate and WPML compatibility.
 
 = 0.8.3 =
