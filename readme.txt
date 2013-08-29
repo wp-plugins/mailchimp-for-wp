@@ -14,7 +14,7 @@ Thé ultimate MailChimp plugin to grow your MailChimp e-mail lists. Sign-up form
 
 = MailChimp for WordPress =
 
-Want to grow your MailChimp list(s)? This is the plugin for you.
+Want to grow your MailChimp list(s)? Want more control over your sign-up forms? This is the plugin for you.
 
 Easily create and manage sign-up forms and then add them to your posts, pages and widgets by using a simple shortcode. Add a "Sign me up to the newsletter" checkbox to your comment, registration and other forms to make subscribing to your lists effortless for your visitors. 
 
