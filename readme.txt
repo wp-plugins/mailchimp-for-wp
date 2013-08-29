@@ -120,8 +120,8 @@ Or... if you want to use checkboxes.
 
 `
 <input type="hidden" name="GROUPINGS[0][id]" value="INSERT_GROUPING_ID_HERE" />
-<input type="hidden" name="GROUPINGS[0][groups][]" value="Group 1" /><label>Group 1</label>
-<input type="hidden" name="GROUPINGS[0][groups][]" value="Group 2" /><label>Group 2</label>
+<input type="checkbox" name="GROUPINGS[0][groups][]" value="Group 1" /><label>Group 1</label>
+<input type="checkbox" name="GROUPINGS[0][groups][]" value="Group 2" /><label>Group 2</label>
 `
 
 = Can I create multiple sign-up forms? =
