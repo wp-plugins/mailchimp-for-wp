@@ -18,6 +18,7 @@ Want to grow your MailChimp list(s)? This is the plugin for you.
 
 Easily create and manage sign-up forms and then add them to your posts, pages and widgets by using a simple shortcode. Add a "Sign me up to the newsletter" checkbox to your comment, registration and other forms to make subscribing to your lists effortless for your visitors. 
 
+[Upgrade to MailChimp for WordPress Pro now](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
 
 **Features:**
 
@@ -38,12 +39,7 @@ Easily create and manage sign-up forms and then add them to your posts, pages an
 * Premium support
 * No advertisements
 
-Get [MailChimp for WordPress Pro](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/) now.
-
-**More info:**
-
-* [MailChimp for WordPress](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
-* Check out more [WordPress plugins](http://dannyvankooten.com/wordpress-plugins/) by the same author.
+[Upgrade to MailChimp for WordPress Pro now](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
 
 **MailChimp Sign-Up Form**
 The plugin comes with an easy to way to build sign-up forms for your MailChimp lists. Add as many fields as you like and customize labels, placeholders, initial value's etc. in a simple way.
@@ -62,8 +58,9 @@ You can add this checkbox to ANY form you like, including Contact Form 7 forms. 
 1. Activate the plugin
 1. Fill in your MailChimp API key in the plugin's options.
 1. Select at least one list to subscribe visitors to.
-1. (Optional) Select where the checkbox should show up.
-1. (Optional) Design a form and include it in your posts, pages or text widgets.
+1. (Optional) Select to which forms the sign-up checkbox should be added.
+1. (Optional) Create a form and show it in your posts, pages or text widgets using the shortcode `[mc4wp-form]`.
+1. (Optional) If you like the plugin, upgrade to pro or donate a beer. :-)
 
 == Frequently Asked Questions ==
 
@@ -90,10 +87,11 @@ form.mc4wp-form{ ... } /* the form element */
 form.mc4wp-form p { ... } /* form paragraphs */
 form.mc4wp-form label { ... } /* labels */
 form.mc4wp-form input { ... } /* input fields */
+form.mc4wp-form input[type=checkbox] { ... } /* checkboxes */
 form.mc4wp-form input[type=submit] { ... } /* submit button */
-form.mc4wp-form p.mc4wp-alert { ... } /* success & error messages */
-form.mc4wp-form p.mc4wp-success { ... } /* success message */
-form.mc4wp-form p.mc4wp-error { ... } /* error messages */
+form.mc4wp-form .mc4wp-alert { ... } /* success & error messages */
+form.mc4wp-form .mc4wp-success { ... } /* success message */
+form.mc4wp-form .mc4wp-error { ... } /* error messages */
 ` 
 
 = The shortcode [mc4wp-form] is not working. Why? =
@@ -113,8 +111,18 @@ Note: when using Contact Form 7 you can use "[mc4wp_checkbox]" inside your CF7 f
 = How do I add subscribers to certain interest groups? =
 The following snippet should get you started.
 
-`<input type="hidden" name="GROUPINGS[0][id]" value="INSERT GROUPING ID HERE" />
-<input type="hidden" name="GROUPINGS[0][groups]" value="INSERT GROUPING GROUP ID'S HERE (SEPARATED BY COMMA)" />`
+`
+<input type="hidden" name="GROUPINGS[0][id]" value="INSERT_GROUPING_ID_HERE" />
+<input type="hidden" name="GROUPINGS[0][groups]" value="Groupname 1,Groupname 2,Groupname 3" />
+`
+
+Or... if you want to use checkboxes.
+
+`
+<input type="hidden" name="GROUPINGS[0][id]" value="INSERT_GROUPING_ID_HERE" />
+<input type="hidden" name="GROUPINGS[0][groups][]" value="Group 1" /><label>Group 1</label>
+<input type="hidden" name="GROUPINGS[0][groups][]" value="Group 2" /><label>Group 2</label>
+`
 
 = Can I create multiple sign-up forms? =
 Sorry, this feature is only available in the premium version of the plugin.
@@ -128,6 +136,11 @@ Sorry, this feature is only available in the premium version of the plugin.
 1. The MC4WP form options page.
 
 == Changelog ==
+
+= 1.0 =
+* Added support for group checkboxes
+* Added support for paragraph elements in error messages, they are now wrapped in <div> tags. Update your custom CSS rules
+* Added some translation filters for qTranslate and WPML compatibility.
 
 = 0.8.3 =
 * Added: Guess first and last name when only using full name field.

@@ -60,7 +60,7 @@ class MC4WP_Lite_Form
 			$form_markup = str_replace('%IP_ADDRESS%', $this->get_ip_address(), $form_markup);
 			$form_markup = str_replace('%DATE%', date('dd/mm/yyyy'), $form_markup);
 
-			$content .= $form_markup;
+			$content .= __($form_markup);
 
 			// hidden fields
 			$content .= '<textarea name="mc4wp_required_but_not_really" style="display: none;"></textarea>';
@@ -71,27 +71,31 @@ class MC4WP_Lite_Form
 		if($this->form_instance_number == $this->submitted_form_instance) {
 			
 			if($this->success) {
-				$content .= '<p class="mc4wp-alert mc4wp-success">' . $opts['form_text_success'] . '</p>';
+				$content .= '<div class="mc4wp-alert mc4wp-success">' . __($opts['form_text_success']) . '</div>';
 			} elseif($this->error) {
 				
 				$e = $this->error;
 
 				if($e == 'already_subscribed') {
 					$text = (empty($opts['form_text_already_subscribed'])) ? $mc4wp->get_mc_api()->errorMessage : $opts['form_text_already_subscribed'];
-					$content .= '<p class="mc4wp-alert mc4wp-notice">'. $text .'</p>';
+					$content .= '<div class="mc4wp-alert mc4wp-notice">'. __($text) .'</div>';
 				}elseif(isset($opts['form_text_' . $e]) && !empty($opts['form_text_'. $e] )) {
-					$content .= '<p class="mc4wp-alert mc4wp-error">' . $opts['form_text_' . $e] . '</p>';
+					$content .= '<div class="mc4wp-alert mc4wp-error">' . __($opts['form_text_' . $e]) . '</div>';
 				} else {
-					$content .= '<p class="mc4wp-alert mc4wp-error">' . $opts['form_text_error'];
+					$content .= '<div class="mc4wp-alert mc4wp-error">' . __($opts['form_text_error']);
 
 					if($is_admin) {
 						$content .= $this->get_admin_notice($e);
 					} 
 
-					$content .= '</p>';
+					$content .= '</div>';
 				}			
 			}
 			// endif
+		}
+
+		if($is_admin && empty($opts['form_lists'])) {
+			$content .= '<p><strong>Warning:</strong> you have not selected a MailChimp list for this sign-up form to subscribe to yet. <a href="'. get_admin_url(null, 'admin.php?page=mailchimp-for-wp&tab=form-settings') .'">Edit your form settings</a> and select at least 1 list.</p>';
 		}
 
 		$content .= "</form>";
@@ -143,10 +147,39 @@ class MC4WP_Lite_Form
 		foreach($_POST as $name => $value) {
 
 			// only add uppercases fields to merge variables array
-			if($name == 'EMAIL' || $name !== strtoupper($name)) { continue; }
+			if(!empty($name) && $name == 'EMAIL' || $name !== strtoupper($name)) { continue; }
 
-			$name = strtoupper($name);
-			$merge_vars[$name] = $value;
+			if($name === 'GROUPINGS') {
+
+				// malformed
+				if(!is_array($value)) { continue; }
+				$merge_vars['GROUPINGS'] = array();
+
+				if(!isset($value[0])) {
+					$groupings = array($value); 
+				} else {
+					$groupings = $value;
+				}
+
+				foreach($groupings as $grouping) {
+
+					if((isset($grouping['name']) || isset($grouping['id'])) && isset($grouping['groups']) && !empty($grouping['groups'])) {
+
+						if(is_array($grouping['groups'])) {
+
+							$grouping['groups'] = implode(',', $grouping['groups']);
+						}
+
+							// add grouping to array
+						$merge_vars['GROUPINGS'][] = $grouping;
+					}
+				}
+
+				if(empty($merge_vars['GROUPINGS'])) { unset($merge_vars['GROUPINGS']); }
+
+			} else {
+				$merge_vars[$name] = $value;
+			}
 
 		}
 

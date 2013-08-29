@@ -71,7 +71,7 @@ class MC4WP_Lite_Checkbox
 		$checked = $opts['checkbox_precheck'] ? "checked" : '';
 		$content = '<p id="mc4wp-checkbox">';
 		$content .= '<input type="checkbox" name="mc4wp-do-subscribe" id="mc4wp-checkbox-input" value="1" '. $checked . ' />';
-		$content .= '<label for="mc4wp-checkbox-input">'. $opts['checkbox_label'] . '</label>';
+		$content .= '<label for="mc4wp-checkbox-input">'. __($opts['checkbox_label']) . '</label>';
 		$content .= '</p>';
 		return $content;
 	}
@@ -120,17 +120,6 @@ class MC4WP_Lite_Checkbox
 				} else {
 					// something went wrong
 					$error = $result;
-
-					// show error to admins only
-					if(current_user_can('manage_options')) {
-						if($error == 'no_lists_selected') {
-							die("
-								<h3>MailChimp for WordPress - configuration error</h3>
-								<p><strong>Error:</strong> No lists have been selected. Go to the <a href=\"". get_admin_url(null, "admin.php?page=mailchimp-for-wp&tab=checkbox-settings") ."\">MailChimp for WordPress options page</a> and select at least one list to subscribe commenters to.</p>
-								<p><em>PS. don't worry, this error message will only be shown to WP Administrators.</em></p>
-								"); 
-						}
-					}
 				}
 
 			}
@@ -166,17 +155,6 @@ class MC4WP_Lite_Checkbox
 			// success, do something cool later
 		} else {
 			$error = $result;
-
-			// show error to admins only
-			if(current_user_can('manage_options')) {
-				if($error == 'no_lists_selected') {
-					die("
-						<h3>MailChimp for WordPress - configuration error</h3>
-						<p><strong>Error:</strong> No lists have been selected. Go to the <a href=\"". get_admin_url(null, "admin.php?page=mailchimp-for-wp&tab=checkbox-settings") ."\">MailChimp for WordPress options page</a> and select at least one list to subscribe subscribers to.</p>
-						<p><em>PS. don't worry, this error message will only be shown to WP Administrators.</em></p>
-						"); 
-				}
-			}
 		}
 
 	}
@@ -202,17 +180,6 @@ class MC4WP_Lite_Checkbox
 			// success, do something cool later
 		} else {
 			$error = $result;
-
-			// show error to admins only
-			if(current_user_can('manage_options')) {
-				if($error == 'no_lists_selected') {
-					die("
-						<h3>MailChimp for WordPress - configuration error</h3>
-						<p><strong>Error:</strong> No lists have been selected. Go to the <a href=\"". get_admin_url(null, "admin.php?page=mailchimp-for-wp&tab=checkbox-settings") ."\">MailChimp for WordPress options page</a> and select at least one list to subscribe members to.</p>
-						<p><em>PS. don't worry, this error message will only be shown to WP Administrators.</em></p>
-					"); 
-				}
-			}
 		}
 
 	}

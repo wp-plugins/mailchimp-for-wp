@@ -44,7 +44,7 @@
 
 			<p>Pro features include multiple sign-up forms, even easier form creation, AJAX submission and premium support.</p>
 
-			<p style="text-align: center;"><a class="button button-primary" href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Buy MailChimp for WP Pro now!</a></p>
+			<p style="text-align: center;"><a target="_blank" class="button button-primary" href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Buy MailChimp for WP Pro now!</a></p>
 
 			<p>Alternatively, you can: </p>
             <ul>

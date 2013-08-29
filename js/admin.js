@@ -109,8 +109,8 @@
 			f.$label.val('');
 			f.$placeholder.val('');
 			f.$preset.val('');
-			f.$wrapInP.prop('checked', true);
-			f.$required.prop('checked', false);
+			f.$wrapInP.attr('checked', true);
+			f.$required.attr('checked', false);
 			f.$valueLabel.html("Initial value");
 
 			// hide or show some of the fields, depending on chosen fieldType
@@ -118,7 +118,7 @@
 
 				case 'hidden':
 					f.$all.find('.row-placeholder, .row-wrap-in-p, .row-label, .row-required').hide();
-					f.$wrapInP.prop('checked', false);
+					f.$wrapInP.attr('checked', false);
 				break;
 
 				case 'submit':
@@ -153,7 +153,7 @@
 					f.$label.val("Email address");
 					f.$name.val('EMAIL');
 					f.$placeholder.val("Your email address");
-					f.$required.prop('checked', true);
+					f.$required.attr('checked', true);
 				break;
 				case 'fname':
 					f.$label.val('First name:');
