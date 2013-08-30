@@ -139,6 +139,7 @@ Sorry, this feature is only available in the premium version of the plugin.
 * Added: group preset to form field wizard for hidden fields, checkboxes and radio inputs.
 * Added: radio inputs to field wizard
 * Improved: the field wizard will now add labels after the checkbox and radio input elements.
+* Fixed: regular error messages not being shown in some cases.
 
 = 1.0 =
 * Added support for group checkboxes
