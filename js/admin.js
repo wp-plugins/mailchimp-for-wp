@@ -1,7 +1,7 @@
 (function($) { 
 
 	// variables
-	var FormDesigner;
+	var FieldWizard;
 	// event bindings
 	$("#mc4wp-nav a").click(function(e) {
 		var target, wp_referer;
@@ -42,7 +42,7 @@
 		$("#mc4wp_form_options, #mc4wp_form_options_2").fadeOut(); 
 	});
 
-	FormDesigner = {
+	FieldWizard = {
 		fields: {
 			$value: $("#mc4wp_ffd_field_value"),
 			$placeholder: $("#mc4wp_ffd_field_placeholder"),
@@ -55,40 +55,66 @@
 			$required: $("#mc4wp_ffd_field_required"),
 			$label: $("#mc4wp_ffd_field_label"),
 			$preset: $("#mc4wp_ffd_field_preset"),
-			$valueLabel: $("#mc4wp_ffd_field_value_label")
+			$valueLabel: $("#mc4wp_ffd_field_value_label"),
+			$grouping: $("#mc4wp_ffd_field_grouping")
+		},
+		getMarkup: function(what) {
+			var markup = '', f = this.fields;
+
+			var fieldId = "f%N%_"+ f.$name.val().toLowerCase().replace(/[^\w-]+/g,'');
+
+
+			if(f.$type.val() == 'checkbox' || f.$type.val() == 'radio') {
+				fieldId = fieldId.replace('groupings','') + '_' + f.$value.val().toLowerCase().replace(/[^\w-]+/g,'');
+			}
+
+			switch(what) {
+				case 'input':
+					markup += "<input type=\""+ f.$type.val() + "\" ";
+
+					// add name attribute
+					if(f.$type.val() != "submit") {
+						markup += "name=\""+ f.$name.val() +"\" ";
+					}
+
+					// add value attribute
+					if(f.$value.val() != '') { markup += "value=\""+ f.$value.val() +"\" "; }
+
+					// add id attribute
+					if(f.$type.val() != 'hidden' && f.$type.val() != 'submit') {
+						markup += "id=\"" + fieldId + "\" ";
+					}
+
+					// if placeholder is given, add it. Otherwise, omit it for W3C validity
+					if(f.$placeholder.is(':visible') && f.$placeholder.val() != '') { markup += "placeholder=\""+ f.$placeholder.val() +"\" "; }
+					if(f.$required.is(':visible') && f.$required.is(":checked")) { markup += "required" ; }
+					
+					// add closing trailing flash
+					markup += "/>";
+				break;
+				case 'label':
+					// setup field code
+					if(f.$label.is(':visible') && f.$label.val() != '') { markup += "<label for=\"" + fieldId +"\">"+ f.$label.val() +"</label>\n\t"; }
+
+				break;
+			}
+
+			return markup;
 		},
 		updatePreviewCode: function() {
 			var f = this.fields, fieldPreview = '';
 
-			var fieldId = "mc4wp_f%N%_"+ f.$name.val().toLowerCase();
-
 			// wrap in <p> tags if necessary
 			if(f.$wrapInP.is(':checked:visible')) { fieldPreview += "<p>\n\t"; }
 
-			// setup field code
-			if(f.$label.is(':visible') && f.$label.val() != '') { fieldPreview += "<label for=\"" + fieldId +"\">"+ f.$label.val() +"</label>\n\t"; }
-
-			fieldPreview += "<input type=\""+ f.$type.val() + "\" ";
-
-			// add name attribute
-			if(f.$type.val() != "submit") {
-				fieldPreview += "name=\""+ f.$name.val() +"\" ";
+			if(f.$type.val() == 'checkbox' || f.$type.val() == 'radio') {
+				// reverse label and input field order
+				fieldPreview += this.getMarkup('input');
+				fieldPreview += this.getMarkup('label');
+			} else {
+				fieldPreview += this.getMarkup('label');
+				fieldPreview += this.getMarkup('input');
 			}
-
-			// add value attribute
-			if(f.$value.val() != '') { fieldPreview += "value=\""+ f.$value.val() +"\" "; }
-
-			// add id attribute
-			if(f.$type.val() != 'hidden' && f.$type.val() != 'submit') {
-				fieldPreview += "id=\"" + fieldId + "\" ";
-			}
-
-			// if placeholder is given, add it. Otherwise, omit it for W3C validity
-			if(f.$placeholder.is(':visible') && f.$placeholder.val() != '') { fieldPreview += "placeholder=\""+ f.$placeholder.val() +"\" "; }
-			if(f.$required.is(':visible') && f.$required.is(":checked")) { fieldPreview += "required" ; }
-			
-			// add closing trailing flash
-			fieldPreview += "/>";
 
 			// add closing </p> tag, if necessary
 			if(f.$wrapInP.is(':checked:visible')) { fieldPreview += "\n</p>"; }
@@ -101,6 +127,7 @@
 			// reset
 			f.$all.hide();
 			f.$all.find('p.row').show();
+			f.$all.find('p.row-grouping-id').hide();
 
 		
 			// set field defaults
@@ -109,9 +136,11 @@
 			f.$label.val('');
 			f.$placeholder.val('');
 			f.$preset.val('');
+			f.$grouping.val('');
 			f.$wrapInP.attr('checked', true);
 			f.$required.attr('checked', false);
-			f.$valueLabel.html("Initial value");
+			f.$valueLabel.html("Initial value <small>(optional)</small>");
+			f.$preset.find('option[value="group"]').attr('disabled', 'disabled');
 
 			// hide or show some of the fields, depending on chosen fieldType
 			switch(fieldType) {
@@ -119,6 +148,7 @@
 				case 'hidden':
 					f.$all.find('.row-placeholder, .row-wrap-in-p, .row-label, .row-required').hide();
 					f.$wrapInP.attr('checked', false);
+					f.$preset.find('option[value="group"]').removeAttr('disabled');
 				break;
 
 				case 'submit':
@@ -127,20 +157,31 @@
 				break;
 
 				case 'checkbox':
-					f.$all.find('.row-placeholder, .row-required, span.initial').hide();
+				case 'radio':
+					f.$all.find('.row-placeholder, .row-required').hide();
 					f.$valueLabel.html("Value");
+					f.$preset.find('option[value="group"]').removeAttr('disabled');
 				break;
 
 			}
 
 			f.$all.show();
-			FormDesigner.preset(f.$preset.val());
-			FormDesigner.updatePreviewCode();
+			FieldWizard.preset(f.$preset.val());
+			FieldWizard.updatePreviewCode();
 		},
 		validateFields: function() {
-			var f = this.fields;
+			var f = this.fields, arrayCharPos, name;
 
-			f.$name.val(f.$name.val().trim().toUpperCase().replace(/\s+/g,''));
+			name = f.$name.val().trim();
+			arrayCharPos = name.indexOf('[');
+
+			if(arrayCharPos !== -1) {
+				name = name.substring(0, arrayCharPos).toUpperCase().replace(/\s+/g,'') + name.substring(arrayCharPos);
+			} else {
+				name = name.toUpperCase();
+			}
+
+			f.$name.val(name);
 		},
 		preset: function(preset) {
 			var f = this.fields;
@@ -171,8 +212,14 @@
 					f.$placeholder.val("Your name");
 				break;
 				case 'group':
-					//f.$label.val('Group Name comes here');
-					//f.$name.val('Group ID comes here');
+					f.$all.find('p.row-grouping-id').show();
+					f.$all.find('p.row-name').hide();
+
+					if(f.$type.val() == 'checkbox' || f.$type.val() == 'radio') {
+						f.$valueLabel.html("Group name");
+					} else {
+						f.$valueLabel.html("Group names <small>(separated by comma)</small>");
+					}
 				break;
 
 			}
@@ -195,34 +242,40 @@
 			}
 
 			return true;
+		},
+		setNameAttributeForGrouping: function() {
+			f = this.fields;
+			if(f.$type.val() == 'checkbox') {
+				f.$name.val('GROUPINGS[' + f.$grouping.val() +'][]');
+			} else {
+				f.$name.val('GROUPINGS[' + f.$grouping.val() +']');				
+			}
 		}
 	}
 
 	// Events
 	$("#mc4wp_ffd_field_type").change(function() {
-		FormDesigner.setup($(this).val());		
+		FieldWizard.setup($(this).val());		
 	});
 	$("#mc4wp_ffd_field_preset").change(function() {
-		FormDesigner.preset($(this).val());
+		FieldWizard.preset($(this).val());
 	});
 
 	$("#mc4wp_ffd_fields :input").change(function() {
-		FormDesigner.validateFields();
-		FormDesigner.updatePreviewCode();
+		FieldWizard.validateFields();
+		FieldWizard.updatePreviewCode();
 	});
 	$("#mc4wp_ffd_add_to_form").click(function(e) { 
-		FormDesigner.transferCodeToForm();
+		FieldWizard.transferCodeToForm();
 		return false;
 	});
-
+	$("#mc4wp_ffd_field_grouping").change(function() {
+		FieldWizard.setNameAttributeForGrouping();
+		FieldWizard.updatePreviewCode()
+	});
 	$("#mc4wp-submit-form-settings").click(function(e) {
-		return FormDesigner.validateSettings();
+		return FieldWizard.validateSettings();
 	});
-
-	FormDesigner.fields.$form.bind('copy', function(e) {
-		return alert("Use the [mc4wp-form] shortcode to render this form inside a page, post or widget.");
-	});
-
 
 
 })(jQuery);

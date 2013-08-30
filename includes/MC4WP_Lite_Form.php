@@ -7,7 +7,7 @@ class MC4WP_Lite_Form
 	private $did_request = false;
 	private $request_succes = false; 
 	private $error = null;
-	private $success = null;
+	private $success = false;
 	private $submitted_form_instance = 0;
 
 	public function __construct(MC4WP_Lite $mc4wp) 
@@ -28,9 +28,11 @@ class MC4WP_Lite_Form
 
 			// change $_POST['name'] to something else, to fix WP bug
 			// maybe later ok?
-
+			$this->ensure_backwards_compatibility();
 			add_action('init', array($this, 'subscribe'));
 		}
+
+		
 	}
 
 	public function load_stylesheet()
@@ -54,19 +56,20 @@ class MC4WP_Lite_Form
 
 		// maybe hide the form
 		if(!($this->success && $opts['form_hide_after_success'])) {
-			$form_markup = $this->options['form_markup'];
+			$form_markup = __($this->options['form_markup']);
 			// replace special values
 			$form_markup = str_replace('%N%', $this->form_instance_number, $form_markup);
 			$form_markup = str_replace('%IP_ADDRESS%', $this->get_ip_address(), $form_markup);
 			$form_markup = str_replace('%DATE%', date('dd/mm/yyyy'), $form_markup);
 
-			$content .= __($form_markup);
+			$content .= $form_markup;
 
 			// hidden fields
 			$content .= '<textarea name="mc4wp_required_but_not_really" style="display: none;"></textarea>';
 			$content .= '<input type="hidden" name="mc4wp_form_submit" value="1" />';
 			$content .= '<input type="hidden" name="mc4wp_form_instance" value="'. $this->form_instance_number .'" />';
 		}		
+
 
 		if($this->form_instance_number == $this->submitted_form_instance) {
 			
@@ -77,25 +80,28 @@ class MC4WP_Lite_Form
 				$e = $this->error;
 
 				if($e == 'already_subscribed') {
-					$text = (empty($opts['form_text_already_subscribed'])) ? $mc4wp->get_mc_api()->errorMessage : $opts['form_text_already_subscribed'];
+					$text = (empty($opts['form_text_already_subscribed'])) ? $api->errorMessage : $opts['form_text_already_subscribed'];
 					$content .= '<div class="mc4wp-alert mc4wp-notice">'. __($text) .'</div>';
-				}elseif(isset($opts['form_text_' . $e]) && !empty($opts['form_text_'. $e] )) {
+				} elseif(isset($opts['form_text_' . $e]) && !empty($opts['form_text_'. $e] )) {
 					$content .= '<div class="mc4wp-alert mc4wp-error">' . __($opts['form_text_' . $e]) . '</div>';
-				} else {
-					$content .= '<div class="mc4wp-alert mc4wp-error">' . __($opts['form_text_error']);
+				}
 
-					if($is_admin) {
-						$content .= $this->get_admin_notice($e);
-					} 
+				if($is_admin) {
 
-					$content .= '</div>';
-				}			
+					$api = MC4WP_Lite::get_instance()->get_mc_api();
+
+					// show MailChimp error message for debugging purposes
+					if($api->errorMessage && !empty($api->errorMessage)) {
+						$content .= '<div class="mc4wp-alert mc4wp-error"><strong>Admin notice:</strong> '. $api->errorMessage . '</div>';
+					}	
+				} 
+
 			}
 			// endif
 		}
 
 		if($is_admin && empty($opts['form_lists'])) {
-			$content .= '<p><strong>Warning:</strong> you have not selected a MailChimp list for this sign-up form to subscribe to yet. <a href="'. get_admin_url(null, 'admin.php?page=mailchimp-for-wp&tab=form-settings') .'">Edit your form settings</a> and select at least 1 list.</p>';
+			$content .= '<div class="mc4wp-alert mc4wp-error"><strong>Admin notice:</strong> you have not selected a MailChimp list for this sign-up form to subscribe to yet. <a href="'. get_admin_url(null, 'admin.php?page=mailchimp-for-wp&tab=form-settings') .'">Edit your form settings</a> and select at least 1 list.</div>';
 		}
 
 		$content .= "</form>";
@@ -111,21 +117,7 @@ class MC4WP_Lite_Form
 		$mc4wp = MC4WP_Lite::get_instance();
 		$opts = $this->options; 
 
-		$this->submitted_form_instance = $_POST['mc4wp_form_instance'];
-
-		// for backwards compatibility, uppercase all post variables
-		foreach($_POST as $name => $value) {
-			// only uppercase variables which are not already uppercased
-			// skip the mc4wp necessary form vars
-			if($name === strtoupper($name) || in_array($name, array('mc4wp_form_instance', 'mc4wp_required_but_not_really', 'mc4wp_form_submit'))) continue;
-			$uppercased_name = strtoupper($name);
-
-			// set new (uppercased) $_POST variable
-			$_POST[$uppercased_name] = $value;
-
-			// unset old post variable
-			unset($_POST[$name]);			
-		}
+		$this->submitted_form_instance = (int) $_POST['mc4wp_form_instance'];
 
 		if(!isset($_POST['EMAIL']) || !is_email($_POST['EMAIL'])) { 
 			// no (valid) e-mail address has been given
@@ -151,28 +143,32 @@ class MC4WP_Lite_Form
 
 			if($name === 'GROUPINGS') {
 
+				$groupings = $value;
+
 				// malformed
-				if(!is_array($value)) { continue; }
+				if(!is_array($groupings)) { continue; }
+
+				// setup groupings array
 				$merge_vars['GROUPINGS'] = array();
 
-				if(!isset($value[0])) {
-					$groupings = array($value); 
-				} else {
-					$groupings = $value;
-				}
+				foreach($groupings as $grouping_id_or_name => $groups) {
 
-				foreach($groupings as $grouping) {
+						$grouping = array();
 
-					if((isset($grouping['name']) || isset($grouping['id'])) && isset($grouping['groups']) && !empty($grouping['groups'])) {
+						if(is_numeric($grouping_id_or_name)) {
+							$grouping['id'] = $grouping_id_or_name;
+						} else {
+							$grouping['name'] = $grouping_id_or_name;
+						}
 
-						if(is_array($grouping['groups'])) {
-
-							$grouping['groups'] = implode(',', $grouping['groups']);
+						if(is_array($groups)) {
+							$grouping['groups'] = implode(',', $groups);
+						} else {
+							$grouping['groups'] = $groups;
 						}
 
 							// add grouping to array
 						$merge_vars['GROUPINGS'][] = $grouping;
-					}
 				}
 
 				if(empty($merge_vars['GROUPINGS'])) { unset($merge_vars['GROUPINGS']); }
@@ -208,11 +204,11 @@ class MC4WP_Lite_Form
 			return true;
 		} else {
 
+			$this->success = false;
 			$this->error = $result;
+
 			return false;
 		}
-
-		
 	}
 
 	private function get_ip_address()
@@ -249,28 +245,51 @@ class MC4WP_Lite_Form
 		return $page_url;
 	}
 
-	private function get_admin_notice($error) {
-		$api = MC4WP_Lite::get_instance()->get_mc_api();
-		$notices = array();
-		$notices['merge_field_error'] = 'There seems to be a problem with your merge fields. Make sure all required merge fields are present in your sign-up form.';
-		$notices['no_lists_selected'] = 'No lists have been selected. <a href="'. get_admin_url(null, "admin.php?page=mailchimp-for-wp&tab=form-settings") .'">Edit your form settings</a> and select at least one list.';
+	/*
+		Ensure backwards compatibility so sign-up forms that contain old form mark-up rules don't break
+		- Uppercase $_POST variables that should be sent to MailChimp
+		- Format GROUPINGS in one of the following formats. 
+			$_POST[GROUPINGS][$group_id] = "Group 1, Group 2"
+			$_POST[GROUPINGS][$group_name] = array("Group 1", "Group 2")
+	*/
+	public function ensure_backwards_compatibility()
+	{
 
-		$notice = '<br /><br /><strong>Admins only: </strong>';
-		
-		if(isset($notices[$error])) {
-			$has_notice = true;
-			$notice .= $notices[$error];
-		}
-		if($api->errorMessage && !empty($api->errorMessage)) {
-			$has_notice = true;
-			$notice .= '<br /><br />MailChimp returned the following error message: ' . $api->errorMessage;
+		// upercase $_POST variables
+		foreach($_POST as $name => $value) {
+			
+			// only uppercase variables which are not already uppercased, skip mc4wp internal vars
+			if($name === strtoupper($name) || in_array($name, array('mc4wp_form_instance', 'mc4wp_required_but_not_really', 'mc4wp_form_submit'))) continue;
+			$uppercased_name = strtoupper($name);
+
+			// set new (uppercased) $_POST variable, unset old one.
+			$_POST[$uppercased_name] = $value;
+			unset($_POST[$name]);			
 		}
 
-		return ($has_notice) ? $notice : '';
+		// detect old style GROUPINGS, then fix it.
+		if(isset($_POST['GROUPINGS']) && is_array($_POST['GROUPINGS']) && isset($_POST['GROUPINGS'][0])) {
+
+			$old_groupings = $_POST['GROUPINGS'];
+			unset($_POST['GROUPINGS']);
+			$new_groupings = array();
+
+			foreach($old_groupings as $grouping) {
+
+				if(!isset($grouping['id']) && !isset($grouping['name'])) { continue; }
+
+				$key = (isset($grouping['id'])) ? $grouping['id'] : $grouping['name'];
+
+				$new_groupings[$key] = $grouping['groups'];
+
+			}
+
+			// re-fill $_POST array with new groupings
+			if(!empty($new_groupings)) { $_POST['GROUPINGS'] = $new_groupings; }
+
+		}
+
+		return;
 	}
-
-	
-
-	
 
 }

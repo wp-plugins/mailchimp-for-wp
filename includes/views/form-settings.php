@@ -68,14 +68,17 @@
 						<div class="mc4wp-col mc4wp-col-1-3 mc4wp-last">
 							<div id="mc4wp_ffd" class="mc4wp-well">
 
-								<select class="widefat" id="mc4wp_ffd_field_type">
-									<option value="">Select field type..</option>
-									<option value="text">Text field</option>
-									<option value="email">Email field (HTML5)</option>
-									<option value="checkbox">Checkbox</option>
-									<option value="hidden">Hidden field</option>
-									<option value="submit">Submit button</option>
-								</select>
+								<p>
+									<select class="widefat" id="mc4wp_ffd_field_type">
+										<option value="">Select field type..</option>
+										<option value="text">Text field</option>
+										<option value="email">Email field (HTML5)</option>
+										<option value="checkbox">Checkbox</option>
+										<option value="radio">Radio button</option>
+										<option value="hidden">Hidden field</option>
+										<option value="submit">Submit button</option>
+									</select>
+								</p>
 
 								<div id="mc4wp_ffd_fields">
 
@@ -87,8 +90,14 @@
 											<option value="fname">First name</option>
 											<option value="lname">Last name</option>
 											<option value="email">Email address</option>
+											<option value="group">Interest group</option>
 										</select>
 										<small>Helps by presetting some values</small>
+									</p>
+
+									<p class="row row-grouping-id">
+										<label for="mc4wp_ffd_field_grouping">Grouping ID or Name</label>
+										<input class="widefat" type="text" id="mc4wp_ffd_field_grouping" />
 									</p>
 
 									<p class="row row-name">
@@ -98,7 +107,7 @@
 									</p>
 
 									<p class="row row-value">
-										<label for="mc4wp_ffd_field_value"><span id="mc4wp_ffd_field_value_label">Initial value</span> <small>(optional)</small></label>
+										<label for="mc4wp_ffd_field_value"><span id="mc4wp_ffd_field_value_label">Initial value (optional)</span></label>
 										<input class="widefat" type="text" id="mc4wp_ffd_field_value" />
 									</p>
 
@@ -128,9 +137,6 @@
 			</tr>
 		</tbody>
 	</table>
-
-
-	
 
 	<div id="mc4wp_form_options_2" <?php if(!$opts['form_usage']) { ?>style="display:none;"<?php } ?>>
 		<h3>Visual feedback to subscriber</h3>

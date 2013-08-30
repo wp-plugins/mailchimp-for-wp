@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, newsletter, mailinglist, email, email list, form, widget form, sign-up form, subscribe form, comments, comment form, mailchimp widget, buddypress, multisite
 Requires at least: 3.1
 Tested up to: 3.6
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,7 +101,7 @@ Make sure to go to **form settings** in the plugin settings screen. There you ha
 Yes, you can. Go to checkbox and tick the checkbox that says "show checkbox at other forms (manual)". Then, include ANY field with name attribute `mc4wp-do-subscribe` and the plugin will take care of the rest. 
 
 Example: 
-`<input type="checkbox" name="mc4wp-do-subscribe" value="1" id="mc4wp-checkbox" /><label for="mc4wp-checkbox">Subscribe to our newsletter</label>`.
+`<input type="checkbox" name="mc4wp-do-subscribe" value="1" id="mc4wp-checkbox" /><label for="mc4wp-checkbox">Subscribe to our newsletter</label>`
 
 Make sure your form contains an email field with any of the following names: 
 `email, e-mail, emailaddress, user_email, your-email, your_email, signup_email, emailadres` 
@@ -109,19 +109,16 @@ Make sure your form contains an email field with any of the following names:
 Note: when using Contact Form 7 you can use "[mc4wp_checkbox]" inside your CF7 form template.
 
 = How do I add subscribers to certain interest groups? =
-The following snippet should get you started.
+Use the field wizard. Or, if you know more about HTML, the following snippet should get you started. **Replace `###` with your grouping ID or grouping name**.
 
 `
-<input type="hidden" name="GROUPINGS[0][id]" value="INSERT_GROUPING_ID_HERE" />
-<input type="hidden" name="GROUPINGS[0][groups]" value="Groupname 1,Groupname 2,Groupname 3" />
+<input type="hidden" name="GROUPINGS[###]" value="Groupname 1,Groupname 2,Groupname 3" />
 `
-
-Or... if you want to use checkboxes.
+Or, if you want to use checkboxes...
 
 `
-<input type="hidden" name="GROUPINGS[0][id]" value="INSERT_GROUPING_ID_HERE" />
-<input type="checkbox" name="GROUPINGS[0][groups][]" value="Group 1" /><label>Group 1</label>
-<input type="checkbox" name="GROUPINGS[0][groups][]" value="Group 2" /><label>Group 2</label>
+<input type="checkbox" name="GROUPINGS[###][]" value="Group 1" /><label>Group 1</label>
+<input type="checkbox" name="GROUPINGS[###][]" value="Group 2" /><label>Group 2</label>
 `
 
 = Can I create multiple sign-up forms? =
@@ -136,6 +133,12 @@ Sorry, this feature is only available in the premium version of the plugin.
 1. The MC4WP form options page.
 
 == Changelog ==
+
+= 1.0.1 =
+* Changed: format for groups is now somewhat easier. Refer to the FAQ and update your form mark-up please. (Backwards compatibility included)
+* Added: group preset to form field wizard for hidden fields, checkboxes and radio inputs.
+* Added: radio inputs to field wizard
+* Improved: the field wizard will now add labels after the checkbox and radio input elements.
 
 = 1.0 =
 * Added support for group checkboxes
