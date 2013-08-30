@@ -12,8 +12,6 @@
 	<p class="alert warning"><b>Notice:</b> You must select atleast 1 list to subscribe to.</p>
 	<?php } ?>
 
-
-
 	<table class="form-table">
 		<tbody>
 			<tr valign="top">
@@ -58,7 +56,7 @@
 					<div class="mc4wp-wrapper">
 
 						<div class="mc4wp-col mc4wp-col-2-3 mc4wp-first">
-							<textarea class="widefat" cols="160" rows="20" id="mc4wp_form_markup" name="mc4wp[form_markup]"><?php echo esc_textarea($opts['form_markup']); ?></textarea>
+							<textarea class="widefat" cols="160" rows="20" id="mc4wp-form-markup" name="mc4wp[form_markup]"><?php echo esc_textarea($opts['form_markup']); ?></textarea>
 							<p><small>Use the <b>[mc4wp-form]</b> shortcode to render this form inside a widget, post or page.</small></p>
 							<p class="submit">
 								<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" id="mc4wp-submit-form-settings" />
@@ -66,71 +64,7 @@
 						</div>
 
 						<div class="mc4wp-col mc4wp-col-1-3 mc4wp-last">
-							<div id="mc4wp_ffd" class="mc4wp-well">
-
-								<p>
-									<select class="widefat" id="mc4wp_ffd_field_type">
-										<option value="">Select field type..</option>
-										<option value="text">Text field</option>
-										<option value="email">Email field (HTML5)</option>
-										<option value="checkbox">Checkbox</option>
-										<option value="radio">Radio button</option>
-										<option value="hidden">Hidden field</option>
-										<option value="submit">Submit button</option>
-									</select>
-								</p>
-
-								<div id="mc4wp_ffd_fields">
-
-									<p class="row row-preset">
-										<label for="mc4wp_ffd_field_preset">Preset (optional)</label>
-										<select class="widefat" id="mc4wp_ffd_field_preset">
-											<option value="" disabled>Choose a preset..</option>
-											<option value="name">Full name</option>
-											<option value="fname">First name</option>
-											<option value="lname">Last name</option>
-											<option value="email">Email address</option>
-											<option value="group">Interest group</option>
-										</select>
-										<small>Helps by presetting some values</small>
-									</p>
-
-									<p class="row row-grouping-id">
-										<label for="mc4wp_ffd_field_grouping">Grouping ID or Name</label>
-										<input class="widefat" type="text" id="mc4wp_ffd_field_grouping" />
-									</p>
-
-									<p class="row row-name">
-										<label for="mc4wp_ffd_field_name">Field name*</label>
-										<input class="widefat" type="text" id="mc4wp_ffd_field_name" />
-										<small>Should match your merge field tag</small>
-									</p>
-
-									<p class="row row-value">
-										<label for="mc4wp_ffd_field_value"><span id="mc4wp_ffd_field_value_label">Initial value (optional)</span></label>
-										<input class="widefat" type="text" id="mc4wp_ffd_field_value" />
-									</p>
-
-									<p class="row row-placeholder">
-										<label for="mc4wp_ffd_field_placeholder">Placeholder (HTML5) <small>(optional)</small></label>
-										<input class="widefat" type="text" id="mc4wp_ffd_field_placeholder" />
-									</p>
-
-									<p class="row row-label">
-										<label for="mc4wp_ffd_field_label">Label <small>(optional)</small></label>
-										<input class="widefat" type="text" id="mc4wp_ffd_field_label" />
-									</p>
-
-									<p class="row row-wrap-in-p"><input type="checkbox" id="mc4wp_ffd_wrap_in_p" value="1" checked /> <label for="mc4wp_ffd_wrap_in_p">Wrap in paragraph (<code>&lt;p&gt;</code>) tags?</label></p>
-
-									<p class="row row-required"><input type="checkbox" id="mc4wp_ffd_field_required" value="1" /> <label for="mc4wp_ffd_field_required">Required field? (HTML5)</label></p>
-
-									<textarea style="width:100%;" cols="60" rows="5" id="mc4wp_ffd_preview_field_code"></textarea>
-
-									<p><input class="button button-large" type="button" id="mc4wp_ffd_add_to_form" value="&laquo; add to form" /></p>
-
-								</div>
-							</div>
+							<?php include('parts/field-wizard.php'); ?>
 						</div>
 					</div>
 				</td>
