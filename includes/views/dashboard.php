@@ -11,7 +11,7 @@
 	<h2 style="display:none;"></h2>
 	<?php settings_errors(); ?>
 
-	<div style="float:left; width:70%;">
+	<div id="mc4wp-main-column">
 
 		<form method="post" action="options.php">
 				
@@ -35,20 +35,27 @@
 
 	</div>
 
-	<div style="width:26%; float:right; margin-left:3%;">
+	<div id="mc4wp-secondary-column">
 		
-		<div class="box mc4wp-well buybox">
+		<div id="mc4wp-upgrade-box">
 			<h3>Get MailChimp for WP Pro</h3>
 			
-			<p>Enjoying this version of MailChimp for WP? Then you will <strong>LOVE</strong> MailChimp for WP Pro.</p>
+			<p>Enjoying this "lite" version of MailChimp for WordPress? Then you will <strong style="font-size:13px">LOVE</strong> MailChimp for WP Pro.</p>
 
-			<p>Pro features include multiple sign-up forms, even easier form creation, AJAX submission and premium support.</p>
+			<p style="text-align: center;"><a target="_blank" class="upgrade-button" href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Buy MailChimp for WP Pro now!</a></p>
 
-			<p style="text-align: center;"><a target="_blank" class="button button-primary" href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Buy MailChimp for WP Pro now!</a></p>
+			<p>Pro features include..
+				<ul>
+					<li>AJAX form submission (no page reload)</li>
+					<li>Multiple sign-up forms</li>
+					<li>Even easier form creation</li>
+					<li>Premium support</li>
+				</ul>
+			</p>
 
 			<p>Alternatively, you can: </p>
             <ul>
-            	<li><a target="_blank" href="http://dannyvankooten.com/donate/">Donate $5, $10 or $20</a> (although I recommend just buying Pro)</li>
+            	<li><a target="_blank" href="http://dannyvankooten.com/donate/">Donate $5, $10 or $20</a> <small>(just buy Pro)</small></li>
                 <li><a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/mailchim-for-wp?rate=5#postform">Give a 5&#9733; review on WordPress.org</a></li>
                 <li><a target="_blank" href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Link to the plugin page on my website</a></li>
                 <li><a target="_blank" href="http://twitter.com/?status=I%20manage%20my%20%23WordPress%20sign-up%20forms%20using%20MailChimp%20for%20WP%20and%20I%20love%20it%20-%20check%20it%20out!%20http%3A%2F%2Fwordpress.org%2Fplugins%2Fmailchimp-for-wp%2F">Tweet about MailChimp for WP</a></li>
