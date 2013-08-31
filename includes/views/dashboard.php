@@ -40,9 +40,9 @@
 		<div id="mc4wp-upgrade-box">
 			<h3>Get MailChimp for WP Pro</h3>
 			
-			<p>Enjoying this "lite" version of MailChimp for WordPress? Then you will <strong style="font-size:13px">LOVE</strong> MailChimp for WP Pro.</p>
+			<p>Enjoying the "lite" version of MailChimp for WordPress? You will <strong style="font-size:13px">LOVE</strong> MailChimp for WP Pro.</p>
 
-			<p style="text-align: center;"><a target="_blank" class="upgrade-button" href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Buy MailChimp for WP Pro now!</a></p>
+			<p style="text-align: center;"><a target="_blank" class="upgrade-button" href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Upgrade to MailChimp for WP Pro</a></p>
 
 			<p>Pro features include..
 				<ul>

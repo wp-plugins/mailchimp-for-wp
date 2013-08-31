@@ -44,21 +44,21 @@
 #mc4wp_admin .mc4wp-well{ background:#efefef; padding:10px; border:1px solid #666; }
 
 #mc4wp_admin .upgrade-button{
-border:1px solid #FFC826;-webkit-box-shadow: #B4B5B5 1px 1px 1px  ;-moz-box-shadow: #B4B5B5 1px 1px 1px ; box-shadow: #B4B5B5 1px 1px 1px  ; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:13px;font-family:arial, helvetica, sans-serif; padding: 15px 20px 15px 20px; text-decoration:none; display:inline-block;text-shadow: 1px 1px 0 rgba(51,51,51,0.3);font-weight:bold; color: #000000;
- background-color: #ffd65e; background-image: -webkit-gradient(linear, left top, left bottom, from(#ffd65e), to(#FEBF04));
- background-image: -webkit-linear-gradient(top, #ffd65e, #FEBF04);
- background-image: -moz-linear-gradient(top, #ffd65e, #FEBF04);
- background-image: -ms-linear-gradient(top, #ffd65e, #FEBF04);
- background-image: -o-linear-gradient(top, #ffd65e, #FEBF04);
- background-image: linear-gradient(to bottom, #ffd65e, #FEBF04);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffd65e, endColorstr=#FEBF04);
+border:1px solid #ffad41;-webkit-box-shadow: #999999 1px 1px 1px  ;-moz-box-shadow: #999999 1px 1px 1px ; box-shadow: #999999 1px 1px 1px  ; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;padding: 12px 16px; text-decoration:none; display:inline-block;text-shadow: 1px 1px 0 rgba(51,51,51,0.3);font-weight:bold; color: #000000;
+ background-color: #ffc579; background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc579), to(#fb9d23));
+ background-image: -webkit-linear-gradient(top, #ffc579, #fb9d23);
+ background-image: -moz-linear-gradient(top, #ffc579, #fb9d23);
+ background-image: -ms-linear-gradient(top, #ffc579, #fb9d23);
+ background-image: -o-linear-gradient(top, #ffc579, #fb9d23);
+ background-image: linear-gradient(to bottom, #ffc579, #fb9d23);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffc579, endColorstr=#fb9d23);
 }
 
 #mc4wp_admin .upgrade-button:hover{
- border:1px solid #f7b800;
- background-color: #ffc92b; background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc92b), to(#ce9a01));
- background-image: -webkit-linear-gradient(top, #ffc92b, #ce9a01);
- background-image: -moz-linear-gradient(top, #ffc92b, #ce9a01);
- background-image: -ms-linear-gradient(top, #ffc92b, #ce9a01);
- background-image: -o-linear-gradient(top, #ffc92b, #ce9a01);
- background-image: linear-gradient(to bottom, #ffc92b, #ce9a01);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffc92b, endColorstr=#ce9a01);
+ border:1px solid #ff9913;
+ background-color: #ffaf46; background-image: -webkit-gradient(linear, left top, left bottom, from(#ffaf46), to(#e78404));
+ background-image: -webkit-linear-gradient(top, #ffaf46, #e78404);
+ background-image: -moz-linear-gradient(top, #ffaf46, #e78404);
+ background-image: -ms-linear-gradient(top, #ffaf46, #e78404);
+ background-image: -o-linear-gradient(top, #ffaf46, #e78404);
+ background-image: linear-gradient(to bottom, #ffaf46, #e78404);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffaf46, endColorstr=#e78404);
 }
