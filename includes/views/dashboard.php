@@ -37,7 +37,7 @@
 
 	<div id="mc4wp-secondary-column">
 		
-		<div id="mc4wp-upgrade-box">
+		<div class="mc4wp-box" id="mc4wp-upgrade-box">
 			<h3>Get MailChimp for WP Pro</h3>
 			
 			<p>Enjoying the "lite" version of MailChimp for WordPress? You will <strong style="font-size:13px">LOVE</strong> MailChimp for WP Pro.</p>
@@ -62,7 +62,7 @@
             </ul>
         </div>
 
-        <div id="mc4wp-info-tabs">
+        <div class="mc4wp-box" id="mc4wp-info-tabs">
 			<div class="info-tab info-tab-form-settings" <?php if($tab != 'form-settings') { echo 'style="display:none;"'; } ?>>
 				<h4>Notes regarding the form designer</h4>
 				<p>At a minimum, your form should include an EMAIL field and a submit button.</p>
@@ -94,7 +94,7 @@
 			</div>
 		</div>
 
-		<div>
+		<div class="mc4wp-box">
 			<h3>Looking for support?</h3>
         	<p>Having trouble? Please use the <a href="http://wordpress.org/support/plugin/mailchimp-for-wp">support forums</a> on WordPress.org.</p>
 		</div>
