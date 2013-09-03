@@ -33,10 +33,10 @@ Easily create and manage sign-up forms and then add them to your posts, pages an
 
 **Pro Features:**
 
-* AJAX forms (no page reload)
-* Multiple sign-up forms
-* Creating forms is even more easy.
-* Premium support
+* AJAX forms (no page reload, fast)
+* Multiple sign-up forms for multiple lists
+* Field presets for all your list's merge tags which makes it extremely easy to create sign-up forms.
+* Premium e-mail support
 * No advertisements
 
 [Upgrade to MailChimp for WordPress Pro now](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
@@ -60,7 +60,7 @@ You can add this checkbox to ANY form you like, including Contact Form 7 forms. 
 1. Select at least one list to subscribe visitors to.
 1. (Optional) Select to which forms the sign-up checkbox should be added.
 1. (Optional) Create a form and show it in your posts, pages or text widgets using the shortcode `[mc4wp-form]`.
-1. (Optional) If you like the plugin, upgrade to pro or donate a beer. :-)
+1. (Optional) If you like the plugin, upgrade to Pro or donate a beer. :-)
 
 == Frequently Asked Questions ==
 
@@ -131,6 +131,9 @@ Sorry, this feature is only available in the premium version of the plugin.
 
 1. The MC4WP options page.
 1. The MC4WP form options page.
+1. Multiple lists in [MailChimp for WordPress Pro](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
+1. Editing a form in [MailChimp for WordPress Pro](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
+
 
 == Changelog ==
 
@@ -148,7 +151,7 @@ Sorry, this feature is only available in the premium version of the plugin.
 
 = 0.8.3 =
 * Added: Guess first and last name when only using full name field.
-* Added: Links to [MailChimp for WordPress Pro]
+* Added: Links to [MailChimp for WordPress Pro](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
 * Fixed: Bug where options could not be saved after adding specific HTML tags to the form mark-up.
 
 = 0.8.2 =
