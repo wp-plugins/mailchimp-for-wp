@@ -18,6 +18,8 @@ class MC4WP_Lite
 
 	public function __construct()
 	{
+		$this->ensure_backwards_compatibility();
+
 		$defaults = array(
 			'mailchimp_api_key' => '',
 			'checkbox_label' => 'Sign me up for the newsletter!', 'checkbox_precheck' => 1, 'checkbox_css' => 0, 
@@ -29,7 +31,7 @@ class MC4WP_Lite
 			'form_redirect' => '', 'form_lists' => array(), 'form_double_optin' => 1, 'form_hide_after_success' => 0
 		);
 
-		$this->options = $opts = array_merge($defaults, (array) get_option('mc4wp'));
+		$this->options = $opts = array_merge($defaults, (array) get_option('mc4wp_lite'));
 
 		// compatibility
 		// transfer old general mailchimp settings
@@ -132,5 +134,14 @@ class MC4WP_Lite
 		return $result;
 	}
 
+
+	public function ensure_backwards_compatibility()
+	{
+		// transfer options to new option key
+		if(($opts = get_option('mc4wp')) != false && isset($opts['mailchimp_api_key'])) {
+			update_option('mc4wp_lite', $opts);
+			delete_option('mc4wp');
+		}
+	}
 
 }

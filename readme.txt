@@ -36,6 +36,7 @@ Easily create and manage sign-up forms and then add them to your posts, pages an
 * AJAX forms (no page reload, fast)
 * Multiple sign-up forms for multiple lists
 * Field presets for all your list's merge tags which makes it extremely easy to create sign-up forms.
+* Subscribers log, gain insight into where and how your visitors subscribe to your lists.
 * Premium e-mail support
 * No advertisements
 

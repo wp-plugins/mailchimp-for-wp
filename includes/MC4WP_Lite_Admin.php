@@ -27,7 +27,7 @@ class MC4WP_Lite_Admin
 
 	public function register_settings()
 	{
-		register_setting('mc4wp_options_group', 'mc4wp', array($this, 'validate_options'));
+		register_setting('mc4wp_options_group', 'mc4wp_lite', array($this, 'validate_options'));
 	}
 
 	public function validate_options($opts)

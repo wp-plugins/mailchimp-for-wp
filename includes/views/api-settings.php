@@ -5,7 +5,7 @@
 
 		<tr valign="top">
 			<th scope="row"><label for="mailchimp_api_key">MailChimp API Key</label> <a target="_blank" href="http://admin.mailchimp.com/account/api">(?)</a></th>
-			<td><input type="text" size="50" placeholder="Your MailChimp API key" id="mailchimp_api_key" name="mc4wp[mailchimp_api_key]" value="<?php echo $opts['mailchimp_api_key']; ?>" /></td>
+			<td><input type="text" size="50" placeholder="Your MailChimp API key" id="mailchimp_api_key" name="mc4wp_lite[mailchimp_api_key]" value="<?php echo $opts['mailchimp_api_key']; ?>" /></td>
 		</tr>
 
 	</table>
@@ -27,7 +27,7 @@
 		</thead>
 		<tbody>
 			<?php if($lists && is_array($lists)) { ?>
-			<?php foreach($lists as $l) { ?>
+			<?php foreach($lists as $l) { if(!is_array($l)) { continue; }?>
 			<tr valign="top">
 				<td><?php echo $l['id']; ?></td>
 				<td><?php echo $l['name']; ?></td>

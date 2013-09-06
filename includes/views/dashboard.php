@@ -44,18 +44,19 @@
 
 			<p style="text-align: center;"><a target="_blank" class="upgrade-button" href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Upgrade to MailChimp for WP Pro</a></p>
 
-			<p>Pro features include..
+			<p><strong>Pro features include..</strong>
 				<ul>
 					<li>AJAX form submission (no page reload)</li>
-					<li>Multiple sign-up forms</li>
-					<li>Even easier form creation</li>
+					<li>Multiple sign-up forms for different lists</li>
+					<li>Presets for all your merge fields, easily add new fields</li>
+					<li>Log subscribers, gain insight into where and how your visitors subscribe to your lists</li>
 					<li>Premium support</li>
 				</ul>
 			</p>
 
 			<p>Alternatively, you can: </p>
             <ul>
-            	<li><a target="_blank" href="http://dannyvankooten.com/donate/">Donate $5, $10 or $20</a> <small>(just buy Pro)</small></li>
+            	<li><a target="_blank" href="http://dannyvankooten.com/donate/">Donate $5, $10 or $20.</a> </li>
                 <li><a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/mailchim-for-wp?rate=5#postform">Give a 5&#9733; review on WordPress.org</a></li>
                 <li><a target="_blank" href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Link to the plugin page on my website</a></li>
                 <li><a target="_blank" href="http://twitter.com/?status=I%20manage%20my%20%23WordPress%20sign-up%20forms%20using%20MailChimp%20for%20WP%20and%20I%20love%20it%20-%20check%20it%20out!%20http%3A%2F%2Fwordpress.org%2Fplugins%2Fmailchimp-for-wp%2F">Tweet about MailChimp for WP</a></li>
