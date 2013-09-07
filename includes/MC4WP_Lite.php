@@ -2,22 +2,37 @@
 
 class MC4WP_Lite
 {
-	private static $instance;
-	private static $mc_api;
 	private $options = array();
-	public $checkbox, $form;
+	private $mailchimp_api = null;
+	private static $instance, $checkbox = null, $form = null;
 
-	public static function get_instance()
+	public static function instance()
 	{
-		if(!isset(self::$instance)) {
-			self::$instance = new MC4WP_Lite();
-		}
-
 		return self::$instance;
+	}
+
+	public static function checkbox()
+	{
+		if(!self::$checkbox) { 
+			require 'MC4WP_Lite_Checkbox.php';
+			self::$checkbox = new MC4WP_Lite_Checkbox; 
+		}
+		return self::$checkbox;
+	}
+
+	public static function form()
+	{
+		if(!self::$form) { 
+			require 'MC4WP_Lite_Form.php';
+			self::$form = new MC4WP_Lite_Form; 
+		}
+		return self::$form;
 	}
 
 	public function __construct()
 	{
+		self::$instance = $this;
+
 		$this->ensure_backwards_compatibility();
 
 		$defaults = array(
@@ -43,16 +58,29 @@ class MC4WP_Lite
 		}
 
 		if($opts['checkbox_show_at_comment_form'] || $opts['checkbox_show_at_registration_form'] || $opts['checkbox_show_at_bp_form'] || $opts['checkbox_show_at_ms_form'] || $opts['checkbox_show_at_other_forms']) {
-			require_once 'MC4WP_Lite_Checkbox.php';
-			$this->checkbox = new MC4WP_Lite_Checkbox($this);
+			self::checkbox();
 		}
 
 		// load form functionality
 		if($opts['form_usage']) {
-			require_once 'MC4WP_Lite_Form.php';
-			$this->form = new MC4WP_Lite_Form($this);
+			self::form();
 		}
 
+		if(defined('DOING_AJAX') && DOING_AJAX) {
+			// ajax only
+
+		} else {
+			// non-ajax only
+
+			if(is_admin()) {
+				// backend only
+				require_once 'MC4WP_Lite_Admin.php';
+				$MC4WP_Admin = new MC4WP_Lite_Admin();
+			} else {
+				// frontend only
+				require 'functions.php';
+			}
+		}
 	}
 
 	public function get_options() 
@@ -60,9 +88,9 @@ class MC4WP_Lite
 		return $this->options;
 	}
 
-	public function get_mc_api()
+	public function get_mailchimp_api()
 	{
-		if(!isset(self::$mc_api)) {
+		if(!$this->mailchimp_api) {
 
 			// Only load MailChimp API if it has not been loaded yet
 			// other plugins may have already at this point.
@@ -70,70 +98,11 @@ class MC4WP_Lite
 				require_once 'MCAPI.php';
 			}
 			
-			self::$mc_api = new MCAPI($this->options['mailchimp_api_key']);
+			$this->mailchimp_api = new MCAPI($this->options['mailchimp_api_key']);
 		}
 
-		return self::$mc_api;
+		return $this->mailchimp_api;
 	}
-
-	public function subscribe($type, $email, array $merge_vars = array(), array $data = array())
-	{
-		$mc = $this->get_mc_api();
-		$opts = $this->get_options();
-
-		$lists = $opts[$type . '_lists'];
-		
-		if(empty($lists)) {
-			return 'no_lists_selected';
-		}
-
-		// add ip address to merge vars
-		if(isset($data['ip'])) {
-			$merge_vars['OPTINIP'] = $data['ip'];
-		}
-
-		// guess all three name kinds
-		if(isset($data['name'])) {
-			
-			$name = $data['name'];
-			$merge_vars['NAME'] = $name;
-
-			if(!isset($merge_vars['FNAME']) && !isset($merge_vars['LNAME'])) {
-				// try to fill first and last name fields as well
-				$strpos = strpos($name, ' ');
-
-				if($strpos) {
-					$merge_vars['FNAME'] = substr($name, 0, $strpos);
-					$merge_vars['LNAME'] = substr($name, $strpos);
-				} else {
-					$merge_vars['FNAME'] = $name;
-					$merge_vars['LNAME'] = '...';
-				}
-			}
-		}
-
-		foreach($lists as $list) {
-			$result = $mc->listSubscribe($list, $email, $merge_vars, 'html', $opts[$type . '_double_optin']);
-		}
-
-		if($mc->errorCode) {
-
-			if($mc->errorCode == 214) {
-				return 'already_subscribed';
-			}
-
-			if($mc->errorCode >= 250 && $mc->errorCode <= 254 && current_user_can('manage_options')) {
-				return 'merge_field_error';
-			}
-
-			return 'error';
-		}
-		
-		// flawed
-		// this will only return the result of the last list a subscribe attempt has been sent to
-		return $result;
-	}
-
 
 	public function ensure_backwards_compatibility()
 	{

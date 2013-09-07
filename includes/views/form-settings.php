@@ -38,6 +38,11 @@
 				
 			</tr>
 			<tr valign="top">
+				<th scope="row">Enable AJAX?</th>
+				<td><a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Only in Pro</a></td>
+				<td class="desc">Submit forms with AJAX, meaning the page doesn't have to reload.</td>
+			</tr>
+			<tr valign="top">
 				<th scope="row">Double opt-in?</th>
 				<td><input type="radio" id="mc4wp_form_double_optin_1" name="mc4wp_lite[form_double_optin]" value="1" <?php if($opts['form_double_optin'] == 1) echo 'checked="checked"'; ?> /> <label for="mc4wp_form_double_optin_1">Yes</label> &nbsp; <input type="radio" id="mc4wp_form_double_optin_0" name="mc4wp_lite[form_double_optin]" value="0" <?php if($opts['form_double_optin'] == 0) echo 'checked="checked"'; ?> /> <label for="mc4wp_form_double_optin_0">No</label></td>
 				<td class="desc"></td>

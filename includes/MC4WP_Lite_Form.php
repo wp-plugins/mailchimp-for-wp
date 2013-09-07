@@ -4,15 +4,13 @@ class MC4WP_Lite_Form
 {
 	private $options;
 	private $form_instance_number = 1;
-	private $did_request = false;
-	private $request_succes = false; 
 	private $error = null;
 	private $success = false;
 	private $submitted_form_instance = 0;
 
-	public function __construct(MC4WP_Lite $mc4wp) 
+	public function __construct() 
 	{
-		$this->options = $opts = $mc4wp->get_options();
+		$this->options = $opts = MC4WP_Lite::instance()->get_options();
 
 		if($opts['form_css']) {
 			add_action( 'wp_enqueue_scripts', array($this, 'load_stylesheet') );
@@ -25,11 +23,8 @@ class MC4WP_Lite_Form
 		add_filter( 'widget_text', 'do_shortcode', 11);
 
 		if(isset($_POST['mc4wp_form_submit'])) {
-
-			// change $_POST['name'] to something else, to fix WP bug
-			// maybe later ok?
 			$this->ensure_backwards_compatibility();
-			add_action('init', array($this, 'subscribe'));
+			add_action('init', array($this, 'submit'));
 		}
 
 		
@@ -42,9 +37,7 @@ class MC4WP_Lite_Form
 
 	public function output_form($atts, $content = null)
 	{
-		$mc4wp = MC4WP_Lite::get_instance();
 		$opts = $this->options;
-		$is_admin = current_user_can('manage_options');
 
 		// add some useful css classes
 		$css_classes = ' ';
@@ -76,7 +69,8 @@ class MC4WP_Lite_Form
 			if($this->success) {
 				$content .= '<div class="mc4wp-alert mc4wp-success">' . __($opts['form_text_success']) . '</div>';
 			} elseif($this->error) {
-				
+
+				$api = MC4WP_Lite::instance()->get_mailchimp_api();
 				$e = $this->error;
 
 				if($e == 'already_subscribed') {
@@ -86,12 +80,9 @@ class MC4WP_Lite_Form
 					$content .= '<div class="mc4wp-alert mc4wp-error">' . __($opts['form_text_' . $e]) . '</div>';
 				}
 
-				if($is_admin) {
+				if(current_user_can('manage_options')) {
 
-					$api = MC4WP_Lite::get_instance()->get_mc_api();
-
-					// show MailChimp error message for debugging purposes
-					if($api->errorMessage && !empty($api->errorMessage)) {
+					if($api->errorCode && !empty($api->errorMessage)) {
 						$content .= '<div class="mc4wp-alert mc4wp-error"><strong>Admin notice:</strong> '. $api->errorMessage . '</div>';
 					}	
 				} 
@@ -100,7 +91,7 @@ class MC4WP_Lite_Form
 			// endif
 		}
 
-		if($is_admin && empty($opts['form_lists'])) {
+		if(current_user_can('manage_options') && empty($opts['form_lists'])) {
 			$content .= '<div class="mc4wp-alert mc4wp-error"><strong>Admin notice:</strong> you have not selected a MailChimp list for this sign-up form to subscribe to yet. <a href="'. get_admin_url(null, 'admin.php?page=mailchimp-for-wp&tab=form-settings') .'">Edit your form settings</a> and select at least 1 list.</div>';
 		}
 
@@ -112,11 +103,9 @@ class MC4WP_Lite_Form
 		return $content;
 	}
 
-	public function subscribe()
+	public function submit()
 	{
-		$mc4wp = MC4WP_Lite::get_instance();
 		$opts = $this->options; 
-
 		$this->submitted_form_instance = (int) $_POST['mc4wp_form_instance'];
 
 		if(!isset($_POST['EMAIL']) || !is_email($_POST['EMAIL'])) { 
@@ -186,11 +175,11 @@ class MC4WP_Lite_Form
 				$merge_vars['FNAME'] = substr($merge_vars['NAME'], 0, $strpos);
 				$merge_vars['LNAME'] = substr($merge_vars['NAME'], $strpos);
 			} else {
-				$request['merge_vars']['FNAME'] = $merge_vars['NAME'];
+				$merge_vars['FNAME'] = $merge_vars['NAME'];
 			}
 		}
 
-		$result = $mc4wp->subscribe('form', $email, $merge_vars);
+		$result = $this->subscribe($email, $merge_vars);
 
 		if($result === true) { 
 			$this->success = true;
@@ -290,6 +279,48 @@ class MC4WP_Lite_Form
 		}
 
 		return;
+	}
+
+	public function subscribe($email, array $merge_vars = array())
+	{
+		$api = MC4WP_Lite::instance()->get_mailchimp_api();
+		$opts = $this->options;
+
+		$lists = $opts['checkbox_lists'];
+		
+		if(empty($lists)) {
+			return 'no_lists_selected';
+		}
+
+		// guess FNAME and LNAME
+		if(isset($merge_vars['NAME']) && !isset($merge_vars['FNAME']) && !isset($merge_vars['LNAME'])) {
+			
+			$strpos = strpos($name, ' ');
+
+			if($strpos) {
+				$merge_vars['FNAME'] = substr($name, 0, $strpos);
+				$merge_vars['LNAME'] = substr($name, $strpos);
+			} else {
+				$merge_vars['FNAME'] = $name;
+			}
+		}
+		
+		foreach($lists as $list) {
+			$result = $api->listSubscribe($list, $email, $merge_vars, 'html', $opts['checkbox_double_optin']);
+		}
+
+		if($api->errorCode) {
+
+			if($api->errorCode == 214) {
+				return 'already_subscribed';
+			}
+
+			return 'error';
+		}
+		
+		// flawed
+		// this will only return the result of the last list a subscribe attempt has been sent to
+		return $result;
 	}
 
 }

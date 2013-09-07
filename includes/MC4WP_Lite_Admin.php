@@ -6,9 +6,9 @@ class MC4WP_Lite_Admin
 	private $options = array();
 	private $runs_buddypress = false;
 
-	public function __construct(MC4WP_Lite $mc4wp)
+	public function __construct()
 	{
-		$this->options = $mc4wp->get_options();
+		$this->options = MC4WP_Lite::instance()->get_options();
 
 		add_action('admin_init', array($this, 'register_settings'));
 		add_action('admin_menu', array($this, 'build_menu'));
@@ -80,16 +80,14 @@ class MC4WP_Lite_Admin
 
 	private function get_mailchimp_api()
 	{
-		return MC4WP_Lite::get_instance()->get_mc_api();
+		return MC4WP_Lite::instance()->get_mailchimp_api();
 	}
 
 	public function get_mailchimp_lists($refresh_cache = false)
 	{
 		$lists = get_transient( 'mc4wp_mailchimp_lists' );
 		
-		if(!$refresh_cache && isset($_REQUEST['renew-cached-data'])) {
-			$refresh_cache = true;
-		}
+		$refresh_cache = (isset($_REQUEST['renew-cached-data'])) ? true : $refresh_cache;
 
 		if($refresh_cache || !$lists) {
 
@@ -103,19 +101,18 @@ class MC4WP_Lite_Admin
 				foreach($lists_data['data'] as $l) {
 					$lists[$l['id']] = array(
 						'id' => $l['id'],
-						'name' => $l['name'],
-						'merge_vars' => array()
+						'name' => $l['name']
 					);
 				}
 
 				if(isset($_REQUEST['renew-cached-data'])) {
 					// add notice
-					add_settings_error("mc4wp", "cache-renewed", 'Cached data from MailChimp successfully renewed.', 'updated' );
+					add_settings_error("mc4wp", "cache-renewed", 'MailChimp cache renewed.', 'updated' );
 				}
 
 				// store lists in transients
 				set_transient('mc4wp_mailchimp_lists', $lists, 3600); // 1 hour
-				set_transient('mc4wp_mailchimp_lists_fallback', $lists, 604800); // 1 week
+				set_transient('mc4wp_mailchimp_lists_fallback', $lists, 1209600); // 2 weeks
 			} else {
 				// api request failed, get fallback data (with longer lifetime)
 				$lists = get_transient('mc4wp_mailchimp_lists_fallback');

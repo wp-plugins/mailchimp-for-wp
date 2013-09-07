@@ -2,12 +2,12 @@
 
 class MC4WP_Lite_Checkbox
 {
-	private $options;
+	private $options = array();
 	private $showed_checkbox = false;
 
-	public function __construct(MC4WP_Lite $mc4wp)
+	public function __construct()
 	{
-		$this->options = $opts = $mc4wp->get_options();
+		$this->options = $opts = MC4WP_Lite::instance()->get_options();
 
 		// load checkbox css if necessary
 		if($this->options['checkbox_css'] == 1) {
@@ -94,7 +94,7 @@ class MC4WP_Lite_Checkbox
 	{
 		$cid = (int) $cid;
 		$opts = $this->options;
-		$mc4wp = MC4WP_Lite::get_instance();
+		$mc4wp = MC4WP_Lite::instance();
 	
 		if ( !is_object($comment) )
 			$comment = get_comment($cid);
@@ -107,13 +107,12 @@ class MC4WP_Lite_Checkbox
 
 			if($subscribe == 1) {
 				$email = $comment->comment_author_email;
-				$ip = $comment->comment_author_IP;
-				$name = $comment->comment_author;
-
-				$result = $mc4wp->subscribe('checkbox', $email, array(), array(
-					'name' => $name,
-					'ip' => $ip)
+				$merge_vars = array(
+					'OPTINIP' => $comment->comment_author_IP,
+					'NAME' => $comment->comment_author
 				);
+
+				$result = $this->subscribe($email, $merge_vars);
 
 				if($result === true) {
 					update_comment_meta($cid, 'mc4wp_subscribe', 'subscribed', 1);
@@ -135,8 +134,6 @@ class MC4WP_Lite_Checkbox
 	/* Start registration form functions */
 	public function subscribe_from_registration($user_id)
 	{
-		$mc4wp = MC4WP_Lite::get_instance();
-
 		if($_POST['mc4wp-do-subscribe'] != 1) { return false; }
 			
 		// gather emailadress from user who WordPress registered
@@ -144,44 +141,28 @@ class MC4WP_Lite_Checkbox
 		if(!$user) { return false; }
 
 		$email = $user->user_email;
-		$name = $user->user_login;
-		
-		$result = $mc4wp->subscribe('checkbox', $email, array(), array(
-			'name' => $name
-			)
+		$merge_vars = array(
+			'NAME' => $user->user_login
 		);
-
-		if($result === true ) {
-			// success, do something cool later
-		} else {
-			$error = $result;
-		}
-
+		
+		$result = $this->subscribe($email, $merge_vars); 
 	}
 	/* End registration form functions */
 
 	/* Start BuddyPress functions */
 	public function subscribe_from_buddypress()
 	{
-		$mc4wp = MC4WP_Lite::get_instance();
+		$mc4wp = MC4WP_Lite::instance();
 
 		if($_POST['mc4wp-do-subscribe'] != 1) return;
 			
 		// gather emailadress and name from user who BuddyPress registered
 		$email = $_POST['signup_email'];
-		$name = $_POST['signup_username'];
-		
-		$result = $mc4wp->subscribe('checkbox', $email, array(), array(
-			'name' => $name
-			)
+		$merge_vars = array(
+			'NAME' => $_POST['signup_username']
 		);
 
-		if($result === true ) {
-			// success, do something cool later
-		} else {
-			$error = $result;
-		}
-
+		$result = $this->subscribe($email, $merge_vars);
 	}
 	/* End BuddyPress functions */
 
@@ -218,12 +199,10 @@ class MC4WP_Lite_Checkbox
 		if(!is_object($user)) return false;
 
 		$email = $user->user_email;
-		$name = $user->first_name . ' ' . $user->last_name;
-		
-		$result = $mc4wp->subscribe('checkbox', $email, array(), array(
-			'name' => $name,
-			)
+		$merge_vars = array(
+			'NAME' => $user->first_name . ' ' . $user->last_name
 		);
+		$result = $this->subscribe($email, $merge_vars);
 	}
 	/* End Multisite functions */
 
@@ -239,8 +218,8 @@ class MC4WP_Lite_Checkbox
 
 		// start running..
 		$opts = $this->options;
-		$mc4wp = MC4WP_Lite::get_instance();
-		$email = $name = null;
+		$email = null;
+		$merge_vars = array();
 
 		// Smart field guessing
 		$possibilities = array('email', 'your-email', 'e-mail', 'emailaddress', 'user_email', 'signup_email', 'emailadres', 'your_email');
@@ -254,7 +233,7 @@ class MC4WP_Lite_Checkbox
 		$possibilities = array('name', 'your-name', 'username', 'fname', 'user_login', 'lname', 'first_name', 'last_name', 'firstname', 'lastname', 'fullname', 'naam');
 		foreach($possibilities as $key) {
 			if(isset($_POST[$key]) && !empty($_POST[$key])) {
-				$name = $_POST[$key];
+				$merge_vars['NAME'] = $_POST[$key];
 				break;
 			}
 		}
@@ -272,14 +251,51 @@ class MC4WP_Lite_Checkbox
 		}
 
 		// subscribe
-		$result = $mc4wp->subscribe('checkbox', $email, array(), array(
-			'name' => $name
-			)
-		);
-
-		// do something with the result... later
+		$result = $this->subscribe($email, $merge_vars);
 		return true;
 	}
 	/* End whatever functions */
+
+	public function subscribe($email, array $merge_vars = array())
+	{
+		$api = MC4WP_Lite::instance()->get_mailchimp_api();
+		$opts = $this->options;
+
+		$lists = $opts['checkbox_lists'];
+		
+		if(empty($lists)) {
+			return 'no_lists_selected';
+		}
+
+		// guess FNAME and LNAME
+		if(isset($merge_vars['NAME']) && !isset($merge_vars['FNAME']) && !isset($merge_vars['LNAME'])) {
+			
+			$strpos = strpos($name, ' ');
+
+			if($strpos) {
+				$merge_vars['FNAME'] = substr($name, 0, $strpos);
+				$merge_vars['LNAME'] = substr($name, $strpos);
+			} else {
+				$merge_vars['FNAME'] = $name;
+			}
+		}
+		
+		foreach($lists as $list) {
+			$result = $api->listSubscribe($list, $email, $merge_vars, 'html', $opts['checkbox_double_optin']);
+		}
+
+		if($api->errorCode) {
+
+			if($api->errorCode == 214) {
+				return 'already_subscribed';
+			}
+
+			return 'error';
+		}
+		
+		// flawed
+		// this will only return the result of the last list a subscribe attempt has been sent to
+		return $result;
+	}
 
 }
