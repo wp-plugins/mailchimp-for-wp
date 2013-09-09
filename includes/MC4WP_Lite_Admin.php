@@ -2,9 +2,7 @@
 
 class MC4WP_Lite_Admin
 {
-	private static $instance;
 	private $options = array();
-	private $runs_buddypress = false;
 
 	public function __construct()
 	{
@@ -21,7 +19,8 @@ class MC4WP_Lite_Admin
 	public function add_settings_link($links)
 	{
 		 $settings_link = '<a href="admin.php?page=mailchimp-for-wp">Settings</a>';
-         array_unshift($links, $settings_link);
+		 $upgrade_link = '<a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Upgrade to Pro</a>';
+         array_unshift($links, $upgrade_link, $settings_link);
          return $links;
 	}
 
@@ -58,7 +57,6 @@ class MC4WP_Lite_Admin
 	public function page_dashboard()
 	{
 		$opts = $this->options;
-		$runs_buddypress = $this->runs_buddypress;
 		$api = $this->get_mailchimp_api();
 
 		if(empty($opts['mailchimp_api_key'])) {
@@ -124,8 +122,4 @@ class MC4WP_Lite_Admin
 		return $lists;
 	}
 
-	public function set_buddypress_var()
-	{
-		$this->runs_buddypress = true;
-	}
 }

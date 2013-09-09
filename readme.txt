@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, newsletter, mailinglist, email, email list, form, widget form, sign-up form, subscribe form, comments, comment form, mailchimp widget, buddypress, multisite
 Requires at least: 3.1
 Tested up to: 3.6
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,15 +99,24 @@ form.mc4wp-form .mc4wp-error { ... } /* error messages */
 Make sure to go to **form settings** in the plugin settings screen. There you have to check a checkbox that says "load form functionality". This will make the plugin load the necessary code.
 
 = Can I add a checkbox to this third-party form? =
-Yes, you can. Go to checkbox and tick the checkbox that says "show checkbox at other forms (manual)". Then, include ANY field with name attribute `mc4wp-do-subscribe` and the plugin will take care of the rest. 
+Yes, you can. Go to checkbox and tick the checkbox that says "show checkbox at other forms (manual)". Then, include ANY field with name attribute `mc4wp-do-subscribe` and the plugin will take care of the rest.
 
 Example: 
 `<input type="checkbox" name="mc4wp-do-subscribe" value="1" id="mc4wp-checkbox" /><label for="mc4wp-checkbox">Subscribe to our newsletter</label>`
 
 Make sure your form contains an email field with any of the following names: 
-`email, e-mail, emailaddress, user_email, your-email, your_email, signup_email, emailadres` 
+`email, e-mail, email_address, your-email` 
 
-Note: when using Contact Form 7 you can use "[mc4wp_checkbox]" inside your CF7 form template.
+Note: when using Contact Form 7 you can use `[mc4wp_checkbox]` inside your CF7 form template to render the checkbox.
+
+= I'm using Contact Form 7 / plugin XYZ with the checkbox, how do I add more MailChimp merge fields? =
+Prefix the name attribute with `mc4wp-` and the plugin will send the field value to MailChimp.
+
+Example CF7 code for MailChimp WEBSITE field:
+`[text* mc4wp-website]`
+
+Example HTML code:
+`<input type="text" name="mc4wp-WEBSITE" /><label>Your website:</label>`
 
 = How do I add subscribers to certain interest groups? =
 Use the field wizard. Or, if you know more about HTML, the following snippet should get you started. **Replace `###` with your grouping ID or grouping name**.
@@ -138,10 +147,18 @@ Sorry, this feature is only available in the premium version of the plugin.
 
 == Changelog ==
 
+= 1.0.3 =
+* Added HTML quicktags to form markup textarea.
+* Added option to set custom label when using Contact Form 7 shortcode `[mc4wp_checkbox "Your checkbox label"]`
+* Added HTML comments
+* Added upgrade link to plugins overview
+* Improved compatibility with third-party plugins when using checkbox, smarter e-mail field guessing
+* Improved: easier copying of the form shortcode from form settings pages
+* Added: uninstall function
+
 = 1.0.2 =
 * Improved code, less memory usage
 * Added `mc4wp_show_form()` function for usage inside template files
-* 
 
 = 1.0.1 =
 * Changed: format for groups is now somewhat easier. Refer to the FAQ and update your form mark-up please. (Backwards compatibility included)

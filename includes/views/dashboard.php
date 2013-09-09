@@ -31,7 +31,9 @@
 
 		</form>
 
-		<p class="copyright-notice">I would like to remind you that this plugin is <b>not</b> developed by or affiliated with MailChimp in any way. My name is <a href="http://dannyvankooten.com/">Danny van Kooten</a>, I am a young, Dutch webdeveloper who thought more people might like a plugin like this one.</p>
+		<p class="copyright-notice">I would like to remind you that this plugin is not developed by or affiliated with MailChimp in any way.
+		 My name is <a href="http://dannyvankooten.com/">Danny van Kooten</a> and I am a young Dutch webdeveloper.</p>
+		 <p class="copyright-notice">Enjoying my plugin? Please consider <a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">upgrading to the premium version</a>, which is awesome.</p>
 
 	</div>
 

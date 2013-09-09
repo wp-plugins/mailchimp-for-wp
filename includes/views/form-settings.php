@@ -2,11 +2,8 @@
 		
 	<h2>Form Settings</h2>		
 	
-	<p>MailChimp for WP comes packed with a neat shortcode you can use in your posts, pages or text widgets to display a sign-up form. Configure the form below, then paste <i>[mc4wp-form]</i> in a post, page or text widget and watch your list(s) grow!</p>
-
-	<?php if(!$connected) { ?>
-	<p class="alert warning"><b>Notice:</b> Please make sure the plugin is connected to MailChimp first.</p>
-	<?php } ?>
+	<p>MailChimp for WP comes packed with a neat shortcode you can use in your posts, pages or text widgets to display a sign-up form. 
+		Configure the form below, then paste <input size="10" type="text" onfocus="this.select();" readonly="readonly" value="[mc4wp-form]" class="mc4wp-shortcode-example"> in a post, page or text widget and watch your list(s) grow!</p>
 
 	<?php if($opts['form_usage'] && empty($opts['form_lists'])) { ?>
 	<p class="alert warning"><b>Notice:</b> You must select atleast 1 list to subscribe to.</p>
@@ -39,7 +36,7 @@
 			</tr>
 			<tr valign="top">
 				<th scope="row">Enable AJAX?</th>
-				<td><a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Only in Pro</a></td>
+				<td><a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Upgrade to Pro</a></td>
 				<td class="desc">Submit forms with AJAX, meaning the page doesn't have to reload.</td>
 			</tr>
 			<tr valign="top">
@@ -53,7 +50,7 @@
 				<td class="desc">Tick "yes" for basic form formatting.</td>
 			</tr>
 			<tr valign="top">
-				<th scope="row" colspan="3">Form mark-up</th>
+				<th scope="row" colspan="3" style="font-weight:bold;">Form mark-up</th>
 			</tr>
 			<tr valign="top">
 				<td colspan="3">
@@ -61,10 +58,15 @@
 					<div class="mc4wp-wrapper">
 
 						<div class="mc4wp-col mc4wp-col-2-3 mc4wp-first">
-							<textarea class="widefat" cols="160" rows="20" id="mc4wp-form-markup" name="mc4wp_lite[form_markup]"><?php echo esc_textarea($opts['form_markup']); ?></textarea>
-							<p><small>Use the <b>[mc4wp-form]</b> shortcode to render this form inside a widget, post or page.</small></p>
+							<?php 
+							if(function_exists('wp_editor')) {
+								wp_editor( $opts['form_markup'], 'mc4wpformmarkup', array('tinymce' => false, 'media_buttons' => false, 'textarea_name' => 'mc4wp_lite[form_markup]'));
+							} else {
+								?><textarea class="widefat" cols="160" rows="20" id="mc4wpformmarkup" name="mc4wp_lite[form_markup]"><?php echo esc_textarea($opts['form_markup']); ?></textarea><?php
+							} ?>
+							<p><small>Use <input type="text" onfocus="this.select();" readonly="readonly" value="[mc4wp-form]" size="10" class="mc4wp-shortcode-example"> to render this form inside a widget, post or page. </small></p>
 							<p class="submit">
-								<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" id="mc4wp-submit-form-settings" />
+								<input type="submit" class="button-primary" value="<?php _e('Save All Changes') ?>" id="mc4wp-submit-form-settings" />
 	</p>					</p>
 						</div>
 
@@ -116,6 +118,6 @@
 
 		</div>
 
-		<?php submit_button(); ?>
+		<?php submit_button("Save All Changes"); ?>
 
 	</div>

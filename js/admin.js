@@ -48,7 +48,7 @@
 			$fields: $("#mc4wp-fw .mc4wp-fields :input"),
 			$fieldRows: $("#mc4wp-fw .field-row"),
 			$textFields: $("#mc4wp-fw .mc4wp-fields :input[type='text']"),
-			$form: $("#mc4wp-form-markup"),
+			$form: $("#mc4wpformmarkup"),
 			$grouping: $("#mc4wp-fw-grouping"),
 			$label: $("#mc4wp-fw-label"),
 			$name: $("#mc4wp-fw-name"),

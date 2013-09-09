@@ -31,8 +31,8 @@
 			<tr valign="top">
 				<td><?php echo $l['id']; ?></td>
 				<td><?php echo $l['name']; ?></td>
-				<td><a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Only in Pro</a></td>
-				<td><a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Only in Pro</a></td>
+				<td><a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Upgrade to Pro</a></td>
+				<td><a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Upgrade to Pro</a></td>
 			</tr>
 			<?php } ?>
 			<?php } else { ?>

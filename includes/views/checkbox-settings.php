@@ -1,10 +1,6 @@
 <div id="mc4wp-tab-checkbox-settings" class="mc4wp-tab <?php if($tab == 'checkbox-settings') { echo 'active'; } ?>">
 	<h2>Checkbox Settings</h2>	
 
-	<?php if(!$connected) { ?>
-		<p class="alert warning"><b>Notice:</b> Please make sure the plugin is connected to MailChimp first.</p>
-	<?php } ?>	
-
 	<?php if(empty($opts['checkbox_lists'])) { ?>
 		<p class="alert warning"><b>Notice:</b> You must select atleast 1 list to subscribe to.</p>
 	<?php } ?>
@@ -38,7 +34,7 @@
 					<label><input name="mc4wp_lite[checkbox_show_at_comment_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_comment_form']) echo 'checked '; ?>> Comment form</label> &nbsp; 
 					<label><input name="mc4wp_lite[checkbox_show_at_registration_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_registration_form']) echo 'checked '; ?>> Registration form</label> &nbsp; 
 					<?php if(is_multisite()) { ?><label><input name="mc4wp_lite[checkbox_show_at_ms_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_ms_form']) echo 'checked '; ?>> Multisite form</label> &nbsp; <?php } ?>
-					<?php if($runs_buddypress) { ?><label><input name="mc4wp_lite[checkbox_show_at_bp_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_bp_form']) echo 'checked '; ?>> BuddyPress form</label> &nbsp; <?php } ?>
+					<?php if(class_exists("BuddyPress")) { ?><label><input name="mc4wp_lite[checkbox_show_at_bp_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_bp_form']) echo 'checked '; ?>> BuddyPress form</label> &nbsp; <?php } ?>
 					<label><input name="mc4wp_lite[checkbox_show_at_other_forms]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_other_forms']) echo 'checked '; ?>> Other forms (manual)</label> &nbsp; 
 				</td>
 			</tr>

@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: MailChimp for WP
+Plugin Name: MailChimp for WP Lite
 Plugin URI: http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/
 Description: Complete MailChimp integration for WordPress. Sign-up forms, widgets, comment checkboxes, etc..
-Version: 1.0.2
+Version: 1.0.3
 Author: Danny van Kooten
 Author URI: http://dannyvanKooten.com
 License: GPL v3
@@ -25,6 +25,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+define("MC4WP_LITE_VERSION", "1.0.3");
+
 // frontend AND backend
 require 'includes/MC4WP_Lite.php';
-new MC4WP_Lite;
+new MC4WP_Lite();

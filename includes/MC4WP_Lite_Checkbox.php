@@ -17,11 +17,11 @@ class MC4WP_Lite_Checkbox
 
 		/* Comment Form Actions */
 		if($opts['checkbox_show_at_comment_form']) {
-			add_action ('comment_post', array($this, 'add_comment_meta'), 1);
+			add_action ('comment_post', array($this, 'add_comment_meta'), 10, 1);
 		
 			// hooks for checking if we should subscribe the commenter
-			add_action('comment_approved_', array($this, 'subscribe_from_comment'), 10, 1);
-			add_action('comment_post', array($this, 'subscribe_from_comment'), 60, 1);
+			add_action('comment_approved_', array($this, 'subscribe_from_comment'), 10, 2);
+			add_action('comment_post', array($this, 'subscribe_from_comment'), 60, 2);
 
 			// hooks for outputting the checkbox
 			add_action('thesis_hook_after_comment_box', array($this,'output_checkbox'), 20);
@@ -31,7 +31,7 @@ class MC4WP_Lite_Checkbox
 		/* Registration Form Actions */
 		if($opts['checkbox_show_at_registration_form']) {
 			add_action('register_form',array($this, 'output_checkbox'),20);
-			add_action('user_register',array($this, 'subscribe_from_registration'), 50);
+			add_action('user_register',array($this, 'subscribe_from_registration'), 40, 1);
 		}
 
 		/* BuddyPress Form Actions */
@@ -65,14 +65,17 @@ class MC4WP_Lite_Checkbox
 		}
 	}
 
-	public function get_checkbox()
+	public function get_checkbox($args = array())
 	{
 		$opts = $this->options;
+		$label = isset($args['labels'][0]) ? $args['labels'][0] : $opts['checkbox_label'];
 		$checked = $opts['checkbox_precheck'] ? "checked" : '';
-		$content = '<p id="mc4wp-checkbox">';
+		$content = '<!-- Checkbox by MailChimp for WP plugin v'.MC4WP_LITE_VERSION.' - http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/ -->';
+		$content .= '<p id="mc4wp-checkbox">';
 		$content .= '<input type="checkbox" name="mc4wp-do-subscribe" id="mc4wp-checkbox-input" value="1" '. $checked . ' />';
-		$content .= '<label for="mc4wp-checkbox-input">'. __($opts['checkbox_label']) . '</label>';
+		$content .= '<label for="mc4wp-checkbox-input">'. __($label) . '</label>';
 		$content .= '</p>';
+		$content .= '<!-- / MailChimp for WP Plugin -->';
 		return $content;
 	}
 
@@ -134,7 +137,7 @@ class MC4WP_Lite_Checkbox
 	/* Start registration form functions */
 	public function subscribe_from_registration($user_id)
 	{
-		if($_POST['mc4wp-do-subscribe'] != 1) { return false; }
+		if(!isset($_POST['mc4wp-do-subscribe']) || $_POST['mc4wp-do-subscribe'] != 1) { return false; }
 			
 		// gather emailadress from user who WordPress registered
 		$user = get_userdata($user_id);
@@ -152,9 +155,7 @@ class MC4WP_Lite_Checkbox
 	/* Start BuddyPress functions */
 	public function subscribe_from_buddypress()
 	{
-		$mc4wp = MC4WP_Lite::instance();
-
-		if($_POST['mc4wp-do-subscribe'] != 1) return;
+		if(!isset($_POST['mc4wp-do-subscribe']) || $_POST['mc4wp-do-subscribe'] != 1) return;
 			
 		// gather emailadress and name from user who BuddyPress registered
 		$email = $_POST['signup_email'];
@@ -221,32 +222,29 @@ class MC4WP_Lite_Checkbox
 		$email = null;
 		$merge_vars = array();
 
-		// Smart field guessing
-		$possibilities = array('email', 'your-email', 'e-mail', 'emailaddress', 'user_email', 'signup_email', 'emailadres', 'your_email');
-		foreach($possibilities as $key) {
-			if(isset($_POST[$key]) && !empty($_POST[$key])) {
-				$email = $_POST[$key];
-				break;
-			}
-		}
+		// Add all fields with name attribute "mc4wp-*" to merge vars
+		foreach($_POST as $key => $value) {
 
-		$possibilities = array('name', 'your-name', 'username', 'fname', 'user_login', 'lname', 'first_name', 'last_name', 'firstname', 'lastname', 'fullname', 'naam');
-		foreach($possibilities as $key) {
-			if(isset($_POST[$key]) && !empty($_POST[$key])) {
-				$merge_vars['NAME'] = $_POST[$key];
-				break;
+			if($key == 'mc4wp-do-subscribe') { 
+				continue; 
+			} elseif(stristr($key, 'email') != false && is_email($value)) {
+				// find e-mail field
+				$email = $value;
+			} elseif(in_array($key, array('name', 'your-name', 'NAME', 'username', 'fullname'))) {
+				// find name field
+				$merge_vars['NAME'] = $value;
+			} elseif(substr($key, 0, 5) == 'mc4wp-') {
+				// find extra fields which should be sent to MailChimp
+				$key = strtoupper(substr($key, 5));
+
+				if(!isset($merge_vars[$key])) {
+					$merge_vars[$key] = $value;
+				}
 			}
 		}
 
 		// if email has not been found by the smart field guessing, return false.. sorry
 		if(!$email) { 
-			if(current_user_can('manage_options')) {
-				die("
-					<h3>MailChimp for WP error</h3>
-					<p>MailChimp for WP detected a subscribe attempt but had some trouble determining the email value. Make sure the other form contains an e-mail field with
-					 one of the following name attributes: 'email', 'e-mail', 'emailaddress', 'user_email', 'signup_email' or 'emailadres'.</p>
-				");
-			}
 			return false; 
 		}
 

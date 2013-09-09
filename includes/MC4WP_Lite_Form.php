@@ -44,7 +44,8 @@ class MC4WP_Lite_Form
 		if($this->error) $css_classes .= 'mc4wp-form-error ';
 		if($this->success) $css_classes .= 'mc4wp-form-success ';
 
-		$content = '<form method="post" action="'. $this->get_current_page_url() .'#mc4wp-form-'. $this->form_instance_number .'" id="mc4wp-form-'.$this->form_instance_number.'" class="mc4wp-form form'.$css_classes.'">';
+		$content = '<!-- Form by MailChimp for WP plugin v'. MC4WP_LITE_VERSION .' - http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/ -->';
+		$content .= '<form method="post" action="'. $this->get_current_page_url() .'#mc4wp-form-'. $this->form_instance_number .'" id="mc4wp-form-'.$this->form_instance_number.'" class="mc4wp-form form'.$css_classes.'">';
 
 
 		// maybe hide the form
@@ -96,6 +97,7 @@ class MC4WP_Lite_Form
 		}
 
 		$content .= "</form>";
+		$content .= '<!-- / MailChimp for WP Plugin -->';
 
 		// increase form instance number in case there is more than one form on a page
 		$this->form_instance_number++;
