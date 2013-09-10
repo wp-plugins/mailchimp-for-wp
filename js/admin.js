@@ -198,7 +198,10 @@
 				email: ['preset', 'name', 'label', 'value', 'req', 'p', 'placeholder'],
 				checkbox: ['preset', 'name', 'label', 'value', 'p'],
 				radio: ['preset', 'name', 'label', 'value', 'p'],
-				submit: ['value', 'p']
+				submit: ['value', 'p'],
+				date: [ 'name', 'label', 'req', 'p'],
+				tel: [ 'name', 'label', 'req', 'p', 'placeholder'],
+				url: [ 'name', 'label', 'req', 'p', 'placeholder']
 			}
 
 			availablePresets = {
@@ -207,7 +210,8 @@
 				email: ['email'],
 				radio: ['group'],
 				checkbox: ['group'],
-				submit: []
+				submit: [],
+
 			}
 
 			// show field rows for chosen fieldType

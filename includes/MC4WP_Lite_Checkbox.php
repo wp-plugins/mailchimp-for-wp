@@ -17,11 +17,8 @@ class MC4WP_Lite_Checkbox
 
 		/* Comment Form Actions */
 		if($opts['checkbox_show_at_comment_form']) {
-			add_action ('comment_post', array($this, 'add_comment_meta'), 10, 1);
-		
 			// hooks for checking if we should subscribe the commenter
-			add_action('comment_approved_', array($this, 'subscribe_from_comment'), 10, 2);
-			add_action('comment_post', array($this, 'subscribe_from_comment'), 60, 2);
+			add_action('comment_post', array($this, 'subscribe_from_comment'), 20, 2);
 
 			// hooks for outputting the checkbox
 			add_action('thesis_hook_after_comment_box', array($this,'output_checkbox'), 20);
@@ -62,6 +59,7 @@ class MC4WP_Lite_Checkbox
 	{
 		if(function_exists("wpcf7_add_shortcode")) {
 			wpcf7_add_shortcode('mc4wp_checkbox', array($this, 'get_checkbox'));
+			add_action('wpcf7_mail_sent', array($this, 'subscribe_from_cf7'));
 		}
 	}
 
@@ -93,39 +91,20 @@ class MC4WP_Lite_Checkbox
 
 
 	/* Start comment form functions */
-	public function subscribe_from_comment($cid, $comment = null)
+	public function subscribe_from_comment($cid, $comment_approved = '')
 	{
-		$cid = (int) $cid;
-		$opts = $this->options;
-		$mc4wp = MC4WP_Lite::instance();
-	
-		if ( !is_object($comment) )
-			$comment = get_comment($cid);
+		if(!isset($_POST['mc4wp-do-subscribe']) || $_POST['mc4wp-do-subscribe'] != 1) { return false; }
+		if($comment_approved === 'spam') { return false; }
+
+		$comment = get_comment($cid);
 		
-		// check if comment has been marked as spam or not
-		if ( $comment->comment_karma == 0 ) {
+		$email = $comment->comment_author_email;
+		$merge_vars = array(
+			'OPTINIP' => $comment->comment_author_IP,
+			'NAME' => $comment->comment_author
+			);
 
-			// check if commenter wanted to be subscribed
-			$subscribe = get_comment_meta($cid, 'mc4wp_subscribe', true);
-
-			if($subscribe == 1) {
-				$email = $comment->comment_author_email;
-				$merge_vars = array(
-					'OPTINIP' => $comment->comment_author_IP,
-					'NAME' => $comment->comment_author
-				);
-
-				$result = $this->subscribe($email, $merge_vars);
-
-				if($result === true) {
-					update_comment_meta($cid, 'mc4wp_subscribe', 'subscribed', 1);
-				} else {
-					// something went wrong
-					$error = $result;
-				}
-
-			}
-		}
+		return $this->subscribe($email, $merge_vars);
 	}
 
 	public function add_comment_meta($comment_id)
@@ -207,27 +186,29 @@ class MC4WP_Lite_Checkbox
 	}
 	/* End Multisite functions */
 
+	/* Start Contact Form 7 functions */
+	public function subscribe_from_cf7($arg = null)
+	{
+		$_POST['mc4wp-try-subscribe'] = 1;
+		return $this->subscribe_from_whatever();
+	}
+	/* End Contact Form 7 functions */
+
 	/* Start whatever functions */
 	public function subscribe_from_whatever()
 	{
-		if(!isset($_POST['mc4wp-do-subscribe']) || !$_POST['mc4wp-do-subscribe']) { return false; }
-
-		// check if not coming from a comment form, registration form, buddypress form or multisite form. 
-		$script_filename = basename($_SERVER["SCRIPT_FILENAME"]);
-		if(in_array( $script_filename, array('wp-comments-post.php', 'wp-login.php', 'wp-signup.php'))) { return false; }
-		if(isset($_POST['signup_submit'])) { return false; }
+		if(!isset($_POST['mc4wp-try-subscribe']) || !$_POST['mc4wp-try-subscribe']) { return false; }
 
 		// start running..
-		$opts = $this->options;
 		$email = null;
 		$merge_vars = array();
 
 		// Add all fields with name attribute "mc4wp-*" to merge vars
 		foreach($_POST as $key => $value) {
 
-			if($key == 'mc4wp-do-subscribe') { 
+			if($key == 'mc4wp-try-subscribe') { 
 				continue; 
-			} elseif(stristr($key, 'email') != false && is_email($value)) {
+			} elseif(!$email && is_email($value)) {
 				// find e-mail field
 				$email = $value;
 			} elseif(in_array($key, array('name', 'your-name', 'NAME', 'username', 'fullname'))) {
@@ -268,13 +249,13 @@ class MC4WP_Lite_Checkbox
 		// guess FNAME and LNAME
 		if(isset($merge_vars['NAME']) && !isset($merge_vars['FNAME']) && !isset($merge_vars['LNAME'])) {
 			
-			$strpos = strpos($name, ' ');
+			$strpos = strpos($merge_vars['NAME'], ' ');
 
 			if($strpos) {
-				$merge_vars['FNAME'] = substr($name, 0, $strpos);
-				$merge_vars['LNAME'] = substr($name, $strpos);
+				$merge_vars['FNAME'] = substr($merge_vars['NAME'], 0, $strpos);
+				$merge_vars['LNAME'] = substr($merge_vars['NAME'], $strpos);
 			} else {
-				$merge_vars['FNAME'] = $name;
+				$merge_vars['FNAME'] = $merge_vars['NAME'];
 			}
 		}
 		

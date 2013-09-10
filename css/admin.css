@@ -61,3 +61,7 @@ border:1px solid #ffad41;-webkit-box-shadow: #999999 1px 1px 1px  ;-moz-box-shad
  background-image: -o-linear-gradient(top, #ffaf46, #e78404);
  background-image: linear-gradient(to bottom, #ffaf46, #e78404);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffaf46, endColorstr=#e78404);
 }
+
+table.mc4wp-help, table.mc4wp-help th, table.mc4wp-help td { border: 1px solid #ddd; border-collapse: collapse; font-size: 12px; }
+table.mc4wp-help th, table.mc4wp-help td { vertical-align: text-top; text-align: left; padding: 5px 10px; }
+table.mc4wp-help tr:hover { 	background-color: #ddd; }

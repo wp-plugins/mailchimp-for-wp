@@ -11,6 +11,9 @@
 			<option value="radio">Radio button</option>
 			<option value="hidden">Hidden field</option>
 			<option value="submit">Submit button</option>
+			<option value="url">URL field (HTML5)</option>
+			<option value="date">Date field (HTML5)</option>
+			<option value="tel">Phone no. field (HTML5)</option>
 		</select>
 	</p>
 

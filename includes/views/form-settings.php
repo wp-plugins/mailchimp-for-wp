@@ -36,7 +36,7 @@
 			</tr>
 			<tr valign="top">
 				<th scope="row">Enable AJAX?</th>
-				<td><a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Upgrade to Pro</a></td>
+				<td><a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Upgrade to Pro to use AJAX forms</a></td>
 				<td class="desc">Submit forms with AJAX, meaning the page doesn't have to reload.</td>
 			</tr>
 			<tr valign="top">

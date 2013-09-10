@@ -56,7 +56,7 @@
 				</ul>
 			</p>
 
-			<p>Alternatively, you can: </p>
+			<p>Alternative ways to show a token of your appreciation, all much appreciated:</p>
             <ul>
             	<li><a target="_blank" href="http://dannyvankooten.com/donate/">Donate $5, $10 or $20.</a> </li>
                 <li><a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/mailchim-for-wp?rate=5#postform">Give a 5&#9733; review on WordPress.org</a></li>
@@ -68,32 +68,63 @@
         <div class="mc4wp-box" id="mc4wp-info-tabs">
 			<div class="info-tab info-tab-form-settings" <?php if($tab != 'form-settings') { echo 'style="display:none;"'; } ?>>
 				<h4>Notes regarding the form designer</h4>
-				<p>At a minimum, your form should include an EMAIL field and a submit button.</p>
+				<p>At a minimum, your form should include an <strong>EMAIL</strong> field and a submit button.</p>
 				
 				<p>Add other fields if you like but keep in mind that...</p>
 					<ul class="ul-square">
 						<li>...all field names should be uppercased</li>
-						<li>... field names should match your MailChimp lists merge fields tags</li>
+						<li>... field names should match your MailChimp lists merge tags</li>
 					</ul>
 
-
-				<p><strong>Special form strings</strong></p>
-				<table>
-					<tr>
-						<th>%N%</th><td>The form instance number. Useful when you have more than one form on a certain page.</td>
-					</tr>
-					<tr>
-						<th>%IP_ADDRESS%</th><td>The IP adress of the visitor.</td>
-					</tr>
-					<tr>
-						<th>%DATE%</th><td>The current date (dd/mm/yyyy).</td>
-					</tr>
-				</table>
-
-				<p><strong>Visual appearance</strong></p>
+				<p><strong>Styling</strong></p>
 				<p>Alter the visual appearance of the form by applying CSS rules to <b>form.mc4wp-form</b>. Add these CSS rules to your theme's stylesheet
 					 which can in most cases be found here: <em><?php echo get_stylesheet_directory(); ?>/style.css</em>.</p>
 					 <p>The <a href="http://wordpress.org/plugins/mailchimp-for-wp/faq/" target="_blank">MailChimp for WP FAQ</a> lists the various CSS selectors you can use to target the different elements.</p>
+			
+				<p><strong>Form variables</strong></p>
+				<table class="mc4wp-help">
+				<tr>
+					<th>{n}</th>
+					<td>Replaced with a unique number for this form.</td>
+				</tr>
+				<tr>
+					<th>{ip}</th>
+					<td>Replaced with the visitor's IP address.</td>
+				</tr>
+				<tr>
+					<th>{date}</th>
+					<td>Replaced with the current date (yyyy/mm/dd eg: <?php echo date("Y/m/d"); ?>)</td>
+				</tr>
+				<tr>
+					<th>{time}</th>
+					<td>Replaced with the current time (hh:mm:ss eg: <?php echo date("H:i:s"); ?>)</td>
+				</tr>
+				<tr>
+					<th>{user_email}</th>
+					<td>Replaced with the logged in user's email (or nothing, if there is no logged in user).</td>
+				</tr>
+				<tr>
+					<th>{user_name}</th>
+					<td>Display name of the current user</td>
+				</tr>
+				<tr>
+					<th>{user_firstname}</th>
+					<td>First name of the current user</td>
+				</tr>
+				<tr>
+					<th>{user_lastname}</th>
+					<td>Last name of the current user</td>
+				</tr>
+				<tr>
+					<th>{user_id}</th>
+					<td>Current user ID</td>
+				</tr>
+				<tr>
+					<th>{current_url}</th>
+					<td>Current URL</td>
+				</tr>
+			</table>
+
 			</div>
 		</div>
 

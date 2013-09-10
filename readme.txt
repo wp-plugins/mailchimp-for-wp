@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, newsletter, mailinglist, email, email list, form, widget form, sign-up form, subscribe form, comments, comment form, mailchimp widget, buddypress, multisite
 Requires at least: 3.1
 Tested up to: 3.6
-Stable tag: 1.0.3
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,10 +99,10 @@ form.mc4wp-form .mc4wp-error { ... } /* error messages */
 Make sure to go to **form settings** in the plugin settings screen. There you have to check a checkbox that says "load form functionality". This will make the plugin load the necessary code.
 
 = Can I add a checkbox to this third-party form? =
-Yes, you can. Go to checkbox and tick the checkbox that says "show checkbox at other forms (manual)". Then, include ANY field with name attribute `mc4wp-do-subscribe` and the plugin will take care of the rest.
+Yes, you can. Go to checkbox and tick the checkbox that says "show checkbox at other forms (manual)". Then, include ANY field with name attribute `mc4wp-try-subscribe` and the plugin will take care of the rest.
 
 Example: 
-`<input type="checkbox" name="mc4wp-do-subscribe" value="1" id="mc4wp-checkbox" /><label for="mc4wp-checkbox">Subscribe to our newsletter</label>`
+`<input type="checkbox" name="mc4wp-try-subscribe" value="1" id="mc4wp-checkbox" /><label for="mc4wp-checkbox">Subscribe to our newsletter</label>`
 
 Make sure your form contains an email field with any of the following names: 
 `email, e-mail, email_address, your-email` 
@@ -146,6 +146,14 @@ Sorry, this feature is only available in the premium version of the plugin.
 
 
 == Changelog ==
+
+= 1.1 =
+* Fixed: spam comments not being filtered
+* Fixed: Automatic splitting of NAME into FNAME and LNAME
+* Added: HTML 5 url, tel and date fields to field wizard
+* Added: Form variables for usage inside form mark-up.
+* Improved: default form CSS
+* Improved: Contact Form 7 integration
 
 = 1.0.3 =
 * Added HTML quicktags to form markup textarea.
@@ -198,7 +206,7 @@ Sorry, this feature is only available in the premium version of the plugin.
 * Improved: Code, removed unnecessary code, only load classes when not existing yet, etc.
 * Improved: hooked into user_register to allow third-party registration form plugins.
 * Added: Shortcode for usage inside Contact Form 7 form templates `[mc4wp_checkbox]`
-* Added: Catch-all, hook into ANY form using ANY input field with name attribute `mc4wp-do-subscribe` and value `1`.
+* Added: Catch-all, hook into ANY form using ANY input field with name attribute `mc4wp-try-subscribe` and value `1`.
 * Fixed: Subscribe from Multisite sign-up
 * Fixed: 404 page when no e-mail given.
 
@@ -260,3 +268,8 @@ Sorry, this feature is only available in the premium version of the plugin.
 
 = 0.1 =
 * BETA release
+
+== Upgrade Notice ==
+
+= 1.1 =
+Bugfix for automatic name splitting.

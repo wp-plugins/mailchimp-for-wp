@@ -1,9 +1,20 @@
 form.mc4wp-form{ clear:both; margin:15px 0; }
 form.mc4wp-form p{ clear:both; }
-form.mc4wp-form label{ display:block; font-weight:bold; }
+form.mc4wp-form label{ display:block; font-weight:bold; margin-bottom: 3px; }
 form.mc4wp-form input{ display:block; }
-form.mc4wp-form input[type="checkbox"], form.mc4wp-form input[type="radio"] { float:left; margin-right:10px; vertical-align:bottom;  display:inline-block; }
-form.mc4wp-form input[type=submit]{ }
+
+form.mc4wp-form input[type="text"],
+form.mc4wp-form input[type="email"],
+form.mc4wp-form input[type="tel"],
+form.mc4wp-form input[type="url"] { display:block; width:100%;
+	box-sizing:border-box; box-sizing: border-box; -moz-box-sizing: border-box; }
+
+form.mc4wp-form input[type="checkbox"] { clear:left; float:left; margin-right:10px; vertical-align:bottom;  
+	display:inline-block; -webkit-appearance: checkbox; }
+form.mc4wp-form input[type="radio"] { clear:left; float:left; margin-right:10px; display:inline-block; 
+	-webkit-appearance: radio;  }
+form.mc4wp-form select, div.mc4wp-form input[type="date"] { min-width:35%; }
+form.mc4wp-form input[type="submit"], div.mc4wp-form button[type="submit"]{ display:inline-block; }
 
 form.mc4wp-form .mc4wp-alert{ margin-top:1em; margin-bottom:1em; padding: 10px 35px 10px 15px; color: #c09853; background-color: #fcf8e3; border: 1px solid #fbeed5; border-radius: 4px; display:block;  position:relative;}
 form.mc4wp-form .mc4wp-success { color: #468847; background-color: #dff0d8; border-color: #d6e9c6; }

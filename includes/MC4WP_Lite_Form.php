@@ -45,16 +45,14 @@ class MC4WP_Lite_Form
 		if($this->success) $css_classes .= 'mc4wp-form-success ';
 
 		$content = '<!-- Form by MailChimp for WP plugin v'. MC4WP_LITE_VERSION .' - http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/ -->';
-		$content .= '<form method="post" action="'. $this->get_current_page_url() .'#mc4wp-form-'. $this->form_instance_number .'" id="mc4wp-form-'.$this->form_instance_number.'" class="mc4wp-form form'.$css_classes.'">';
+		$content .= '<form method="post" action="'. $this->get_current_url() .'#mc4wp-form-'. $this->form_instance_number .'" id="mc4wp-form-'.$this->form_instance_number.'" class="mc4wp-form form'.$css_classes.'">';
 
 
 		// maybe hide the form
 		if(!($this->success && $opts['form_hide_after_success'])) {
 			$form_markup = __($this->options['form_markup']);
 			// replace special values
-			$form_markup = str_replace('%N%', $this->form_instance_number, $form_markup);
-			$form_markup = str_replace('%IP_ADDRESS%', $this->get_ip_address(), $form_markup);
-			$form_markup = str_replace('%DATE%', date('dd/mm/yyyy'), $form_markup);
+			$form_markup = $this->replace_form_variables($form_markup);
 
 			$content .= $form_markup;
 
@@ -170,17 +168,6 @@ class MC4WP_Lite_Form
 
 		}
 
-		// Try to guess FNAME and LNAME if they are not given, but NAME is
-		if(isset($merge_vars['NAME']) && !isset($merge_vars['FNAME']) && !isset($merge_vars['LNAME'])) {
-			$strpos = strpos($merge_vars['NAME'], ' ');
-			if($strpos) {
-				$merge_vars['FNAME'] = substr($merge_vars['NAME'], 0, $strpos);
-				$merge_vars['LNAME'] = substr($merge_vars['NAME'], $strpos);
-			} else {
-				$merge_vars['FNAME'] = $merge_vars['NAME'];
-			}
-		}
-
 		$result = $this->subscribe($email, $merge_vars);
 
 		if($result === true) { 
@@ -215,7 +202,7 @@ class MC4WP_Lite_Form
 		return $ip;
 	}
 
-	private function get_current_page_url() {
+	private function get_current_url() {
 		$page_url = 'http';
 
 		if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) { $page_url .= 's'; }
@@ -323,6 +310,29 @@ class MC4WP_Lite_Form
 		// flawed
 		// this will only return the result of the last list a subscribe attempt has been sent to
 		return $result;
+	}
+
+	private function replace_form_variables($markup) 
+	{
+
+		$markup = str_replace(array('%N%', '{n}'), $this->form_instance_number, $markup);
+		$markup = str_replace(array('%IP_ADDRESS%', '{ip}'), $this->get_ip_address(), $markup);
+		$markup = str_replace(array('%DATE%', '{date}'), date('Y/m/d'), $markup);
+		$markup = str_replace('{time}', date("H:i:s"), $markup);
+		$markup = str_replace('{current_url}', $this->get_current_url(), $markup);
+		
+		$needles = array('{user_email}', '{user_firstname}', '{user_lastname}', '{user_name}', '{user_id}');
+		if(is_user_logged_in()) {
+			// logged in user, replace vars by user vars
+			$user = wp_get_current_user();
+			$replacements = array($user->user_email, $user->user_firstname, $user->user_lastname, $user->display_name, $user->ID);
+        	$markup = str_replace($needles, $replacements, $markup);
+    	} else {
+    		// no logged in user, remove vars
+    		$markup = str_replace($needles, '', $markup);
+    	}
+
+		return $markup;
 	}
 
 }
