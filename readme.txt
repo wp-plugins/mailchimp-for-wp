@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, newsletter, mailinglist, email, email list, form, widget form, sign-up form, subscribe form, comments, comment form, mailchimp widget, buddypress, multisite
 Requires at least: 3.1
 Tested up to: 3.6
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -146,6 +146,8 @@ Sorry, this feature is only available in the premium version of the plugin.
 
 
 == Changelog ==
+= 1.1.1 =
+* Fixed warning for BuddyPress sites
 
 = 1.1 =
 * Fixed: spam comments not being filtered
@@ -271,5 +273,5 @@ Sorry, this feature is only available in the premium version of the plugin.
 
 == Upgrade Notice ==
 
-= 1.1 =
-Bugfix for automatic name splitting.
+= 1.1.1 =
+Bugfix for BuddyPress sites

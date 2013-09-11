@@ -11,9 +11,16 @@ class MC4WP_Lite_Admin
 		add_action('admin_init', array($this, 'register_settings'));
 		add_action('admin_menu', array($this, 'build_menu'));
 		add_action( 'admin_enqueue_scripts', array($this, 'load_css_and_js') );
-		add_action( 'bp_include', array($this, 'set_buddypress_var'));
+
+		register_activation_hook( 'mailchimp-for-wp-pro/mailchimp-for-wp-pro.php', array($this, 'on_activation') );
 
 		add_filter("plugin_action_links_mailchimp-for-wp/mailchimp-for-wp.php", array($this, 'add_settings_link'));
+	}
+
+	public function on_activation()
+	{
+		delete_transient('mc4wp_mailchimp_lists');
+		delete_transient('mc4wp_mailchimp_lists_fallback');
 	}
 
 	public function add_settings_link($links)
