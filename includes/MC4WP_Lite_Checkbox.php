@@ -9,6 +9,8 @@ class MC4WP_Lite_Checkbox
 	{
 		$this->options = $opts = MC4WP_Lite::instance()->get_options();
 
+		add_action('init', array($this, 'on_init')); 
+
 		// load checkbox css if necessary
 		if($this->options['checkbox_css'] == 1) {
 			add_action( 'wp_enqueue_scripts', array($this, 'load_stylesheet') );
@@ -47,15 +49,23 @@ class MC4WP_Lite_Checkbox
 			add_filter('add_signup_meta', array($this, 'add_multisite_usermeta'));
 		}
 
+		/* bbPress actions */
+		if($opts['checkbox_show_at_bbpress_forms']) {
+			add_action('bbp_theme_after_topic_form_subscriptions', array($this, 'output_checkbox'), 10);
+			add_action('bbp_theme_after_reply_form_subscription', array($this, 'output_checkbox'), 10);
+			add_action('bbp_theme_anonymous_form_extras_bottom', array($this, 'output_checkbox'), 10);
+			add_action('bbp_new_topic', array($this, 'subscribe_from_bbpress_new_topic'), 10, 4);
+			add_action('bbp_new_reply', array($this, 'subscribe_from_bbpress_new_reply'), 10, 5);
+		}
+
 		/* Other actions... catch-all */
 		if($opts['checkbox_show_at_other_forms']) {
-			add_action('init', array($this, 'add_cf7_shortcode')); 
 			add_action('init', array($this, 'subscribe_from_whatever'));
 		}
 
 	}
 
-	public function add_cf7_shortcode()
+	public function on_init()
 	{
 		if(function_exists("wpcf7_add_shortcode")) {
 			wpcf7_add_shortcode('mc4wp_checkbox', array($this, 'get_checkbox'));
@@ -68,12 +78,12 @@ class MC4WP_Lite_Checkbox
 		$opts = $this->options;
 		$label = isset($args['labels'][0]) ? $args['labels'][0] : $opts['checkbox_label'];
 		$checked = $opts['checkbox_precheck'] ? "checked" : '';
-		$content = '<!-- Checkbox by MailChimp for WP plugin v'.MC4WP_LITE_VERSION.' - http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/ -->';
+		$content = "\n<!-- Checkbox by MailChimp for WP plugin v". MC4WP_LITE_VERSION ." - http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/ -->\n";
 		$content .= '<p id="mc4wp-checkbox">';
 		$content .= '<input type="checkbox" name="mc4wp-do-subscribe" id="mc4wp-checkbox-input" value="1" '. $checked . ' />';
 		$content .= '<label for="mc4wp-checkbox-input">'. __($label) . '</label>';
 		$content .= '</p>';
-		$content .= '<!-- / MailChimp for WP Plugin -->';
+		$content .= "\n<!-- / MailChimp for WP Plugin -->\n";
 		return $content;
 	}
 
@@ -189,6 +199,8 @@ class MC4WP_Lite_Checkbox
 	/* Start Contact Form 7 functions */
 	public function subscribe_from_cf7($arg = null)
 	{
+		if(!isset($_POST['mc4wp-do-subscribe']) || !$_POST['mc4wp-do-subscribe']) { return false; }
+		
 		$_POST['mc4wp-try-subscribe'] = 1;
 		return $this->subscribe_from_whatever();
 	}
@@ -235,6 +247,44 @@ class MC4WP_Lite_Checkbox
 	}
 	/* End whatever functions */
 
+	public function subscribe_from_bbpress($anonymous_data, $user_id)
+	{
+		if(!isset($_POST['mc4wp-do-subscribe']) || $_POST['mc4wp-do-subscribe'] != 1) { return; }
+
+		if($anonymous_data) {
+
+			$email = $anonymous_data['bbp_anonymous_email'];
+			$merge_vars = array(
+				'NAME' => $anonymous_data['bbp_anonymous_name']
+			);
+
+		} elseif($user_id) {
+
+			$user_info = get_userdata($user_id);	
+			$email = $user_info->user_email;
+			$merge_vars = array(
+				'NAME' => $user_info->first_name . ' ' . $user_info->last_name,
+				'FNAME' => $user_info->first_name,
+				'LNAME' => $user_info->last_name
+			);
+
+		} else {
+			return false;
+		}
+
+		return $this->subscribe($email, $merge_vars);
+	}
+
+	public function subscribe_from_bbpress_new_topic($topic_id, $forum_id, $anonymous_data, $topic_author)
+	{
+		return $this->subscribe_from_bbpress($anonymous_data, $topic_author);
+	}
+
+	public function subscribe_from_bbpress_new_reply($reply_id, $topic_id, $forum_id, $anonymous_data, $reply_author)
+	{
+		return $this->subscribe_from_bbpress($anonymous_data, $reply_author);
+	}
+
 	public function subscribe($email, array $merge_vars = array())
 	{
 		$api = MC4WP_Lite::instance()->get_mailchimp_api();
@@ -276,5 +326,7 @@ class MC4WP_Lite_Checkbox
 		// this will only return the result of the last list a subscribe attempt has been sent to
 		return $result;
 	}
+
+
 
 }

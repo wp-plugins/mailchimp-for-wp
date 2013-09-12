@@ -1,23 +1,18 @@
 <div id="mc4wp-tab-form-settings" class="mc4wp-tab <?php if($tab == 'form-settings') { echo 'active'; } ?>">
-		
+	
+	<?php if(empty($opts['form_lists'])) { ?>
+	<div class="updated settings-error">
+		<p><b>Notice:</b> You must select atleast 1 list to subscribe to.</p>
+	</diV>
+	<?php } ?>
+
 	<h2>Form Settings</h2>		
 	
 	<p>MailChimp for WP comes packed with a neat shortcode you can use in your posts, pages or text widgets to display a sign-up form. 
 		Configure the form below, then paste <input size="10" type="text" onfocus="this.select();" readonly="readonly" value="[mc4wp-form]" class="mc4wp-shortcode-example"> in a post, page or text widget and watch your list(s) grow!</p>
 
-	<?php if($opts['form_usage'] && empty($opts['form_lists'])) { ?>
-	<p class="alert warning"><b>Notice:</b> You must select atleast 1 list to subscribe to.</p>
-	<?php } ?>
 
 	<table class="form-table">
-		<tbody>
-			<tr valign="top">
-				<th scope="row">Use form functionality?</th>
-				<td><input type="radio" id="mc4wp_form_usage_1" name="mc4wp_lite[form_usage]" value="1" <?php if($opts['form_usage'] == 1) echo 'checked="checked"'; ?> /> <label for="mc4wp_form_usage_1">Yes</label> &nbsp; <input type="radio" id="mc4wp_form_usage_0" name="mc4wp_lite[form_usage]" value="0" <?php if($opts['form_usage'] == 0) echo 'checked="checked"'; ?> /> <label for="mc4wp_form_usage_0">No</label></td>
-				<td class="desc">Tick "yes" if you want to be able to use the <i>[mc4wp-form]</i> shortcode.</td>
-			</tr>
-		</tbody>
-		<tbody id="mc4wp_form_options" <?php if(!$opts['form_usage']) { ?>style="display:none;"<?php } ?>>
 			<tr valign="top">
 				<th scope="row">Lists</th>
 					<?php // loop through lists
@@ -76,10 +71,9 @@
 					</div>
 				</td>
 			</tr>
-		</tbody>
 	</table>
 
-	<div id="mc4wp_form_options_2" <?php if(!$opts['form_usage']) { ?>style="display:none;"<?php } ?>>
+	<div>
 		<h3>Visual feedback to subscriber</h3>
 		<table class="form-table mc4wp-form-messages">
 			<tr valign="top">

@@ -1,9 +1,12 @@
 <div id="mc4wp-tab-checkbox-settings" class="mc4wp-tab <?php if($tab == 'checkbox-settings') { echo 'active'; } ?>">
-	<h2>Checkbox Settings</h2>	
-
+	
 	<?php if(empty($opts['checkbox_lists'])) { ?>
-		<p class="alert warning"><b>Notice:</b> You must select atleast 1 list to subscribe to.</p>
+	<div class="updated settings-error">
+		<p><b>Notice:</b> You must select atleast 1 list to subscribe to.</p>
+	</diV>
 	<?php } ?>
+
+	<h2>Checkbox Settings</h2>	
 
 	<table class="form-table">
 		<tr valign="top">
@@ -18,7 +21,7 @@
 							?><input type="checkbox" id="mc4wp_checkbox_list_<?php echo $l['id']; ?>_cb" name="mc4wp_lite[checkbox_lists][<?php echo $l['id']; ?>]" value="<?php echo $l['id']; ?>" <?php if(array_key_exists($l['id'], $opts['checkbox_lists'])) echo 'checked="checked"'; ?>> <label for="mc4wp_checkbox_list_<?php echo $l['id']; ?>_cb"><?php echo $l['name']; ?></label><br /><?php
 						} ?>
 						</td>
-						<td class="desc">Select MailChimp to which commenters should be subscribed</td>
+						<td class="desc">Select lists to which people should be subscribed</td>
 					<?php
 					} ?>
 				
@@ -31,10 +34,9 @@
 			<tr valign="top">
 				<th scope="row">Add the checkbox to these forms</th>
 				<td colspan="2">
-					<label><input name="mc4wp_lite[checkbox_show_at_comment_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_comment_form']) echo 'checked '; ?>> Comment form</label> &nbsp; 
-					<label><input name="mc4wp_lite[checkbox_show_at_registration_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_registration_form']) echo 'checked '; ?>> Registration form</label> &nbsp; 
-					<?php if(is_multisite()) { ?><label><input name="mc4wp_lite[checkbox_show_at_ms_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_ms_form']) echo 'checked '; ?>> Multisite form</label> &nbsp; <?php } ?>
-					<?php if(class_exists("BuddyPress")) { ?><label><input name="mc4wp_lite[checkbox_show_at_bp_form]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_bp_form']) echo 'checked '; ?>> BuddyPress form</label> &nbsp; <?php } ?>
+					<?php foreach($this->get_checkbox_compatible_plugins() as $code => $name) { ?>
+						<label><input name="mc4wp_lite[checkbox_show_at_<?php echo $code; ?>]" value="1" type="checkbox" <?php checked($opts['checkbox_show_at_'.$code], 1); ?>> <?php echo $name; ?></label> &nbsp; 
+					<?php } ?>
 					<label><input name="mc4wp_lite[checkbox_show_at_other_forms]" value="1" type="checkbox" <?php if($opts['checkbox_show_at_other_forms']) echo 'checked '; ?>> Other forms (manual)</label> &nbsp; 
 				</td>
 			</tr>

@@ -61,6 +61,20 @@ class MC4WP_Lite_Admin
 		wp_localize_script( 'mc4wp-admin-js', 'mc4wp_urls', $translation_array );
 	}
 
+	public function get_checkbox_compatible_plugins()
+	{
+		$checkbox_plugins = array(
+			'comment_form' => "Comment form",
+			"registration_form" => "Registration form"
+		);
+
+		if(is_multisite()) $checkbox_plugins['ms_form'] = "MultiSite forms";
+		if(class_exists("BuddyPress")) $checkbox_plugins['bp_form'] = "BuddyPress registration";
+		if(class_exists('bbPress')) $checkbox_plugins['bbpress_forms'] = "bbPress";
+
+		return $checkbox_plugins;
+	}
+
 	public function page_dashboard()
 	{
 		$opts = $this->options;

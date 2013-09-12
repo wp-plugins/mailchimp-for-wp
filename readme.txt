@@ -3,8 +3,8 @@ Contributors: DvanKooten
 Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, newsletter, mailinglist, email, email list, form, widget form, sign-up form, subscribe form, comments, comment form, mailchimp widget, buddypress, multisite
 Requires at least: 3.1
-Tested up to: 3.6
-Stable tag: 1.1.1
+Tested up to: 3.6.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,7 @@ Easily create and manage sign-up forms and then add them to your posts, pages an
 * Uses the MailChimp API, blazingly fast and reliable.
 * Configuring is easy, all you need is your MailChimp API key.
 * Compatible with BuddyPress and MultiSite registration forms.
+* Compatible with bbPress, add a newsletter checkbox to the new topic and new reply forms.
 * Compatible with Contact Form 7, you can use `[mc4wp_checkbox]` inside your CF7 forms.
 
 **Pro Features:**
@@ -37,6 +38,7 @@ Easily create and manage sign-up forms and then add them to your posts, pages an
 * Multiple sign-up forms for multiple lists
 * Field presets for all your list's merge tags which makes it extremely easy to create sign-up forms.
 * Subscribers log, gain insight into where and how your visitors subscribe to your lists.
+* Add newsletter sign-up checkboxes to WooCommerce & Easy Digital Downloads checkout forms
 * Premium e-mail support
 * No advertisements
 
@@ -88,8 +90,8 @@ form.mc4wp-form{ ... } /* the form element */
 form.mc4wp-form p { ... } /* form paragraphs */
 form.mc4wp-form label { ... } /* labels */
 form.mc4wp-form input { ... } /* input fields */
-form.mc4wp-form input[type=checkbox] { ... } /* checkboxes */
-form.mc4wp-form input[type=submit] { ... } /* submit button */
+form.mc4wp-form input[type="checkbox"] { ... } /* checkboxes */
+form.mc4wp-form input[type="submit"] { ... } /* submit button */
 form.mc4wp-form .mc4wp-alert { ... } /* success & error messages */
 form.mc4wp-form .mc4wp-success { ... } /* success message */
 form.mc4wp-form .mc4wp-error { ... } /* error messages */
@@ -146,6 +148,16 @@ Sorry, this feature is only available in the premium version of the plugin.
 
 
 == Changelog ==
+
+= 1.1.2 =
+* Fixed: field wizard initial value not being set in some browsers
+* Fixed: CF7 checkbox subscribing everyone regardless of checkbox setting
+* Added: bbPress compatibility, you can now add a sign-up checkbox to the new topic and new reply forms
+* Improved: various code and debug improvements
+* Improved: field wizard now wraps radio inputs and checkboxes in a label
+* Improved: Usability when using sign-up checkbox with Contact Form 7
+* Removed: form usage option
+
 = 1.1.1 =
 * Fixed warning for BuddyPress sites
 

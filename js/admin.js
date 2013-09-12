@@ -35,13 +35,6 @@
 		
 	});
 
-	$("#mc4wp_form_usage_1").click(function() { 
-		$("#mc4wp_form_options, #mc4wp_form_options_2").fadeIn(); 
-	});
-	$("#mc4wp_form_usage_0").click(function() { 
-		$("#mc4wp_form_options, #mc4wp_form_options_2").fadeOut(); 
-	});
-
 	FieldWizard = {
 		fields: {
 			$container: $("#mc4wp-fw .mc4wp-fields"),
@@ -126,23 +119,29 @@
 
 			if(fieldType != 'submit') { $input.attr('name', f.$name.val()); }
 
-			if(f.$value.val().length > 0) $input.val(f.$value.val());
+			// set a default value?
+			if(f.$value.val().length > 0) { 
+				$input.attr('value', f.$value.val());
+			}
 
+			// generate field id
 			if(f.$name.val().length > 0 && fieldType != 'submit' && fieldType != 'hidden') {
-				// generate field id
+				
 				if(fieldType == 'checkbox' || fieldType == 'radio') {
-					fieldId = "f%N%_" + f.$name.val().toLowerCase().replace(/[^\w-]+/g,'').replace('groupings','') + '_' + f.$value.val().toLowerCase().replace(/[^\w-]+/g,'');
+					fieldId = "f_" + f.$name.val().toLowerCase().replace(/[^\w-]+/g,'').replace('groupings','') + '_' + f.$value.val().toLowerCase().replace(/[^\w-]+/g,'');
 				} else {
-					fieldId = "f%N%_"+ f.$name.val().toLowerCase().replace(/[^\w-]+/g,'');
+					fieldId = "f_"+ f.$name.val().toLowerCase().replace(/[^\w-]+/g,'');
 				}
 								
 				$input.attr('id', fieldId);
 			}
 
+			// set placeholder attribute
 			if(f.$placeholder.val() != '' && f.$placeholder.is(':visible')) {
 				$input.attr('placeholder', f.$placeholder.val());
 			}
 
+			// set required attribute
 			if(f.$required.is(":checked:visible")) {
 				$input.attr('required', true);
 			}
@@ -157,12 +156,15 @@
 			if(f.$label.val() != '' && f.$label.is(':visible')) {
 				$label = $("<label />");
 				$label.attr('for', fieldId);
-				$label.html(f.$label.val());
-
+				
 				if(fieldType == 'radio' || fieldType == 'checkbox') {
-					$label.insertAfter($input);
-					$("<br>").insertAfter($input);
+					// wrap $input in a <label> tag
+					$input.wrap($label);
+					// wrap label text in <span> tags, insert after input
+					$("<span />").text(f.$label.val()).insertAfter($input);
 				} else {
+					// add label before input element
+					$label.html(f.$label.val());
 					$label.insertBefore($input);
 					$("<br>").insertAfter($label);
 				}

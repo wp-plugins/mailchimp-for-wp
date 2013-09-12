@@ -1,7 +1,8 @@
 form.mc4wp-form{ clear:both; margin:15px 0; }
 form.mc4wp-form p{ clear:both; }
 form.mc4wp-form label{ display:block; font-weight:bold; margin-bottom: 3px; }
-form.mc4wp-form input{ display:block; }
+
+form.mc4wp-form ul li label{ font-weight:normal; }
 
 form.mc4wp-form input[type="text"],
 form.mc4wp-form input[type="email"],
@@ -9,10 +10,10 @@ form.mc4wp-form input[type="tel"],
 form.mc4wp-form input[type="url"] { display:block; width:100%;
 	box-sizing:border-box; box-sizing: border-box; -moz-box-sizing: border-box; }
 
-form.mc4wp-form input[type="checkbox"] { clear:left; float:left; margin-right:10px; vertical-align:bottom;  
+form.mc4wp-form form input[type="checkbox"] { margin:0 10px 0 0; padding:0; height:13px; width:13px; 
 	display:inline-block; -webkit-appearance: checkbox; }
-form.mc4wp-form input[type="radio"] { clear:left; float:left; margin-right:10px; display:inline-block; 
-	-webkit-appearance: radio;  }
+form.mc4wp-form form input[type="radio"] { margin:0 10px 0 0; padding:0; height:13px; width:13px; 
+	display:inline-block; 	-webkit-appearance: radio;  }
 form.mc4wp-form select, div.mc4wp-form input[type="date"] { min-width:35%; }
 form.mc4wp-form input[type="submit"], div.mc4wp-form button[type="submit"]{ display:inline-block; }
 
