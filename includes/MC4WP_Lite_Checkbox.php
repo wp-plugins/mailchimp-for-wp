@@ -30,7 +30,7 @@ class MC4WP_Lite_Checkbox
 		/* Registration Form Actions */
 		if($opts['checkbox_show_at_registration_form']) {
 			add_action('register_form',array($this, 'output_checkbox'),20);
-			add_action('user_register',array($this, 'subscribe_from_registration'), 40, 1);
+			add_action('user_register',array($this, 'subscribe_from_registration'), 80, 1);
 		}
 
 		/* BuddyPress Form Actions */
@@ -136,6 +136,14 @@ class MC4WP_Lite_Checkbox
 		$merge_vars = array(
 			'NAME' => $user->user_login
 		);
+
+		if(isset($user->user_firstname) && !empty($user->user_firstname)) {
+			$merge_vars['FNAME'] = $user->user_firstname;
+		}
+
+		if(isset($user->user_lastname) && !empty($user->user_lastname)) {
+			$merge_vars['LNAME'] = $user->user_lastname;
+		}
 		
 		$result = $this->subscribe($email, $merge_vars); 
 	}
