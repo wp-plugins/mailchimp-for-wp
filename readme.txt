@@ -20,7 +20,7 @@ Easily create and manage sign-up forms and then add them to your posts, pages an
 
 *This plugin has a premium version: [upgrade to MailChimp for WordPress Pro now >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)*
 
-**Features:**
+**Plugin Features**
 
 * Show sign-up forms in your posts, pages and widgets by using a simple shortcode `[mc4wp-form]`
 * Adds a "sign-up to our newsletter" checkbox to ANY form, including your comment and registration forms.
@@ -32,7 +32,7 @@ Easily create and manage sign-up forms and then add them to your posts, pages an
 * Compatible with [bbPress](http://bbpress.org/), add a newsletter checkbox to the new topic and new reply forms.
 * Compatible with [Contact Form 7](http://contactform7.com/), you can use `[mc4wp_checkbox]` inside your CF7 forms.
 
-**Pro Features:**
+**Premium Features**
 
 * AJAX sign-up forms, so the page doesn't have to reload when clicking submit.
 * Multiple sign-up forms for multiple lists
@@ -43,15 +43,19 @@ Easily create and manage sign-up forms and then add them to your posts, pages an
 
 [Upgrade to MailChimp for WordPress Pro now >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
 
-**MailChimp Sign-Up Form**
+= MailChimp Sign-Up Form =
 The plugin comes with an easy to way to build sign-up forms for your MailChimp lists. Add as many fields as you like and customize labels, placeholders, initial value's etc. in a simple way.
 
 Use the `[mc4wp-form]` shortcode to show a sign-up form in your posts, pages or text widgets.
 
-**Sign-Up Checkbox**
-Commenters and subscribers are valuable visitors who are most likely interested to be on your mailinglist. This plugin makes it easy for them, all they have to do is check a single checkbox when commenting or registering on your website!
+= "Sign-up to our newsletter?" Checkboxes =
+People who comment or register on your website are valuable visitors and most likely interested to be on your mailinglist as well. This plugin makes it easy for them to subscribe to your MailChimp lists, one mouse-click is all they need.
 
-You can add sign-up checkboxes to ANY form you like including Contact Form 7 forms.
+You can add sign-up checkboxes to ANY form you like, including Contact Form 7 forms.
+
+= Simple but extremely flexible =
+Plugins should be flexible but simple. This plugin was developed with that in mind. Most settings are optional, making configuration of the plugin really simple. However, if you are more tech-savvy the plugin has plenty of customization options. 
+
 
 == Installation ==
 
