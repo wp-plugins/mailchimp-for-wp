@@ -14,9 +14,11 @@ The best MailChimp plugin to get more email subscribers. Easily add sign-up form
 
 = MailChimp for WordPress =
 
-Want to grow your MailChimp list(s)? Want more control over your sign-up forms? This is the plugin for you.
+Want to get more email subscribers for your MailChimp lists? This plugin will be a BIG help by showing sign-up forms and sign-up checkboxes on your WordPress website.
 
-Easily create and manage sign-up forms and then add them to your posts, pages and widgets by using a simple shortcode. Add a "Sign me up to the newsletter" checkbox to your comment, registration and other forms to make subscribing to your lists effortless for your visitors. 
+Easily build sign-up forms and then add them to your posts, pages and widget areas by using a simple shortcode `[mc4wp-form]`. 
+
+Add "sign up to our newsletter" checkboxes to your comment form, registration form or other forms, making subscribing to your list(s) effortless for your visitors.  
 
 *This plugin has a premium version: [upgrade to MailChimp for WordPress Pro now >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)*
 
