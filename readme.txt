@@ -28,9 +28,9 @@ Easily create and manage sign-up forms and then add them to your posts, pages an
 * Create and manage sign-up forms in an easy way. No field limit!
 * Uses the MailChimp API, blazingly fast and reliable.
 * Configuring is easy, all you need is your MailChimp API key.
-* Compatible with BuddyPress and MultiSite registration forms.
-* Compatible with bbPress, add a newsletter checkbox to the new topic and new reply forms.
-* Compatible with Contact Form 7, you can use `[mc4wp_checkbox]` inside your CF7 forms.
+* Compatible with [BuddyPress](http://buddypress.org/) and WordPress MultiSite registration forms.
+* Compatible with [bbPress](http://bbpress.org/), add a newsletter checkbox to the new topic and new reply forms.
+* Compatible with [Contact Form 7](http://contactform7.com/), you can use `[mc4wp_checkbox]` inside your CF7 forms.
 
 **Pro Features:**
 
@@ -38,7 +38,7 @@ Easily create and manage sign-up forms and then add them to your posts, pages an
 * Multiple sign-up forms for multiple lists
 * Field presets for all your list's merge tags which makes it extremely easy to create sign-up forms.
 * Subscribers log, gain insight into where and how your visitors subscribe to your lists.
-* Built-in integration with WooCommerce and Easy Digital Downloads for adding sign-up checkboxes to your checkout forms.
+* Built-in integration with [WooCommerce](http://www.woocommerce.com/) and [Easy Digital Downloads](https://easydigitaldownloads.com?ref=2123) for adding sign-up checkboxes to your checkout forms.
 * Premium support
 
 [Upgrade to MailChimp for WordPress Pro now >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
