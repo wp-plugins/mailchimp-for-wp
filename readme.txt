@@ -39,7 +39,8 @@ Add "sign up to our newsletter" checkboxes to your comment form, registration fo
 * AJAX sign-up forms, so the page doesn't have to reload when clicking submit.
 * Multiple sign-up forms for multiple lists
 * Field presets for all your list's merge tags which makes it extremely easy to create sign-up forms.
-* Subscribers log, gain insight into where and how your visitors subscribe to your lists.
+* Subscribers log, keep track of all sign-ups
+* Statistical charts, gain valuable insights when and how your visitors subscribed.
 * Built-in integration with [WooCommerce](http://www.woocommerce.com/) and [Easy Digital Downloads](https://easydigitaldownloads.com?ref=2123) for adding sign-up checkboxes to your checkout forms.
 * Premium support
 
@@ -77,6 +78,7 @@ Plugins should be flexible but simple. This plugin was developed with that in mi
 Yes, there is and it is awesome. Pro features include:
 
 1. (Multiple) AJAX Sign-up Forms (so the page doesn't reload after clicking the submit button)
+1. Statistical charts, learn when and how your visitors subscribed.
 1. Subscriber logging, keep track of everyone who subscribes and where they subscribed from.
 1. Easier form creation: presets for all your merge fields
 1. Sign-up checkbox integration with WooCommerce and Easy Digital Downloads
