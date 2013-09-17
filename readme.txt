@@ -71,7 +71,6 @@ Plugins should be flexible but simple. This plugin was developed with that in mi
 1. (Optional) Create a form and show it in your posts, pages or text widgets using the shortcode `[mc4wp-form]`.
 1. (Optional) If you like the plugin, upgrade to [MailChimp for WordPress Pro](dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/) for an even better plugin or donate a beer. Much appreciated!
 
-
 == Frequently Asked Questions ==
 
 = Is there a premium version of this plugin? =
