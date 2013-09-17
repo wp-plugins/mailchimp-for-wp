@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, newsletter, mailinglist, email, email list, form, widget form, sign-up form, subscribe form, comments, comment form, mailchimp widget, buddypress, multisite
 Requires at least: 3.1
 Tested up to: 3.6.1
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -158,10 +158,14 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 3. An example sign-up checkbox.
 4. An example sign-up form in my footer on dannyvankooten.com. More [MailChimp sign-up form examples](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/demo-sign-up-forms/) are available on my website.
 5. You can create multiple sign-up forms in [MailChimp for WordPress Pro](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
-6. Editing a form got a lot easier in [MailChimp for WordPress Pro](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
+6. Editing a form got a lot easier in the premium version.
+7. Gain valuable insights which method your visitors used to subscribe for any given time period using beautiful line charts. (Premium version only)
 
 
 == Changelog ==
+= 1.1.4 =
+* Fixed: usage of textarea elements in the form mark-up for WP3.3+.
+
 = 1.1.3 =
 * Added: first and lastname to registration hook, works with Register Redux Plus for example.
 

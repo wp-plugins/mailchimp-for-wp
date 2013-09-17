@@ -33,7 +33,7 @@
 
 		<p class="copyright-notice">I would like to remind you that this plugin is not developed by or affiliated with MailChimp in any way.
 		 My name is <a href="http://dannyvankooten.com/">Danny van Kooten</a> and I am a young Dutch webdeveloper.</p>
-		 <p class="copyright-notice">Enjoying my plugin? Please consider <a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">upgrading to the premium version</a>, which is awesome.</p>
+		 <p class="copyright-notice">Enjoying MailChimp for WP Lite? Consider <a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">upgrading to the premium version</a>, it's awesome.</p>
 
 	</div>
 
@@ -48,21 +48,23 @@
 
 			<p><strong>Pro features include..</strong>
 				<ul>
-					<li>AJAX form submission (no page reload)</li>
+					<li>AJAX form submission (no page reload after clicking submit)</li>
 					<li>Multiple sign-up forms for different lists</li>
-					<li>Presets for all your merge fields, easily add new fields</li>
-					<li>Log subscribers, gain insight into where and how your visitors subscribe to your lists</li>
+					<li>Presets for all your merge fields, makes it super easy to add new fields</li>
+					<li>Subscribers log, keep track of subscribers</li>
+					<li>Statistical charts, gain valuable insight when and how your visitors subscribed</li>
 					<li>Premium support</li>
 				</ul>
 			</p>
 
-			<p>Alternative ways to show a token of your appreciation, all much appreciated:</p>
+			<p>Alternative ways to show your appreciation:</p>
             <ul>
-            	<li><a target="_blank" href="http://dannyvankooten.com/donate/">Donate $5, $10 or $20.</a> </li>
                 <li><a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/mailchim-for-wp?rate=5#postform">Give a 5&#9733; review on WordPress.org</a></li>
                 <li><a target="_blank" href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Link to the plugin page on my website</a></li>
                 <li><a target="_blank" href="http://twitter.com/?status=I%20manage%20my%20%23WordPress%20sign-up%20forms%20using%20MailChimp%20for%20WP%20and%20I%20love%20it%20-%20check%20it%20out!%20http%3A%2F%2Fwordpress.org%2Fplugins%2Fmailchimp-for-wp%2F">Tweet about MailChimp for WP</a></li>
             </ul>
+
+            <p>Everything is much appreciated. Thanks and enjoy my plugin!</p>
         </div>
 
         <div class="mc4wp-box" id="mc4wp-info-tabs">

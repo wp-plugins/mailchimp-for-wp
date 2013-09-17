@@ -29,7 +29,7 @@
 				<option value="email">Email address</option>
 				<option value="group">Interest group</option>
 			</select>
-			<small>Helps by presetting some values</small>
+			<small>Helps by presetting some values.</small>
 		</p>
 
 		<p class="field-row row-grouping">

@@ -55,7 +55,7 @@
 						<div class="mc4wp-col mc4wp-col-2-3 mc4wp-first">
 							<?php 
 							if(function_exists('wp_editor')) {
-								wp_editor( $opts['form_markup'], 'mc4wpformmarkup', array('tinymce' => false, 'media_buttons' => false, 'textarea_name' => 'mc4wp_lite[form_markup]'));
+								wp_editor( esc_textarea($opts['form_markup']), 'mc4wpformmarkup', array('tinymce' => false, 'media_buttons' => false, 'textarea_name' => 'mc4wp_lite[form_markup]'));
 							} else {
 								?><textarea class="widefat" cols="160" rows="20" id="mc4wpformmarkup" name="mc4wp_lite[form_markup]"><?php echo esc_textarea($opts['form_markup']); ?></textarea><?php
 							} ?>
