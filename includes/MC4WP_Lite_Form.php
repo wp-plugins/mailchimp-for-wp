@@ -275,7 +275,7 @@ class MC4WP_Lite_Form
 		$api = MC4WP_Lite::instance()->get_mailchimp_api();
 		$opts = $this->options;
 
-		$lists = $opts['checkbox_lists'];
+		$lists = $opts['form_lists'];
 		
 		if(empty($lists)) {
 			return 'no_lists_selected';
@@ -295,7 +295,7 @@ class MC4WP_Lite_Form
 		}
 		
 		foreach($lists as $list) {
-			$result = $api->listSubscribe($list, $email, $merge_vars, 'html', $opts['checkbox_double_optin']);
+			$result = $api->listSubscribe($list, $email, $merge_vars, 'html', $opts['form_double_optin']);
 		}
 
 		if($api->errorCode) {
