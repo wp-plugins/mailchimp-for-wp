@@ -2,7 +2,6 @@
 
 class MC4WP_Lite_Form
 {
-	private $options;
 	private $form_instance_number = 1;
 	private $error = null;
 	private $success = false;
@@ -10,9 +9,9 @@ class MC4WP_Lite_Form
 
 	public function __construct() 
 	{
-		$this->options = $opts = MC4WP_Lite::instance()->get_options();
+		$opts = $this->get_options();
 
-		if($opts['form_css']) {
+		if($opts['css']) {
 			add_action( 'wp_enqueue_scripts', array($this, 'load_stylesheet') );
 		}
 		
@@ -26,18 +25,22 @@ class MC4WP_Lite_Form
 			$this->ensure_backwards_compatibility();
 			add_action('init', array($this, 'submit'));
 		}
+	}
 
-		
+	public function get_options()
+	{
+		$options = MC4WP_Lite::instance()->get_options();
+		return $options['form'];
 	}
 
 	public function load_stylesheet()
 	{
-		wp_enqueue_style( 'mc4wp-form-reset', plugins_url('mailchimp-for-wp/css/form.css') );
+		wp_enqueue_style( 'mc4wp-form-reset', plugins_url('mailchimp-for-wp/assets/css/form.css') );
 	}
 
 	public function output_form($atts, $content = null)
 	{
-		$opts = $this->options;
+		$opts = $this->get_options();
 
 		// add some useful css classes
 		$css_classes = ' ';
@@ -47,10 +50,9 @@ class MC4WP_Lite_Form
 		$content = "\n<!-- Form by MailChimp for WP plugin v". MC4WP_LITE_VERSION ." - http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/ -->\n";
 		$content .= '<form method="post" action="'. $this->get_current_url() .'#mc4wp-form-'. $this->form_instance_number .'" id="mc4wp-form-'.$this->form_instance_number.'" class="mc4wp-form form'.$css_classes.'">';
 
-
 		// maybe hide the form
-		if(!($this->success && $opts['form_hide_after_success'])) {
-			$form_markup = __($this->options['form_markup']);
+		if(!($this->success && $opts['hide_after_success'])) {
+			$form_markup = __($opts['markup']);
 			// replace special values
 			$form_markup = $this->replace_form_variables($form_markup);
 
@@ -62,27 +64,26 @@ class MC4WP_Lite_Form
 			$content .= '<input type="hidden" name="mc4wp_form_instance" value="'. $this->form_instance_number .'" />';
 		}		
 
-
 		if($this->form_instance_number == $this->submitted_form_instance) {
 			
 			if($this->success) {
-				$content .= '<div class="mc4wp-alert mc4wp-success">' . __($opts['form_text_success']) . '</div>';
+				$content .= '<div class="mc4wp-alert mc4wp-success">' . __($opts['text_success']) . '</div>';
 			} elseif($this->error) {
 
-				$api = MC4WP_Lite::instance()->get_mailchimp_api();
+				$api = MC4WP_Lite::api();
 				$e = $this->error;
 
 				if($e == 'already_subscribed') {
-					$text = (empty($opts['form_text_already_subscribed'])) ? $api->errorMessage : $opts['form_text_already_subscribed'];
+					$text = (empty($opts['text_already_subscribed'])) ? $api->get_error_message() : $opts['text_already_subscribed'];
 					$content .= '<div class="mc4wp-alert mc4wp-notice">'. __($text) .'</div>';
-				} elseif(isset($opts['form_text_' . $e]) && !empty($opts['form_text_'. $e] )) {
-					$content .= '<div class="mc4wp-alert mc4wp-error">' . __($opts['form_text_' . $e]) . '</div>';
+				} elseif(isset($opts['text_' . $e]) && !empty($opts['text_'. $e] )) {
+					$content .= '<div class="mc4wp-alert mc4wp-error">' . __($opts['text_' . $e]) . '</div>';
 				}
 
 				if(current_user_can('manage_options')) {
 
-					if($api->errorCode && !empty($api->errorMessage)) {
-						$content .= '<div class="mc4wp-alert mc4wp-error"><strong>Admin notice:</strong> '. $api->errorMessage . '</div>';
+					if($api->has_error()) {
+						$content .= '<div class="mc4wp-alert mc4wp-error"><strong>Admin notice:</strong> '. $api->get_error_message() . '</div>';
 					}	
 				} 
 
@@ -90,8 +91,8 @@ class MC4WP_Lite_Form
 			// endif
 		}
 
-		if(current_user_can('manage_options') && empty($opts['form_lists'])) {
-			$content .= '<div class="mc4wp-alert mc4wp-error"><strong>Admin notice:</strong> you have not selected a MailChimp list for this sign-up form to subscribe to yet. <a href="'. get_admin_url(null, 'admin.php?page=mailchimp-for-wp&tab=form-settings') .'">Edit your form settings</a> and select at least 1 list.</div>';
+		if(current_user_can('manage_options') && empty($opts['lists'])) {
+			$content .= '<div class="mc4wp-alert mc4wp-error"><strong>Admin notice:</strong> you have not selected a MailChimp list for this sign-up form to subscribe to yet. <a href="'. admin_url('admin.php?page=mc4wp-lite-form-settings') .'">Edit your form settings</a> and select at least 1 list.</div>';
 		}
 
 		$content .= "</form>";
@@ -105,7 +106,7 @@ class MC4WP_Lite_Form
 
 	public function submit()
 	{
-		$opts = $this->options; 
+		$opts = $this->get_options(); 
 		$this->submitted_form_instance = (int) $_POST['mc4wp_form_instance'];
 
 		if(!isset($_POST['EMAIL']) || !is_email($_POST['EMAIL'])) { 
@@ -174,8 +175,8 @@ class MC4WP_Lite_Form
 			$this->success = true;
 
 			// check if we want to redirect the visitor
-			if(!empty($opts['form_redirect'])) {
-				wp_redirect($opts['form_redirect']);
+			if(!empty($opts['redirect'])) {
+				wp_redirect($opts['redirect']);
 				exit;
 			}
 
@@ -272,10 +273,10 @@ class MC4WP_Lite_Form
 
 	public function subscribe($email, array $merge_vars = array())
 	{
-		$api = MC4WP_Lite::instance()->get_mailchimp_api();
-		$opts = $this->options;
+		$api = MC4WP_Lite::api();
+		$opts = $this->get_options();
 
-		$lists = $opts['form_lists'];
+		$lists = $opts['lists'];
 		
 		if(empty($lists)) {
 			return 'no_lists_selected';
@@ -295,16 +296,14 @@ class MC4WP_Lite_Form
 		}
 		
 		foreach($lists as $list) {
-			$result = $api->listSubscribe($list, $email, $merge_vars, 'html', $opts['form_double_optin']);
+			$result = $api->subscribe($list, $email, $merge_vars, 'html', $opts['double_optin']);
 		}
 
-		if($api->errorCode) {
-
-			if($api->errorCode == 214) {
-				return 'already_subscribed';
-			}
-
-			return 'error';
+		if($result === true) {
+			$this->success = true;
+		} else {
+			$this->success = false;
+			$this->error = $result;
 		}
 		
 		// flawed

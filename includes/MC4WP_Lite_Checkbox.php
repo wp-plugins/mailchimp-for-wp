@@ -2,23 +2,22 @@
 
 class MC4WP_Lite_Checkbox
 {
-	private $options = array();
 	private $showed_checkbox = false;
 
 	public function __construct()
 	{
-		$this->options = $opts = MC4WP_Lite::instance()->get_options();
+		$opts = $this->get_options();
 
 		add_action('init', array($this, 'on_init')); 
 
 		// load checkbox css if necessary
-		if($this->options['checkbox_css'] == 1) {
+		if($opts['css'] == 1) {
 			add_action( 'wp_enqueue_scripts', array($this, 'load_stylesheet') );
 			add_action( 'login_enqueue_scripts',  array($this, 'load_stylesheet') );
 		}
 
 		/* Comment Form Actions */
-		if($opts['checkbox_show_at_comment_form']) {
+		if($opts['show_at_comment_form']) {
 			// hooks for checking if we should subscribe the commenter
 			add_action('comment_post', array($this, 'subscribe_from_comment'), 20, 2);
 
@@ -28,19 +27,19 @@ class MC4WP_Lite_Checkbox
 		}
 
 		/* Registration Form Actions */
-		if($opts['checkbox_show_at_registration_form']) {
+		if($opts['show_at_registration_form']) {
 			add_action('register_form',array($this, 'output_checkbox'),20);
 			add_action('user_register',array($this, 'subscribe_from_registration'), 80, 1);
 		}
 
 		/* BuddyPress Form Actions */
-		if($opts['checkbox_show_at_bp_form']) {
+		if($opts['show_at_buddypress_form']) {
 			add_action('bp_before_registration_submit_buttons', array($this, 'output_checkbox'), 20);
 			add_action('bp_complete_signup', array($this, 'subscribe_from_buddypress'), 20);
 		}
 
 		/* Multisite Form Actions */
-		if($opts['checkbox_show_at_ms_form']) {
+		if($opts['show_at_multisite_form']) {
 			add_action('signup_extra_fields', array($this, 'output_checkbox'), 20);
 			add_action('signup_blogform', array($this, 'add_multisite_hidden_checkbox'), 20);
 			add_action('wpmu_activate_blog', array($this, 'on_multisite_blog_signup'), 20, 5);
@@ -50,7 +49,7 @@ class MC4WP_Lite_Checkbox
 		}
 
 		/* bbPress actions */
-		if($opts['checkbox_show_at_bbpress_forms']) {
+		if($opts['show_at_bbpress_forms']) {
 			add_action('bbp_theme_after_topic_form_subscriptions', array($this, 'output_checkbox'), 10);
 			add_action('bbp_theme_after_reply_form_subscription', array($this, 'output_checkbox'), 10);
 			add_action('bbp_theme_anonymous_form_extras_bottom', array($this, 'output_checkbox'), 10);
@@ -59,10 +58,16 @@ class MC4WP_Lite_Checkbox
 		}
 
 		/* Other actions... catch-all */
-		if($opts['checkbox_show_at_other_forms']) {
+		if($opts['show_at_other_forms']) {
 			add_action('init', array($this, 'subscribe_from_whatever'));
 		}
 
+	}
+
+	public function get_options()
+	{
+		$options = MC4WP_Lite::instance()->get_options();
+		return $options['checkbox'];
 	}
 
 	public function on_init()
@@ -75,9 +80,9 @@ class MC4WP_Lite_Checkbox
 
 	public function get_checkbox($args = array())
 	{
-		$opts = $this->options;
-		$label = isset($args['labels'][0]) ? $args['labels'][0] : $opts['checkbox_label'];
-		$checked = $opts['checkbox_precheck'] ? "checked" : '';
+		$opts = $this->get_options();
+		$label = isset($args['labels'][0]) ? $args['labels'][0] : $opts['label'];
+		$checked = $opts['precheck'] ? "checked" : '';
 		$content = "\n<!-- Checkbox by MailChimp for WP plugin v". MC4WP_LITE_VERSION ." - http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/ -->\n";
 		$content .= '<p id="mc4wp-checkbox">';
 		$content .= '<input type="checkbox" name="mc4wp-do-subscribe" id="mc4wp-checkbox-input" value="1" '. $checked . ' />';
@@ -96,7 +101,7 @@ class MC4WP_Lite_Checkbox
 
 	public function load_stylesheet()
 	{
-		wp_enqueue_style( 'mc4wp-checkbox-reset', plugins_url('mailchimp-for-wp/css/checkbox.css') );
+		wp_enqueue_style( 'mc4wp-checkbox-reset', plugins_url('mailchimp-for-wp/assets/css/checkbox.css') );
 	}
 
 
@@ -295,10 +300,10 @@ class MC4WP_Lite_Checkbox
 
 	public function subscribe($email, array $merge_vars = array())
 	{
-		$api = MC4WP_Lite::instance()->get_mailchimp_api();
-		$opts = $this->options;
+		$api = MC4WP_Lite::api();
+		$opts = $this->get_options();
 
-		$lists = $opts['checkbox_lists'];
+		$lists = $opts['lists'];
 		
 		if(empty($lists)) {
 			return 'no_lists_selected';
@@ -318,20 +323,10 @@ class MC4WP_Lite_Checkbox
 		}
 		
 		foreach($lists as $list) {
-			$result = $api->listSubscribe($list, $email, $merge_vars, 'html', $opts['checkbox_double_optin']);
+			$result = $api->subscribe($list, $email, $merge_vars, 'html', $opts['double_optin']);
 		}
 
-		if($api->errorCode) {
-
-			if($api->errorCode == 214) {
-				return 'already_subscribed';
-			}
-
-			return 'error';
-		}
-		
-		// flawed
-		// this will only return the result of the last list a subscribe attempt has been sent to
+		// flawed, add retry option.
 		return $result;
 	}
 

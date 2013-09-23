@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, newsletter, mailinglist, email, email list, form, widget form, sign-up form, subscribe form, comments, comment form, mailchimp widget, buddypress, multisite
 Requires at least: 3.1
 Tested up to: 3.6.1
-Stable tag: 1.1.5
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,14 @@ Yes, there is and it is awesome. Pro features include:
 
 [Upgrade to MailChimp for WordPress Pro now >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
 
+= The form shows a success message but subscribers are not added to my list(s)? =
+If the form shows a success message, it means the sign-up succeeded. 100%. MailChimp could have a slight delay sending the confirmation email though, just be patient.
+
+= The sign-up checkbox doesn't work? =
+The checkbox will fail silently because subscribing is not the main goal of the form that contains the checkbox. Please check if your list contains any required fields besides email and name fields.
+
+Optionally, use a sign-up form to help troubleshooting.
+
 = How can I style the sign-up form? =
 You can use CSS to style the sign-up form. Use the following CSS selectors.
 
@@ -101,7 +109,7 @@ form.mc4wp-form .mc4wp-success { ... } /* success message */
 form.mc4wp-form .mc4wp-error { ... } /* error messages */
 ` 
 
-Just add your CSS rules to your theme stylesheet, **/wp-content/themes/your-theme-name/style.css**.
+Just add your CSS rules to the end of your theme stylesheet, **/wp-content/themes/your-theme-name/style.css**.
 
 = Where can I find my MailChimp API key? =
 [http://kb.mailchimp.com/article/where-can-i-find-my-api-key](http://kb.mailchimp.com/article/where-can-i-find-my-api-key)
@@ -120,7 +128,6 @@ If you need more data for your merge fields, prefix the field name with `mc4wp-`
 
 = Can I add a checkbox to a third-party form? =
 Yes, you can. Go to MailChimp for WP > Checkbox Settings and tick the "show checkbox at other forms (manual)" checkbox. Then, include a checkbox with name attribute `mc4wp-try-subscribe` and value `1` in your form.
-
 
 *Example HTML for checkbox in third-party form*
 `
@@ -164,8 +171,13 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 
 == Changelog ==
-= 1.1.5 =
-* Fixed: Form using checkbox settings for list and double opt-in instead of form settings.
+
+= 1.2 =
+* Improved: updated to MailChimp 2.0 API
+* Improved: now using custom light-weight API class using the WordPress HTTP API.
+* Improved: huge performance improvements on admin settings pages
+* Improved: usability and responsiveness of form settings page
+* Improved: clean-up
 
 = 1.1.4 =
 * Fixed: usage of textarea elements in the form mark-up for WP3.3+.
@@ -308,9 +320,6 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 * BETA release
 
 == Upgrade Notice ==
-
-= 1.1.5 =
-Bugfix for correct form lists and double opt-in setting
 
 = 1.1.1 =
 Bugfix for BuddyPress sites

@@ -1,39 +1,20 @@
 (function($) { 
 
+	$("tr.pro-feature td :radio").change(function() {
+		this.checked = false;
+		alert("This option is only available in the premium version of MailChimp for WordPress.");
+	});
+
+	$("tr.pro-feature label").click(function() {
+		alert("This option is only available in the premium version of MailChimp for WordPress.");
+	});
+
+
+
+
 	// variables
 	var FieldWizard;
 	// event bindings
-	$("#mc4wp-nav a").click(function(e) {
-		var target, wp_referer;
-
-		target = $(this).attr('data-target');
-		$("#mc4wp-tabs .mc4wp-tab.active").removeClass('active');
-		$("#mc4wp-tab-" + target).addClass('active');
-
-		// show info tabs
-		$("#mc4wp-info-tabs .info-tab").hide();
-		$("#mc4wp-info-tabs .info-tab-" + target).show();
-
-		$("#mc4wp-nav .active").removeClass('active');
-		$(this).addClass('active');
-
-		// Change window location to add URL params
-		if (window.history && history.replaceState) {
-		  // NOTE: doesn't take into account existing params
-			history.replaceState("", "", $(this).attr('href'));
-		}
-
-		// update WP hidden input field
-		$('input[name="_wp_http_referer"]').val(mc4wp_urls.admin_page + "&tab=" + target);
-
-		if($("#mc4wp-tab-" + target).is(":visible")) {
-			e.preventDefault();
-			return false;
-		} else {
-			return true;
-		}
-		
-	});
 
 	FieldWizard = {
 		fields: {

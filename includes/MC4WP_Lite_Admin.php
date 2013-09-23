@@ -12,9 +12,15 @@ class MC4WP_Lite_Admin
 		add_action('admin_menu', array($this, 'build_menu'));
 		add_action( 'admin_enqueue_scripts', array($this, 'load_css_and_js') );
 
-		register_activation_hook( 'mailchimp-for-wp-pro/mailchimp-for-wp-pro.php', array($this, 'on_activation') );
+		register_activation_hook( 'mailchimp-for-wp/mailchimp-for-wp.php', array($this, 'on_activation') );
 
 		add_filter("plugin_action_links_mailchimp-for-wp/mailchimp-for-wp.php", array($this, 'add_settings_link'));
+	
+		// did the user click on upgrade to pro link?
+		if(isset($_GET['page']) && $_GET['page'] == 'mc4wp-lite-upgrade' && !headers_sent()) {
+			header("Location: http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/");
+			exit;
+		}
 	}
 
 	public function on_activation()
@@ -25,7 +31,7 @@ class MC4WP_Lite_Admin
 
 	public function add_settings_link($links)
 	{
-		 $settings_link = '<a href="admin.php?page=mailchimp-for-wp">Settings</a>';
+		 $settings_link = '<a href="admin.php?page=mc4wp-lite">Settings</a>';
 		 $upgrade_link = '<a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Upgrade to Pro</a>';
          array_unshift($links, $upgrade_link, $settings_link);
          return $links;
@@ -33,7 +39,9 @@ class MC4WP_Lite_Admin
 
 	public function register_settings()
 	{
-		register_setting('mc4wp_options_group', 'mc4wp_lite', array($this, 'validate_options'));
+		register_setting('mc4wp_lite_settings', 'mc4wp_lite', array($this, 'validate_options'));
+		register_setting('mc4wp_lite_checkbox_settings', 'mc4wp_lite_checkbox', array($this, 'validate_options'));
+		register_setting('mc4wp_lite_form_settings', 'mc4wp_lite_form', array($this, 'validate_options'));
 	}
 
 	public function validate_options($opts)
@@ -43,22 +51,24 @@ class MC4WP_Lite_Admin
 
 	public function build_menu()
 	{
-		$page = add_menu_page('MailChimp for WP Lite', 'MailChimp for WP Lite', 'manage_options', 'mailchimp-for-wp', array($this, 'page_dashboard'), plugins_url('mailchimp-for-wp/img/menu-icon.png'));
+		add_menu_page('MailChimp for WP Lite', 'MailChimp for WP Lite', 'manage_options', 'mc4wp-lite', array($this, 'show_api_settings'), plugins_url('mailchimp-for-wp/assets/img/menu-icon.png'));
+		add_submenu_page('mc4wp-lite', 'General Settings - MailChimp for WP Lite', 'General Settings', 'manage_options', 'mc4wp-lite', array($this, 'show_api_settings'));
+		add_submenu_page('mc4wp-lite', 'Checkbox Settings - MailChimp for WP Lite', 'Checkbox Settings', 'manage_options', 'mc4wp-lite-checkbox-settings', array($this, 'show_checkbox_settings'));
+		add_submenu_page('mc4wp-lite', 'Form Settings - MailChimp for WP Lite', 'Form Settings', 'manage_options', 'mc4wp-lite-form-settings', array($this, 'show_form_settings'));
+		add_submenu_page('mc4wp-lite', 'Upgrade to Pro - MailChimp for WP Lite', 'Upgrade to Pro', 'manage_options', 'mc4wp-lite-upgrade', array($this, 'redirect_to_pro'));
+
 	}
 
 	public function load_css_and_js($hook)
 	{
-		if($hook != 'toplevel_page_mailchimp-for-wp') { return false; }
-
-		wp_register_script('mc4wp-admin-js',  plugins_url('mailchimp-for-wp/js/admin.js'), array('jquery'), false, true);
+		if(!isset($_GET['page']) || stristr($_GET['page'], 'mc4wp-lite') == false) { return; }
 		
 		// css
-		wp_enqueue_style( 'mc4wp-admin-css', plugins_url('mailchimp-for-wp/css/admin.css') );
+		wp_enqueue_style( 'mc4wp-admin-css', plugins_url('mailchimp-for-wp/assets/css/admin.css') );
 
 		// js
+		wp_register_script('mc4wp-admin-js',  plugins_url('mailchimp-for-wp/assets/js/admin.js'), array('jquery'), false, true);
 		wp_enqueue_script( array('jquery', 'mc4wp-admin-js') );
-		$translation_array = array( 'admin_page' => get_admin_url(null, 'admin.php?page=mailchimp-for-wp') );
-		wp_localize_script( 'mc4wp-admin-js', 'mc4wp_urls', $translation_array );
 	}
 
 	public function get_checkbox_compatible_plugins()
@@ -75,63 +85,77 @@ class MC4WP_Lite_Admin
 		return $checkbox_plugins;
 	}
 
-	public function page_dashboard()
+	public function redirect_to_pro()
 	{
-		$opts = $this->options;
-		$api = $this->get_mailchimp_api();
-
-		if(empty($opts['mailchimp_api_key'])) {
-			$connected = false;
-		} else {
-			$connected = ($api->ping() === "Everything's Chimpy!");
-		}
-
-		if($connected) {
-			$lists = $this->get_mailchimp_lists();
-		}
-		
-		// tab shit
-		$tabs = array('api-settings', 'checkbox-settings', 'form-settings');
-		$tab = (isset($_GET['tab'])) ? $_GET['tab'] : 'api-settings';
-
-		require 'views/dashboard.php';
+		?><script>window.location.replace('http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/'); </script><?php
 	}
 
-	private function get_mailchimp_api()
+	public function show_api_settings()
 	{
-		return MC4WP_Lite::instance()->get_mailchimp_api();
+		$opts = $this->options['general'];
+		$tab = 'api-settings';
+
+		if(empty($opts['api_key'])) {
+			$connected = false;
+		} else {
+			$connected = (MC4WP_Lite::api()->is_connected());
+		}
+
+		$lists = $this->get_mailchimp_lists();
+		require 'views/api-settings.php';
+	}
+
+	public function show_checkbox_settings()
+	{
+		$opts = $this->options['checkbox'];
+		$lists = $this->get_mailchimp_lists();
+		$tab = 'checkbox-settings';
+		require 'views/checkbox-settings.php';
+	}
+
+	public function show_form_settings()
+	{
+		$opts = $this->options['form'];
+		$lists = $this->get_mailchimp_lists();
+		$tab = 'form-settings';
+		require 'views/form-settings.php';
 	}
 
 	public function get_mailchimp_lists($refresh_cache = false)
 	{
 		$lists = get_transient( 'mc4wp_mailchimp_lists' );
 		
-		$refresh_cache = (isset($_REQUEST['renew-cached-data'])) ? true : $refresh_cache;
+		$refresh_cache = (isset($_REQUEST['mc4wp-renew-cache'])) ? true : $refresh_cache;
 
 		if($refresh_cache || !$lists) {
 
 			// make api request for lists
-			$api = $this->get_mailchimp_api();
-			$lists_data = $api->lists();
-			$lists = array();
+			$api = MC4WP_Lite::api();
+			$connected = $api->is_connected();
 
-			if($lists_data && isset($lists_data['data'])) {
+			if($connected && ($lists_data = $api->get_lists())) {
+				
+				// build simplified lists array
+				$lists = array();
+				foreach($lists_data as $data) {
 
-				foreach($lists_data['data'] as $l) {
-					$lists[$l['id']] = array(
-						'id' => $l['id'],
-						'name' => $l['name']
+					$list = array(
+						'id' => $data->id,
+						'name' => $data->name
 					);
-				}
 
-				if(isset($_REQUEST['renew-cached-data'])) {
+					$lists["{$data->id}"] = (object) $list;
+				}
+				
+				if(isset($_REQUEST['mc4wp-renew-cache'])) {
 					// add notice
 					add_settings_error("mc4wp", "cache-renewed", 'MailChimp cache renewed.', 'updated' );
 				}
 
 				// store lists in transients
-				set_transient('mc4wp_mailchimp_lists', $lists, 3600); // 1 hour
+				set_transient('mc4wp_mailchimp_lists', $lists, (24 * 3600)); // 1 day
 				set_transient('mc4wp_mailchimp_lists_fallback', $lists, 1209600); // 2 weeks
+
 			} else {
 				// api request failed, get fallback data (with longer lifetime)
 				$lists = get_transient('mc4wp_mailchimp_lists_fallback');
