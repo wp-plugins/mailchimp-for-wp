@@ -1,0 +1,67 @@
+#mc4wp_admin hr{ margin:20px 0; background-color:lightGray; border:0; height:1px; }
+#mc4wp_admin h2{ padding-bottom: 0; }
+#mc4wp_admin span.status{ padding:3px; color:white; font-size:12px; }
+#mc4wp_admin span.status.connected{ background-color:green; }
+#mc4wp_admin span.status.not_connected{ background-color:lightGrey; }
+#mc4wp_admin td.desc{ font-style:italic; font-size:10px; }
+
+#mc4wp_admin .alert{ border:1px solid black; padding:5px; width:auto; }
+#mc4wp_admin .alert.warning{ background:#FCF8E3; color:#C09853; border:1px solid #FBEED5; }
+
+#mc4wp-main-column{ float:left; width:65%; margin-right:0; }
+#mc4wp-secondary-column{ float:right; width:32%; margin-left:2.5%; }
+#mc4wp-secondary-column .mc4wp-box{ margin-bottom:20px; }
+
+/* tabs */
+#mc4wp-nav { clear:both; padding:0; margin:20px 0; border-bottom: 1px solid lightGray; }
+#mc4wp-nav li { list-style: none; margin: 0; padding:0; display: inline-block; }
+#mc4wp-nav li a { font-weight:bold; display:block; padding: 6px 12px; margin:0 10px -1px 0; border:1px solid lightGray; text-decoration: none; font-size:14px; }
+#mc4wp-nav li a.active { background: white; border-bottom: 1px solid white; color:black; }
+#mc4wp-tabs .mc4wp-tab{ display:none !important; }
+#mc4wp-tabs .mc4wp-tab.active{ display:block !important; }
+/* end tabs */
+
+#mc4wp-upgrade-box { border:1px solid black; background:#efefef; padding:20px; -moz-box-shadow: 0 0 5px 5px #888; -webkit-box-shadow: 0 0 5px 5px#888; box-shadow: 0 0 5px 5px #888; }
+#mc4wp-upgrade-box h3{ margin:0; }
+#mc4wp-upgrade-box ul{ list-style:square; margin-left:25px; }
+#mc4wp-upgrade-box li{ margin:0; }
+
+#mc4wp-fw h4{ margin-top:0; }
+#mc4wp-fw .mc4wp-fields { display:none; }
+#mc4wp-fw-preview { font-size:11px; }
+
+#mc4wp_admin table th{ text-align:left; }
+#mc4wp_admin table.form-table tr td:first-child, #mc4wp_admin table.form-table tr th:first-child{ padding-left:0; }
+#mc4wp_admin p.copyright-notice{ font-style:italic; }
+
+#mc4wp_admin .mc4wp-wrapper{ clear:both; width:100%; display:block; }
+#mc4wp_admin .mc4wp-col { float:left; margin:0 1%; padding:0;  }
+#mc4wp_admin .mc4wp-col-2-3{ width:64%; }
+#mc4wp_admin .mc4wp-col-1-3{ width:34%; }
+#mc4wp_admin .mc4wp-first{ margin-left:0; }
+#mc4wp_admin .mc4wp-last{ margin-right:0; }
+#mc4wp_admin .mc4wp-well{ background:#efefef; padding:10px; border:1px solid #666; }
+
+#mc4wp_admin .upgrade-button{
+border:1px solid #ffad41;-webkit-box-shadow: #999999 1px 1px 1px  ;-moz-box-shadow: #999999 1px 1px 1px ; box-shadow: #999999 1px 1px 1px  ; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;padding: 12px 16px; text-decoration:none; display:inline-block;text-shadow: 1px 1px 0 rgba(51,51,51,0.3);font-weight:bold; color: #000000;
+ background-color: #ffc579; background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc579), to(#fb9d23));
+ background-image: -webkit-linear-gradient(top, #ffc579, #fb9d23);
+ background-image: -moz-linear-gradient(top, #ffc579, #fb9d23);
+ background-image: -ms-linear-gradient(top, #ffc579, #fb9d23);
+ background-image: -o-linear-gradient(top, #ffc579, #fb9d23);
+ background-image: linear-gradient(to bottom, #ffc579, #fb9d23);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffc579, endColorstr=#fb9d23);
+}
+
+#mc4wp_admin .upgrade-button:hover{
+ border:1px solid #ff9913;
+ background-color: #ffaf46; background-image: -webkit-gradient(linear, left top, left bottom, from(#ffaf46), to(#e78404));
+ background-image: -webkit-linear-gradient(top, #ffaf46, #e78404);
+ background-image: -moz-linear-gradient(top, #ffaf46, #e78404);
+ background-image: -ms-linear-gradient(top, #ffaf46, #e78404);
+ background-image: -o-linear-gradient(top, #ffaf46, #e78404);
+ background-image: linear-gradient(to bottom, #ffaf46, #e78404);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffaf46, endColorstr=#e78404);
+}
+
+table.mc4wp-help, table.mc4wp-help th, table.mc4wp-help td { border: 1px solid #ddd; border-collapse: collapse; font-size: 12px; }
+table.mc4wp-help th, table.mc4wp-help td { vertical-align: text-top; text-align: left; padding: 5px 10px; }
+table.mc4wp-help tr:hover { 	background-color: #ddd; }
