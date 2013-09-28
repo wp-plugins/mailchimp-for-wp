@@ -36,11 +36,11 @@ Add "sign up to our newsletter" checkboxes to your comment form, registration fo
 
 **Premium Features**
 
-* AJAX sign-up forms, so the page doesn't have to reload when clicking submit.
-* Multiple sign-up forms for multiple lists
-* Field presets for all your list's merge tags which makes it extremely easy to create sign-up forms.
-* Subscribers log, keep track of all sign-ups
-* Statistical charts, gain valuable insights when and how your visitors subscribed.
+* Form Designer, alter the visual appearance of your forms from your admin panel. Absolutely no CSS knowledge required.
+* AJAX powered sign-up forms, so the page doesn't have to reload when clicking submit.
+* Multiple sign-up forms, for multiple lists.
+* All MailChimp list fields or interest groupings can be added to your forms using the field wizard.
+* Reports. Gain insights in when, where and how your visitors subscribe with the subscribers log and beautiful statistical charts. 
 * Built-in integration with [WooCommerce](http://www.woocommerce.com/) and [Easy Digital Downloads](https://easydigitaldownloads.com?ref=2123) for adding sign-up checkboxes to your checkout forms.
 * Premium support
 
@@ -77,14 +77,14 @@ Plugins should be flexible but simple. This plugin was developed with that in mi
 Yes, there is and it is awesome. Pro features include:
 
 1. (Multiple) AJAX Sign-up Forms (so the page doesn't reload after clicking the submit button)
-1. Statistical charts, learn when and how your visitors subscribed.
-1. Subscriber logging, keep track of everyone who subscribes and where they subscribed from.
-1. Easier form creation: presets for all your merge fields
+1. Create beautiful forms from your admin panel with the Form CSS Designer.
+1. Reports, learn when, where and how your visitors subscribed. 
+1. The form field wizard makes it easy to add your MailChimp list fields to your sign-up forms.
 1. Sign-up checkbox integration with WooCommerce and Easy Digital Downloads
-1. Custom individual checkbox labels
+1. Custom checkbox labels
 1. Premium support
 
-[Upgrade to MailChimp for WordPress Pro now >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
+[More information about MailChimp for WordPress Pro](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
 
 = The form shows a success message but subscribers are not added to my list(s)? =
 If the form shows a success message, it means the sign-up succeeded. 100%. MailChimp could have a slight delay sending the confirmation email though, just be patient.
