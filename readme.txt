@@ -54,7 +54,7 @@ People who comment or register on your website are valuable visitors and most li
 
 You can add sign-up checkboxes to ANY form you like, including Contact Form 7 forms.
 
-** More information **
+**More information**
 Check out more [WordPress plugins](http://dannyvankooten.com/wordpress-plugins/) by [Danny van Kooten](http://dannyvankooten.com) or [contact Danny on Twitter](http://twitter.com/dannyvankooten).
 
 
@@ -87,11 +87,6 @@ Yes, there is and it is awesome. Pro features include:
 = The form shows a success message but subscribers are not added to my list(s)? =
 If the form shows a success message, it means the sign-up succeeded. 100%. MailChimp could have a slight delay sending the confirmation email though, just be patient.
 
-= The sign-up checkbox doesn't work? =
-The checkbox will fail silently because subscribing is not the main goal of the form that contains the checkbox. Please check if your list contains any required fields besides email and name fields.
-
-Optionally, use a sign-up form to help troubleshooting.
-
 = How can I style the sign-up form? =
 You can use CSS to style the sign-up form. Use the following CSS selectors.
 
@@ -108,6 +103,8 @@ form.mc4wp-form .mc4wp-error { ... } /* error messages */
 ` 
 
 Just add your CSS rules to the end of your theme stylesheet, **/wp-content/themes/your-theme-name/style.css**.
+
+[Upgrade to MailChimp for WordPress Pro to use the form CSS designer to create beautiful sign-up forms >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
 
 = Where can I find my MailChimp API key? =
 [http://kb.mailchimp.com/article/where-can-i-find-my-api-key](http://kb.mailchimp.com/article/where-can-i-find-my-api-key)
