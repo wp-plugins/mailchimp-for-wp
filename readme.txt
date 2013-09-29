@@ -29,15 +29,13 @@ Add "sign up to our newsletter" checkboxes to your comment form, registration fo
 * SPAM protection, no "fake" subscribers will be added to your lists.
 * Create and manage sign-up forms in an easy way. No field limit!
 * Uses the MailChimp API, blazingly fast and reliable.
+* Built-in integration for [BuddyPress](http://buddypress.org/) and WordPress MultiSite registration forms, [bbPress](http://bbpress.org/) new topic and new reply forms and [Contact Form 7](http://contactform7.com/) forms.
 * Configuring is easy, all you need is your MailChimp API key.
-* Compatible with [BuddyPress](http://buddypress.org/) and WordPress MultiSite registration forms.
-* Compatible with [bbPress](http://bbpress.org/), add a newsletter checkbox to the new topic and new reply forms.
-* Compatible with [Contact Form 7](http://contactform7.com/), you can use `[mc4wp_checkbox]` inside your CF7 forms.
 
-**Premium Features**
+**Premium Plugin Features**
 
-* Form Designer, alter the visual appearance of your forms from your admin panel. Absolutely no CSS knowledge required.
-* AJAX powered sign-up forms, so the page doesn't have to reload when clicking submit.
+* Form CSS designer, design beautiful sign-up forms from your admin panel. Absolutely no CSS knowledge required.
+* AJAX powered sign-up forms, so the page doesn't have to reload after submitting.
 * Multiple sign-up forms, for multiple lists.
 * All MailChimp list fields or interest groupings can be added to your forms using the field wizard.
 * Reports. Gain insights in when, where and how your visitors subscribe with the subscribers log and beautiful statistical charts. 
@@ -47,7 +45,7 @@ Add "sign up to our newsletter" checkboxes to your comment form, registration fo
 [Upgrade to MailChimp for WordPress Pro now >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
 
 = MailChimp Sign-Up Form =
-The plugin comes with an easy to way to build sign-up forms for your MailChimp lists. Add as many fields as you like and customize labels, placeholders, initial value's etc. in a simple way.
+The plugin comes with an easy to way to build sign-up forms for your MailChimp lists. Add as many fields as you like and customize labels, placeholders, initial values etcetera in a simple way. Visitors never have to leave your website to subscribe to your MailChimp lists. Big plus!
 
 Use the `[mc4wp-form]` shortcode to show a sign-up form in your posts, pages or text widgets.
 
@@ -56,8 +54,8 @@ People who comment or register on your website are valuable visitors and most li
 
 You can add sign-up checkboxes to ANY form you like, including Contact Form 7 forms.
 
-= Simple but extremely flexible =
-Plugins should be flexible but simple. This plugin was developed with that in mind. Most settings are optional, making configuration of the plugin really simple. However, if you are more tech-savvy the plugin has plenty of customization options. 
+** More information **
+Check out more [WordPress plugins](http://dannyvankooten.com/wordpress-plugins/) by [Danny van Kooten](http://dannyvankooten.com) or [contact Danny on Twitter](http://twitter.com/dannyvankooten).
 
 
 == Installation ==
@@ -165,9 +163,10 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 2. Add a sign-up checkbox to various places on your website.
 3. An example sign-up checkbox.
 4. An example sign-up form in my footer on dannyvankooten.com. More [MailChimp sign-up form examples](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/demo-sign-up-forms/) are available on my website.
-5. You can create multiple sign-up forms in [MailChimp for WordPress Pro](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
-6. Editing a form got a lot easier in the premium version.
-7. Gain valuable insights which method your visitors used to subscribe for any given time period using beautiful line charts. (Premium version only)
+5. **Premium only:** Create multiple AJAX powered sign-up forms.
+6. **Premium only:** Use the field wizard to easily add advanced fields to your form mark-up. You don't have to write any HTML, if you want.
+7. **Premium only:** Design beautiful sign-up forms using the form CSS designer.
+8. **Premium only:** Gain valuable insights which method your visitors used to subscribe for any given time period using beautiful line charts. [Upgrade to the premium version now.](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
 
 
 == Changelog ==
