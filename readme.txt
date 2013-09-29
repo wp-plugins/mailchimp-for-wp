@@ -24,12 +24,12 @@ Add "sign up to our newsletter" checkboxes to your comment form, registration fo
 
 **Plugin Features**
 
-* Show sign-up forms in your posts, pages and widgets by using a simple shortcode `[mc4wp-form]`
-* Adds a "sign-up to our newsletter" checkbox to ANY form, including your comment and registration forms.
+* Create a highly customizable sign-up form and show it in your posts, pages and widgets by using a simple shortcode `[mc4wp-form]`
+* Add a "sign-up to our newsletter" checkbox to ANY form you like, like your comment form.
+* Built-in integration with [BuddyPress](http://buddypress.org/) and WordPress MultiSite registration forms, [bbPress](http://bbpress.org/) new topic and new reply forms and [Contact Form 7](http://contactform7.com/) forms. You can add sign-up checkboxes to these forms with 1 simple click.
+* Create sign-up forms in an easy but higly customizable way.
 * SPAM protection, no "fake" subscribers will be added to your lists.
-* Create and manage sign-up forms in an easy way. No field limit!
-* Uses the MailChimp API, blazingly fast and reliable.
-* Built-in integration for [BuddyPress](http://buddypress.org/) and WordPress MultiSite registration forms, [bbPress](http://bbpress.org/) new topic and new reply forms and [Contact Form 7](http://contactform7.com/) forms.
+* Uses the MailChimp API, superfast and reliable. Also, visitors never have to leave your website to subscribe.
 * Configuring is easy, all you need is your MailChimp API key.
 
 **Premium Plugin Features**
