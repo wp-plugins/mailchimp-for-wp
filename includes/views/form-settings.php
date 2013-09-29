@@ -1,6 +1,6 @@
 <div id="mc4wp-<?php echo $tab; ?>" class="wrap mc4wp-settings">
 
-	<?php include 'parts/admin-nav.php'; ?>
+	<h2>Form settings</h2>
 
 	<div id="mc4wp-content">
 
@@ -21,11 +21,13 @@
 						?><td colspan="2">No lists found, are you connected to MailChimp?</td><?php
 					} else { ?>
 					<td>
+						<ul id="mc4wp-lists">
 						<?php foreach($lists as $list) { ?>
-						<input type="checkbox" id="mc4wp_form_list_<?php echo $list->id; ?>_cb" name="mc4wp_lite_form[lists][<?php echo $list->id; ?>]" value="<?php echo $list->id; ?>" <?php if(array_key_exists($list->id, $opts['lists'])) echo 'checked="checked"'; ?>> <label for="mc4wp_form_list_<?php echo $list->id; ?>_cb"><?php echo $list->name; ?></label><br />
+							<li><input type="checkbox" id="mc4wp_form_list_<?php echo $list->id; ?>_cb" name="mc4wp_lite_form[lists][<?php echo $list->id; ?>]" value="<?php echo $list->id; ?>" data-groupings="<?php echo esc_attr(json_encode($list->interest_groupings)); ?>" data-fields="<?php echo esc_attr(json_encode($list->merge_vars)); ?>" <?php if(array_key_exists($list->id, $opts['lists'])) echo 'checked="checked"'; ?>> <label for="mc4wp_form_list_<?php echo $list->id; ?>_cb"><?php echo $list->name; ?></label></li>
 						<?php } ?>
+						</ul>
 				</td>
-				<td class="desc" <?php if(empty($opts['lists'])) { ?>style="color:red;"<?php } ?>>Select at least 1 MailChimp list for this form</td>
+				<td class="desc" <?php if(empty($opts['lists'])) { ?>style="color:red;"<?php } ?>>Select at least one MailChimp list for this form</td>
 				<?php
 			} ?>
 
@@ -41,7 +43,7 @@
 						} else {
 							?><textarea class="widefat" cols="160" rows="20" id="mc4wpformmarkup" name="mc4wp_lite_form[markup]"><?php echo esc_textarea($opts['markup']); ?></textarea><?php
 						} ?>
-						<p><small>Use <input type="text" onfocus="this.select();" readonly="readonly" value="[mc4wp-form]" size="10" class="mc4wp-shortcode-example"> to render this form inside a widget, post or page. </small></p>
+						<p><small>Use <input type="text" onfocus="this.select();" readonly="readonly" value="[mc4wp-form]" size="10" class="mc4wp-shortcode-example"> to render this form inside a widget, post or page. <u>Do not just copy the form mark-up as that will not work.</u> </small></p>
 						<p class="submit">
 							<input type="submit" class="button-primary" value="<?php _e('Save All Changes') ?>" id="mc4wp-submit-form-settings" />
 						</p>
@@ -55,7 +57,7 @@
 		</tr>
 	</table>
 
-		<h3>MailChimp settings</h3>
+		<h3>MailChimp Settings</h3>
 		<table class="form-table">
 			<tr valign="top">
 				<th scope="row">Double opt-in?</th>
@@ -94,7 +96,7 @@
 			</tr>
 		</table>
 
-		<h3>Form settings & messages (optional)</h3>
+		<h3>Form Settings & Messages</h3>
 
 		<table class="form-table mc4wp-form-messages">
 			<tr valign="top" class="pro-feature">
@@ -153,23 +155,22 @@
 	<?php include 'parts/admin-upgrade-to-pro.php'; ?>
 
 	<div class="mc4wp-box" id="mc4wp-info-tabs">
-		<h4>Building your sign-up form</h4>
-		<p>At a minimum, your form should include an <strong>EMAIL</strong> field and a submit button.</p>
+		<h3>Building your sign-up form</h3>
+		<p>At a minimum, your form should include just an <strong>EMAIL</strong> field and a submit button. If your list requires more fields, add those too. 
+		Field names should be uppercased and match your MailChimp list fields merge tags. The field wizard tool does this automatically.</p>
 
-		<p>Add other fields as you like but keep in mind that...</p>
-		<ul class="ul-square">
-			<li>... field names should be uppercased</li>
-			<li>... field names should match your MailChimp lists merge tags</li>
-		</ul>
-
-		<p><strong>Styling</strong></p>
-		<p>Alter the visual appearance of the form by applying CSS rules to <b>form.mc4wp-form</b></p>
+		<p><strong>Styling</strong><br />
+		Alter the visual appearance of the form by applying CSS rules to <b>.mc4wp-form</b> and its child elements.</p>
 		<p>You should add the CSS rules to your theme stylesheet using <strong>Appearance > Editor</strong> or by editing <em><?php echo get_stylesheet_directory(); ?>/style.css</em> over FTP.</p>
 
 			
-			<p>The <a href="http://wordpress.org/plugins/mailchimp-for-wp/faq/" target="_blank">MailChimp for WP FAQ</a> lists the various CSS selectors you can use to target the different elements.</p>
+		<p>The <a href="http://wordpress.org/plugins/mailchimp-for-wp/faq/" target="_blank">MailChimp for WP FAQ</a> lists the various CSS selectors you can use to target the different elements.</p>
+
+		<p><em>PS: The premium version has a neat CSS builder. <a href="http://dannyvankooten.com/wp-content/uploads/2013/06/form-css-designer.png">Here's a screenshot</a>. Absolutely zero CSS knowledge required to create beautiful forms!</em></p>
 			
-			<p><strong>Form variables</strong></p>
+			<h3>Form variables</h3>
+			<p>Use the following variables to add some dynamic content to your form.</p>
+
 			<table class="mc4wp-help">
 				<tr>
 					<th>{n}</th>

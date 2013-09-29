@@ -59,10 +59,31 @@ class MC4WP_Lite_API {
 		}
 	}
 
+	public function get_list_groupings($list_id)
+	{
+		$result = $this->call('lists/interest-groupings', array('id' => $list_id) );
+		if($result && is_array($result)) {
+			return $result;
+		} else {
+			return false;
+		}
+	}
+
 	public function get_lists()
 	{
 		$result = $this->call('lists/list');
 
+		if($result && isset($result->data)) {
+			return $result->data;
+		} else {
+			return false;
+		}
+	}
+
+	public function get_lists_with_merge_vars($list_ids) 
+	{
+		$result = $this->call('lists/merge-vars', array('id' => $list_ids));
+		
 		if($result && isset($result->data)) {
 			return $result->data;
 		} else {

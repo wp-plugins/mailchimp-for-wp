@@ -1,38 +1,45 @@
 <div id="mc4wp-<?php echo $tab; ?>" class="wrap mc4wp-settings">
 
-	<?php include 'parts/admin-nav.php'; ?>
+	<h2>Checkbox Settings</h2>
 
 	<div id="mc4wp-content">
 
 		<?php settings_errors(); ?>
 		<p>To use the MailChimp for WP sign-up checkboxes, select at least one list and one form to add the checkbox to.</p>
 
+		<h3>List settings</h3>
 		<form action="options.php" method="post">
 			<?php settings_fields( 'mc4wp_lite_checkbox_settings' ); ?>
 
-			<h3>Checkbox Settings</h3>
 			<table class="form-table">
 				<tr valign="top">
 					<th scope="row">Lists</th>
 					
 					<?php // loop through lists
-					if(empty($lists)) { 
+					if(empty($lists)) 
+					{ 
 						?><td colspan="2">No lists found, are you connected to MailChimp?</td><?php
-					} else { ?>
-					<td>
-						<?php foreach($lists as $list) { 
-						?><input type="checkbox" id="mc4wp_checkbox_list_<?php echo $list->id; ?>_cb" name="mc4wp_lite_checkbox[lists][<?php echo $list->id; ?>]" value="<?php echo $list->id; ?>" <?php if(array_key_exists($list->id, $opts['lists'])) echo 'checked="checked"'; ?>> <label for="mc4wp_checkbox_list_<?php echo $list->id; ?>_cb"><?php echo $list->name; ?></label><br /><?php
-						} ?>
-				</td>
-				<td class="desc" <?php if(empty($opts['lists'])) { ?>style="color:red;"<?php } ?>>Select at least 1 MailChimp list to which people should be subscribed.</td>
-				<?php
-			} ?>
+					} 
+					else 
+					{ ?>
+						<td>
+							<?php foreach($lists as $list) { 
+							?><input type="checkbox" id="mc4wp_checkbox_list_<?php echo $list->id; ?>_cb" name="mc4wp_lite_checkbox[lists][<?php echo $list->id; ?>]" value="<?php echo $list->id; ?>" <?php if(array_key_exists($list->id, $opts['lists'])) echo 'checked="checked"'; ?>> <label for="mc4wp_checkbox_list_<?php echo $list->id; ?>_cb"><?php echo $list->name; ?></label><br /><?php
+							} ?>
+						</td>
+						<td class="desc" <?php if(empty($opts['lists'])) { ?>style="color:red;"<?php } ?>>Select at least one MailChimp list to which people who tick a checkbox should be subscribed.</td>
+					<?php 
+					} 
+					?>
+				</tr>
+			</table>
 
-		</tr>
+		<h3>Checkbox settings</h3>
+		<table class="form-table">
 		<tr valign="top">
 			<th scope="row">Double opt-in?</th>
 			<td class="nowrap"><input type="radio" id="mc4wp_checkbox_double_optin_1" name="mc4wp_lite_checkbox[double_optin]" value="1" <?php if($opts['double_optin'] == 1) echo 'checked="checked"'; ?> /> <label for="mc4wp_checkbox_double_optin_1">Yes</label> &nbsp; <input type="radio" id="mc4wp_checkbox_double_optin_0" name="mc4wp_lite_checkbox[double_optin]" value="0" <?php if($opts['double_optin'] == 0) echo 'checked="checked"'; ?> /> <label for="mc4wp_checkbox_double_optin_0">No</label></td>
-			<td class="desc"></td>
+			<td class="desc">Tick "yes" if you want subscribers to have to confirm their email address (recommended)</td>
 		</tr>
 		<tr valign="top">
 			<th scope="row">Add the checkbox to these forms</th>

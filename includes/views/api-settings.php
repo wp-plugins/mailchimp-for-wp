@@ -1,6 +1,6 @@
 <div id="mc4wp-<?php echo $tab; ?>" class="wrap mc4wp-settings">
 
-	<?php include 'parts/admin-nav.php'; ?>
+	<h2>MailChimp API Settings</h2>
 
 	<div id="mc4wp-content">
 
@@ -53,13 +53,14 @@
 		</tbody>
 	</table>
 
-	<p>
-	<form method="post" action="">
-		<input type="submit" class="button" value="Renew Cache" />
-		<input type="hidden" name="mc4wp-renew-cache" value="1" />
-	</form>
+	<p><form method="post"><input type="submit" name="renew-cached-data" value="Renew cached data" class="button" /></form></p>
 	<?php } ?>
+
+	<?php include 'parts/admin-footer.php'; ?>
 </div>
+
+
+
 <div id="mc4wp-sidebar">
 	<?php include 'parts/admin-upgrade-to-pro.php'; ?>
 	<?php include 'parts/admin-need-support.php'; ?>
