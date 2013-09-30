@@ -215,6 +215,8 @@ class MC4WP_Lite_Checkbox
 		if(!isset($_POST['mc4wp-do-subscribe']) || !$_POST['mc4wp-do-subscribe']) { return false; }
 		
 		$_POST['mc4wp-try-subscribe'] = 1;
+		unset($_POST['mc4wp-do-subscribe']);
+
 		return $this->subscribe_from_whatever();
 	}
 	/* End Contact Form 7 functions */
@@ -239,9 +241,9 @@ class MC4WP_Lite_Checkbox
 			} elseif(in_array($key, array('name', 'your-name', 'NAME', 'username', 'fullname'))) {
 				// find name field
 				$merge_vars['NAME'] = $value;
-			} elseif(substr($key, 0, 5) == 'mc4wp-') {
+			} elseif(strtolower(substr($key, 0, 6)) == 'mc4wp-') {
 				// find extra fields which should be sent to MailChimp
-				$key = strtoupper(substr($key, 5));
+				$key = strtoupper(substr($key, 6));
 
 				if(!isset($merge_vars[$key])) {
 					$merge_vars[$key] = $value;
