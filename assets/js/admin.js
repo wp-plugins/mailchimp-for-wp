@@ -48,27 +48,27 @@
 
 				// loop through merge fields from this list
 				for(var i = 0, fieldCount = fields.length; i < fieldCount; i++) {
-					var field = fields[i];
+					var f = fields[i];
 
 					// add field to select if no similar option exists yet
-					if($mailchimpMergeFields.find("option[value='"+ field.tag +"']").length == 0) {
+					if($mailchimpMergeFields.find("option[value='"+ f.tag +"']").length == 0) {
 
-						var text = (field.name.length > 40) ? field.name.substring(0, 40) + '..' : field.name;
-						if(field.req) { text += '*'; }
+						var text = (f.name.length > 40) ? f.name.substring(0, 40) + '..' : f.name;
+						if(f.req) { text += '*'; }
 
 						var include = false;
 						var triggers = [ 'name', 'email', 'website' ];
-						for(var i = 0; i < triggers.length; i++) {
-							if(field.tag.toLowerCase().indexOf(triggers[i]) != -1) {
+						for(var j = 0; j < triggers.length; j++) {
+							if(f.tag.toLowerCase().indexOf(triggers[i]) !== -1) {
 								include = true; 
 								break;
 							}
 						}
 
 						if(include) {
-							var $option = $("<option />").text(text).val(field.tag).data('field', field);
+							var $option = $("<option />").text(text).val(f.tag).data('field', f);
 						} else {
-							var $option = $("<option />").text(text + " (Pro only)").val(field.tag).attr('disabled', 'disabled');
+							var $option = $("<option />").text(text + " (Pro only)").val(f.tag).attr('disabled', 'disabled');
 						}
 						
 						$mailchimpMergeFields.append($option);
