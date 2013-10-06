@@ -92,7 +92,9 @@ class MC4WP_Lite_API {
 	}
 
 	private function call($method, array $data = array())
-	{
+	{	
+		// do not make request when no api key was provided.
+		if(empty($this->api_key)) { return false; }
 
 		$data['apikey'] = $this->api_key;
 

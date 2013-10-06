@@ -16,7 +16,7 @@
 	*/
 	(function() {
 		// setup variables
-		var $lists = $("#mc4wp-lists input");
+		var $lists = $("#mc4wp-lists :input");
 		var $mailchimpFields = $("#mc4wp-fw-mailchimp-fields");
 		var $mailchimpMergeFields = $("#mc4wp-fw-mailchimp-fields .merge-fields");
 		var $mailchimpGroupings = $("#mc4wp-fw-mailchimp-fields .groupings");
@@ -47,7 +47,7 @@
 				var groupings = $(this).data('groupings');
 
 				// loop through merge fields from this list
-				for(var i = 0, fieldCount = fields.length; i < fieldCount; i++) {
+				for(var i = 0; i < fields.length; i++) {
 					var f = fields[i];
 
 					// add field to select if no similar option exists yet
@@ -59,7 +59,7 @@
 						var include = false;
 						var triggers = [ 'name', 'email', 'website' ];
 						for(var j = 0; j < triggers.length; j++) {
-							if(f.tag.toLowerCase().indexOf(triggers[i]) !== -1) {
+							if(f.tag.toLowerCase().indexOf(triggers[j]) !== -1) {
 								include = true; 
 								break;
 							}
@@ -68,7 +68,7 @@
 						if(include) {
 							var $option = $("<option />").text(text).val(f.tag).data('field', f);
 						} else {
-							var $option = $("<option />").text(text + " (Pro only)").val(f.tag).attr('disabled', 'disabled');
+							var $option = $("<option />").text("(PRO ONLY) " + text).val(f.tag).attr('disabled', 'disabled');
 						}
 						
 						$mailchimpMergeFields.append($option);
@@ -82,7 +82,7 @@
 					// add field to select if no similar option exists yet
 					if($mailchimpGroupings.find("option[value='"+ grouping.id +"']").length == 0) {
 						var text = (grouping.name.length > 40) ? grouping.name.substring(0, 40) + '..' : grouping.name;
-						var $option = $("<option />").text(text + " (Pro only)").val(grouping.id).attr('disabled', 'disabled');
+						var $option = $("<option />").text("(PRO ONLY) " + text).val(grouping.id).attr('disabled', 'disabled');
 						$mailchimpGroupings.append($option);
 					}
 				}
@@ -254,7 +254,7 @@
 		$("#mc4wp-fw-add-to-form").click(addCodeToFormMarkup);
 
 		// init
-		$lists.change();
+		setFields();
 
 	})();
 

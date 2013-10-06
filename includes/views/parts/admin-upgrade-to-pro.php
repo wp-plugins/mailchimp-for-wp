@@ -10,8 +10,8 @@
 	<p>Some alternative ways to show your appreciation:</p>
 	<ul class="ul-square">
 		<li><a target="_blank" href="http://wordpress.org/support/view/plugin-reviews/mailchimp-for-wp?rate=5#postform">Give a &#9733;&#9733;&#9733;&#9733;&#9733; review on WordPress.org</a></li>
-		<li><a target="_blank" href="http://twitter.com/?status=I%20manage%20my%20%23WordPress%20sign-up%20forms%20using%20MailChimp%20for%20WP%20and%20I%20love%20it%20-%20check%20it%20out!%20http%3A%2F%2Fwordpress.org%2Fplugins%2Fmailchimp-for-wp%2F">Tweet about MailChimp for WP</a></li>
-		<li>Write about the plugin on your blog and link to <a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">the plugin page</a>.</li>
+		<li><a target="_blank" href="http://twitter.com/?status=Showing%20my%20appreciation%20to%20%40DannyvanKooten%20for%20his%20WordPress%20plugin%3A%20MailChimp%20for%20WP%20%20-%20check%20it%20out!%20http%3A%2F%2Fwordpress.org%2Fplugins%2Fmailchimp-for-wp%2F">Tweet about MailChimp for WP</a></li>
+		<li>Review the plugin on your blog and link to <a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">the plugin page</a>.</li>
 		<li><a target="_blank" href="http://wordpress.org/plugins/mailchimp-for-wp/">Vote "works" on the WordPress.org plugin page</a></li>
 	</ul>
 </div>

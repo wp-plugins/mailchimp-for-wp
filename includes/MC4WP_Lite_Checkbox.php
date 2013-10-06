@@ -329,7 +329,7 @@ class MC4WP_Lite_Checkbox
 		}
 		
 		// check if result succeeded, show debug message to administrators
-		if($result !== true && $api->has_error() && current_user_can('manage_options')) 
+		if($result !== true && $api->has_error() && current_user_can('manage_options') && !defined("DOING_AJAX")) 
 		{
 			wp_die("
 					<h3>MailChimp for WP - Error</h3>

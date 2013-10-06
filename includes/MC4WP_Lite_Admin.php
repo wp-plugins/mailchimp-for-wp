@@ -103,7 +103,7 @@ class MC4WP_Lite_Admin
 		}
 
 		$lists = $this->get_mailchimp_lists();
-		require 'views/api-settings.php';
+		include_once MC4WP_LITE_PLUGIN_DIR . 'includes/views/api-settings.php';
 	}
 
 	public function show_checkbox_settings()
@@ -111,7 +111,7 @@ class MC4WP_Lite_Admin
 		$opts = $this->options['checkbox'];
 		$lists = $this->get_mailchimp_lists();
 		$tab = 'checkbox-settings';
-		require 'views/checkbox-settings.php';
+		include_once MC4WP_LITE_PLUGIN_DIR . 'includes/views/checkbox-settings.php';
 	}
 
 	public function show_form_settings()
@@ -119,7 +119,7 @@ class MC4WP_Lite_Admin
 		$opts = $this->options['form'];
 		$lists = $this->get_mailchimp_lists();
 		$tab = 'form-settings';
-		require 'views/form-settings.php';
+		include_once MC4WP_LITE_PLUGIN_DIR . 'includes/views/form-settings.php';
 	}
 
 	/**
@@ -139,34 +139,41 @@ class MC4WP_Lite_Admin
 		if($refresh_cache || !$cached_lists) {
 			// make api request for lists
 			$api = MC4WP_Lite::api();
-			$lists = $api->get_lists();
+			$lists = array();
+			$lists_data = $api->get_lists();
 
-			if($lists) {
+			if($lists_data) {
 				
 				$list_ids = array();
-				foreach($lists as $key => $list) {
+				foreach($lists_data as $list) {
 					$list_ids[] = $list->id;
-					$lists[$key]->merge_vars = array();
-					$lists[$key]->interest_groupings = array();
+
+					$lists["{$list->id}"] = (object) array(
+						'id' => $list->id,
+						'name' => $list->name,
+						'subscriber_count' => $list->stats->member_count,
+						'merge_vars' => array(),
+						'interest_groupings' => array()
+					);
+
+					// get interest groupings
+					$groupings_data = $api->get_list_groupings($list->id);
+					if($groupings_data) {
+						$lists["{$list->id}"]->interest_groupings = array_map(array($this, 'strip_unnecessary_grouping_properties'), $groupings_data);
+					}
 				}
 
-				// get lists including merge vars
-				$lists = $api->get_lists_with_merge_vars($list_ids);
-
-				// get interest groupings for each list
-				if($lists) {
-					foreach($lists as $key => $list) {
-						$lists[$key]->interest_groupings = array();
-
-						$result = $api->get_list_groupings($list->id);
-						if($result) {
-							$lists[$key]->interest_groupings = $result;
-						}
+				// get merge vars for all lists at once
+				$merge_vars_data = $api->get_lists_with_merge_vars($list_ids);
+				if($merge_vars_data) {
+					foreach($merge_vars_data as $list) {
+						// add merge vars to list
+						$lists["{$list->id}"]->merge_vars = array_map(array($this, 'strip_unnecessary_merge_vars_properties'), $list->merge_vars);
 					}
 				}
 
 				// cache renewal triggered manually?
-				if(isset($_REQUEST['renew-cached-data'])) {
+				if(isset($_POST['renew-cached-data'])) {
 					if($lists) {
 						add_settings_error("mc4wp", "cache-renewed", 'Renewed MailChimp cache.', 'updated' );
 					} else {
@@ -187,6 +194,42 @@ class MC4WP_Lite_Admin
 		}
 
 		return $cached_lists;
+	}
+
+	/**
+	* Build the group array object which will be stored in cache
+	*/ 
+	public function strip_unnecessary_group_properties($group) {
+		return (object) array(
+			'name' => $group->name
+		);
+	}
+
+	/**
+	* Build the groupings array object which will be stored in cache
+	*/ 
+	public function strip_unnecessary_grouping_properties($grouping)
+	{
+		return (object) array(
+			'id' => $grouping->id,
+			'name' => $grouping->name,
+			'groups' => array_map(array($this, 'strip_unnecessary_group_properties'), $grouping->groups),
+			'form_field' => $grouping->form_field
+		);
+	}
+
+	/**
+	* Build the merge_var array object which will be stored in cache
+	*/ 
+	public function strip_unnecessary_merge_vars_properties($merge_var)
+	{
+		return (object) array(
+			'name' => $merge_var->name,
+			'field_type' => $merge_var->field_type,
+			'req' => $merge_var->req,
+			'tag' => $merge_var->tag
+		);
+
 	}
 
 }

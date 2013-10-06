@@ -80,7 +80,7 @@
 	<div class="mc4wp-box">
 		<h3>Styling the Sign-Up Checkbox</h3>
 		<p>Custom or additional styling can be done by applying CSS rules to <b>#mc4wp-checkbox</b> or its child elements.</p>
-		<p>You should add the CSS rules to your theme stylesheet using <strong>Appearance > Editor</strong> or by editing <em><?php echo get_stylesheet_directory(); ?>/style.css</em> over FTP.</p>
+		<p>You should add the CSS rules to your theme stylesheet using the <a href="<?php echo admin_url('theme-editor.php?file=style.css'); ?>">Theme Editor</a> or by editing <em><?php echo get_stylesheet_directory(); ?>/style.css</em> over FTP.</p>
 	</div>
 
 	<?php include 'parts/admin-need-support.php'; ?>

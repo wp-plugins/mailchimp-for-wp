@@ -2,7 +2,7 @@
 #mc4wp-sidebar{ float:right; width:32%; margin:0; padding:9px 0 0; }
 #mc4wp-sidebar .mc4wp-box{ margin-bottom:20px; }
 
-#mc4wp-upgrade-box { background:#efefef; border:1px solid #cecece; padding:20px; }
+#mc4wp-upgrade-box { background:#222; color:#ddd; padding:20px; }
 #mc4wp-upgrade-box h3{ margin:0; }
 
 #mc4wp-fw h4{ margin-top:0; }
@@ -11,8 +11,9 @@
 #mc4wp-lists{ margin:0; }
 #mc4wp-lists input{ margin-right:5px; }
 
-.mc4wp-settings tr.pro-feature th, .mc4wp-settings tr.pro-feature td{ color:#999; }
+.mc4wp-settings tr.pro-feature th, .mc4wp-settings tr.pro-feature td{ color:#aaa; }
 
+.mc4wp-settings h3{ margin-top:2em;}
 .mc4wp-settings span.status{ display:inline-block; padding:3px 6px; color:white; font-size:12px; font-weight:bold;  }
 .mc4wp-settings span.positive{ background-color:green; }
 .mc4wp-settings span.negative{ background-color:lightGrey; }

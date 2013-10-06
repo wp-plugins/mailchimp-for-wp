@@ -161,7 +161,7 @@
 
 		<p><strong>Styling</strong><br />
 		Alter the visual appearance of the form by applying CSS rules to <b>.mc4wp-form</b> and its child elements.</p>
-		<p>You should add the CSS rules to your theme stylesheet using <strong>Appearance > Editor</strong> or by editing <em><?php echo get_stylesheet_directory(); ?>/style.css</em> over FTP.</p>
+		<p>You should add the CSS rules to your theme stylesheet using the <a href="<?php echo admin_url('theme-editor.php?file=style.css'); ?>">Theme Editor</a> or by editing <em><?php echo get_stylesheet_directory(); ?>/style.css</em> over FTP.</p>
 
 			
 		<p>The <a href="http://wordpress.org/plugins/mailchimp-for-wp/faq/" target="_blank">MailChimp for WP FAQ</a> lists the various CSS selectors you can use to target the different elements.</p>
@@ -173,8 +173,8 @@
 
 			<table class="mc4wp-help">
 				<tr>
-					<th>{n}</th>
-					<td>Replaced with a unique number for this form.</td>
+					<th>{subscriber_count}</th>
+					<td>Replaced with the number of subscribers on the selected list(s).</td>
 				</tr>
 				<tr>
 					<th>{ip}</th>
