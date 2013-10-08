@@ -18,7 +18,12 @@ Want to get more email subscribers for your MailChimp lists? This plugin will be
 
 Easily build sign-up forms and then add them to your posts, pages and widget areas by using a simple shortcode `[mc4wp-form]`. 
 
-Add "sign up to our newsletter" checkboxes to your comment form, registration form or other forms, making subscribing to your list(s) effortless for your visitors.  
+Add "sign up to our newsletter" checkboxes to your comment form, registration form or other forms, making subscribing to your list(s) effortless for your visitors. 
+
+`
+MailChimp for WordPress now comes with a premium version where you can create (multiple) beautiful highly converting AJAX powered forms without touching any code.
+` 
+[Upgrade to MailChimp for WordPress Pro now >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
 
 **Plugin Features**
 
@@ -37,7 +42,7 @@ Add "sign up to our newsletter" checkboxes to your comment form, registration fo
 * Built-in integration with WooCommerce and Easy Digital Downloads for adding sign-up checkboxes to your checkout forms.
 * Priority support
 
-[More information about MailChimp for WordPress Pro >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
+[More information](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/) | [Screenshots](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/screenshots/) | [Demo](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/demo-sign-up-forms/) | [Upgrade now >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
 
 = MailChimp Sign-Up Form =
 The plugin comes with an easy to way to build sign-up forms for your MailChimp lists. Add as many fields as you like and customize labels, placeholders, initial values etcetera in a simple way. Visitors never have to leave your website to subscribe to your MailChimp lists. Big plus!
@@ -78,7 +83,7 @@ Yes, there is and it is awesome. Pro features include:
 1. Custom checkbox labels
 1. Priority support
 
-[More information about MailChimp for WordPress Pro](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
+[More information](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/) | [Screenshots](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/screenshots/) | [Demo](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/demo-sign-up-forms/)
 
 = The form shows a success message but subscribers are not added to my list(s)? =
 If the form shows a success message, it means the sign-up succeeded. Always. MailChimp could have a slight delay sending the confirmation email though, just be patient.
