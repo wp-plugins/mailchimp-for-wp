@@ -20,10 +20,9 @@ Easily build sign-up forms and then add them to your posts, pages and widget are
 
 Add "sign up to our newsletter" checkboxes to your comment form, registration form or other forms, making subscribing to your list(s) effortless for your visitors. 
 
-`
-MailChimp for WordPress now comes with a premium version.
-Create (multiple) beautiful highly converting AJAX powered forms without touching any code.
-` 
+
+> MailChimp for WordPress now comes with a premium version.
+> Create (multiple) beautiful highly converting AJAX powered forms, absolutely no HTML or CSS knowledge required!
 [Upgrade to MailChimp for WordPress Pro now >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
 
 **Plugin Features**
@@ -34,14 +33,14 @@ Create (multiple) beautiful highly converting AJAX powered forms without touchin
 * Uses the MailChimp API, superfast and reliable. Also, visitors never have to leave your website to subscribe.
 * Configuring is easy, all you need is your MailChimp API key.
 
-**Premium Plugin Features**
+**Premium Features**
 
 * Form designer, design beautiful sign-up forms from your admin panel. No CSS knowledge required.
-* (Multiple) AJAX powered sign-up forms, so the page doesn't have to reload after submitting.
-* All MailChimp list fields or interest groupings can be added to your forms using the field wizard. No HTML knowledge required.
-* Reports. Gain insights in when, where and how your visitors subscribe with the subscribers log and beautiful statistical charts. 
-* Built-in integration with WooCommerce and Easy Digital Downloads for adding sign-up checkboxes to your checkout forms.
-* Priority support
+* (Multiple) AJAX powered sign-up forms (no page reload after submitting).
+* Unlocked field wizard containing all your list fields and interest groupings. No HTML knowledge required.
+* Reports. Gain insights in when, where and how your visitors subscribe with the subscribers log and beautiful statistical charts.
+* Built-in integration with WooCommerce and Easy Digital Downloads.
+* Priority support.
 
 [More information](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/) | [Screenshots](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/screenshots/) | [Demo](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/demo-sign-up-forms/) | [Upgrade now >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
 
