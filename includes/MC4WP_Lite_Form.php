@@ -39,6 +39,10 @@ class MC4WP_Lite_Form {
 	public function output_form( $atts, $content = null ) {
 		$opts = $this->get_options();
 
+		if(!function_exists('mc4wp_replace_variables')) {
+			include_once MC4WP_LITE_PLUGIN_DIR . 'includes/template-functions.php';
+		}
+		
 		// add some useful css classes
 		$css_classes = ' ';
 		if ( $this->error ) $css_classes .= 'mc4wp-form-error ';
