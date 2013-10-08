@@ -3,7 +3,7 @@
 Plugin Name: MailChimp for WP Lite
 Plugin URI: http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/
 Description: Lite version of MailChimp for WordPress. Add various sign-up methods to your WordPress website. Show a sign-up form in your posts, pages or text widgets. Add a sign-up checkbox to various forms, like your comment form. <a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Premium features include (multiple) AJAX powered forms, a form designer, an unlocked field wizard and much more.</a>
-Version: 1.2.4
+Version: 1.2.5
 Author: Danny van Kooten
 Author URI: http://dannyvanKooten.com
 License: GPL v3
@@ -25,7 +25,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-define("MC4WP_LITE_VERSION", "1.2.4");
+define("MC4WP_LITE_VERSION", "1.2.5");
 define("MC4WP_LITE_PLUGIN_DIR", plugin_dir_path(__FILE__));
 
 // frontend AND backend
