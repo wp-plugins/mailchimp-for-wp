@@ -230,24 +230,29 @@ class MC4WP_Lite_Checkbox
 		$email = null;
 		$merge_vars = array();
 
-		// Add all fields with name attribute "mc4wp-*" to merge vars
 		foreach($_POST as $key => $value) {
 
 			if($key == 'mc4wp-try-subscribe') { 
 				continue; 
-			} elseif(!$email && is_email($value)) {
-				// find e-mail field
-				$email = $value;
-			} elseif(in_array($key, array('name', 'your-name', 'NAME', 'username', 'fullname'))) {
-				// find name field
-				$merge_vars['NAME'] = $value;
 			} elseif(strtolower(substr($key, 0, 6)) == 'mc4wp-') {
 				// find extra fields which should be sent to MailChimp
 				$key = strtoupper(substr($key, 6));
 
-				if(!isset($merge_vars[$key])) {
+				if($key == 'EMAIL') {
+					$email = $value;
+				} elseif(!isset($merge_vars[$key])) {
+					// if value is array, convert to comma-delimited string
+					if(is_array($value)) { $value = implode(',', $value); }
+
 					$merge_vars[$key] = $value;
 				}
+
+			} elseif(!$email && is_email($value)) {
+				// find first email field
+				$email = $value;
+			} elseif(!isset($merge_vars['NAME']) && in_array(strtolower($key), array('name', 'your-name', 'username', 'fullname', 'full-name'))) {
+				// find name field
+				$merge_vars['NAME'] = $value;
 			}
 		}
 
@@ -323,9 +328,17 @@ class MC4WP_Lite_Checkbox
 				$merge_vars['FNAME'] = $merge_vars['NAME'];
 			}
 		}
+
+		$merge_vars = apply_filters('mc4wp_merge_vars', $merge_vars);
+		$email_type = apply_filters('mc4wp_email_type', 'html');
 		
 		foreach($lists as $list) {
-			$result = $api->subscribe($list, $email, $merge_vars, 'html', $opts['double_optin']);
+			$result = $api->subscribe($list, $email, $merge_vars, $email_type, $opts['double_optin']);
+
+			if($result === true) { 
+				$from_url = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : '';
+				do_action( 'mc4wp_subscribe_checkbox', $email, $list, $merge_vars );
+			}
 		}
 		
 		// check if result succeeded, show debug message to administrators

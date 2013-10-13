@@ -101,7 +101,7 @@ class MC4WP_Lite_API {
 		$response = wp_remote_post($this->api_url . $method . '.json', array( 
 			'body' => json_encode($data),
 			'timeout' => 10,
-			'headers' => array('Accept-Encoding' => ''),
+			'headers' => array('Accept-Encoding' => '*'),
 			'sslverify' => false
 			) 
 		); 

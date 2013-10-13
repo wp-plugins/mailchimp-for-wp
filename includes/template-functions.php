@@ -82,7 +82,7 @@ if(!function_exists('mc4wp_get_subscriber_count')) {
 		// start calculating subscribers count for all list combined
 		$count = 0;
 		foreach($list_ids as $id) {
-			$count += $list_counts[$id];
+			$count += (isset($list_counts[$id])) ? $list_counts[$id] : 0;
 		}
 
 		return apply_filters('mc4wp_subscriber_count', $count);

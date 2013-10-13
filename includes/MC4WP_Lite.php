@@ -40,23 +40,28 @@ class MC4WP_Lite {
 		}
 		return self::$admin;
 	}
+
 	public function __construct() {
 		self::$instance = $this;
 
 		$this->backwards_compatibility();
 		$opts = $this->get_options();
 
-		// setup the code
+		// checkbox
 		self::checkbox();
+
+		// form
 		self::form();
 
+		// widget
+		add_action( 'widgets_init', array($this, 'register_widget') );
+
 		if ( !defined( 'DOING_AJAX' ) || !DOING_AJAX ) {
-			// non-ajax only
 			if ( is_admin() ) {
-				// backend non-ajax only
+				// backend only
 				self::admin();
 			} else {
-				// frontend non-ajax only
+				// frontend only
 				include_once MC4WP_LITE_PLUGIN_DIR . 'includes/template-functions.php';
 			}
 		}
@@ -160,6 +165,12 @@ class MC4WP_Lite {
 		update_option( 'mc4wp_lite_checkbox', $new_options['checkbox'] );
 		update_option( 'mc4wp_lite_form', $new_options['form'] );
 
+	}
+
+	public function register_widget()
+	{
+		include_once MC4WP_LITE_PLUGIN_DIR . 'includes/MC4WP_Lite_Widget.php';
+		register_widget( 'MC4WP_Lite_Widget' );
 	}
 
 }

@@ -16,11 +16,18 @@ class MC4WP_Lite_Admin
 		register_deactivation_hook( 'mailchimp-for-wp-pro/mailchimp-for-wp-pro.php', array($this, 'delete_transients') );
 
 		add_filter("plugin_action_links_mailchimp-for-wp/mailchimp-for-wp.php", array($this, 'add_settings_link'));
-	
+		
 		// did the user click on upgrade to pro link?
-		if(isset($_GET['page']) && $_GET['page'] == 'mc4wp-lite-upgrade' && !headers_sent()) {
-			header("Location: http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/");
-			exit;
+		if(isset($_GET['page'])) {
+
+			if($_GET['page'] == 'mc4wp-lite-upgrade' && !headers_sent()) {
+				header("Location: http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/?utm_source=lite-plugin&utm_medium=link&utm_campaign=menu-upgrade-link");
+				exit;
+			}
+
+			if($_GET['page'] == 'mc4wp-lite-form-settings') {
+				add_filter('quicktags_settings', array($this, 'set_quicktags_buttons'), 10, 2 );
+			}
 		}
 	}
 
@@ -28,6 +35,15 @@ class MC4WP_Lite_Admin
 	{
 		delete_transient('mc4wp_mailchimp_lists');
 		delete_transient('mc4wp_mailchimp_lists_fallback');
+	}
+
+	public function set_quicktags_buttons($settings, $editor_id)
+	{
+		if($editor_id != 'mc4wpformmarkup') { return $settings; }
+
+		// strong,em,link,block,del,ins,img,ul,ol,li,code,more,close
+		$settings['buttons'] = 'strong,em,link,block,img,ul,ol,li,close';
+		return $settings;
 	}
 
 	public function add_settings_link($links)

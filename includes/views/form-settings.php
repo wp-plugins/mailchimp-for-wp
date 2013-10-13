@@ -105,7 +105,7 @@
 					<input type="radio" readonly /> <label>Yes</label> &nbsp; 
 					<input type="radio" checked readonly /> <label>No</label>
 				</td>
-				<td class="desc">Tick "yes" if you want to use AJAX to submit forms, meaning the page doesn't need to reload so everything happens inline. <a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/demo-sign-up-forms/">(demo)</a></td>
+				<td class="desc">Tick "yes" if you want to use AJAX to submit forms, meaning the page doesn't need to reload so everything happens inline. <a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/demo-sign-up-forms/?utm_source=lite-plugin&utm_medium=link&utm_campaign=settings-demo-link">(demo)</a></td>
 			</tr>
 			<tr valign="top">
 				<th scope="row">Load some default CSS?</th>
