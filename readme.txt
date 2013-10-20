@@ -20,9 +20,8 @@ Easily build sign-up forms and display them in your posts, pages and widget area
 
 Add "sign up to our newsletter" checkboxes to your comment form, contact forms or any form you like, making subscribing to your list(s) effortless for your visitors. 
 
-> MailChimp for WP comes with a premium version.
-> Create (multiple) beautiful highly converting AJAX powered forms, no HTML or CSS knowledge required!
-> *[Upgrade to MailChimp for WordPress Pro now >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=first-link)*
+> MailChimp for WP comes with a premium version which gives you better forms, easier styling and detailed statistics.
+> *[Upgrade now >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=first-link)*
 
 **Plugin Features**
 
@@ -188,22 +187,22 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 == Changelog ==
 
-= 1.3.1 =
+= 1.3.1 - October 20, 2013 =
 * Fixed: bug when calling MailChimp API for PHP 5.2
 * Improved: better default form CSS
 * Improved: Combined checkbox and form stylesheets into 1 file and encouraged browser caching.
 
-= 1.3 =
+= 1.3 - October 13, 2013 =
 * Added: Form widget
 * Added: Smooth scroll to form element after form submission (if jQuery loaded)
 * Improved: Added and removed some buttons from QTags editor toolbar
 * Improved: Some UI improvements
 * Improved: Optimized integration with third-party forms like Contact Form 7
 
-= 1.2.5 =
+= 1.2.5 - October 8, 2013 =
 * Fixed `undefined function mc4wp_replace_variables` fatal error when using Quick Cache plugin.
 
-= 1.2.4 =
+= 1.2.4 - October 6, 2013 =
 * Improved: code performance improvements
 * Improved: added `mc4wp_get_form()` for an easier shortcode callback. Useful to [add a sign-up form to the end of your posts](http://dannyvankooten.com/2577/add-mailchimp-sign-up-form-end-of-posts/).
 * Improved default CSS
@@ -211,18 +210,18 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 * Added: form nonce for better security
 * Fix: CSS issue where the form caused a huge sidebar gap in some themes.
 
-= 1.2.3 =
+= 1.2.3 - October 3, 2013 =
 * Fixed: bug where some MailChimp fields were not showing in the field wizard / add field tool.
 
-= 1.2.2 =
+= 1.2.2 - September 30, 2013 =
 * Fixed sending extra list fields when integrating with third-party forms like Contact Form 7
 
-= 1.2.1 =
+= 1.2.1 - September 29, 2013 =
 * Improved: total revamp of the form field wizard, many improvements.
 * Improved: some textual improvements in the setting pages
 * Added: debug message to sign-up checkbox for WP administrators
 
-= 1.2 =
+= 1.2 - September 23, 2013 =
 * Improved: updated to MailChimp 2.0 API
 * Improved: now using custom light-weight API class using the WordPress HTTP API.
 * Improved: huge performance improvements on admin settings pages
