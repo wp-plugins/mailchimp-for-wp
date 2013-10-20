@@ -9,10 +9,11 @@ class MC4WP_Lite_Form {
 	public function __construct() {
 		$opts = $this->get_options();
 
-		if ( $opts['css'] ) {
-			add_action( 'wp_enqueue_scripts', array( $this, 'load_stylesheet' ) );
+		if($opts['css'] == 1) {
+			add_filter('mc4wp_stylesheets', array($this, 'add_stylesheet'));
 		}
 
+		add_shortcode( 'mc4wp_form', array( $this, 'output_form' ) );
 		add_shortcode( 'mc4wp-form', array( $this, 'output_form' ) );
 
 		// enable shortcodes in text widgets
@@ -33,8 +34,9 @@ class MC4WP_Lite_Form {
 		return $options['form'];
 	}
 
-	public function load_stylesheet() {
-		wp_enqueue_style( 'mc4wp-form-reset', plugins_url( 'mailchimp-for-wp/assets/css/form.css' ) );
+	public function add_stylesheet($stylesheets) {
+		$stylesheets['form'] = 1;
+		return $stylesheets;
 	}
 
 	public function output_form( $atts, $content = null ) {

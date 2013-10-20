@@ -63,6 +63,10 @@ class MC4WP_Lite {
 			} else {
 				// frontend only
 				include_once MC4WP_LITE_PLUGIN_DIR . 'includes/template-functions.php';
+
+				// load css
+				add_action( 'wp_enqueue_scripts', array($this, 'load_stylesheets'), 90);
+				add_action( 'login_enqueue_scripts',  array($this, 'load_stylesheets') );
 			}
 		}
 	}
@@ -171,6 +175,16 @@ class MC4WP_Lite {
 	{
 		include_once MC4WP_LITE_PLUGIN_DIR . 'includes/MC4WP_Lite_Widget.php';
 		register_widget( 'MC4WP_Lite_Widget' );
+	}
+
+	public function load_stylesheets() 
+	{
+		$stylesheets = apply_filters('mc4wp_stylesheets', array());
+
+		if(!empty($stylesheets)) {
+			$stylesheet_url = add_query_arg($stylesheets, plugins_url('mailchimp-for-wp/assets/css/css.php'));
+			wp_enqueue_style( 'mailchimp-for-wp', $stylesheet_url, array(), MC4WP_LITE_VERSION);
+		}
 	}
 
 }
