@@ -26,10 +26,9 @@ Add "sign up to our newsletter" checkboxes to your comment form, contact forms o
 **Plugin Features**
 
 * Easily create a highly customizable sign-up form and show it in your posts, pages and widgets by using a simple shortcode `[mc4wp_form]`
-* Add a "sign-up to our newsletter" checkbox to ANY form you like, like your comment form.
-* Built-in integration with [BuddyPress](http://buddypress.org/) and WordPress MultiSite registration forms, [bbPress](http://bbpress.org/) new topic and new reply forms and [Contact Form 7](http://contactform7.com/) forms. You can add sign-up checkboxes to these forms with 1 simple click.
-* Uses the MailChimp API, superfast and reliable. Also, visitors never have to leave your website to subscribe.
-* Configuring is easy, all you need is your MailChimp API key.
+* Add a "sign-up to our newsletter" checkbox to your comment form, or *any* other form you like.
+* Built-in integration with BuddyPress, WordPress MultiSite, bbPress and Contact Form 7 forms. You can add sign-up checkboxes to these forms with 1 simple click.
+* Configuring this plugin is easy, all you need is your MailChimp API key.
 
 **Premium Features**
 
@@ -40,7 +39,7 @@ Add "sign up to our newsletter" checkboxes to your comment form, contact forms o
 * Built-in integration with WooCommerce and Easy Digital Downloads.
 * Priority support.
 
-[More information](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Screenshots](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/screenshots/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Demo](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/demo-sign-up-forms/) | [Upgrade now >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link)
+[More information](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Screenshots](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/screenshots/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Demo](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/demo-sign-up-forms/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Upgrade now >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link)
 
 = MailChimp Sign-Up Form =
 The plugin comes with an easy to way to build sign-up forms for your MailChimp lists. Add as many fields as you like and customize labels, placeholders, initial values etcetera in a simple way. Visitors never have to leave your website to subscribe to your MailChimp lists.
@@ -59,8 +58,9 @@ Check out more [WordPress plugins](http://dannyvankooten.com/wordpress-plugins/?
 
 == Installation ==
 
-1. In your WordPress admin panel, go to Plugins > New Plugin, search for "MailChimp for WP" and click "Install now"
-1. Alternatively, download the plugin and upload the contents of mailchimp-for-wp.zip to your plugins directory, which usually is `/wp-content/plugins/`.
+= Installing the plugin =
+1. In your WordPress admin panel, go to *Plugins > New Plugin*, search for *MailChimp for WordPress* and click "Install now"
+1. Alternatively, download the plugin and upload the contents of `mailchimp-for-wp.zip` to your plugins directory, which usually is `/wp-content/plugins/`.
 1. Activate the plugin
 1. Set your MailChimp API key in the plugin settings.
 
@@ -72,12 +72,12 @@ Check out more [WordPress plugins](http://dannyvankooten.com/wordpress-plugins/?
 = Configuring the sign-up form(s) =
 1. Go to *MailChimp for WP > Forms*
 1. Select at least one list to subscribe visitors to.
-1. (Optional) Add some fields or dynamic content to your form.
+1. *(Optional)* Add some fields or dynamic content to your form.
 1. Show the form in pages or posts by using the `[mc4wp_form]` shortcode.
 1. Show the form in your widget areas by using the widget.
 
 = Upgrade to Pro =
-1. If you like the plugin, upgrade to [MailChimp for WordPress Pro](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=installation-instructions-link) for an even better plugin.
+If you like the plugin, upgrade to [MailChimp for WordPress Pro](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=installation-instructions-link) for an even better plugin.
 
 == Frequently Asked Questions ==
 
