@@ -83,14 +83,12 @@ Check out more [WordPress plugins](http://dannyvankooten.com/wordpress-plugins/?
 == Frequently Asked Questions ==
 
 = Is there a premium version of this plugin? =
-Yes, there is and you will love it. Pro features include:
+Yes, there is and you will love it. Some Pro features are:
 
-1. (Multiple) AJAX Sign-up Forms (so the page doesn't reload after clicking the submit button)
-1. Create beautiful forms from your admin panel with the Form Designer. No CSS knowledge required!
+1. (Multiple) AJAX powered forms (no page reload after submitting)
+1. Design beautiful forms from your admin panel, no CSS knowledge required!
 1. Reports, learn when, where and how your visitors subscribed. 
-1. The form field wizard makes it easy to add your MailChimp list fields to your sign-up forms.
-1. Sign-up checkbox integration with WooCommerce and Easy Digital Downloads
-1. Custom checkbox labels
+1. Easily add your MailChimp list fields to your forms using the add-field tool.
 1. Priority support
 
 [More information](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link) | [Screenshots](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/screenshots/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link) | [Demo](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/demo-sign-up-forms/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link)
@@ -124,7 +122,7 @@ You can use CSS rules to style the sign-up form, use the following CSS selectors
 
 Add your custom CSS rules to the end of your theme stylesheet, **/wp-content/themes/your-theme-name/style.css**. Do not add them to the plugin stylesheet as they will be automatically overwritten on the next plugin update.
 
-[PS: With the Pro version, you can design beautiful forms without having to touch any code >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
+[PS: With the Pro version, you can design beautiful forms without touching any code >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/)
 
 = Where can I find my MailChimp API key? =
 [Here](http://kb.mailchimp.com/article/where-can-i-find-my-api-key)
