@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: DvanKooten
 Donate link: http://dannyvankooten.com/donate/
-Tags: mailchimp, newsletter, mailinglist, email, email list, form, widget form, sign-up form, subscribe form, comments, comment form, mailchimp widget, buddypress, multisite
+Tags: mailchimp, widget, form, checkbox, sign-up form, mandrill, buddypress, multisite, bbpress, contact form 7, newsletter, mailinglist
 Requires at least: 3.1
 Tested up to: 3.7
 Stable tag: 1.3.1
@@ -25,31 +25,30 @@ Add "sign up to our newsletter" checkboxes to your comment form, contact forms o
 
 **Plugin Features**
 
-* Easily create a highly customizable sign-up form and show it in your posts, pages and widgets by using a simple shortcode `[mc4wp_form]`
-* Add a "sign-up to our newsletter" checkbox to your comment form, or *any* other form you like.
-* Built-in integration with BuddyPress, WordPress MultiSite, bbPress and Contact Form 7 forms. You can add sign-up checkboxes to these forms with 1 simple click.
+* Easily create a highly customizable sign-up form
+* Show a sign-up form in your posts or pages using a simple shortcode `[mc4wp_form]`
+* Show a sign-up form in your sidebar or footer using the dedicated form widget.
+* Add a "sign-up to our newsletter" checkbox to your comment form or *any* other form you like.
+* Built-in integration with BuddyPress, WordPress MultiSite, bbPress and Contact Form 7 forms.
 * Configuring this plugin is easy, all you need is your MailChimp API key.
 
-**Premium Features**
+**Premium features**
 
-* Design beautiful sign-up forms from your admin panel, no CSS knowledge required.
-* (Multiple) AJAX powered sign-up forms (no page reload after submitting).
-* Add all your list fields and interest groupings to your sign-up forms, no HTML knowledge required.
-* Gain insights in when, where and how your visitors subscribe with the subscribers log and beautiful line graphs.
-* Built-in integration with WooCommerce and Easy Digital Downloads.
-* Priority support.
+The premium version comes with better and unlimited forms, easier form styling, an unlocked field wizard, detailed statistics and priority support.
 
 [More information](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Screenshots](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/screenshots/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Demo](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/demo-sign-up-forms/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Upgrade now >>](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link)
 
-= MailChimp Sign-Up Form =
-The plugin comes with an easy to way to build sign-up forms for your MailChimp lists. Add as many fields as you like and customize labels, placeholders, initial values etcetera in a simple way. Visitors never have to leave your website to subscribe to your MailChimp lists.
+= Sign-Up Forms =
+This plugin comes with an easy but flexible way to build sign-up forms for your MailChimp lists.
 
-Use the `[mc4wp_form]` shortcode to show a sign-up form in your posts and pages or use the widget to display a form in your widget areas.
+With the *add field* tool you can easily customize field labels, placeholders etcetera and have the HTML generated for you. If you want more control, you can just write the form mark-up yourself.
 
-= "Sign-up to our newsletter?" Checkboxes =
-People who comment or register on your website are valuable visitors and most likely interested to be on your mailinglist as well. This plugin makes it easy for them to subscribe to your MailChimp lists, one mouse-click is all they need.
+Use the `[mc4wp_form]` shortcode to display a sign-up form in your posts or pages or use the widget to show it in your widget areas, like your sidebar or footer. 
 
-You can add sign-up checkboxes to ANY form you like, including Contact Form 7 forms.
+= Sign-Up Checkboxes =
+Subscribing to your MailChimp lists should be easy for your visitors. This plugin gives you the option to add sign-up checkboxes to various forms so all your visitors have to do to subscribe is tick the checkbox. 
+
+You can add sign-up checkboxes to your comment form, Contact Form 7 forms or *any* other form you like.
 
 **More information**
 
@@ -87,7 +86,7 @@ Yes, there is and you will love it. Some Pro features are:
 1. (Multiple) AJAX powered forms (no page reload after submitting)
 1. Design beautiful forms from your admin panel, no CSS knowledge required!
 1. Reports, learn when, where and how your visitors subscribed. 
-1. Easily add your MailChimp list fields to your forms using the add-field tool.
+1. Easily add *all* your MailChimp list fields to your forms using the add-field tool.
 1. Priority support
 
 [More information](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link) | [Screenshots](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/screenshots/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link) | [Demo](http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/demo-sign-up-forms/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link)
@@ -166,6 +165,9 @@ Or, if you want to use a hidden field...
 `
 <input type="hidden" name="GROUPINGS[###]" value="Groupname 1,Groupname 2,Groupname 3" />
 `
+
+= I don't see new subscribers but they are still added to my list =
+When you have double opt-in disabled, new subscribers will be seen as *imports* by MailChimp. They will not show up in your daily digest emails or statistics. My recommendation is to leave double opt-in enabled.
 
 = Why does the checkbox not show up at my comment form? =
 Your theme probably does not support the necessary comment hook this plugin uses to add the checkbox to your comment form. You can manually place the checkbox by placing the following code snippet inside the form tags of your theme's comment form.
