@@ -1,6 +1,6 @@
 <div id="mc4wp-<?php echo $tab; ?>" class="wrap mc4wp-settings">
 
-	<h2>MailChimp API Settings</h2>
+	<h2>MailChimp Settings</h2>
 
 	<div id="mc4wp-content">
 
@@ -9,7 +9,7 @@
 		<form action="options.php" method="post">
 			<?php settings_fields( 'mc4wp_lite_settings' ); ?>
 			
-			<h3>MailChimp API Settings <?php if($connected) { ?><span class="status positive">CONNECTED</span> <?php } else { ?><span class="status negative">NOT CONNECTED</span><?php } ?></h3>
+			<h3 class="mc4wp-title">MailChimp API Settings <?php if($connected) { ?><span class="status positive">CONNECTED</span> <?php } else { ?><span class="status negative">NOT CONNECTED</span><?php } ?></h3>
 			<table class="form-table">
 
 				<tr valign="top">
@@ -27,7 +27,7 @@
 		</form>
 
 	<?php if($connected) { ?>
-	<h3>Cache</h3>
+	<h3 class="mc4wp-title">MailChimp Cache</h3>
 	<p>The table below shows your cached MailChimp lists configuration. If you made any changes in your MailChimp configuration that is not yet represented in the table below, please renew the cache manually by hitting the "renew cached data" button.</p>
 
 	<h4>Lists</h4>
@@ -44,7 +44,7 @@
 					<tr valign="top">
 						<td><?php echo $list->id; ?></td>
 						<td><?php echo $list->name; ?></td>
-						<td><em>Only available in the premium version. <a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Upgrade now.</a></em></td>
+						<td><em>Only available in the premium version. <a href="http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=lite-plugin&utm_medium=link&utm_campaign=cache-table-link">Upgrade now.</a></em></td>
 					</tr>
 				<?php } // endforeach ?>
 			<?php } else { ?>

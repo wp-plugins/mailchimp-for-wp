@@ -7,7 +7,7 @@
 		<?php settings_errors(); ?>
 		<p>To use the MailChimp for WP sign-up checkboxes, select at least one list and one form to add the checkbox to.</p>
 
-		<h3>List settings</h3>
+		<h3 class="mc4wp-title">List settings</h3>
 		<form action="options.php" method="post">
 			<?php settings_fields( 'mc4wp_lite_checkbox_settings' ); ?>
 
@@ -34,7 +34,7 @@
 				</tr>
 			</table>
 
-		<h3>Checkbox settings</h3>
+		<h3 class="mc4wp-title">Checkbox settings</h3>
 		<table class="form-table">
 		<tr valign="top">
 			<th scope="row">Double opt-in?</th>
@@ -52,7 +52,10 @@
 		</tr>
 		<tr valign="top">
 			<th scope="row"><label for="mc4wp_checkbox_label">Checkbox label text</label></th>
-			<td colspan="2"><input type="text"  class="widefat" id="mc4wp_checkbox_label" name="mc4wp_lite_checkbox[label]" value="<?php echo esc_attr($opts['label']); ?>" required /></td>
+			<td colspan="2">
+				<input type="text"  class="widefat" id="mc4wp_checkbox_label" name="mc4wp_lite_checkbox[label]" value="<?php echo esc_attr($opts['label']); ?>" required />
+				<p class="help">HTML tags like <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> are allowed in the label text.</p>
+			</td>
 		</tr>
 		<tr valign="top">
 			<th scope="row">Pre-check the checkbox?</th>

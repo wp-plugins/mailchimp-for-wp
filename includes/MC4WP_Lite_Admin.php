@@ -21,7 +21,7 @@ class MC4WP_Lite_Admin
 		if(isset($_GET['page'])) {
 
 			if($_GET['page'] == 'mc4wp-lite-upgrade' && !headers_sent()) {
-				header("Location: http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/?utm_source=lite-plugin&utm_medium=link&utm_campaign=menu-upgrade-link");
+				header("Location: http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=lite-plugin&utm_medium=link&utm_campaign=menu-upgrade-link");
 				exit;
 			}
 
@@ -49,7 +49,7 @@ class MC4WP_Lite_Admin
 	public function add_settings_link($links)
 	{
 		 $settings_link = '<a href="admin.php?page=mc4wp-lite">Settings</a>';
-		 $upgrade_link = '<a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/">Upgrade to Pro</a>';
+		 $upgrade_link = '<a href="http://dannyvankooten.com/mailchimp-for-wordpress/">Upgrade to Pro</a>';
          array_unshift($links, $upgrade_link, $settings_link);
          return $links;
 	}
@@ -68,7 +68,7 @@ class MC4WP_Lite_Admin
 
 	public function build_menu()
 	{
-		add_menu_page('MailChimp for WP Lite', 'MailChimp for WP Lite', 'manage_options', 'mc4wp-lite', array($this, 'show_api_settings'), plugins_url('mailchimp-for-wp/assets/img/menu-icon.png'));
+		add_menu_page('MailChimp for WP Lite', 'MailChimp for WP', 'manage_options', 'mc4wp-lite', array($this, 'show_api_settings'), plugins_url('mailchimp-for-wp/assets/img/menu-icon.png'));
 		add_submenu_page('mc4wp-lite', 'API Settings - MailChimp for WP Lite', 'MailChimp Settings', 'manage_options', 'mc4wp-lite', array($this, 'show_api_settings'));
 		add_submenu_page('mc4wp-lite', 'Checkbox Settings - MailChimp for WP Lite', 'Checkboxes', 'manage_options', 'mc4wp-lite-checkbox-settings', array($this, 'show_checkbox_settings'));
 		add_submenu_page('mc4wp-lite', 'Form Settings - MailChimp for WP Lite', 'Forms', 'manage_options', 'mc4wp-lite-form-settings', array($this, 'show_form_settings'));
@@ -104,7 +104,7 @@ class MC4WP_Lite_Admin
 
 	public function redirect_to_pro()
 	{
-		?><script>window.location.replace('http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/'); </script><?php
+		?><script>window.location.replace('http://dannyvankooten.com/mailchimp-for-wordpress/'); </script><?php
 	}
 
 	public function show_api_settings()
@@ -239,12 +239,18 @@ class MC4WP_Lite_Admin
 	*/ 
 	public function strip_unnecessary_merge_vars_properties($merge_var)
 	{
-		return (object) array(
+		$array = array(
 			'name' => $merge_var->name,
 			'field_type' => $merge_var->field_type,
 			'req' => $merge_var->req,
 			'tag' => $merge_var->tag
 		);
+
+		if ( isset( $merge_var->choices ) ) {
+			$array["choices"] = $merge_var->choices;
+		}
+
+		return (object) $array;
 
 	}
 

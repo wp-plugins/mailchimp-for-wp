@@ -11,9 +11,29 @@
 			<form action="options.php" method="post">
 				<?php settings_fields( 'mc4wp_lite_form_settings' ); ?>
 				
-				<h3>Required form settings</h3>
+				<h3 class="mc4wp-title">Required form settings</h3>
 				<table class="form-table">
 
+					<tr valign="top">
+						<th scope="row"><label for="mc4wp_load_stylesheet_select">Load styles or theme?</label></th>
+						<td class="nowrap">
+							<select name="mc4wp_lite_form[css]" id="mc4wp_load_stylesheet_select">
+								<option value="0" <?php selected($opts['css'], 0); ?>>No</option>
+								<option value="default" <?php selected($opts['css'], 'default'); ?><?php selected($opts['css'], 1); ?>>Yes, load basic formatting styles</option>
+								<optgroup label="Load a default form theme">
+									<option value="light" <?php selected($opts['css'], 'light'); ?>>Light theme</option>
+									<option value="red" <?php selected($opts['css'], 'red'); ?>>Red theme</option>
+									<option value="green" <?php selected($opts['css'], 'green'); ?>>Green theme</option>
+									<option value="blue" <?php selected($opts['css'], 'blue'); ?>>Blue theme</option>
+									<option value="dark" <?php selected($opts['css'], 'dark'); ?>>Dark theme</option>
+									<option disabled>(PRO ONLY) Custom color theme</option>
+								</optgroup>
+							</select>
+						</td>
+						<td class="desc">
+							If you want to load some default styles, select "basic formatting styles" or one of the default themes.
+						</td>
+					</tr>
 					<tr valign="top">
 						<th scope="row">MailChimp list(s)</th>
 					<?php // loop through lists
@@ -26,38 +46,40 @@
 							<li><input type="checkbox" id="mc4wp_form_list_<?php echo $list->id; ?>_cb" name="mc4wp_lite_form[lists][<?php echo $list->id; ?>]" value="<?php echo $list->id; ?>" data-groupings="<?php echo esc_attr(json_encode($list->interest_groupings)); ?>" data-fields="<?php echo esc_attr(json_encode($list->merge_vars)); ?>" <?php if(array_key_exists($list->id, $opts['lists'])) echo 'checked="checked"'; ?>> <label for="mc4wp_form_list_<?php echo $list->id; ?>_cb"><?php echo $list->name; ?></label></li>
 						<?php } ?>
 						</ul>
-				</td>
-				<td class="desc" <?php if(empty($opts['lists'])) { ?>style="color:red;"<?php } ?>>Select at least one MailChimp list for this form.</td>
-				<?php
-			} ?>
+					</td>
+					<td class="desc" <?php if(empty($opts['lists'])) { ?>style="color:red;"<?php } ?>>Select at least one MailChimp list for this form.</td>
+					<?php } ?>
 
-		</tr>
-		<tr valign="top">
-			<td colspan="3">
-				<h4>Form mark-up</h4>
-				<div class="mc4wp-wrapper">
-					<div class="mc4wp-col mc4wp-col-2-3 mc4wp-first">
-						<?php 
-						if(function_exists('wp_editor')) {
-							wp_editor( esc_textarea($opts['markup']), 'mc4wpformmarkup', array('tinymce' => false, 'media_buttons' => false, 'textarea_name' => 'mc4wp_lite_form[markup]'));
-						} else {
-							?><textarea class="widefat" cols="160" rows="20" id="mc4wpformmarkup" name="mc4wp_lite_form[markup]"><?php echo esc_textarea($opts['markup']); ?></textarea><?php
-						} ?>
-						<p><small>Use <input type="text" onfocus="this.select();" readonly="readonly" value="[mc4wp_form]" size="12" class="mc4wp-shortcode-example"> to render this form inside a widget, post or page. <u>Do not just copy the form mark-up as that will not work.</u> </small></p>
-						<p class="submit">
-							<input type="submit" class="button-primary" value="<?php _e('Save All Changes') ?>" id="mc4wp-submit-form-settings" />
-						</p>
-					</div>
+					</tr>
+					<tr valign="top">
+						<td colspan="3">
+							<h4>Form mark-up</h4>
+							<div class="mc4wp-wrapper">
+								<div class="mc4wp-col mc4wp-col-2-3 mc4wp-first">
+									<?php 
+									if(function_exists('wp_editor')) {
+										wp_editor( esc_textarea($opts['markup']), 'mc4wpformmarkup', array('tinymce' => false, 'media_buttons' => false, 'textarea_name' => 'mc4wp_lite_form[markup]'));
+									} else {
+										?><textarea class="widefat" cols="160" rows="20" id="mc4wpformmarkup" name="mc4wp_lite_form[markup]"><?php echo esc_textarea($opts['markup']); ?></textarea><?php
+									} ?>
+									<p><small>Use <input type="text" onfocus="this.select();" readonly="readonly" value="[mc4wp_form]" size="12" class="mc4wp-shortcode-example"> to render this form inside a widget, post or page. <u>Do not just copy the form mark-up as that will not work.</u> </small></p>
+									<p class="submit">
+										<input type="submit" class="button-primary" value="<?php _e('Save All Changes') ?>" id="mc4wp-submit-form-settings" />
+									</p>
+								</div>
 
-					<div class="mc4wp-col mc4wp-col-1-3 mc4wp-last">
-						<?php include('parts/admin-field-wizard.php'); ?>
-					</div>
-				</div>
-			</td>
-		</tr>
+								<div class="mc4wp-col mc4wp-col-1-3 mc4wp-last">
+									<?php include('parts/admin-field-wizard.php'); ?>
+								</div>
+							</div>
+						</td>
+					</tr>
+
 	</table>
 
-		<h3>MailChimp Settings</h3>
+
+
+		<h3 class="mc4wp-title">MailChimp Settings</h3>
 		<table class="form-table">
 			<tr valign="top">
 				<th scope="row">Double opt-in?</th>
@@ -96,7 +118,7 @@
 			</tr>
 		</table>
 
-		<h3>Form Settings & Messages</h3>
+		<h3 class="mc4wp-title">Form Settings & Messages</h3>
 
 		<table class="form-table mc4wp-form-messages">
 			<tr valign="top" class="pro-feature">
@@ -105,12 +127,7 @@
 					<input type="radio" readonly /> <label>Yes</label> &nbsp; 
 					<input type="radio" checked readonly /> <label>No</label>
 				</td>
-				<td class="desc">Tick "yes" if you want to use AJAX to submit forms, meaning the page doesn't need to reload so everything happens inline. <a href="http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/demo-sign-up-forms/?utm_source=lite-plugin&utm_medium=link&utm_campaign=settings-demo-link">(demo)</a></td>
-			</tr>
-			<tr valign="top">
-				<th scope="row">Load some default CSS?</th>
-				<td class="nowrap"><input type="radio" id="mc4wp_form_css_1" name="mc4wp_lite_form[css]" value="1" <?php if($opts['css'] == 1) echo 'checked="checked"'; ?> /> <label for="mc4wp_form_css_1">Yes</label> &nbsp; <input type="radio" id="mc4wp_form_css_0" name="mc4wp_lite_form[css]" value="0" <?php if($opts['css'] == 0) echo 'checked="checked"'; ?> /> <label for="mc4wp_form_css_0">No</label></td>
-				<td class="desc">Tick "yes" to load some basic form styles.</td>
+				<td class="desc">Tick "yes" if you want to use AJAX to submit forms, meaning the page doesn't need to reload so everything happens inline. <a href="http://dannyvankooten.com/mailchimp-for-wordpress/demo-sign-up-forms/?utm_source=lite-plugin&utm_medium=link&utm_campaign=settings-demo-link">(demo)</a></td>
 			</tr>
 			<tr valign="top">
 				<th scope="row"><label for="mc4wp_form_hide_after_success">Hide form after a successful sign-up?</label></th>
@@ -159,8 +176,8 @@
 		<p>At a minimum, your form should include just an <strong>EMAIL</strong> field and a submit button.</p>
 		<p>Add more fields to your form if your list requires more fields. Field names should match your MailChimp list field tags. Use the "Add a new field" tool to have the correct HTML generated for you.</p>
 
-		<p><strong>Styling</strong><br />
-		Alter the visual appearance of the form by applying CSS rules to <b>.mc4wp-form</b> and its child elements.</p>
+		<h3>Form Styling</h3>
+		<p>Alter the visual appearance of the form by applying CSS rules to <b>.mc4wp-form</b> and its child elements.</p>
 		<p>You should add the CSS rules to your theme stylesheet using the <a href="<?php echo admin_url('theme-editor.php?file=style.css'); ?>">Theme Editor</a> or by editing <em><?php echo get_stylesheet_directory(); ?>/style.css</em> over FTP.</p>
 
 		<p>The <a href="http://wordpress.org/plugins/mailchimp-for-wp/faq/" target="_blank">FAQ</a> lists the various CSS selectors you can use to target the different elements.</p>

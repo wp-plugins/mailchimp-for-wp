@@ -9,8 +9,8 @@ class MC4WP_Lite_Form {
 	public function __construct() {
 		$opts = $this->get_options();
 
-		if($opts['css'] == 1) {
-			add_filter('mc4wp_stylesheets', array($this, 'add_stylesheet'));
+		if($opts['css']) {
+			add_filter('mc4wp_stylesheets', array($this, 'add_stylesheets'));
 		}
 
 		add_shortcode( 'mc4wp_form', array( $this, 'output_form' ) );
@@ -34,8 +34,16 @@ class MC4WP_Lite_Form {
 		return $options['form'];
 	}
 
-	public function add_stylesheet($stylesheets) {
+	public function add_stylesheets($stylesheets) {
+		$opts = $this->get_options();
+
 		$stylesheets['form'] = 1;
+
+		// theme?
+		if($opts['css'] != 1 && $opts['css'] != 'default') {
+			$stylesheets['form-theme'] = $opts['css'];
+		}
+
 		return $stylesheets;
 	}
 
@@ -51,7 +59,7 @@ class MC4WP_Lite_Form {
 		if ( $this->error ) $css_classes .= 'mc4wp-form-error ';
 		if ( $this->success ) $css_classes .= 'mc4wp-form-success ';
 
-		$content = "\n<!-- Form by MailChimp for WP plugin v". MC4WP_LITE_VERSION ." - http://dannyvankooten.com/wordpress-plugins/mailchimp-for-wordpress/ -->\n";
+		$content = "\n<!-- Form by MailChimp for WordPress plugin v". MC4WP_LITE_VERSION ." - http://dannyvankooten.com/mailchimp-for-wordpress/ -->\n";
 		$content .= '<form method="post" action="#mc4wp-form-'. $this->form_instance_number .'" id="mc4wp-form-'.$this->form_instance_number.'" class="mc4wp-form form'.$css_classes.'">';
 
 		// maybe hide the form

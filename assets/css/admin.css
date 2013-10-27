@@ -6,8 +6,9 @@
 #mc4wp-upgrade-box h3{ margin:0; }
 
 #mc4wp-fw h4{ margin-top:0; }
+#mc4wp-fw p{ margin-bottom: 1em; }
 #mc4wp-fw-fields { display:none; }
-#mc4wp-fw-preview { font-family: "Courier New", Courier, monospace; font-size:11px; }
+#mc4wp-fw-preview { font-family: "Courier New", Courier, monospace; min-height:200px; font-size:11px; background:white; z-index:99; }
 #mc4wp-lists{ margin:0; }
 #mc4wp-lists input{ margin-right:5px; }
 
@@ -33,6 +34,8 @@
 	border:1px solid #ccc;
 	-webkit-border-radius: 3px; border-radius: 3px;
 	-moz-border-radius: 3px; }
+
+.mc4wp-title{ font-size: 1.25em; margin-bottom: 1em; }
 
 table.mc4wp-help, table.mc4wp-help th, table.mc4wp-help td { border: 1px solid #ddd; border-collapse: collapse; font-size: 12px; }
 table.mc4wp-help th, table.mc4wp-help td { vertical-align: text-top; text-align: left; padding: 5px 10px; }
