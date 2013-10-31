@@ -168,8 +168,8 @@ class MC4WP_Lite_Form {
 						$grouping['name'] = $grouping_id_or_name;
 					}
 
-					if ( is_array( $groups ) ) {
-						$grouping['groups'] = implode( ',', $groups );
+					if ( !is_array( $groups ) ) {
+						$grouping['groups'] = explode( ',', $groups );
 					} else {
 						$grouping['groups'] = $groups;
 					}
