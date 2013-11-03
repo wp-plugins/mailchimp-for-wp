@@ -3,8 +3,8 @@ Contributors: DvanKooten
 Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, widget, form, checkbox, sign-up form, mandrill, buddypress, multisite, bbpress, contact form 7, newsletter, mailinglist
 Requires at least: 3.1
-Tested up to: 3.7
-Stable tag: 1.4
+Tested up to: 3.7.1
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -191,6 +191,9 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 
 == Changelog ==
+
+= 1.4.1 - October 29, 2013 =
+* Fixed: Grouping data not being sent to MailChimp when using sign-up forms.
 
 = 1.4 - October 28, 2013 =
 * Added: default form CSS themes, choose between light, red, green, blue or dark form styling.
@@ -380,6 +383,9 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 * BETA release
 
 == Upgrade Notice ==
+
+= 1.4.1 =
+Fixed grouping information not being sent to MailChimp when using sign-up forms.
 
 = 1.4 =
 New: default form themes, more unlocked fields in the "add field" tool and smarter auto-detection of name fields when integrating with Contact Form 7.

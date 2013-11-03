@@ -97,7 +97,7 @@ class MC4WP_Lite_API {
 		if(empty($this->api_key)) { return false; }
 
 		$data['apikey'] = $this->api_key;
-		$url = add_query_arg($data, $this->api_url . $method . '.json');
+		$url = $this->api_url . $method . '.json';
 
 		$response = wp_remote_post($url, array( 
 			'body' => $data,

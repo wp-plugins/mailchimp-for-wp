@@ -69,7 +69,7 @@ class MC4WP_Lite_Form {
 			// replace special values
 			$form_markup = str_replace( array( '%N%', '{n}' ), $this->form_instance_number, $form_markup );
 			$form_markup = mc4wp_replace_variables( $form_markup, array_values( $opts['lists'] ) );
-			$form_markup = apply_filters('mc4wp_form_content', $form_markup, 0);
+			$form_markup = apply_filters('mc4wp_form_content', $form_markup);
 			$content .= $form_markup;
 
 			// hidden fields
