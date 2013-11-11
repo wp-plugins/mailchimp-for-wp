@@ -99,6 +99,9 @@ class MC4WP_Lite_Admin
 		if(class_exists("BuddyPress")) $checkbox_plugins['bp_form'] = "BuddyPress registration";
 		if(class_exists('bbPress')) $checkbox_plugins['bbpress_forms'] = "bbPress";
 
+		if ( class_exists( 'Easy_Digital_Downloads' ) ) $checkbox_plugins['_edd_checkout'] = "(PRO ONLY) Easy Digital Downloads checkout";
+		if ( class_exists( 'Woocommerce' ) ) $checkbox_plugins['_woocommerce_checkout'] = "(PRO ONLY) WooCommerce checkout";
+
 		return $checkbox_plugins;
 	}
 

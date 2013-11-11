@@ -1,6 +1,6 @@
 <div id="mc4wp-<?php echo $tab; ?>" class="wrap mc4wp-settings">
 
-	<h2>Form settings</h2>
+	<h2>MailChimp for WordPress: Form settings</h2>
 
 	<div id="mc4wp-content">
 
@@ -20,13 +20,14 @@
 							<select name="mc4wp_lite_form[css]" id="mc4wp_load_stylesheet_select">
 								<option value="0" <?php selected($opts['css'], 0); ?>>No</option>
 								<option value="default" <?php selected($opts['css'], 'default'); ?><?php selected($opts['css'], 1); ?>>Yes, load basic formatting styles</option>
+								<option disabled>(PRO ONLY) Yes, load my custom form styles</option>
 								<optgroup label="Load a default form theme">
-									<option value="light" <?php selected($opts['css'], 'light'); ?>>Light theme</option>
-									<option value="red" <?php selected($opts['css'], 'red'); ?>>Red theme</option>
-									<option value="green" <?php selected($opts['css'], 'green'); ?>>Green theme</option>
-									<option value="blue" <?php selected($opts['css'], 'blue'); ?>>Blue theme</option>
-									<option value="dark" <?php selected($opts['css'], 'dark'); ?>>Dark theme</option>
-									<option disabled>(PRO ONLY) Custom color theme</option>
+									<option value="light" <?php selected($opts['css'], 'light'); ?>>Light Theme</option>
+									<option value="red" <?php selected($opts['css'], 'red'); ?>>Red Theme</option>
+									<option value="green" <?php selected($opts['css'], 'green'); ?>>Green Theme</option>
+									<option value="blue" <?php selected($opts['css'], 'blue'); ?>>Blue Theme</option>
+									<option value="dark" <?php selected($opts['css'], 'dark'); ?>>Dark Theme</option>
+									<option disabled>(PRO ONLY) Custom Color Theme</option>
 								</optgroup>
 							</select>
 						</td>

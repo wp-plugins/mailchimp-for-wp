@@ -1,6 +1,6 @@
 <div id="mc4wp-<?php echo $tab; ?>" class="wrap mc4wp-settings">
 
-	<h2>Checkbox Settings</h2>
+	<h2>MailChimp for WordPress: Checkbox Settings</h2>
 
 	<div id="mc4wp-content">
 
@@ -44,9 +44,14 @@
 		<tr valign="top">
 			<th scope="row">Add the checkbox to these forms</th>
 			<td colspan="2">
-				<?php foreach($this->get_checkbox_compatible_plugins() as $code => $name) { ?>
-					<label><input name="mc4wp_lite_checkbox[show_at_<?php echo $code; ?>]" value="1" type="checkbox" <?php checked($opts['show_at_'.$code], 1); ?>> <?php echo $name; ?></label> &nbsp; 
-				<?php } ?>
+				<?php foreach($this->get_checkbox_compatible_plugins() as $code => $name) {
+
+					if($code[0] != '_') {
+						?><label><input name="mc4wp_lite_checkbox[show_at_<?php echo $code; ?>]" value="1" type="checkbox" <?php checked($opts['show_at_'.$code], 1); ?>> <?php echo $name; ?></label> &nbsp; <?php
+					} else {
+						?><label class="pro-feature"><input type="checkbox" disabled> <?php echo $name; ?></label> &nbsp; <?php
+					}
+				} ?>
 				<label><input name="mc4wp_lite_checkbox[show_at_other_forms]" value="1" type="checkbox" <?php if($opts['show_at_other_forms']) echo 'checked '; ?>> Other forms (manual)</label> &nbsp; 
 			</td>
 		</tr>

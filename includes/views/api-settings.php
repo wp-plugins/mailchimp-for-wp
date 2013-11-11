@@ -1,6 +1,6 @@
 <div id="mc4wp-<?php echo $tab; ?>" class="wrap mc4wp-settings">
 
-	<h2>MailChimp Settings</h2>
+	<h2>MailChimp for WordPress: MailChimp Settings</h2>
 
 	<div id="mc4wp-content">
 
