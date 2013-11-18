@@ -279,6 +279,8 @@ class MC4WP_Lite_Form {
 
 		$merge_vars = apply_filters('mc4wp_merge_vars', $merge_vars);
 		$email_type = apply_filters('mc4wp_email_type', 'html');
+		$lists = apply_filters('mc4wp_lists', $lists, $merge_vars);
+
 
 		foreach ( $lists as $list ) {
 			$result = $api->subscribe( $list, $email, $merge_vars, $email_type, $opts['double_optin'] );
