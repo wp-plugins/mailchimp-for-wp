@@ -71,7 +71,7 @@ class MC4WP_Lite_API {
 
 	public function get_lists()
 	{
-		$result = $this->call('lists/list');
+		$result = $this->call('lists/list', array('limit' => 100));
 
 		if($result && isset($result->data)) {
 			return $result->data;

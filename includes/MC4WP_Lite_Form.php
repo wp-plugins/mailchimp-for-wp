@@ -26,7 +26,12 @@ class MC4WP_Lite_Form {
 			add_action( 'wp_footer', array( $this, 'print_scroll_js' ), 99);
 		}
 
+		add_action( 'wp_enqueue_scripts', array($this, 'register_scripts' ) );
+	}
 
+	public function register_scripts()
+	{
+		wp_register_script( 'mc4wp-placeholders', plugins_url('mailchimp-for-wp/assets/js/placeholders.min.js'), array(), MC4WP_LITE_VERSION, true );
 	}
 
 	public function get_options() {
@@ -60,7 +65,7 @@ class MC4WP_Lite_Form {
 		if ( $this->success ) $css_classes .= 'mc4wp-form-success ';
 
 		$content = "\n<!-- Form by MailChimp for WordPress plugin v". MC4WP_LITE_VERSION ." - http://dannyvankooten.com/mailchimp-for-wordpress/ -->\n";
-		$content .= '<form method="post" action="#mc4wp-form-'. $this->form_instance_number .'" id="mc4wp-form-'.$this->form_instance_number.'" class="mc4wp-form form'.$css_classes.'">';
+		$content .= '<form method="post" action="'. mc4wp_get_current_url() .'#mc4wp-form-'. $this->form_instance_number .'" id="mc4wp-form-'.$this->form_instance_number.'" class="mc4wp-form form'.$css_classes.'">';
 
 		// maybe hide the form
 		if ( !( $this->success && $opts['hide_after_success'] ) ) {
@@ -115,6 +120,12 @@ class MC4WP_Lite_Form {
 
 		// increase form instance number in case there is more than one form on a page
 		$this->form_instance_number++;
+
+		// make sure scripts are enqueued later
+		global $is_IE;
+		if(isset($is_IE) && $is_IE) {
+			wp_enqueue_script('mc4wp-placeholders');
+		}
 
 		return $content;
 	}
@@ -220,12 +231,13 @@ class MC4WP_Lite_Form {
 		// upercase $_POST variables
 		foreach ( $_POST as $name => $value ) {
 
-			// only uppercase variables which are not already uppercased, skip mc4wp internal vars
-			if ( $name === strtoupper( $name ) || in_array( $name, array( 'mc4wp_form_instance', 'mc4wp_form_nonce', 'mc4wp_required_but_not_really', 'mc4wp_form_submit' ) ) ) continue;
-			$uppercased_name = strtoupper( $name );
+			// skip mc4wp internal vars
+			if (in_array( $name, array( 'mc4wp_form_instance', 'mc4wp_form_nonce', 'mc4wp_required_but_not_really', 'mc4wp_form_submit' ) ) ) {
+				continue;
+			}
 
-			// set new (uppercased) $_POST variable, unset old one.
-			$_POST[$uppercased_name] = $value;
+			$ucname = strtoupper( $name );
+			$_POST[$ucname] = $value;
 			unset( $_POST[$name] );
 		}
 
@@ -238,9 +250,15 @@ class MC4WP_Lite_Form {
 
 			foreach ( $old_groupings as $grouping ) {
 
-				if ( !isset( $grouping['id'] ) && !isset( $grouping['name'] ) ) { continue; }
+				if(!isset($grouping['groups'])) { continue; }
 
-				$key = ( isset( $grouping['id'] ) ) ? $grouping['id'] : $grouping['name'];
+				if ( isset( $grouping['id'] ) ) {
+					$key = $grouping['id'];
+				} else if(isset( $grouping['name'] ) ) { 
+					$key = $grouping['name'];
+				} else { 
+					continue; 
+				}
 
 				$new_groupings[$key] = $grouping['groups'];
 
@@ -267,29 +285,34 @@ class MC4WP_Lite_Form {
 		// guess FNAME and LNAME
 		if ( isset( $merge_vars['NAME'] ) && !isset( $merge_vars['FNAME'] ) && !isset( $merge_vars['LNAME'] ) ) {
 
-			$strpos = strpos( $name, ' ' );
+			$strpos = strpos( $merge_vars['NAME'], ' ' );
 
 			if ( $strpos ) {
-				$merge_vars['FNAME'] = substr( $name, 0, $strpos );
-				$merge_vars['LNAME'] = substr( $name, $strpos );
+				$merge_vars['FNAME'] = trim( substr( $merge_vars['NAME'], 0, $strpos ) );
+				$merge_vars['LNAME'] = trim( substr( $merge_vars['NAME'], $strpos ) );
 			} else {
-				$merge_vars['FNAME'] = $name;
+				$merge_vars['FNAME'] = $merge_vars['NAME'];
 			}
 		}
 
-		$merge_vars = apply_filters('mc4wp_merge_vars', $merge_vars);
+		do_action('mc4wp_before_subscribe', $email, $merge_vars, 0);
+
+		$result = false;
 		$email_type = apply_filters('mc4wp_email_type', 'html');
 		$lists = apply_filters('mc4wp_lists', $lists, $merge_vars);
 
+		foreach ( $lists as $list_id ) {
 
-		foreach ( $lists as $list ) {
-			$result = $api->subscribe( $list, $email, $merge_vars, $email_type, $opts['double_optin'] );
+			$list_merge_vars = apply_filters('mc4wp_merge_vars', $merge_vars, 0, $list_id);
+			$result = $api->subscribe( $list, $email, $list_merge_vars, $email_type, $opts['double_optin'] );
 
 			if($result === true) {
 				$from_url = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : '';
 				do_action('mc4wp_subscribe_form', $email, $list, 0, $merge_vars, $from_url); 
 			}
 		}
+
+		do_action('mc4wp_after_subscribe', $email, $merge_vars, 0, $result);
 
 		if ( $result === true ) {
 			$this->success = true;

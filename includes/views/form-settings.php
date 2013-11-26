@@ -44,11 +44,11 @@
 					<td>
 						<ul id="mc4wp-lists">
 						<?php foreach($lists as $list) { ?>
-							<li><input type="checkbox" id="mc4wp_form_list_<?php echo $list->id; ?>_cb" name="mc4wp_lite_form[lists][<?php echo $list->id; ?>]" value="<?php echo $list->id; ?>" data-groupings="<?php echo esc_attr(json_encode($list->interest_groupings)); ?>" data-fields="<?php echo esc_attr(json_encode($list->merge_vars)); ?>" <?php if(array_key_exists($list->id, $opts['lists'])) echo 'checked="checked"'; ?>> <label for="mc4wp_form_list_<?php echo $list->id; ?>_cb"><?php echo $list->name; ?></label></li>
+							<li><label><input type="checkbox" name="mc4wp_lite_form[lists][<?php echo esc_attr($list->id); ?>]" value="<?php echo esc_attr($list->id); ?>" data-groupings="<?php echo esc_attr(json_encode($list->interest_groupings)); ?>" data-fields="<?php echo esc_attr(json_encode($list->merge_vars)); ?>" <?php if(array_key_exists($list->id, $opts['lists'])) echo 'checked="checked"'; ?>> <?php echo $list->name; ?></label></li>
 						<?php } ?>
 						</ul>
 					</td>
-					<td class="desc" <?php if(empty($opts['lists'])) { ?>style="color:red;"<?php } ?>>Select at least one MailChimp list for this form.</td>
+					<td class="desc">Select the list(s) to which people who submit this form should be subscribed.</td>
 					<?php } ?>
 
 					</tr>
@@ -63,10 +63,8 @@
 									} else {
 										?><textarea class="widefat" cols="160" rows="20" id="mc4wpformmarkup" name="mc4wp_lite_form[markup]"><?php echo esc_textarea($opts['markup']); ?></textarea><?php
 									} ?>
-									<p><small>Use <input type="text" onfocus="this.select();" readonly="readonly" value="[mc4wp_form]" size="12" class="mc4wp-shortcode-example"> to render this form inside a widget, post or page. <u>Do not just copy the form mark-up as that will not work.</u> </small></p>
-									<p class="submit">
-										<input type="submit" class="button-primary" value="<?php _e('Save All Changes') ?>" id="mc4wp-submit-form-settings" />
-									</p>
+									<p class="help">Use the shortcode <input type="text" onfocus="this.select();" readonly="readonly" value="[mc4wp_form]" size="12" class="mc4wp-shortcode-example"> inside a post, page or text widget to display your sign-up form. <strong>Do not copy and paste the above form mark-up, that will not work.</strong></p>		
+
 								</div>
 
 								<div class="mc4wp-col mc4wp-col-1-3 mc4wp-last">
@@ -76,46 +74,46 @@
 						</td>
 					</tr>
 
-	</table>
+			</table>
 
-
+	<?php submit_button(); ?>
 
 		<h3 class="mc4wp-title">MailChimp Settings</h3>
 		<table class="form-table">
 			<tr valign="top">
 				<th scope="row">Double opt-in?</th>
 				<td class="nowrap"><input type="radio" id="mc4wp_form_double_optin_1" name="mc4wp_lite_form[double_optin]" value="1" <?php if($opts['double_optin'] == 1) echo 'checked="checked"'; ?> /> <label for="mc4wp_form_double_optin_1">Yes</label> &nbsp; <input type="radio" id="mc4wp_form_double_optin_0" name="mc4wp_lite_form[double_optin]" value="0" <?php if($opts['double_optin'] == 0) echo 'checked="checked"'; ?> /> <label for="mc4wp_form_double_optin_0">No</label></td>
-				<td class="desc">Tick "yes" if you want subscribers to confirm their email address (recommended)</td>
+				<td class="desc">Select "yes" if you want subscribers to confirm their email address (recommended)</td>
 			</tr>
 			<tr class="pro-feature" valign="top">
 				<th scope="row">Send Welcome Email?</th>
 				<td class="nowrap">
 					<input type="radio" readonly /> 
-					<label>Yes</label> &nbsp; 
+					<label><?php _e("Yes"); ?></label> &nbsp; 
 					<input type="radio" checked readonly /> 
-					<label>No</label> &nbsp; 
+					<label><?php _e("No"); ?></label> &nbsp; 
 				</td>
-				<td class="desc">Tick "yes" if you want to send your lists Welcome Email if a subscribe succeeds. Only when double opt-in is disabled.</td>
+				<td class="desc">Select "yes" if you want to send your lists Welcome Email if a subscribe succeeds. Only when double opt-in is disabled.</td>
 			</tr>
 			<tr class="pro-feature" valign="top">
 				<th scope="row">Update existing subscribers?</th>
 				<td class="nowrap">
 					<input type="radio" readonly /> 
-					<label>Yes</label> &nbsp; 
+					<label><?php _e("Yes"); ?></label> &nbsp; 
 					<input type="radio" checked readonly /> 
-					<label>No</label> &nbsp; 
+					<label><?php _e("No"); ?></label> &nbsp; 
 				</td>
-				<td class="desc">Tick "yes" if you want to update existing subscribers instead of showing the "already subscribed" message.</td>
+				<td class="desc">Select "yes" if you want to update existing subscribers instead of showing the "already subscribed" message.</td>
 			</tr>
 			<tr class="pro-feature" valign="top">
 				<th scope="row">Replace interest groups?</th>
 				<td class="nowrap">
 					<input type="radio" checked readonly /> 
-					<label>Yes</label> &nbsp; 
+					<label><?php _e("Yes"); ?></label> &nbsp; 
 					<input type="radio" readonly /> 
-					<label>No</label> &nbsp; 
+					<label><?php _e("No"); ?></label> &nbsp; 
 				</td>
-				<td class="desc">Tick "yes" if you want to replace the interest groups with the groups provided instead of adding the provided groups to the member's interest groups. Only when updating a subscriber.</td>
+				<td class="desc">Select "yes" if you want to replace the interest groups with the groups provided instead of adding the provided groups to the member's interest groups. Only when updating a subscriber.</td>
 			</tr>
 		</table>
 
@@ -125,21 +123,21 @@
 			<tr valign="top" class="pro-feature">
 				<th scope="row">Enable AJAX?</th>
 				<td class="nowrap">
-					<input type="radio" readonly /> <label>Yes</label> &nbsp; 
-					<input type="radio" checked readonly /> <label>No</label>
+					<input type="radio" readonly /> <label><?php _e("Yes"); ?></label> &nbsp; 
+					<input type="radio" checked readonly /> <label><?php _e("No"); ?></label>
 				</td>
-				<td class="desc">Tick "yes" if you want to use AJAX to submit forms, meaning the page doesn't need to reload so everything happens inline. <a href="http://dannyvankooten.com/mailchimp-for-wordpress/demo-sign-up-forms/?utm_source=lite-plugin&utm_medium=link&utm_campaign=settings-demo-link">(demo)</a></td>
+				<td class="desc">Select "yes" if you want to use AJAX to submit forms, meaning the page doesn't need to reload so everything happens inline. <a href="http://dannyvankooten.com/mailchimp-for-wordpress/demo/?utm_source=lite-plugin&utm_medium=link&utm_campaign=settings-demo-link">(demo)</a></td>
 			</tr>
 			<tr valign="top">
 				<th scope="row"><label for="mc4wp_form_hide_after_success">Hide form after a successful sign-up?</label></th>
 				<td class="nowrap"><input type="radio" id="mc4wp_form_hide_after_success_1" name="mc4wp_lite_form[hide_after_success]" value="1" <?php if($opts['hide_after_success'] == 1) echo 'checked="checked"'; ?> /> <label for="mc4wp_form_hide_after_success_1">Yes</label> &nbsp; <input type="radio" id="mc4wp_form_hide_after_success_0" name="mc4wp_lite_form[hide_after_success]" value="0" <?php if($opts['hide_after_success'] == 0) echo 'checked="checked"'; ?> /> <label for="mc4wp_form_hide_after_success_0">No</label></td>
-				<td class="desc">Tick "yes" to hide the form fields after a successful sign-up.</td>
+				<td class="desc">Select "yes" to hide the form fields after a successful sign-up.</td>
 			</tr>
 			<tr valign="top">
 				<th scope="row"><label for="mc4wp_form_redirect">Redirect to this URL after a successful sign-up</label></th>
 				<td colspan="2">
 					<input type="text" class="widefat" name="mc4wp_lite_form[redirect]" id="mc4wp_form_redirect" placeholder="Example: <?php echo esc_attr(site_url('/thank-you/')); ?>"value="<?php echo $opts['redirect']; ?>" />
-					<small>Leave empty or enter <strong>0</strong> (zero) for no redirection. Use complete URL's, including http://</small>
+					<p class="help">Leave empty or enter <strong>0</strong> (zero) for no redirection. Use complete (absolute) URL's, including <code>http://</code></p>
 				</td>
 			</tr>
 			<tr valign="top">
@@ -160,11 +158,11 @@
 			</tr>
 			<tr>
 				<th></th>
-				<td colspan="2"><p><small>HTML tags like &lt;a&gt; and &lt;strong&gt; etc. are allowed in the message fields.</small></p></td>
+				<td colspan="2"><p class="help">HTML tags like <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> are allowed in the message fields.</p></td>
 			</tr>
 		</table>
 
-	<?php submit_button("Save All Changes"); ?>
+	<?php submit_button(); ?>
 	</form>
 
 	<?php include 'parts/admin-footer.php'; ?>

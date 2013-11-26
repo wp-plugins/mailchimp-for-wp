@@ -48,7 +48,7 @@ class MC4WP_Lite_Admin
 
 	public function add_settings_link($links)
 	{
-		 $settings_link = '<a href="admin.php?page=mc4wp-lite">Settings</a>';
+		 $settings_link = '<a href="admin.php?page=mc4wp-lite">'. __('Settings') . '</a>';
 		 $upgrade_link = '<a href="http://dannyvankooten.com/mailchimp-for-wordpress/">Upgrade to Pro</a>';
          array_unshift($links, $upgrade_link, $settings_link);
          return $links;
@@ -56,14 +56,9 @@ class MC4WP_Lite_Admin
 
 	public function register_settings()
 	{
-		register_setting('mc4wp_lite_settings', 'mc4wp_lite', array($this, 'validate_options'));
-		register_setting('mc4wp_lite_checkbox_settings', 'mc4wp_lite_checkbox', array($this, 'validate_options'));
-		register_setting('mc4wp_lite_form_settings', 'mc4wp_lite_form', array($this, 'validate_options'));
-	}
-
-	public function validate_options($opts)
-	{
-		return $opts;
+		register_setting('mc4wp_lite_settings', 'mc4wp_lite');
+		register_setting('mc4wp_lite_checkbox_settings', 'mc4wp_lite_checkbox');
+		register_setting('mc4wp_lite_form_settings', 'mc4wp_lite_form');
 	}
 
 	public function build_menu()

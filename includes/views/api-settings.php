@@ -16,7 +16,7 @@
 					<th scope="row"><label for="mailchimp_api_key">MailChimp API Key</label></th>
 					<td>
 						<input type="text" class="widefat" placeholder="Your MailChimp API key" id="mailchimp_api_key" name="mc4wp_lite[api_key]" value="<?php echo $opts['api_key']; ?>" />
-						<small><a target="_blank" href="http://admin.mailchimp.com/account/api">Get your MailChimp API key here.</a></small>
+						<p class="help"><a target="_blank" href="http://admin.mailchimp.com/account/api">Click here to get your MailChimp API Key.</a></p>
 					</td>
 					
 				</tr>
@@ -30,11 +30,12 @@
 	<h3 class="mc4wp-title">MailChimp Cache</h3>
 	<p>The table below shows your cached MailChimp lists configuration. If you made any changes in your MailChimp configuration that is not yet represented in the table below, please renew the cache manually by hitting the "renew cached data" button.</p>
 
-	<h4>Lists</h4>
 	<table class="wp-list-table widefat">
 		<thead>
 			<tr>
-				<th scope="col">ID</th><th scope="col">Name</th><th>Merge fields & Interest groupings</th>
+				<th scope="col">List Name</th>
+				<th scope="col">Merge fields</th>
+				<th scope="col">Interest groupings</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -42,9 +43,16 @@
 			if($lists && is_array($lists)) { ?>
 				<?php foreach($lists as $list) {  ?>
 					<tr valign="top">
-						<td><?php echo $list->id; ?></td>
 						<td><?php echo $list->name; ?></td>
-						<td><em>Only available in the premium version. <a href="http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=lite-plugin&utm_medium=link&utm_campaign=cache-table-link">Upgrade now.</a></em></td>
+						<td><?php 
+						$first = true;
+						foreach($list->merge_vars as $merge_var) { 
+							echo ($first) ? $merge_var->name : ', '. $merge_var->name;
+							$first = false;
+						} 
+						?>
+						</td>
+						<td><a href="http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=lite-plugin&utm_medium=link&utm_campaign=cache-table-link">Pro Only, Upgrade Now</a></td>
 					</tr>
 				<?php } // endforeach ?>
 			<?php } else { ?>

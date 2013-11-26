@@ -7,7 +7,7 @@
 		<?php settings_errors(); ?>
 		<p>To use the MailChimp for WP sign-up checkboxes, select at least one list and one form to add the checkbox to.</p>
 
-		<h3 class="mc4wp-title">List settings</h3>
+		<h3 class="mc4wp-title">MailChimp settings</h3>
 		<form action="options.php" method="post">
 			<?php settings_fields( 'mc4wp_lite_checkbox_settings' ); ?>
 
@@ -24,35 +24,35 @@
 					{ ?>
 						<td>
 							<?php foreach($lists as $list) { 
-							?><input type="checkbox" id="mc4wp_checkbox_list_<?php echo $list->id; ?>_cb" name="mc4wp_lite_checkbox[lists][<?php echo $list->id; ?>]" value="<?php echo $list->id; ?>" <?php if(array_key_exists($list->id, $opts['lists'])) echo 'checked="checked"'; ?>> <label for="mc4wp_checkbox_list_<?php echo $list->id; ?>_cb"><?php echo $list->name; ?></label><br /><?php
+							?><label><input type="checkbox" name="mc4wp_lite_checkbox[lists][<?php echo $list->id; ?>]" value="<?php echo esc_attr($list->id); ?>" <?php if(array_key_exists($list->id, $opts['lists'])) echo 'checked="checked"'; ?>> <?php echo $list->name; ?></label><br /><?php
 							} ?>
 						</td>
-						<td class="desc" <?php if(empty($opts['lists'])) { ?>style="color:red;"<?php } ?>>Select at least one MailChimp list to which people who tick a checkbox should be subscribed.</td>
+						<td class="desc">Select the list(s) to which people who tick the checkbox should be subscribed.</td>
 					<?php 
 					} 
 					?>
+				</tr>
+				<tr valign="top">
+					<th scope="row">Double opt-in?</th>
+					<td class="nowrap"><label><input type="radio" name="mc4wp_lite_checkbox[double_optin]" value="1" <?php checked($opts['double_optin'], 1); ?> /> Yes</label> &nbsp; <label><input type="radio" id="mc4wp_checkbox_double_optin_0" name="mc4wp_lite_checkbox[double_optin]" value="0" <?php checked($opts['double_optin'], 0); ?> /> No</label></td>
+					<td class="desc">Select "yes" if you want subscribers to have to confirm their email address (recommended)</td>
 				</tr>
 			</table>
 
 		<h3 class="mc4wp-title">Checkbox settings</h3>
 		<table class="form-table">
-		<tr valign="top">
-			<th scope="row">Double opt-in?</th>
-			<td class="nowrap"><input type="radio" id="mc4wp_checkbox_double_optin_1" name="mc4wp_lite_checkbox[double_optin]" value="1" <?php if($opts['double_optin'] == 1) echo 'checked="checked"'; ?> /> <label for="mc4wp_checkbox_double_optin_1">Yes</label> &nbsp; <input type="radio" id="mc4wp_checkbox_double_optin_0" name="mc4wp_lite_checkbox[double_optin]" value="0" <?php if($opts['double_optin'] == 0) echo 'checked="checked"'; ?> /> <label for="mc4wp_checkbox_double_optin_0">No</label></td>
-			<td class="desc">Tick "yes" if you want subscribers to have to confirm their email address (recommended)</td>
-		</tr>
+		
 		<tr valign="top">
 			<th scope="row">Add the checkbox to these forms</th>
 			<td colspan="2">
 				<?php foreach($this->get_checkbox_compatible_plugins() as $code => $name) {
 
 					if($code[0] != '_') {
-						?><label><input name="mc4wp_lite_checkbox[show_at_<?php echo $code; ?>]" value="1" type="checkbox" <?php checked($opts['show_at_'.$code], 1); ?>> <?php echo $name; ?></label> &nbsp; <?php
+						?><label><input name="mc4wp_lite_checkbox[show_at_<?php echo $code; ?>]" value="1" type="checkbox" <?php checked($opts['show_at_'.$code], 1); ?>> <?php echo $name; ?></label><br /><?php
 					} else {
-						?><label class="pro-feature"><input type="checkbox" disabled> <?php echo $name; ?></label> &nbsp; <?php
+						?><label class="pro-feature"><input type="checkbox" disabled> <?php echo $name; ?></label><br /><?php
 					}
 				} ?>
-				<label><input name="mc4wp_lite_checkbox[show_at_other_forms]" value="1" type="checkbox" <?php if($opts['show_at_other_forms']) echo 'checked '; ?>> Other forms (manual)</label> &nbsp; 
 			</td>
 		</tr>
 		<tr valign="top">
@@ -64,13 +64,13 @@
 		</tr>
 		<tr valign="top">
 			<th scope="row">Pre-check the checkbox?</th>
-			<td class="nowrap"><input type="radio" id="mc4wp_checkbox_precheck_1" name="mc4wp_lite_checkbox[precheck]" value="1" <?php if($opts['precheck'] == 1) echo 'checked="checked"'; ?> /> <label for="mc4wp_checkbox_precheck_1">Yes</label> &nbsp; <input type="radio" id="mc4wp_checkbox_precheck_0" name="mc4wp_lite_checkbox[precheck]" value="0" <?php if($opts['precheck'] == 0) echo 'checked="checked"'; ?> /> <label for="mc4wp_checkbox_precheck_0">No</label></td>
+			<td class="nowrap"><label><input type="radio" name="mc4wp_lite_checkbox[precheck]" value="1" <?php checked($opts['precheck'], 1); ?> /> Yes</label> &nbsp; <label><input type="radio" name="mc4wp_lite_checkbox[precheck]" value="0" <?php checked($opts['precheck'], 0); ?> /> No</label></td>
 			<td class="desc"></td>
 		</tr>
 		<tr valign="top">
 			<th scope="row">Load some default CSS?</th>
-			<td class="nowrap"><input type="radio" id="mc4wp_checbox_css_1" name="mc4wp_lite_checkbox[css]" value="1" <?php if($opts['css'] == 1) echo 'checked="checked"'; ?> /> <label for="mc4wp_checbox_css_1">Yes</label> &nbsp; <input type="radio" id="mc4wp_checbox_css_0" name="mc4wp_lite_checkbox[css]" value="0" <?php if($opts['css'] == 0) echo 'checked="checked"'; ?> /> <label for="mc4wp_checbox_css_0">No</label></td>
-			<td class="desc">Tick "yes" if the checkbox appears in a weird place.</td>
+			<td class="nowrap"><label><input type="radio" name="mc4wp_lite_checkbox[css]" value="1" <?php checked($opts['css'], 1); ?> /> Yes</label> &nbsp; <label><input type="radio" name="mc4wp_lite_checkbox[css]" value="0" <?php checked($opts['css'], 0); ?> /> No</label></td>
+			<td class="desc">Select "yes" if the checkbox appears in a weird place.</td>
 		</tr>
 		
 		

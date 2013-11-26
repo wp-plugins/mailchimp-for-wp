@@ -85,7 +85,6 @@ class MC4WP_Lite {
 				'show_at_multisite_form' => 0,
 				'show_at_buddypress_form' => 0,
 				'show_at_bbpress_forms' => 0,
-				'show_at_other_forms' => 0,
 				'lists' => array(),
 				'double_optin' => 1
 			),

@@ -106,8 +106,9 @@ function mc4wp_get_subscriber_count( $list_ids ) {
 */
 function mc4wp_get_current_url() {
 	global $wp;
-	return add_query_arg( $wp->query_string, '', home_url( $wp->request ) );
+	return trailingslashit( home_url( add_query_arg( array(), $wp->request ) ) );
 }
+
 
 
 /**

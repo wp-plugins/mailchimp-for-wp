@@ -1,10 +1,10 @@
-=== Plugin Name ===
+=== MailChimp for WordPress ===
 Contributors: DvanKooten
 Donate link: http://dannyvankooten.com/donate/
-Tags: mailchimp, widget, form, checkbox, sign-up form, mandrill, buddypress, multisite, bbpress, contact form 7, newsletter, mailinglist
+Tags: mailchimp, widget, form, checkbox, sign-up form, mandrill, buddypress, multisite, bbpress, contact form 7, newsletter, mailinglist, cf7
 Requires at least: 3.1
 Tested up to: 3.7.1
-Stable tag: 1.4.3
+Stable tag: 1.4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,9 +27,9 @@ Add "sign up to our newsletter" checkboxes to your comment form, contact forms o
 
 * Easily create a highly customizable sign-up form
 * Show a sign-up form in your posts or pages using a simple shortcode `[mc4wp_form]`
-* Show a sign-up form in your sidebar or footer using the dedicated form widget.
+* Show a sign-up form in your sidebar or footer using a simple to use form widget.
 * Add a "sign-up to our newsletter" checkbox to your comment form or *any* other form you like.
-* Built-in integration with BuddyPress, WordPress MultiSite, bbPress and Contact Form 7 forms.
+* Built-in integration with Contact Form 7, BuddyPress, WordPress MultiSite and bbPress.
 * Configuring this plugin is easy, all you need is your MailChimp API key.
 
 **Premium features**
@@ -191,6 +191,16 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 
 == Changelog ==
+
+= 1.4.4 - November 27, 2013 =
+* Fixed: FNAME and LNAME not being guessed from NAME for form sign-ups.
+* Added: very small JavaScript fallback for placeholders in older browsers (<= IE9)
+* Improved: removed limit from the lists retreived from MailChimp, for users with more than 25 lists.
+* Improved: added current page URL to form action attribute for people using `<base>` url's.
+* Improved: removed the sidebar from the admin pages on small screens
+* Improved: various usability improvements
+* Improved: minor improvements to default CSS styles
+* Improved: added various action and filter hooks to the form sign-up process
 
 = 1.4.3 - November 19, 2013 =
 * Improved: added filter hook `mc4wp_lists` to customize lists before sending request to MailChimp.

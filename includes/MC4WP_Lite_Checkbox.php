@@ -57,9 +57,9 @@ class MC4WP_Lite_Checkbox
 		}
 
 		/* Other actions... catch-all */
-		if($opts['show_at_other_forms']) {
+		if(isset($_POST['mc4wp-try-subscribe']) && $_POST['mc4wp-try-subscribe']) {
 			add_action('init', array($this, 'subscribe_from_whatever'));
-		}
+		}		
 
 	}
 
@@ -84,8 +84,7 @@ class MC4WP_Lite_Checkbox
 		$checked = $opts['precheck'] ? "checked" : '';
 		$content = "\n<!-- Checkbox by MailChimp for WordPress plugin v". MC4WP_LITE_VERSION ." - http://dannyvankooten.com/mailchimp-for-wordpress/ -->\n";
 		$content .= '<p id="mc4wp-checkbox">';
-		$content .= '<input type="checkbox" name="mc4wp-do-subscribe" id="mc4wp-checkbox-input" value="1" '. $checked . ' />';
-		$content .= '<label for="mc4wp-checkbox-input">'. __($label) . '</label>';
+		$content .= '<label><input type="checkbox" name="mc4wp-do-subscribe" value="1" '. $checked . ' /> ' . __($label) . '</label>';
 		$content .= '</p>';
 		$content .= "\n<!-- / MailChimp for WP Plugin -->\n";
 		return $content;
@@ -359,14 +358,15 @@ class MC4WP_Lite_Checkbox
 			return 'no_lists_selected';
 		}
 
+		
 		// guess FNAME and LNAME
-		if(isset($merge_vars['NAME']) && !isset($merge_vars['FNAME']) && !isset($merge_vars['LNAME'])) {
-			
-			$strpos = strpos($merge_vars['NAME'], ' ');
+		if ( isset( $merge_vars['NAME'] ) && !isset( $merge_vars['FNAME'] ) && !isset( $merge_vars['LNAME'] ) ) {
 
-			if($strpos) {
-				$merge_vars['FNAME'] = substr($merge_vars['NAME'], 0, $strpos);
-				$merge_vars['LNAME'] = substr($merge_vars['NAME'], $strpos);
+			$strpos = strpos( $merge_vars['NAME'], ' ' );
+
+			if ( $strpos ) {
+				$merge_vars['FNAME'] = trim( substr( $merge_vars['NAME'], 0, $strpos ) );
+				$merge_vars['LNAME'] = trim( substr( $merge_vars['NAME'], $strpos ) );
 			} else {
 				$merge_vars['FNAME'] = $merge_vars['NAME'];
 			}
