@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, widget, form, checkbox, sign-up form, mandrill, buddypress, multisite, bbpress, contact form 7, newsletter, mailinglist, cf7
 Requires at least: 3.1
 Tested up to: 3.7.1
-Stable tag: 1.4.5
+Stable tag: 1.4.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,11 +32,11 @@ Add "sign up to our newsletter" checkboxes to your comment form, contact forms o
 * Built-in integration with Contact Form 7, BuddyPress, WordPress MultiSite and bbPress.
 * Configuring this plugin is easy, all you need is your MailChimp API key.
 
-**Premium features**
-
-The premium version comes with better and unlimited forms, easier form styling, an unlocked field wizard, detailed statistics and priority support.
-
-[More information](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Demo](http://dannyvankooten.com/mailchimp-for-wordpress/demo/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Upgrade now >>](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link)
+> **Premium features**
+>
+> The premium version comes with better and unlimited forms, easier form styling, an unlocked field wizard, detailed statistics and priority support.
+>
+> [More information](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Demo](http://dannyvankooten.com/mailchimp-for-wordpress/demo/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Upgrade now >>](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link)
 
 = Sign-Up Forms =
 This plugin comes with an easy but flexible way to build sign-up forms for your MailChimp lists.
@@ -192,10 +192,11 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 == Changelog ==
 
-= 1.4.5 - November 27, 2013 =
-* Fixed: Invalid email address.
+= 1.4.6 - November 27, 2013 =
+* Fixed: Incorrect invalid email address notice showing up every time.
+* Fixed: Incorrect form action url for some servers.
 
-= 1.4.4 - November 27, 2013 =
+= 1.4.4 - November 26, 2013 =
 * Fixed: FNAME and LNAME not being guessed from NAME for form sign-ups.
 * Added: very small JavaScript fallback for placeholders in older browsers (<= IE9)
 * Improved: removed limit from the lists retreived from MailChimp, for users with more than 25 lists.
