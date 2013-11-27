@@ -105,8 +105,24 @@ function mc4wp_get_subscriber_count( $list_ids ) {
 * @return string current URL
 */
 function mc4wp_get_current_url() {
-	global $wp;
-	return trailingslashit( home_url( add_query_arg( array(), $wp->request ) ) );
+	$page_url = 'http';
+
+	if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) { $page_url .= 's'; }
+
+	$page_url .= '://';
+
+	if (!isset($_SERVER['REQUEST_URI'])) {
+		$_SERVER['REQUEST_URI'] = substr($_SERVER['PHP_SELF'], 1);
+		if (isset($_SERVER['QUERY_STRING'])) { $_SERVER['REQUEST_URI'] .='?'.$_SERVER['QUERY_STRING']; }
+	}
+
+	if($_SERVER['SERVER_PORT'] != '80') {
+		$page_url .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
+	} else {
+		$page_url .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+	}
+
+	return $page_url;
 }
 
 
