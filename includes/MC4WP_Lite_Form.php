@@ -232,7 +232,7 @@ class MC4WP_Lite_Form {
 		foreach ( $_POST as $name => $value ) {
 
 			// skip mc4wp internal vars
-			if (in_array( $name, array( 'mc4wp_form_instance', 'mc4wp_form_nonce', 'mc4wp_required_but_not_really', 'mc4wp_form_submit' ) ) ) {
+			if ($name == strtoupper($name) || in_array( $name, array( 'mc4wp_form_instance', 'mc4wp_form_nonce', 'mc4wp_required_but_not_really', 'mc4wp_form_submit' ) ) ) {
 				continue;
 			}
 
@@ -304,11 +304,11 @@ class MC4WP_Lite_Form {
 		foreach ( $lists as $list_id ) {
 
 			$list_merge_vars = apply_filters('mc4wp_merge_vars', $merge_vars, 0, $list_id);
-			$result = $api->subscribe( $list, $email, $list_merge_vars, $email_type, $opts['double_optin'] );
+			$result = $api->subscribe( $list_id, $email, $list_merge_vars, $email_type, $opts['double_optin'] );
 
 			if($result === true) {
 				$from_url = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : '';
-				do_action('mc4wp_subscribe_form', $email, $list, 0, $merge_vars, $from_url); 
+				do_action('mc4wp_subscribe_form', $email, $list_id, 0, $merge_vars, $from_url); 
 			}
 		}
 
