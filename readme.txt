@@ -32,11 +32,11 @@ Add "sign up to our newsletter" checkboxes to your comment form, contact forms o
 * Built-in integration with Contact Form 7, BuddyPress, WordPress MultiSite and bbPress.
 * Configuring this plugin is easy, all you need is your MailChimp API key.
 
-> **Premium features**
->
-> The premium version comes with better and unlimited forms, easier form styling, an unlocked field wizard, detailed statistics and priority support.
->
-> [More information](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Demo](http://dannyvankooten.com/mailchimp-for-wordpress/demo/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Upgrade now >>](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link)
+**Premium features**
+
+The premium version comes with better and unlimited forms, easier form styling, an unlocked field wizard, detailed statistics and priority support.
+
+[More information](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Demo](http://dannyvankooten.com/mailchimp-for-wordpress/demo/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Upgrade now >>](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link)
 
 = Sign-Up Forms =
 This plugin comes with an easy but flexible way to build sign-up forms for your MailChimp lists.
