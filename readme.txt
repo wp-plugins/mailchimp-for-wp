@@ -20,9 +20,6 @@ Easily build beautiful sign-up forms and display them in your posts, pages and w
 
 Add "sign up to our newsletter" checkboxes to your comment form, contact forms or any form you like, making subscribing to your list(s) effortless for your visitors. 
 
-> MailChimp for WP comes with a premium version which gives you better forms, easier styling and detailed statistics.
-> *[Upgrade now >>](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=first-link)*
-
 **Plugin Features**
 
 * Easily create a highly customizable sign-up form
