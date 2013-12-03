@@ -11,6 +11,7 @@
 	vertical-align: middle;
 	display:inline-block !important; 
 	-webkit-appearance: checkbox; 
+	width: auto;
 }
 
 #mc4wp-checkbox label{ 

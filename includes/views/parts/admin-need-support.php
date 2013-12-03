@@ -1,3 +1,4 @@
+<?php defined("ABSPATH") or exit; ?>
 <div class="mc4wp-box">
 	<h3>Looking for support?</h3>
 	<p>Please use the <a href="http://wordpress.org/support/plugin/mailchimp-for-wp">support forums</a> on WordPress.org. Please do not email me directly as this is reserved for premium users only.</p>

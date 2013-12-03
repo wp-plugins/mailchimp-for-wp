@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, widget, form, checkbox, sign-up form, mandrill, buddypress, multisite, bbpress, contact form 7, newsletter, mailinglist, cf7
 Requires at least: 3.1
 Tested up to: 3.7.1
-Stable tag: 1.4.6
+Stable tag: 1.4.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,11 +32,11 @@ Add "sign up to our newsletter" checkboxes to your comment form, contact forms o
 * Built-in integration with Contact Form 7, BuddyPress, WordPress MultiSite and bbPress.
 * Configuring this plugin is easy, all you need is your MailChimp API key.
 
-**Premium features**
-
-The premium version comes with better and unlimited forms, easier form styling, an unlocked field wizard, detailed statistics and priority support.
-
-[More information](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Demo](http://dannyvankooten.com/mailchimp-for-wordpress/demo/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Upgrade now >>](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link)
+> **Premium features**
+> 
+> The premium version comes with better and unlimited forms, easier form styling, an unlocked field wizard, detailed statistics and priority support.
+> 
+> [More information](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Demo](http://dannyvankooten.com/mailchimp-for-wordpress/demo/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Upgrade now >>](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link)
 
 = Sign-Up Forms =
 This plugin comes with an easy but flexible way to build sign-up forms for your MailChimp lists.
@@ -80,16 +80,17 @@ If you like the plugin, upgrade to [MailChimp for WordPress Pro](http://dannyvan
 
 == Frequently Asked Questions ==
 
-= Is there a premium version of this plugin? =
-Yes, there is and you will love it. Some Pro features are:
-
-1. (Multiple) AJAX powered forms (no page reload after submitting)
-1. Design beautiful forms from your admin panel, no CSS knowledge required!
-1. Reports, learn when, where and how your visitors subscribed. 
-1. Easily add *all* your MailChimp list fields to your forms using the add-field tool.
-1. Priority support
-
-[More information](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link) | [Demo](http://dannyvankooten.com/mailchimp-for-wordpress/demo/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link)
+> **Is there a premium version of this plugin?**
+>
+> Yes, there is and you will love it. Some Pro features are:
+> 
+> 1. (Multiple) AJAX powered forms (no page reload after submitting)
+> 1. Design beautiful forms from your admin panel, no CSS knowledge required!
+> 1. Reports, learn when, where and how your visitors subscribed. 
+> 1. Easily add *all* your MailChimp list fields to your forms using the add-field tool.
+> 1. Priority support
+> 
+> [More information](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link) | [Demo](http://dannyvankooten.com/mailchimp-for-wordpress/demo/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link)
 
 = How to display a form in posts or pages? =
 Use the `[mc4wp_form]` shortcode.
@@ -181,16 +182,21 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 == Screenshots ==
 
-1. **Premium only:** Design beautiful sign-up forms using the form CSS designer.
-2. Add a sign-up checkbox to various places on your website.
-3. An example sign-up checkbox.
-4. An example sign-up form in my footer on dannyvankooten.com. More [MailChimp sign-up form examples](http://dannyvankooten.com/mailchimp-for-wordpress/demo-sign-up-forms/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=screenshots-link) are available on my website.
-5. **Premium only:** Create multiple AJAX powered sign-up forms.
-6. **Premium only:** Use the field wizard to easily add advanced fields to your form mark-up. You don't have to write any HTML, if you want. 
-7. **Premium only:** Gain valuable insights which method your visitors used to subscribe for any given time period using beautiful line charts. [Upgrade to the premium version now.](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=screenshots-link)
+1. Simple or advanced sign-up forms that blend in with your theme.
+2. A sign-up checkbox in your comment form is an amazing conversion booster.
+3. A simple form in the footer of the Twenty Thirteen theme.
+4. Add sign-up checkboxes to various places on your site. Easy-peasy.
+5. Creating sign-up forms is easy. The Pro version allows you to create as many form as you like.
+6. Write your own HTML or have it generated for you. Many (optional) customization settings are availabl.
+7. **Pro only:** Gain valuable insights which method your visitors used to subscribe for any given time period using beautiful line charts.
+8. **Pro only:** Create your own CSS styles with the form designer in the Pro version.
 
 
 == Changelog ==
+
+= 1.4.7 - December 4, 2013 =
+* Fixed: Checkbox width not being reset when loading default CSS.
+* Improved: Views (setting pages) can't be accessed directly anymore.
 
 = 1.4.6 - November 27, 2013 =
 * Fixed: Incorrect invalid email address notice showing up every time.

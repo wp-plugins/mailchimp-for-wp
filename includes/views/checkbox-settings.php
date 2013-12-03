@@ -1,3 +1,4 @@
+<?php defined("ABSPATH") or exit; ?>
 <div id="mc4wp-<?php echo $tab; ?>" class="wrap mc4wp-settings">
 
 	<h2>MailChimp for WordPress: Checkbox Settings</h2>

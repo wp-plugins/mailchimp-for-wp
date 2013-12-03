@@ -1,3 +1,4 @@
+<?php defined("ABSPATH") or exit; ?>
 <div id="mc4wp-fw" class="mc4wp-well">
 
 	<h4>Add a new field</h4>

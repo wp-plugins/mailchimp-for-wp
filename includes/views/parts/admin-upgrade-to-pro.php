@@ -1,3 +1,4 @@
+<?php defined("ABSPATH") or exit; ?>
 <div class="mc4wp-box" id="mc4wp-upgrade-box">
 	<h3>MailChimp for WordPress Pro</h3>
 	
