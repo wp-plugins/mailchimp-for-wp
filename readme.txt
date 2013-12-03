@@ -193,7 +193,7 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 = 1.4.7 - December 4, 2013 =
 * Fixed: Checkbox width not being reset when loading default CSS.
-* Improved: Views (setting pages) can't be accessed directly anymore.
+* Improved: Minor security improvement to prevent some plugin files from being accessed directly.
 
 = 1.4.6 - November 27, 2013 =
 * Fixed: Incorrect invalid email address notice showing up every time.
