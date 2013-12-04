@@ -65,6 +65,8 @@ Take a look at some other [WordPress plugins](http://dannyvankooten.com/wordpres
 1. Show the form in your widget areas using the plugin widget.
 1. Show the form from your template files by calling `mc4wp_form()`
 
+Need help? Please take a look at the [frequently asked questions](http://wordpress.org/plugins/mailchimp-for-wp/faq/) first
+
 = Upgrade to Pro =
 If you like the plugin, upgrade to [MailChimp for WordPress Pro](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=installation-instructions-link) for an even better plugin.
 
