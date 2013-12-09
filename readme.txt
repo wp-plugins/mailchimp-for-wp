@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp, widget, form, checkbox, sign-up form, mandrill, buddypress, multisite, bbpress, contact form 7, newsletter, mailinglist, cf7
 Requires at least: 3.1
 Tested up to: 3.8
-Stable tag: 1.4.7
+Stable tag: 1.4.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
