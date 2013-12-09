@@ -4,7 +4,7 @@
 * Echoes a sign-up checkbox.
 */
 function mc4wp_checkbox() {
-	MC4WP_Lite::checkbox()->output_checkbox();
+	MC4WP_Lite_Checkbox::instance()->output_checkbox();
 }
 
 /**
@@ -22,7 +22,7 @@ function mc4wp_form( $id = 0 ) {
 * @return string HTML of given form_id.
 */
 function mc4wp_get_form( $id = 0 ) {
-	return MC4WP_Lite::form()->output_form( array( 'id' => $id ) );
+	return MC4WP_Lite_Form::instance()->output_form( array( 'id' => $id ) );
 }
 
 
@@ -69,7 +69,7 @@ function mc4wp_get_subscriber_count( $list_ids ) {
 
 	if ( !$list_counts ) {
 		// make api call
-		$api = MC4WP_Lite::api();
+		$api = mc4wp_get_api();
 		$lists = $api->get_lists();
 		$list_counts = array();
 
