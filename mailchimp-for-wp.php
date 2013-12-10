@@ -35,8 +35,9 @@ if(!function_exists('is_plugin_active')) {
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' ); 
 }
 
-// Only load Lite plugin is Pro version is not active
-if(!is_plugin_active('mailchimp-for-wp-pro/mailchimp-for-wp-pro.php')) {
+// only load lite version if Pro is not active or being activated
+if(!is_plugin_active('mailchimp-for-wp-pro/mailchimp-for-wp-pro.php') 
+	&& !(is_admin() && isset($_GET['action']) && $_GET['action'] == 'activate' && isset($_GET['plugin']) && $_GET['plugin'] == 'mailchimp-for-wp-pro/mailchimp-for-wp-pro.php') ) {
 
 	define("MC4WP_LITE_VERSION", "1.4.8");
 	define("MC4WP_LITE_PLUGIN_DIR", plugin_dir_path(__FILE__));
