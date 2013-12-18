@@ -3,12 +3,25 @@
 class MC4WP_Lite_Checkbox
 {
 	private $showed_checkbox = false;
+	private static $instance = null;
 
-	public function __construct()
+	public static function init() {
+		if(self::$instance) {
+			throw new Exception("Already initialized");
+		} else {
+			self::$instance = new self;
+		}
+	}
+
+	public static function instance() {
+		return self::$instance;
+	}
+
+	private function __construct()
 	{
-		$opts = $this->get_options();
+		$opts = mc4wp_get_options('checkbox');
 
-		add_action('init', array($this, 'on_init')); 
+		add_action('init', array($this, 'initialize')); 
 
 		// load checkbox css if necessary
 		if ( $opts['css'] ) {
@@ -56,30 +69,24 @@ class MC4WP_Lite_Checkbox
 			add_action('bbp_new_reply', array($this, 'subscribe_from_bbpress_new_reply'), 10, 5);
 		}
 
-		/* Other actions... catch-all */
-		if(isset($_POST['mc4wp-try-subscribe']) && $_POST['mc4wp-try-subscribe']) {
-			add_action('init', array($this, 'subscribe_from_whatever'));
-		}		
-
 	}
 
-	public function get_options()
-	{
-		$options = MC4WP_Lite::instance()->get_options();
-		return $options['checkbox'];
-	}
-
-	public function on_init()
+	public function initialize()
 	{
 		if(function_exists("wpcf7_add_shortcode")) {
 			wpcf7_add_shortcode('mc4wp_checkbox', array($this, 'get_checkbox'));
 			add_action('wpcf7_mail_sent', array($this, 'subscribe_from_cf7'));
 		}
+
+		// catch-all (for manual integrations with third-party forms)
+		if(isset($_POST['mc4wp-try-subscribe']) && $_POST['mc4wp-try-subscribe']) {
+			$this->subscribe_from_whatever();
+		}
 	}
 
 	public function get_checkbox($args = array())
 	{
-		$opts = $this->get_options();
+		$opts = mc4wp_get_options('checkbox');
 		$label = isset($args['labels'][0]) ? $args['labels'][0] : $opts['label'];
 		$checked = $opts['precheck'] ? "checked" : '';
 		$content = "\n<!-- Checkbox by MailChimp for WordPress plugin v". MC4WP_LITE_VERSION ." - http://dannyvankooten.com/mailchimp-for-wordpress/ -->\n";
@@ -349,12 +356,20 @@ class MC4WP_Lite_Checkbox
 
 	public function subscribe($email, array $merge_vars = array())
 	{
-		$api = MC4WP_Lite::api();
-		$opts = $this->get_options();
+		$api = mc4wp_get_api();
+		$opts = mc4wp_get_options('checkbox');
 
 		$lists = $opts['lists'];
 		
-		if(empty($lists)) {
+		if(!$lists || empty($lists)) {
+			if( ( !defined("DOING_AJAX") || !DOING_AJAX ) && current_user_can('manage_options')) {
+				wp_die('
+					<h3>MailChimp for WP - Error</h3>
+					<p>Please select a list to subscribe to in the <a href="'. admin_url('admin.php?page=mc4wp-lite-checkbox-settings') .'">checkbox settings</a>.</p>
+					<p style="font-style:italic; font-size:12px;">This message is only visible to administrators for debugging purposes.</p>
+					', "Error - MailChimp for WP", array('back_link' => true));
+			}
+
 			return 'no_lists_selected';
 		}
 
