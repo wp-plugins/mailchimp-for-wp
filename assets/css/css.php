@@ -1,8 +1,8 @@
 <?php 
 // Set headers to serve CSS and encourage browser caching
 $expires = 31536000; // cache time: 1 year
-header('Content-Type: text/css; charset: UTF-8'); 
-header("Cache-Control: public, max-age=" . $expires);
+header('Content-Type: text/css'); 
+header("Cache-Control: max-age=" . $expires);
 header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $expires) . ' GMT');
 
 if(isset($_GET['checkbox'])) {

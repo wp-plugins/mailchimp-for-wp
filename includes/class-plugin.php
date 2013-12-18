@@ -68,8 +68,6 @@ class MC4WP_Lite {
 			update_option('mc4wp_transfered_old_widgets', true);
 		}
 		
-
-		
 		
 		// transfer old options to new options format
 		if (isset( $options['mailchimp_api_key'] )) {  

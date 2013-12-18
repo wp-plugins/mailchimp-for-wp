@@ -1,10 +1,10 @@
 === MailChimp for WordPress ===
 Contributors: DvanKooten
 Donate link: http://dannyvankooten.com/donate/
-Tags: mailchimp, widget, form, checkbox, sign-up form, mandrill, buddypress, multisite, bbpress, contact form 7, newsletter, mailinglist, cf7
+Tags: mailchimp,form,shortcode,widget,checkbox,comment,newsletter,buddypress,multisite,bbpress,woocommerce,easy digital downloads,contact form,contact form 7
 Requires at least: 3.1
 Tested up to: 3.8
-Stable tag: 1.4.8
+Stable tag: 1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,24 +74,34 @@ If you like the plugin, upgrade to [MailChimp for WordPress Pro](http://dannyvan
 
 > **Is there a premium version of this plugin?**
 >
-> Yes, there is and you will love it. Some Pro features are:
+> Yes, you will love it. Some Pro features are:
 > 
-> 1. (Multiple) AJAX powered forms (no page reload after submitting)
-> 1. Design beautiful forms from your admin panel, no CSS knowledge required!
-> 1. Reports, learn when, where and how your visitors subscribed. 
-> 1. Easily add *all* your MailChimp list fields to your forms using the add-field tool.
-> 1. Priority support
+> 1. Multiple forms, each subscribing to one or multiple MailChimp list(s).
+> 1. AJAX - no page reload after submitting a sign-up form.
+> 1. Custom color themes and a custom form styles designer.
+> 1. Statistics & log, learn when, where and how your visitors subscribed. 
 > 
-> [More information](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link) | [Demo](http://dannyvankooten.com/mailchimp-for-wordpress/demo/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link)
+> [More Pro features](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link) | [Demo](http://dannyvankooten.com/mailchimp-for-wordpress/demo/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link)
 
 = How to display a form in posts or pages? =
 Use the `[mc4wp_form]` shortcode.
 
 = How to display a form in widget areas like a sidebar? =
-Use the *MailChimp Sign-Up Form* Widget that comes with the plugin.
+Use the **MailChimp for WP Form** Widget that comes with the plugin.
 
 = How to display a form in my template files? =
 Use the `mc4wp_form()` function.
+
+`
+if( function_exists( 'mc4wp_form' ) ) {
+	mc4wp_form();
+}
+`
+
+= Oops. Something went wrong. =
+`Admin notice: FNAME must be provided - Please enter a value`
+
+Your selected MailChimp list requires a field named **FNAME**. Either go into your MailChimp list settings and make the FNAME field optional or add it to your form (using the *Add MailChimp field** select box).
 
 = The form shows a success message but subscribers are not added to my list(s)? =
 If the form shows a success message, it means MailChimp accepted the sign-up request and will take over from there. MailChimp could have a slight delay sending the confirmation email though, just be patient.
@@ -185,6 +195,16 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 
 == Changelog ==
+
+= 1.5 - 18 December 2013 =
+* Added: BIRTHDAY fields will now be formatted in the DD/MM format automatically
+* Added: The plugin will now try to automatically format ADDRESS fields.
+* Added: Form fields will now keep their value when a validation error occurs
+* Improved: Cache headers for CSS file
+* Improved: Added notice when no lists selected and using sign-up checkboxes
+* Improved: Various code improvements
+* Fixed: Error when activating Pro with the Lite plugin still activated.
+* Fixed: BuddyPress & MultiSite checkbox not automatically added
 
 = 1.4.8 - 10 December 2013 =
 * Fixed: "bug" that fetched lists again on every plugin settings page - huge performance improvements on the settings pages.

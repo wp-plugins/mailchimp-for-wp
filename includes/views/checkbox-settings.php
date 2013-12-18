@@ -12,6 +12,12 @@
 		<form action="options.php" method="post">
 			<?php settings_fields( 'mc4wp_lite_checkbox_settings' ); ?>
 
+			<?php if(empty($opts['lists'])) { ?>
+			<div class="mc4wp-info">
+				<p>If you want to use sign-up checkboxes, select at least one MailChimp list to subscribe people to.</p>
+			</div>
+			<?php } ?>
+
 			<table class="form-table">
 				<tr valign="top">
 					<th scope="row">Lists</th>

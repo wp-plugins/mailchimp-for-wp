@@ -104,8 +104,8 @@ class MC4WP_Lite_Admin
 			"registration_form" => "Registration form"
 		);
 
-		if(is_multisite()) $checkbox_plugins['ms_form'] = "MultiSite forms";
-		if(class_exists("BuddyPress")) $checkbox_plugins['bp_form'] = "BuddyPress registration";
+		if(is_multisite()) $checkbox_plugins['multisite_form'] = "MultiSite forms";
+		if(class_exists("BuddyPress")) $checkbox_plugins['buddypress_form'] = "BuddyPress registration";
 		if(class_exists('bbPress')) $checkbox_plugins['bbpress_forms'] = "bbPress";
 
 		if ( class_exists( 'Easy_Digital_Downloads' ) ) $checkbox_plugins['_edd_checkout'] = "(PRO ONLY) Easy Digital Downloads checkout";
@@ -138,6 +138,7 @@ class MC4WP_Lite_Admin
 	{
 		$opts = mc4wp_get_options('checkbox');
 		$lists = $this->get_mailchimp_lists();
+
 		$tab = 'checkbox-settings';
 		include_once MC4WP_LITE_PLUGIN_DIR . 'includes/views/checkbox-settings.php';
 	}

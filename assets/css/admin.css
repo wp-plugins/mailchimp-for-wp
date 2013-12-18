@@ -8,6 +8,13 @@
 	box-sizing: border-box;
 }
 
+.mc4wp-info {
+	padding: 5px 15px;
+	color: #3a87ad;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+}
+
 .valigntop{ vertical-align: top !important; }
 
 .mc4wp-box{ margin-bottom:20px; }
