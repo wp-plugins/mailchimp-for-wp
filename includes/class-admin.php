@@ -160,7 +160,7 @@ class MC4WP_Lite_Admin
 		$cached_lists = get_transient( 'mc4wp_mailchimp_lists' );
 		$refresh_cache = (isset($_REQUEST['renew-cached-data']));
 
-		// force cache refresh if merge_vars are not set
+		// force cache refresh if merge_vars are not set (deprecated)
 		if(!$refresh_cache && $cached_lists) {
 			if(!is_array($cached_lists)) {
 				$refresh_cache = true;

@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp,form,shortcode,widget,checkbox,comment,newsletter,buddypress,multisite,bbpress,woocommerce,easy digital downloads,contact form,contact form 7
 Requires at least: 3.1
 Tested up to: 3.8
-Stable tag: 1.5
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -196,7 +196,11 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 == Changelog ==
 
-= 1.5 - 18 December 2013 =
+= 1.5.1 - January 5, 2013 =
+* Fixed: Having to submit form twice for some www-hosts.
+* Improved: Scroll to form now waits until page has completely loaded
+
+= 1.5 - December 18, 2013 =
 * Added: BIRTHDAY fields will now be formatted in the DD/MM format automatically
 * Added: The plugin will now try to automatically format ADDRESS fields.
 * Added: Form fields will now keep their value when a validation error occurs
@@ -206,7 +210,7 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 * Fixed: Error when activating Pro with the Lite plugin still activated.
 * Fixed: BuddyPress & MultiSite checkbox not automatically added
 
-= 1.4.8 - 10 December 2013 =
+= 1.4.8 - December 10, 2013 =
 * Fixed: "bug" that fetched lists again on every plugin settings page - huge performance improvements on the settings pages.
 * Improved: Longer cache time for combined CSS file.
 * Improved: Prevented indexing of plugin directories

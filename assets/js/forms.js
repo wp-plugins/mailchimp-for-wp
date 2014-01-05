@@ -1,5 +1,16 @@
-(function() {
+function mc4wpAddEvent(element, eventName, callback) {
+	if (element.addEventListener) {
+		element.addEventListener(eventName, callback, false);
+	} else {
+		element.attachEvent("on" + eventName, callback);
+	}
+}
+
+mc4wpAddEvent(window, "load", function() {
 	
+	/**
+	* Populate the form elements in a given container from a JSON object
+	*/
 	function populateFields(container, data, basename) {
 
 		for(var key in data) {
@@ -44,6 +55,8 @@
 					case 'date':
 					case 'tel':
 						element.value = value;
+
+						// remove IE placeholder fallback class
 						element.className = element.className.replace('placeholdersjs','');
 						break;
 
@@ -88,10 +101,12 @@
 		return; 
 	}
 
+	// only populate fields on error
 	if(mc4wp.success == false) {
 		populateFields(formElement, mc4wp.postData);
 	}
 
+	// calculate window height to scroll to
 	var scrollToHeight = 0;
 	var obj = formElement;
 	var windowHeight = window.innerHeight;
@@ -104,21 +119,18 @@
     	scrollToHeight = formElement.offsetTop;
     }
 
-	if((windowHeight - 100) > formElement.clientHeight) {
-		// vertically center the form
+	if((windowHeight - 80) > formElement.clientHeight) {
+		// vertically center the form, but only if there's enough space for a decent margin
 		scrollToHeight = scrollToHeight - ((windowHeight - formElement.clientHeight) / 2);
 	} else {
-		// scroll a little above the form
-		scrollToHeight = scrollToHeight - 100;
+		// the form doesn't fit, scroll a little above the form
+		scrollToHeight = scrollToHeight - 80;
 	}
 	
+	// scroll there. if jQuery is loaded, do it with an animation.
 	if(window.jQuery !== undefined) {
-		var animationTime = (500 + (scrollToHeight / 2));
-		jQuery('html, body').animate({ scrollTop: scrollToHeight }, animationTime);
+		jQuery('html, body').animate({ scrollTop: scrollToHeight }, 800);
 	} else {
 		window.scrollTo(0, scrollToHeight);
 	}
-
-
-
-})();
+});

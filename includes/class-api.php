@@ -101,7 +101,7 @@ class MC4WP_Lite_API {
 
 		$response = wp_remote_post($url, array( 
 			'body' => $data,
-			'timeout' => 10,
+			'timeout' => 20,
 			'headers' => array('Accept-Encoding' => ''),
 			'sslverify' => false
 			) 
