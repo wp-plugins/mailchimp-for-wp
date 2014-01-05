@@ -1,7 +1,7 @@
 <?php defined("ABSPATH") or exit; ?>
 <div id="mc4wp-<?php echo $tab; ?>" class="wrap mc4wp-settings">
 
-	<h2>MailChimp for WordPress: Form settings</h2>
+	<h2><img src="<?php echo plugins_url('mailchimp-for-wp/assets/img/menu-icon.png'); ?>" /> MailChimp for WordPress: Form settings</h2>
 
 	<div id="mc4wp-content">
 
@@ -17,7 +17,7 @@
 
 					<tr valign="top">
 						<th scope="row"><label for="mc4wp_load_stylesheet_select">Load styles or theme?</label></th>
-						<td class="nowrap">
+						<td class="nowrap valigntop">
 							<select name="mc4wp_lite_form[css]" id="mc4wp_load_stylesheet_select">
 								<option value="0" <?php selected($opts['css'], 0); ?>>No</option>
 								<option value="default" <?php selected($opts['css'], 'default'); ?><?php selected($opts['css'], 1); ?>>Yes, load basic formatting styles</option>
@@ -57,7 +57,7 @@
 						<td colspan="3">
 							<h4>Form mark-up</h4>
 							<div class="mc4wp-wrapper">
-								<div class="mc4wp-col mc4wp-col-2-3 mc4wp-first">
+								<div class="mc4wp-col mc4wp-first">
 									<?php 
 									if(function_exists('wp_editor')) {
 										wp_editor( esc_textarea($opts['markup']), 'mc4wpformmarkup', array('tinymce' => false, 'media_buttons' => false, 'textarea_name' => 'mc4wp_lite_form[markup]'));
@@ -68,7 +68,7 @@
 
 								</div>
 
-								<div class="mc4wp-col mc4wp-col-1-3 mc4wp-last">
+								<div class="mc4wp-col mc4wp-last">
 									<?php include('parts/admin-field-wizard.php'); ?>
 								</div>
 							</div>
@@ -172,64 +172,62 @@
 	<?php include 'parts/admin-upgrade-to-pro.php'; ?>
 
 	<div class="mc4wp-box" id="mc4wp-info-tabs">
-		<h3>Building your sign-up form</h3>
+		<h3 class="mc4wp-title">Building your sign-up form</h3>
 		<p>At a minimum, your form should include just an <strong>EMAIL</strong> field and a submit button.</p>
 		<p>Add more fields to your form if your list requires more fields. Field names should match your MailChimp list field tags. Use the "Add a new field" tool to have the correct HTML generated for you.</p>
 
-		<h3>Form Styling</h3>
+		<h3 class="mc4wp-title">Form Styling</h3>
 		<p>Alter the visual appearance of the form by applying CSS rules to <b>.mc4wp-form</b> and its child elements.</p>
 		<p>You should add the CSS rules to your theme stylesheet using the <a href="<?php echo admin_url('theme-editor.php?file=style.css'); ?>">Theme Editor</a> or by editing <em><?php echo get_stylesheet_directory(); ?>/style.css</em> over FTP.</p>
 
 		<p>The <a href="http://wordpress.org/plugins/mailchimp-for-wp/faq/" target="_blank">FAQ</a> lists the various CSS selectors you can use to target the different elements.</p>
+		
+		<h3 class="mc4wp-title">Form variables</h3>
+		<p>Use the following variables to add some dynamic content to your form.</p>
 
-		<p><em>PS: With the premium version, you can design beautiful forms without touching any code. <a href="http://dannyvankooten.com/wp-content/uploads/2013/06/form-css-designer.png">Here's a screenshot</a>.</em></p>
-			
-			<h3>Form variables</h3>
-			<p>Use the following variables to add some dynamic content to your form.</p>
-
-			<table class="mc4wp-help">
-				<tr>
-					<th>{subscriber_count}</th>
-					<td>Replaced with the number of subscribers on the selected list(s).</td>
-				</tr>
-				<tr>
-					<th>{ip}</th>
-					<td>Replaced with the visitor's IP address.</td>
-				</tr>
-				<tr>
-					<th>{date}</th>
-					<td>Replaced with the current date (yyyy/mm/dd eg: <?php echo date("Y/m/d"); ?>)</td>
-				</tr>
-				<tr>
-					<th>{time}</th>
-					<td>Replaced with the current time (hh:mm:ss eg: <?php echo date("H:i:s"); ?>)</td>
-				</tr>
-				<tr>
-					<th>{user_email}</th>
-					<td>Replaced with the logged in user's email (or nothing, if there is no logged in user).</td>
-				</tr>
-				<tr>
-					<th>{user_name}</th>
-					<td>Display name of the current user</td>
-				</tr>
-				<tr>
-					<th>{user_firstname}</th>
-					<td>First name of the current user</td>
-				</tr>
-				<tr>
-					<th>{user_lastname}</th>
-					<td>Last name of the current user</td>
-				</tr>
-				<tr>
-					<th>{user_id}</th>
-					<td>Current user ID</td>
-				</tr>
-				<tr>
-					<th>{current_url}</th>
-					<td>Current URL</td>
-				</tr>
-			</table>
-		</div>
+		<table class="mc4wp-help">
+			<tr>
+				<th>{subscriber_count}</th>
+				<td>Replaced with the number of subscribers on the selected list(s).</td>
+			</tr>
+			<tr>
+				<th>{ip}</th>
+				<td>Replaced with the visitor's IP address.</td>
+			</tr>
+			<tr>
+				<th>{date}</th>
+				<td>Replaced with the current date (yyyy/mm/dd eg: <?php echo date("Y/m/d"); ?>)</td>
+			</tr>
+			<tr>
+				<th>{time}</th>
+				<td>Replaced with the current time (hh:mm:ss eg: <?php echo date("H:i:s"); ?>)</td>
+			</tr>
+			<tr>
+				<th>{user_email}</th>
+				<td>Replaced with the logged in user's email (or nothing, if there is no logged in user).</td>
+			</tr>
+			<tr>
+				<th>{user_name}</th>
+				<td>Display name of the current user</td>
+			</tr>
+			<tr>
+				<th>{user_firstname}</th>
+				<td>First name of the current user</td>
+			</tr>
+			<tr>
+				<th>{user_lastname}</th>
+				<td>Last name of the current user</td>
+			</tr>
+			<tr>
+				<th>{user_id}</th>
+				<td>Current user ID</td>
+			</tr>
+			<tr>
+				<th>{current_url}</th>
+				<td>Current URL</td>
+			</tr>
+		</table>
+	</div>
 
 		<?php include 'parts/admin-need-support.php'; ?>
 	</div>

@@ -1,7 +1,11 @@
 <?php defined("ABSPATH") or exit; ?>
 <div id="mc4wp-fw" class="mc4wp-well">
 
-	<h4>Add a new field</h4>
+	<h4 class="mc4wp-title">Add a new field</h4>
+
+	
+	<p class="mc4wp-notice no-lists-selected" <?php if(!empty($opts['lists'])) { ?>style="display: none;" <?php } ?>>Select at least one list first.</p>
+
 	<p>Use the tool below to generate the HTML for your form fields.</p>
 	<p>
 		<select class="widefat" id="mc4wp-fw-mailchimp-fields">
