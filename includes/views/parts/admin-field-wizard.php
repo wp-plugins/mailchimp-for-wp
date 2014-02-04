@@ -1,4 +1,10 @@
-<?php defined("ABSPATH") or exit; ?>
+<?php 
+if( ! defined("MC4WP_LITE_VERSION") ) {
+	header( 'Status: 403 Forbidden' );
+	header( 'HTTP/1.1 403 Forbidden' );
+	exit;
+}
+?>
 <div id="mc4wp-fw" class="mc4wp-well">
 
 	<h4 class="mc4wp-title">Add a new field</h4>

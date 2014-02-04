@@ -1,12 +1,14 @@
 (function($) { 
 
-	$("tr.pro-feature td :radio").change(function() {
+	$("tr.pro-feature, tr.pro-feature td :radio").change(function() {
 		this.checked = false;
 		alert("This option is only available in the premium version of MailChimp for WordPress.");
+		event.stopPropagation();
 	});
 
-	$("tr.pro-feature label").click(function() {
+	$("tr.pro-feature, tr.pro-feature label").click(function() {
 		alert("This option is only available in the premium version of MailChimp for WordPress.");
+		event.stopPropagation();
 	});
 
 

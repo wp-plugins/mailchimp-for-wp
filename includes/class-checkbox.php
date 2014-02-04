@@ -1,5 +1,11 @@
 <?php
 
+if( ! defined("MC4WP_LITE_VERSION") ) {
+	header( 'Status: 403 Forbidden' );
+	header( 'HTTP/1.1 403 Forbidden' );
+	exit;
+}
+
 class MC4WP_Lite_Checkbox
 {
 	private $showed_checkbox = false;
@@ -89,10 +95,17 @@ class MC4WP_Lite_Checkbox
 		$opts = mc4wp_get_options('checkbox');
 		$label = isset($args['labels'][0]) ? $args['labels'][0] : $opts['label'];
 		$checked = $opts['precheck'] ? "checked" : '';
+
 		$content = "\n<!-- Checkbox by MailChimp for WordPress plugin v". MC4WP_LITE_VERSION ." - http://dannyvankooten.com/mailchimp-for-wordpress/ -->\n";
+		
+		do_action('mc4wp_before_checkbox');
+
 		$content .= '<p id="mc4wp-checkbox">';
 		$content .= '<label><input type="checkbox" name="mc4wp-do-subscribe" value="1" '. $checked . ' /> ' . __($label) . '</label>';
 		$content .= '</p>';
+		
+		do_action('mc4wp_after_checkbox');
+
 		$content .= "\n<!-- / MailChimp for WP Plugin -->\n";
 		return $content;
 	}
