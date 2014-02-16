@@ -1,12 +1,14 @@
 (function($) { 
 
-	$("tr.pro-feature td :radio").change(function() {
+	$("tr.pro-feature, tr.pro-feature td :radio").change(function() {
 		this.checked = false;
 		alert("This option is only available in the premium version of MailChimp for WordPress.");
+		event.stopPropagation();
 	});
 
-	$("tr.pro-feature label").click(function() {
+	$("tr.pro-feature, tr.pro-feature label").click(function() {
 		alert("This option is only available in the premium version of MailChimp for WordPress.");
+		event.stopPropagation();
 	});
 
 
@@ -48,11 +50,16 @@
 		// set the fields the user can choose from
 		function setFields()
 		{
+			// show notice if no lists selecteed
+			var $selectedLists = $lists.filter(':checked');
+			$(".no-lists-selected").toggle(($selectedLists.length == 0));
+			
+
 			// empty field select
 			$mailchimpFields.find('option').not('.default').remove();
 			
 			// loop through checked lists
-			$lists.filter(':checked').each(function() {
+			$selectedLists.each(function() {
 				var fields = $(this).data('fields');
 				var groupings = $(this).data('groupings');
 
