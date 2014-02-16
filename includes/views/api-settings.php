@@ -1,7 +1,15 @@
-<?php defined("ABSPATH") or exit; ?>
+<?php 
+
+if( ! defined("MC4WP_LITE_VERSION") ) {
+	header( 'Status: 403 Forbidden' );
+	header( 'HTTP/1.1 403 Forbidden' );
+	exit;
+}
+
+?>
 <div id="mc4wp-<?php echo $tab; ?>" class="wrap mc4wp-settings">
 
-	<h2>MailChimp for WordPress: MailChimp Settings</h2>
+	<h2><img src="<?php echo plugins_url('mailchimp-for-wp/assets/img/menu-icon.png'); ?>" /> MailChimp for WordPress: MailChimp Settings</h2>
 
 	<div id="mc4wp-content">
 
@@ -28,8 +36,9 @@
 		</form>
 
 	<?php if($connected) { ?>
-	<h3 class="mc4wp-title">MailChimp Cache</h3>
-	<p>The table below shows your cached MailChimp lists configuration. If you made any changes in your MailChimp configuration that is not yet represented in the table below, please renew the cache manually by hitting the "renew cached data" button.</p>
+	<h3 class="mc4wp-title">Cached MailChimp Settings</h3>
+	<p>The table below shows your cached MailChimp lists configuration.</p>
+	<p>Made changes to your lists? Please renew the cache manually by hitting the "renew cached data" button.</p>
 
 	<table class="wp-list-table widefat">
 		<thead>
@@ -53,7 +62,7 @@
 						} 
 						?>
 						</td>
-						<td><a href="http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=lite-plugin&utm_medium=link&utm_campaign=cache-table-link">Pro Only, Upgrade Now</a></td>
+						<td class="pro-feature">Pro Only</td>
 					</tr>
 				<?php } // endforeach ?>
 			<?php } else { ?>
