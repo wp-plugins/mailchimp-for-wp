@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp,form,shortcode,widget,checkbox,comment,newsletter,buddypress,multisite,bbpress,woocommerce,easy digital downloads,contact form,contact form 7
 Requires at least: 3.1
 Tested up to: 3.8.1
-Stable tag: 1.5.3
+Stable tag: 1.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -198,7 +198,11 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 == Changelog ==
 
-= 1.5.3 - February 18, 2014 =
+= 1.5.4 - February 17, 2014 =
+* Fixed: "Add to form" button not working
+* Improved: Plugin now compatible with custom plugin folder names
+
+= 1.5.3 - February 16, 2014 =
 * Fixed: Undefined constant notice on admin pages
 * Fixed: "Add to form mark-up" button not working with CKEditor for WordPress
 * Improved: Cleaned-up Admin JS
@@ -454,6 +458,9 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 * BETA release
 
 == Upgrade Notice ==
+
+= 1.5.4 =
+Fixed admin notice and "add to form" button, improved Contact Form 7 integration.
 
 = 1.5.3 =
 Fixed admin notice and improved Contact Form 7 integration.
