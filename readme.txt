@@ -1,10 +1,10 @@
 === MailChimp for WordPress ===
 Contributors: DvanKooten
 Donate link: http://dannyvankooten.com/donate/
-Tags: mailchimp, widget, form, checkbox, sign-up form, mandrill, buddypress, multisite, bbpress, contact form 7, newsletter, mailinglist, cf7
+Tags: mailchimp,form,shortcode,widget,checkbox,comment,newsletter,buddypress,multisite,bbpress,woocommerce,easy digital downloads,contact form,contact form 7
 Requires at least: 3.1
-Tested up to: 3.7.1
-Stable tag: 1.4.7
+Tested up to: 3.8.1
+Stable tag: 1.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,24 +74,34 @@ If you like the plugin, upgrade to [MailChimp for WordPress Pro](http://dannyvan
 
 > **Is there a premium version of this plugin?**
 >
-> Yes, there is and you will love it. Some Pro features are:
+> Yes, you will love it. Some Pro features are:
 > 
-> 1. (Multiple) AJAX powered forms (no page reload after submitting)
-> 1. Design beautiful forms from your admin panel, no CSS knowledge required!
-> 1. Reports, learn when, where and how your visitors subscribed. 
-> 1. Easily add *all* your MailChimp list fields to your forms using the add-field tool.
-> 1. Priority support
+> 1. Multiple forms, each subscribing to one or multiple MailChimp list(s).
+> 1. AJAX - no page reload after submitting a sign-up form.
+> 1. Custom color themes and a custom form styles designer.
+> 1. Statistics & log, learn when, where and how your visitors subscribed. 
 > 
-> [More information](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link) | [Demo](http://dannyvankooten.com/mailchimp-for-wordpress/demo/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link)
+> [More Pro features](http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link) | [Demo](http://dannyvankooten.com/mailchimp-for-wordpress/demo/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link)
 
 = How to display a form in posts or pages? =
 Use the `[mc4wp_form]` shortcode.
 
 = How to display a form in widget areas like a sidebar? =
-Use the *MailChimp Sign-Up Form* Widget that comes with the plugin.
+Use the **MailChimp for WP Form** Widget that comes with the plugin.
 
 = How to display a form in my template files? =
 Use the `mc4wp_form()` function.
+
+`
+if( function_exists( 'mc4wp_form' ) ) {
+	mc4wp_form();
+}
+`
+
+= Oops. Something went wrong. =
+`Admin notice: FNAME must be provided - Please enter a value`
+
+Your selected MailChimp list requires a field named **FNAME**. Either go into your MailChimp list settings and make the FNAME field optional or add it to your form (using the *Add MailChimp field** select box).
 
 = The form shows a success message but subscribers are not added to my list(s)? =
 If the form shows a success message, it means MailChimp accepted the sign-up request and will take over from there. MailChimp could have a slight delay sending the confirmation email though, just be patient.
@@ -123,6 +133,8 @@ Use the following shortcode in your CF7 form mark-up to display a sign-up checkb
 
 `[mc4wp_checkbox "My custom label text"]`
 
+You can then use `[mc4wp_checkbox]` inside your CF7 email templates, it will show "yes" or "no".
+
 If you need more data for your merge fields, prefix the field name with `mc4wp-`.
 
 *Example CF7 template for MailChimp WEBSITE field*
@@ -131,7 +143,7 @@ If you need more data for your merge fields, prefix the field name with `mc4wp-`
 `
 
 = Can I add a checkbox to third-party forms? =
-Yes. Go to *MailChimp for WP > Checkboxes* and tick the "show checkbox at other forms (manual)" checkbox. Then, include a checkbox with name attribute `mc4wp-try-subscribe` and value `1` in your form.
+Yes. Just include a checkbox with name attribute `mc4wp-try-subscribe` and value `1` in your form.
 
 *Example HTML*
 `
@@ -177,7 +189,7 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 1. Simple or advanced sign-up forms that blend in with your theme.
 2. A sign-up checkbox in your comment form is an amazing conversion booster.
 3. A simple form in the footer of the Twenty Thirteen theme.
-4. Add sign-up checkboxes to various places on your site. Easy-peasy.
+4. Add sign-up checkboxes to various places on your site. 
 5. Creating sign-up forms is easy. The Pro version allows you to create as many form as you like.
 6. Write your own HTML or have it generated for you. Many (optional) customization settings are availabl.
 7. **Pro only:** Gain valuable insights which method your visitors used to subscribe for any given time period using beautiful line charts.
@@ -185,6 +197,48 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 
 == Changelog ==
+
+= 1.5.4 - February 17, 2014 =
+* Fixed: "Add to form" button not working
+* Improved: Plugin now compatible with custom plugin folder names
+
+= 1.5.3 - February 16, 2014 =
+* Fixed: Undefined constant notice on admin pages
+* Fixed: "Add to form mark-up" button not working with CKEditor for WordPress
+* Improved: Cleaned-up Admin JS
+* Improved: You can now use `[mc4wp_checkbox]` inside your CF7 email templates
+* Improved: You can now add `default:1` or `default:0` to the CF7 shortcode to check or uncheck the sign-up checkbox.
+
+= 1.5.2 - February 4, 2014 =
+* Improved: Improved direct file access security
+* Improved: Now using native WP function to catch SSL requests
+* Improved: Changed `call` method in API class to public.
+* Added: Filter to edit the required capability to access settings pages
+* Added: Filter to edit form action
+* Added: Filters to allow extra form validation, like a captcha field.
+* Added: Added `get_member_info` and `list_has_subscriber` method to API class.
+
+= 1.5.1 - January 5, 2014 =
+* Fixed: Having to submit form twice for some www-hosts.
+* Improved: Scroll to form now waits until page has completely loaded
+
+= 1.5 - December 18, 2013 =
+* Added: BIRTHDAY fields will now be formatted in the DD/MM format automatically
+* Added: The plugin will now try to automatically format ADDRESS fields.
+* Added: Form fields will now keep their value when a validation error occurs
+* Improved: Cache headers for CSS file
+* Improved: Added notice when no lists selected and using sign-up checkboxes
+* Improved: Various code improvements
+* Fixed: Error when activating Pro with the Lite plugin still activated.
+* Fixed: BuddyPress & MultiSite checkbox not automatically added
+
+= 1.4.8 - December 10, 2013 =
+* Fixed: "bug" that fetched lists again on every plugin settings page - huge performance improvements on the settings pages.
+* Improved: Longer cache time for combined CSS file.
+* Improved: Prevented indexing of plugin directories
+* Improved: Improved default checkbox CSS for themes that have custom checkbox styling.
+* Improved: Better scroll to form element after form submit. Vertically centers form element with and without jQuery now. No ugly page jump.
+* Improved: WP 3.8 Admin CSS compatibility and other improvements to settings pages, especially for small(er) screens.
 
 = 1.4.7 - December 4, 2013 =
 * Fixed: Checkbox width not being reset when loading default CSS.
@@ -404,6 +458,15 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 * BETA release
 
 == Upgrade Notice ==
+
+= 1.5.4 =
+Fixed admin notice and "add to form" button, improved Contact Form 7 integration.
+
+= 1.5.3 =
+Fixed admin notice and improved Contact Form 7 integration.
+
+= 1.4.8 =
+WP 3.8 compatibility, better scroll to form and huge settings page performance improvement
 
 = 1.4.5 =
 Bugfix: fixed invalid email address message after updating to 1.4.4

@@ -1,16 +1,29 @@
-<?php defined("ABSPATH") or exit; ?>
+<?php 
+if( ! defined("MC4WP_LITE_VERSION") ) {
+	header( 'Status: 403 Forbidden' );
+	header( 'HTTP/1.1 403 Forbidden' );
+	exit;
+}
+
+?>
 <div id="mc4wp-<?php echo $tab; ?>" class="wrap mc4wp-settings">
 
-	<h2>MailChimp for WordPress: Checkbox Settings</h2>
-
+	<h2><img src="<?php echo plugins_url('mailchimp-for-wp/assets/img/menu-icon.png'); ?>" /> MailChimp for WordPress: Checkbox Settings</h2>	
+	
 	<div id="mc4wp-content">
 
 		<?php settings_errors(); ?>
 		<p>To use the MailChimp for WP sign-up checkboxes, select at least one list and one form to add the checkbox to.</p>
 
-		<h3 class="mc4wp-title">MailChimp settings</h3>
+		<h3 class="mc4wp-title">MailChimp settings for checkboxes</h3>
 		<form action="options.php" method="post">
 			<?php settings_fields( 'mc4wp_lite_checkbox_settings' ); ?>
+
+			<?php if(empty($opts['lists'])) { ?>
+			<div class="mc4wp-info">
+				<p>If you want to use sign-up checkboxes, select at least one MailChimp list to subscribe people to.</p>
+			</div>
+			<?php } ?>
 
 			<table class="form-table">
 				<tr valign="top">
@@ -23,7 +36,7 @@
 					} 
 					else 
 					{ ?>
-						<td>
+						<td class="nowrap">
 							<?php foreach($lists as $list) { 
 							?><label><input type="checkbox" name="mc4wp_lite_checkbox[lists][<?php echo $list->id; ?>]" value="<?php echo esc_attr($list->id); ?>" <?php if(array_key_exists($list->id, $opts['lists'])) echo 'checked="checked"'; ?>> <?php echo $list->name; ?></label><br /><?php
 							} ?>
@@ -45,7 +58,7 @@
 		
 		<tr valign="top">
 			<th scope="row">Add the checkbox to these forms</th>
-			<td colspan="2">
+			<td colspan="2" class="nowrap">
 				<?php foreach($this->get_checkbox_compatible_plugins() as $code => $name) {
 
 					if($code[0] != '_') {

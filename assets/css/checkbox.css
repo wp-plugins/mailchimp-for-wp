@@ -10,12 +10,13 @@
 	padding:0; 
 	vertical-align: middle;
 	display:inline-block !important; 
-	-webkit-appearance: checkbox; 
-	width: auto;
+	max-width: 20px;
 }
 
 #mc4wp-checkbox label{ 
+	display:block;
 	cursor:pointer; 
+	width: auto;
 }
 
 #registerform #mc4wp-checkbox{ 
