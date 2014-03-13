@@ -71,6 +71,8 @@
   background:none;
   text-shadow:none;
   filter: none;
+  height: auto;
+  width: auto;
 }
 
 .mc4wp-form input[type="submit"]:focus, .mc4wp-form button:focus {

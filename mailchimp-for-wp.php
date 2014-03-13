@@ -2,8 +2,8 @@
 /*
 Plugin Name: MailChimp for WordPress Lite
 Plugin URI: http://dannyvankooten.com/mailchimp-for-wordpress/
-Description: Lite version of MailChimp for WordPress. Add various sign-up methods to your website. Show sign-up forms in your posts, pages or widgets. Add sign-up checkboxes to various forms, like your comment or contact forms. Premium features include multiple and better forms, easier styling, detailed statistics and much more: <a href="http://dannyvankooten.com/mailchimp-for-wordpress/">Upgrade now</a>
-Version: 1.4.7
+Description: Lite version of MailChimp for WordPress. Adds various sign-up methods to your website. 
+Version: 1.5.6
 Author: Danny van Kooten
 Author URI: http://dannyvanKooten.com
 License: GPL v3
@@ -25,18 +25,36 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-defined( 'ABSPATH' ) OR exit;
-
-define("MC4WP_LITE_VERSION", "1.4.7");
-define("MC4WP_LITE_PLUGIN_DIR", plugin_dir_path(__FILE__));
-
-if(!function_exists('is_plugin_active')) {
-	include_once( ABSPATH . 'wp-admin/includes/plugin.php' ); 
+if( ! defined( 'ABSPATH' ) ) {
+	header( 'Status: 403 Forbidden' );
+	header( 'HTTP/1.1 403 Forbidden' );
+	exit;
 }
 
-// Only load Lite plugin is Pro version is not active
-if(!is_plugin_active('mailchimp-for-wp-pro/mailchimp-for-wp-pro.php')) {
-	include_once MC4WP_LITE_PLUGIN_DIR . 'includes/MC4WP_Lite.php';
-	new MC4WP_Lite();
-} 
 
+function mc4wp_load_plugin() {
+
+	// don't load plugin if user has the premium version installed and activated
+	if( defined( "MC4WP_VERSION" ) || ( is_admin() && isset( $_GET['action'] ) && $_GET['action'] === 'activate' && isset( $_GET['plugin'] ) && stristr( $_GET['plugin'], 'mailchimp-for-wp-pro' ) !== false ) ) {
+		return;
+	}
+
+	// bootstrap the lite plugin
+	define("MC4WP_LITE_VERSION", "1.5.6");
+	define("MC4WP_LITE_PLUGIN_DIR", plugin_dir_path(__FILE__));
+	define("MC4WP_LITE_PLUGIN_URL", plugins_url( '/' , __FILE__ ) );
+
+	require_once MC4WP_LITE_PLUGIN_DIR . 'includes/functions.php';
+	require_once MC4WP_LITE_PLUGIN_DIR . 'includes/class-plugin.php';
+	MC4WP_Lite::init();
+
+	if(is_admin() && (!defined("DOING_AJAX") || !DOING_AJAX)) {
+		
+		// ADMIN
+		require_once MC4WP_LITE_PLUGIN_DIR . 'includes/class-admin.php';
+		MC4WP_Lite_Admin::init();
+
+	} 
+}
+
+add_action( 'plugins_loaded', 'mc4wp_load_plugin', 20 );
