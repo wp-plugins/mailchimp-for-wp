@@ -204,7 +204,7 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 - Fixed special characters in group names not working
 - Fixed BIRTHDAY field format (mm/dd)
 
-** Improvements**
+**Improvements**
 
 - Moved away from Singleton pattern
 - Added a code version number for upgrade routines
