@@ -195,7 +195,6 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 7. **Pro only:** Gain valuable insights which method your visitors used to subscribe for any given time period using beautiful line charts.
 8. **Pro only:** Create your own CSS styles with the form designer in the Pro version.
 
-
 == Changelog ==
 
 = 1.5.7 - March 18, 2014 =
@@ -212,7 +211,6 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 - MailChimp cached data improvements. Now showing subscriber count.
 - Base form CSS improvements, added vertical-align to field elements and removed padding from paragraph elements.
 - Updated Placeholders.js for old IE versions
-
 
 = 1.5.6 - March 13, 2014 =
 * Fixed: Honeypot textarea showing in some themes
