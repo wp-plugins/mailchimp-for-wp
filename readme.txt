@@ -198,6 +198,22 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 == Changelog ==
 
+= 1.5.7 - March 14, 2014 =
+**Fixes**
+
+- Fixed special characters in group names not working
+- Fixed BIRTHDAY field format (mm/dd)
+
+** Improvements**
+
+- Moved away from Singleton pattern
+- Added a code version number for upgrade routines
+- Better class documentation
+- MailChimp cached data improvements. Now showing subscriber count.
+- Base form CSS improvements, added vertical-align to field elements and removed padding from paragraph elements.
+- Updated Placeholders.js for old IE versions
+
+
 = 1.5.6 - March 13, 2014 =
 * Fixed: Honeypot textarea showing in some themes
 * Improved: Plugin will automatically strip duplicate `<form>` tags from form mark-up
@@ -471,6 +487,9 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 * BETA release
 
 == Upgrade Notice ==
+
+= 1.5.7 =
+Minor improvements and small bug fixes.
 
 = 1.5.5 =
 Fixed field generator only generating `text` input fields.

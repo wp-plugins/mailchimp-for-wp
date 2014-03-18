@@ -8,6 +8,7 @@ if( ! defined("MC4WP_LITE_VERSION") ) {
 
 /**
 * Takes care of requests to the MailChimp API
+*
 * @uses WP_HTTP
 */ 
 class MC4WP_Lite_API {
@@ -18,6 +19,8 @@ class MC4WP_Lite_API {
 	private $connected = null;
 
 	/**
+	* Constructor
+	*
 	* @param string $api_key MailChimp API key
 	*/
 	public function __construct( $api_key )
@@ -239,16 +242,12 @@ class MC4WP_Lite_API {
 		}
 
 		// dirty fix for older WP version
-		if($method == 'helper/ping' && isset( $response['headers']['content-length'] ) && (int) $response['headers']['content-length'] == '44' ) { 
+		if($method == 'helper/ping' && isset( $response['headers']['content-length'] ) && (int) $response['headers']['content-length'] == 44 ) { 
 			return (object) array( 'msg' => "Everything's Chimpy!");
 		}
 		
 		$body = wp_remote_retrieve_body( $response );
 		return json_decode( $body );
-	}
-
-	public function show_http_error() {
-
 	}
 
 	/**

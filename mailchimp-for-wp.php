@@ -3,7 +3,7 @@
 Plugin Name: MailChimp for WordPress Lite
 Plugin URI: http://dannyvankooten.com/mailchimp-for-wordpress/
 Description: Lite version of MailChimp for WordPress. Adds various sign-up methods to your website. 
-Version: 1.5.6
+Version: 1.5.7
 Author: Danny van Kooten
 Author URI: http://dannyvanKooten.com
 License: GPL v3
@@ -25,36 +25,43 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+// Prevent direct file access
 if( ! defined( 'ABSPATH' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit;
 }
 
-
+/**
+* Loads the MailChimp for WP plugin files
+*
+* @return boolean True if the plugin files were loaded, false otherwise.
+*/
 function mc4wp_load_plugin() {
 
 	// don't load plugin if user has the premium version installed and activated
-	if( defined( "MC4WP_VERSION" ) || ( is_admin() && isset( $_GET['action'] ) && $_GET['action'] === 'activate' && isset( $_GET['plugin'] ) && stristr( $_GET['plugin'], 'mailchimp-for-wp-pro' ) !== false ) ) {
-		return;
+	if( defined( "MC4WP_VERSION" ) ) {
+		return false;
 	}
 
 	// bootstrap the lite plugin
-	define("MC4WP_LITE_VERSION", "1.5.6");
-	define("MC4WP_LITE_PLUGIN_DIR", plugin_dir_path(__FILE__));
-	define("MC4WP_LITE_PLUGIN_URL", plugins_url( '/' , __FILE__ ) );
+	define( "MC4WP_LITE_VERSION", "1.5.7" );
+	define( "MC4WP_LITE_PLUGIN_DIR", plugin_dir_path( __FILE__ ) );
+	define( "MC4WP_LITE_PLUGIN_URL", plugins_url( '/' , __FILE__ ) );
 
 	require_once MC4WP_LITE_PLUGIN_DIR . 'includes/functions.php';
 	require_once MC4WP_LITE_PLUGIN_DIR . 'includes/class-plugin.php';
-	MC4WP_Lite::init();
+	$GLOBALS['mc4wp'] = new MC4WP_Lite();
 
-	if(is_admin() && (!defined("DOING_AJAX") || !DOING_AJAX)) {
+	if( is_admin() && ( ! defined( "DOING_AJAX" ) || ! DOING_AJAX ) ) {
 		
 		// ADMIN
 		require_once MC4WP_LITE_PLUGIN_DIR . 'includes/class-admin.php';
-		MC4WP_Lite_Admin::init();
+		new MC4WP_Lite_Admin();
 
 	} 
+
+	return true;
 }
 
 add_action( 'plugins_loaded', 'mc4wp_load_plugin', 20 );
