@@ -1,7 +1,15 @@
-<?php defined("ABSPATH") or exit; ?>
+<?php 
+
+if( ! defined("MC4WP_LITE_VERSION") ) {
+	header( 'Status: 403 Forbidden' );
+	header( 'HTTP/1.1 403 Forbidden' );
+	exit;
+}
+
+?>
 <div id="mc4wp-<?php echo $tab; ?>" class="wrap mc4wp-settings">
 
-	<h2>MailChimp for WordPress: MailChimp Settings</h2>
+	<h2><img src="<?php echo MC4WP_LITE_PLUGIN_URL . 'assets/img/menu-icon.png'; ?>" /> MailChimp for WordPress: MailChimp Settings</h2>
 
 	<div id="mc4wp-content">
 
@@ -28,41 +36,84 @@
 		</form>
 
 	<?php if($connected) { ?>
-	<h3 class="mc4wp-title">MailChimp Cache</h3>
-	<p>The table below shows your cached MailChimp lists configuration. If you made any changes in your MailChimp configuration that is not yet represented in the table below, please renew the cache manually by hitting the "renew cached data" button.</p>
+	
+		<h3 class="mc4wp-title">MailChimp Data</h3>
+		<p>The table below shows your MailChimp lists data. If you applied changes to your MailChimp lists, please use the following button to renew your cached data.</p>
+		
+		<form method="post">
+			<p>
+				<input type="submit" name="renew-cached-data" value="Renew cached data" class="button" />
+			</p>
+		</form>
 
-	<table class="wp-list-table widefat">
-		<thead>
-			<tr>
-				<th scope="col">List Name</th>
-				<th scope="col">Merge fields</th>
-				<th scope="col">Interest groupings</th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php 
-			if($lists && is_array($lists)) { ?>
-				<?php foreach($lists as $list) {  ?>
+		<table class="wp-list-table widefat">
+			<thead>
+				<tr>
+					<th class="mc4wp-hide-smallscreens" scope="col">List ID</th>
+					<th scope="col">List Name</th>
+					<th scope="col">Merge fields</th>
+					<th scope="col">Groupings</th>
+					<th scope="col">Subscriber Count</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php 
+				if($lists) { 
+					foreach($lists as $list) { ?>
+
 					<tr valign="top">
+						<td class="mc4wp-hide-smallscreens"><?php echo $list->id; ?></td>
 						<td><?php echo $list->name; ?></td>
-						<td><?php 
-						$first = true;
-						foreach($list->merge_vars as $merge_var) { 
-							echo ($first) ? $merge_var->name : ', '. $merge_var->name;
-							$first = false;
-						} 
-						?>
+						
+						<td>
+							<?php if( ! empty( $list->merge_vars ) ) { ?>
+								<ul class="ul-square" style="margin-top: 0;">
+									<?php foreach( $list->merge_vars as $merge_var ) { ?>
+										<li><?php echo $merge_var->name; ?></li>
+									<?php } ?>
+								</ul>
+							<?php } ?>
 						</td>
-						<td><a href="http://dannyvankooten.com/mailchimp-for-wordpress/?utm_source=lite-plugin&utm_medium=link&utm_campaign=cache-table-link">Pro Only, Upgrade Now</a></td>
-					</tr>
-				<?php } // endforeach ?>
-			<?php } else { ?>
-				<tr><td colspan="4"><p>No lists found, are you connected to MailChimp? If so, try renewing the cache.</p></td></tr>
-			<?php } ?>
-		</tbody>
-	</table>
+						<td>
+						<?php 
+						if( ! empty( $list->interest_groupings ) ) {
+							foreach($list->interest_groupings as $grouping) { ?>
+								<strong><?php echo $grouping->name; ?></strong>
 
-	<p><form method="post"><input type="submit" name="renew-cached-data" value="Renew cached data" class="button" /></form></p>
+								<?php if( ! empty( $grouping->groups ) ) { ?>
+									<ul class="ul-square">
+										<?php foreach( $grouping->groups as $group ) { ?>
+											<li><?php echo $group->name; ?></li>
+										<?php } ?>
+									</ul>
+								<?php } ?>
+							<?php }
+							} else {
+								?>-<?php
+							} ?>
+
+						</td>
+						<td><?php echo $list->subscriber_count; ?></td>
+					</tr>
+					<?php 
+					}  
+				} else { ?>
+					<tr>
+						<td colspan="3">
+							<p>No lists were found in your MailChimp account.</p>
+						</td>
+					</tr>
+				<?php 
+				} 
+				?>
+			</tbody>
+		</table>
+
+		<form method="post">
+			<p>
+				<input type="submit" name="renew-cached-data" value="Renew cached data" class="button" />
+			</p>
+		</form>
 	<?php } ?>
 
 	<?php include 'parts/admin-footer.php'; ?>
