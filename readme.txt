@@ -4,7 +4,7 @@ Donate link: http://dannyvankooten.com/donate/
 Tags: mailchimp,form,shortcode,widget,checkbox,comment,newsletter,buddypress,multisite,bbpress,woocommerce,easy digital downloads,contact form,contact form 7
 Requires at least: 3.1
 Tested up to: 3.8.1
-Stable tag: 1.5.7
+Stable tag: 1.5.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -196,6 +196,12 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 8. **Pro only:** Create your own CSS styles with the form designer in the Pro version.
 
 == Changelog ==
+
+= 1.5.8 - March 26, 2014 =
+
+**Fixes**
+- Fixed 'call to undefined function' when using Avia Layout Builder.
+- "Already subscribed" message never showing.
 
 = 1.5.7 - March 18, 2014 =
 **Fixes**
@@ -485,6 +491,9 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 * BETA release
 
 == Upgrade Notice ==
+
+= 1.5.8 =
+Fixed bug where certain errors (like "already subscribed") were not showing up.
 
 = 1.5.7 =
 Minor improvements and small bug fixes.
