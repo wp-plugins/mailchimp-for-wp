@@ -200,8 +200,9 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 = 1.5.8 - March 26, 2014 =
 
 **Fixes**
-- Fixed 'call to undefined function' when using Avia Layout Builder.
-- "Already subscribed" message never showing.
+
+- 'call to undefined function' when using Avia Layout Builder
+- "Already subscribed" message never showing
 
 = 1.5.7 - March 18, 2014 =
 **Fixes**
