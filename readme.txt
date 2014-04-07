@@ -41,7 +41,9 @@ Add sign-up checkboxes to *any* form on your website. The plugin offers built-in
 
 **More information**
 
-Take a look at some other [WordPress plugins](http://dannyvankooten.com/wordpress-plugins/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=more-info-link) by [Danny van Kooten](http://dannyvankooten.com?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=more-info-link) or contact him on Twitter: [@DannyvanKooten](http://twitter.com/dannyvankooten).
+- Other [WordPress plugins](http://dannyvankooten.com/wordpress-plugins/?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=more-info-link) by [Danny van Kooten](http://dannyvankooten.com?utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=more-info-link)
+- Contact Danny on Twitter: [@DannyvanKooten](http://twitter.com/dannyvankooten)
+- If you're a dev, follow or contribute to the [MailChimp for WordPress plugin on GitHub](https://github.com/dannyvankooten/mailchimp-for-wordpress)
 
 
 == Installation ==
