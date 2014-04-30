@@ -373,3 +373,7 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 * Improved: huge performance improvements on admin settings pages
 * Improved: usability and responsiveness of form settings page
 * Improved: clean-up
+
+== Upgrade Notice ==
+
+Support for Captcha's, translated settings pages, improved CSS serving and various code improvements.
