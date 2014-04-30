@@ -7,7 +7,6 @@ Tested up to: 3.9
 Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: mailchimp-for-wp
 
 The best MailChimp plugin to get more email subscribers. Easily add sign-up forms and sign-up checkboxes to your WordPress website.
 
@@ -28,8 +27,8 @@ Add sign-up checkboxes to *any* form on your website. The plugin offers built-in
 **MailChimp for WordPress, at a glance..**
 
 - Simple. All you need is your MailChimp API key.
-- Customizable. Have the form fields generated for you or write your own HTML. 
-- Beautiful. Choose one of the default form themes or write your own CSS.
+- Customizable. Have the form fields generated for you or use your own mark-up.
+- Beautiful. Choose one of the default form themes or use your own styles.
 - Developer friendly.
 
 [Installation](http://wordpress.org/plugins/mailchimp-for-wp/installation/) | [Frequently Asked Questions](http://wordpress.org/plugins/mailchimp-for-wp/faq/) | [Screenshots](http://wordpress.org/plugins/mailchimp-for-wp/screenshots/)
