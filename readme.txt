@@ -376,4 +376,5 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 == Upgrade Notice ==
 
+= 2.0 =
 Support for Captcha's, translated settings pages, improved CSS serving and various code improvements.
