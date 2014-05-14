@@ -119,10 +119,10 @@ class MC4WP_Lite_Admin
 	{
 		$required_cap = apply_filters( 'mc4wp_settings_cap', 'manage_options' );
 		add_menu_page( 'MailChimp for WP Lite', 'MailChimp for WP', $required_cap, 'mc4wp-lite', array($this, 'show_api_settings'), MC4WP_LITE_PLUGIN_URL . 'assets/img/menu-icon.png' );
-		add_submenu_page( 'mc4wp-lite', 'API Settings - MailChimp for WP Lite', 'MailChimp Settings', $required_cap, 'mc4wp-lite', array( $this, 'show_api_settings' ) );
-		add_submenu_page( 'mc4wp-lite', 'Checkbox Settings - MailChimp for WP Lite', 'Checkboxes', $required_cap, 'mc4wp-lite-checkbox-settings', array($this, 'show_checkbox_settings' ) );
-		add_submenu_page( 'mc4wp-lite', 'Form Settings - MailChimp for WP Lite', 'Forms', $required_cap, 'mc4wp-lite-form-settings', array( $this, 'show_form_settings' ) );
-		add_submenu_page( 'mc4wp-lite', 'Upgrade to Pro - MailChimp for WP Lite', 'Upgrade to Pro', $required_cap, 'mc4wp-lite-upgrade', array( $this, 'redirect_to_pro' ) );
+		add_submenu_page( 'mc4wp-lite', 'API Settings - MailChimp for WP Lite', __( 'MailChimp Settings', 'mailchimp-for-wp' ), $required_cap, 'mc4wp-lite', array( $this, 'show_api_settings' ) );
+		add_submenu_page( 'mc4wp-lite', 'Checkbox Settings - MailChimp for WP Lite', __( 'Checkboxes', 'mailchimp-for-wp' ), $required_cap, 'mc4wp-lite-checkbox-settings', array($this, 'show_checkbox_settings' ) );
+		add_submenu_page( 'mc4wp-lite', 'Form Settings - MailChimp for WP Lite', __( 'Forms', 'mailchimp-for-wp' ), $required_cap, 'mc4wp-lite-form-settings', array( $this, 'show_form_settings' ) );
+		add_submenu_page( 'mc4wp-lite', 'Upgrade to Pro - MailChimp for WP Lite', __( 'Upgrade to Pro', 'mailchimp-for-wp' ), $required_cap, 'mc4wp-lite-upgrade', array( $this, 'redirect_to_pro' ) );
 	}
 
 
@@ -150,8 +150,26 @@ class MC4WP_Lite_Admin
 	public function validate_form_settings( $settings ) {
 
 		if( isset( $settings['markup'] ) ) {
+
 			// strip form tags (to prevent people from adding them)
 			$settings['markup'] = preg_replace( '/<\/?form(.|\s)*?>/i', '', $settings['markup'] );
+
+			// check if form contains EMAIL field
+			// <(input|textarea)(?=[^>]*name="EMAIL")[^>]*>
+			$search = preg_match( '/<(input|textarea)(?=[^>]*name="EMAIL")[^>]*>/i', $settings['markup'] );
+			if( ! $search) {
+				add_settings_error( 'mc4wp', 'mc4wp-form', sprintf( __( 'Your form should contain an EMAIL field. Example: <code>%s</code>', 'mailchimp-for-wp' ), '&lt;input type="email" name="EMAIL" /&gt;' ), 'updated' );
+			}
+
+			// check if form contains submit button
+			// <(input|button)(?=[^>]*type="submit")[^>]*>
+			$search = preg_match( '/<(input|button)(?=[^>]*type="submit")[^>]*>/i', $settings['markup'] );
+			if( ! $search ) {
+				add_settings_error( 'mc4wp', 'mc4wp-form', sprintf( __( 'Your form should contain a submit button. Example: <code>%s</code>', 'mailchimp-for-wp' ), '&lt;input type="submit" value="'. __( 'Sign Up', 'mailchimp-for-wp' ) .'" /&gt;' ), 'updated' );
+			}
+
+			// TODO: Check if form contains all the required form fields
+
 		}
 
 		return $settings;
