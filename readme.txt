@@ -214,17 +214,17 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 **Fixes**
 
-- Fix usage of `mc4wp_checkbox()` function
-- No more double subscription request when integration with Contact Form 7
+- Fix fatal error when using `mc4wp_checkbox()` function
+- No more double API request when integrating with Contact Form 7
 
 **Improvements**
 
-- Make sure template functions are loaded when they're needed
-- Show a warning when required fields are missing in the form mark-up
-- Updated Spanish translations
-- Make sure required form classes can't be removed
+- Template functions are now always loaded when needed
+- A warning will now show when required fields are missing in the form mark-up
+- Required form classes can no longer be accidentally removed
 - Various checkbox integration improvements
-- Various improvements to colored form themes
+- Various CSS improvements to colored form themes
+- Updated Spanish translations
 
 = 2.0.1 =
 
