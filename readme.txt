@@ -4,7 +4,7 @@ Donate link: https://dannyvankooten.com/mailchimp-for-wordpress/
 Tags: mailchimp,form,shortcode,widget,checkbox,comment,newsletter,buddypress,multisite,bbpress,woocommerce,easy digital downloads,contact form,contact form 7
 Requires at least: 3.6
 Tested up to: 3.9.1
-Stable tag: 2.0.5
+Stable tag: 2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,7 @@ Add sign-up checkboxes to *any* form on your website. The plugin offers built-in
 - English (en_US) - Danny van Kooten
 - Dutch (nl_NL) - Danny van Kooten
 - Spanish (es_ES) - [Paul Benitez - Tecnofilos](http://www.tecnofilos.net/)
+- Brazilian (pt_BR) - [Felipe Scuissiatto - Evonline](http://www.evonline.com.br/)
 
 If you have created your own language pack (or have an update of an existing one) you can send in your .PO and .MO files so we can bundle it into MailChimp for WordPress. You can [download the latest POT file](http://plugins.svn.wordpress.org/mailchimp-for-wp/trunk/languages/mailchimp-for-wp.po), and [PO files in each language](http://plugins.svn.wordpress.org/mailchimp-for-wp/trunk/languages/).
 
@@ -216,6 +217,26 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 8. **Pro only:** Create your own CSS styles with the form designer in the Pro version.
 
 == Changelog ==
+
+= 2.1 - July 29, 2014 =
+
+**Fixes**
+
+- Some fields lost its value when a form error occured
+
+**Improvements**
+
+- Minified all CSS and JS files
+- Required MailChimp fields are now validated server side as well.
+- Birthday and address fields are now automatically formatted in the correct format
+- Improved code, memory usage and class documentation
+
+**Additions**
+
+- Brazilian translations, thanks to [Felipe Scuissiatto of Evonline](http://www.evonline.com.br/)
+- `mc4wp_form_messages` filter to register custom error messages
+- `mc4wp_form_message_position` filter to set position of error messages (before or after fields)
+- Option to set the text for when a required field is missing
 
 = 2.0.5 - July 21, 2014 =
 
@@ -460,5 +481,5 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 == Upgrade Notice ==
 
-= 2.0.5 =
-Various minor improvements code and usability improvements.
+= 2.1 =
+Improved server-side field validation, minified all assets, added Brazilian translations.
