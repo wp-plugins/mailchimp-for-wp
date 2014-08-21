@@ -25,7 +25,7 @@ class MC4WP_Lite_Admin
 
 		// did the user click on upgrade to pro link?
 		if( isset( $_GET['page'] ) && $_GET['page'] === 'mc4wp-lite-upgrade' && false === headers_sent() ) {
-			header("Location: https://dannyvankooten.com/mailchimp-for-wordpress/#utm_source=lite-plugin&utm_medium=link&utm_campaign=menu-upgrade-link");
+			header("Location: https://mc4wp.com/#utm_source=lite-plugin&utm_medium=link&utm_campaign=menu-upgrade-link");
 			exit;
 		}
 
@@ -127,7 +127,7 @@ class MC4WP_Lite_Admin
 		}
 
 		$links[] = '<a href="http://wordpress.org/plugins/mailchimp-for-wp/faq/">FAQ</a>';
-		$links[] = '<a href="https://dannyvankooten.com/mailchimp-for-wordpress/#utm_source=lite-plugin&utm_medium=link&utm_campaign=plugins-upgrade-link">' . __( 'Upgrade to Pro', 'mailchimp-for-wp' ) . '</a>';
+		$links[] = '<a href="https://mc4wp.com/#utm_source=lite-plugin&utm_medium=link&utm_campaign=plugins-upgrade-link">' . __( 'Upgrade to Pro', 'mailchimp-for-wp' ) . '</a>';
 		return $links;
 	}
 
@@ -325,8 +325,8 @@ class MC4WP_Lite_Admin
 						continue;
 					}
 
-					// search for field tag in form mark-up
-					$search = stristr( $opts['markup'], 'name="'. $merge_var->tag .'"' );
+					// search for field tag in form mark-up using 'name="FIELD_NAME' without closing " because of array fields
+					$search = stristr( $opts['markup'], 'name="'. $merge_var->tag );
 					if( false === $search ) {
 						$missing_form_fields[] = sprintf( __( 'A \'%s\' field', 'mailchimp-for-wp' ), $merge_var->tag );
 					}
