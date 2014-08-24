@@ -3,7 +3,7 @@ Contributors: DvanKooten
 Donate link: https://mc4wp.com/
 Tags: mailchimp,form,shortcode,widget,checkbox,comment,newsletter,buddypress,multisite,bbpress,woocommerce,easy digital downloads,contact form,contact form 7
 Requires at least: 3.6
-Tested up to: 3.9.2
+Tested up to: 4.0
 Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -69,25 +69,42 @@ If you have created your own language pack (or have an update of an existing one
 == Installation ==
 
 = Installing the plugin =
-1. In your WordPress admin panel, go to *Plugins > New Plugin*, search for *MailChimp for WordPress* and click "Install now"
+1. In your WordPress admin panel, go to *Plugins > New Plugin*, search for **MailChimp for WordPress** and click "*Install now*"
 1. Alternatively, download the plugin and upload the contents of `mailchimp-for-wp.zip` to your plugins directory, which usually is `/wp-content/plugins/`.
 1. Activate the plugin
-1. Set your MailChimp API key in the plugin settings.
+1. Set [your MailChimp API key](https://admin.mailchimp.com/account/api) in the plugin settings.
 
 = Configuring Sign-Up Checkboxes =
 1. Go to *MailChimp for WP > Checkboxes*
-1. Select at least one list to subscribe visitors to.
-1. Select at least 1 form to add the checkbox to, eg your comment form.
+1. Select at least one of your MailChimp lists to subscribe to.
+1. Select the forms you want to add a sign-up checkbox to, eg your comment form.
+1. Integrate the sign-up checkbox with any other form by using the following HTML.
+
+`
+<label><input type="checkbox" name="mc4wp-subscribe" value="1" /> Subscribe to our newsletter.</label>
+`
 
 = Configuring Sign-Up Form(s) =
 1. Go to *MailChimp for WP > Forms*
-1. Select at least one list to subscribe visitors to.
-1. *(Optional)* Add more fields or dynamic content to your form using the **add MailChimp field** tool.
-1. Show the form in pages or posts by using the `[mc4wp_form]` shortcode.
-1. Show the form in your widget areas using the plugin widget.
-1. Show the form from your template files by calling `mc4wp_form()`
+1. Select at least one of your MailChimp lists to subscribe to.
+1. *(Optional)* Add more fields or dynamic content to your form using the **add MailChimp field** dropdown.
+1. Embed a sign-up form in pages or posts by using the following shortcode.
 
-Need help? Please take a look at the [frequently asked questions](http://wordpress.org/plugins/mailchimp-for-wp/faq/) first
+`
+[mc4wp_form]
+`
+1. Show a sign-up form in your widget areas using the "MailChimp Sign-Up Form" widget.
+1. Show a sign-up form from your theme files by using the following PHP function.
+
+`
+<?php
+
+if( function_exists( 'mc4wp_form' ) ) {
+	mc4wp_form();
+}
+`
+
+Need help? Please take a look at the [frequently asked questions](http://wordpress.org/plugins/mailchimp-for-wp/faq/) first. If you can't find your answer there, start a topic in the [MailChimp for WordPress plugin support forums](http://wordpress.org/support/plugin/mailchimp-for-wp).
 
 = Upgrade to Pro =
 If you like the plugin, [get the Pro version of MailChimp for WordPress](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=installation-instructions-link) for an even better plugin!
