@@ -548,5 +548,5 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 == Upgrade Notice ==
 
-= 2.1.1 =
-Added {response} tag to set a custom response position. Added German and Italian translations. Some minor fixes and improvements.
+= 2.1.2 =
+Added Events Manager integration and other minor improvements & edge case bug fixes.
