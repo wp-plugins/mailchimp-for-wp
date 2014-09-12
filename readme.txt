@@ -1,7 +1,7 @@
 === MailChimp for WordPress ===
 Contributors: DvanKooten
 Donate link: https://mc4wp.com/
-Tags: mailchimp,form,shortcode,widget,checkbox,comment,newsletter,buddypress,multisite,bbpress,woocommerce,easy digital downloads,contact form,contact form 7
+Tags: mailchimp,newsletter,optin,mailinglist,sign-up form,subscribe,form,shortcode,widget,checkbox,comment,buddypress,multisite,bbpress,woocommerce,easy digital downloads,contact form,contact form 7,events manager,comment form,registration form,captcha
 Requires at least: 3.6
 Tested up to: 4.0
 Stable tag: 2.1.2
@@ -50,20 +50,22 @@ Add sign-up checkboxes to *any* form on your website. The plugin offers built-in
 
 The MailChimp for WordPress plugin is fully translated into the following languages.
 
-- English (en_US) - Danny van Kooten
-- Dutch (nl_NL) - Danny van Kooten
+- English (en_US) - [Danny van Kooten](http://dannyvankooten.com)
+- Dutch (nl_NL) - ]Danny van Kooten](http://dannyvankooten.com)
 - Spanish (es_ES) - [Paul Benitez - Tecnofilos](http://www.tecnofilos.net/)
 - Brazilian (pt_BR) - [Felipe Scuissiatto - Evonline](http://www.evonline.com.br/)
 - German (de_DE) - [Jochen Gererstorfer](http://slotnerd.de/)
-- Italian (it_IT) - [Gianpaolo Rolando]([Gianpaolo Rolando](http://www.gianpaolorolando.eu/))
+- Italian (it_IT) - [Gianpaolo Rolando](http://www.gianpaolorolando.eu/)
+- Slovak (sk_SK) - [Henrich Koszegi - Webworks](http://webworks.sk/)
 
-If you have created your own language pack (or have an update of an existing one) you can send in your .PO and .MO files so we can bundle it into MailChimp for WordPress. You can [download the latest POT file](http://plugins.svn.wordpress.org/mailchimp-for-wp/trunk/languages/mailchimp-for-wp.po), and [PO files in each language](http://plugins.svn.wordpress.org/mailchimp-for-wp/trunk/languages/).
+If you want to help [translating the MailChimp for WordPress plugin](http://docs.mc4wp.com/article/41-translating-mailchimp-for-wordpress), head over to [translate.mc4wp.com](http://translate.mc4wp.com) .
 
 **More information**
 
+- [MailChimp for WordPress Pro](https://mc4wp.com/), containing additional features.
 - Other [WordPress plugins](http://dannyvankooten.com/wordpress-plugins/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=more-info-link) by [Danny van Kooten](http://dannyvankooten.com#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=more-info-link)
-- Contact Danny on Twitter: [@DannyvanKooten](http://twitter.com/dannyvankooten)
-- If you're a dev, follow or contribute to the [MailChimp for WP plugin on GitHub](https://github.com/dannyvankooten/mailchimp-for-wordpress)
+- [@DannyvanKooten](http://twitter.com/dannyvankooten) on Twitter
+- Developers; follow or contribute to the [MailChimp for WP plugin on GitHub](https://github.com/dannyvankooten/mailchimp-for-wordpress)
 
 
 == Installation ==
