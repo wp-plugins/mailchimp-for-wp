@@ -16,7 +16,7 @@ The best MailChimp plugin to get more email subscribers. Easily add sign-up form
 
 *Adding sign-up methods for your MailChimp lists to your WordPress site should be easy. With this plugin, it finally is.*
 
-MailChimp for WordPress lets you create a highly customizable sign-up form which you can display wherever you want it to display using a simple shortcode, widget or template function.  You can also add sign-up checkboxes to various forms on your site, like your comment or contact forms. 
+MailChimp for WordPress lets you create a highly customizable sign-up form which you can display wherever you want it to display using a simple shortcode, widget or template function.  You can also add sign-up checkboxes to various forms on your site, like your comment or contact forms.
 
 = Sign-Up Forms =
 Easily create sign-up forms for your MailChimp list and display it using a simple shortcode, a widget or PHP function.
@@ -33,25 +33,24 @@ Add sign-up checkboxes to *any* form on your website. The plugin offers built-in
 
 [Installation](http://wordpress.org/plugins/mailchimp-for-wp/installation/) | [Frequently Asked Questions](http://wordpress.org/plugins/mailchimp-for-wp/faq/) | [Screenshots](http://wordpress.org/plugins/mailchimp-for-wp/screenshots/)
 
-> **Premium features**
+> **MailChimp for WordPress Pro**<br />
+> This plugin has a premium version which comes with the following features.
 >
-> The Pro version of the plugin comes with the following features:
+> - Multiple Forms, each form can subscribe to one or multiple MailChimp lists
+> - Easy CSS Styles Builder & Custom Color Themes.
+> - AJAX Forms. Forms do not require a page reload.
+> - Log & Statistics. Useful insights.
+> - WooCommerce and Easy Digital Downloads checkout integration.
+> - Priority Support
 >
-> - Multiple forms, each form can subscribe to one or multiple MailChimp lists
-> - AJAX forms, submitting forms does not require a page reload
-> - Easy CSS Builder and custom color themes
-> - Reports: Statistical graphs & subscription log
-> - Checkbox integration for WooCommerce & Easy Digital Downloads checkout
-> - Priority support
->
-> [More information](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Form demo's](https://mc4wp.com/demo/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Upgrade now >>](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link)
+> [More information](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Demo](https://mc4wp.com/demo/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link)
 
 **Translations**
 
 The MailChimp for WordPress plugin is fully translated into the following languages.
 
 - English (en_US) - [Danny van Kooten](http://dannyvankooten.com)
-- Dutch (nl_NL) - ]Danny van Kooten](http://dannyvankooten.com)
+- Dutch (nl_NL) - [Danny van Kooten](http://dannyvankooten.com)
 - Spanish (es_ES) - [Paul Benitez - Tecnofilos](http://www.tecnofilos.net/)
 - Brazilian (pt_BR) - [Felipe Scuissiatto - Evonline](http://www.evonline.com.br/)
 - German (de_DE) - [Jochen Gererstorfer](http://slotnerd.de/)
@@ -113,16 +112,11 @@ If you like the plugin, [get the Pro version of MailChimp for WordPress](https:/
 
 == Frequently Asked Questions ==
 
-> **Is there a premium version of this plugin?**
+
+> **What are the main differences between Pro and Lite?**
 >
-> Yes, there is and I'm sure you'll love it. Some (but not all) Pro-only features are:
-> 
-> - Unlimited amount of forms. Each form can subscribe to one or multiple MailChimp lists.
-> - Easy CSS Builder and custom color themes.
-> - AJAX. Forms can be submitted using JavaScript, causing no page reload.
-> - Reports: Graphs & log. Learn when, where and how your visitors subscribed.
-> 
-> [More Pro features](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link) | [Demo](https://dannyvankooten.com/mailchimp-for-wordpress/demo/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link)
+> MailChimp for WordPress Pro comes with some additional features like the ability to create multiple forms, AJAX forms, an easy Styles Builder and reports, providing useful insights.
+> [Demo](https://dannyvankooten.com/mailchimp-for-wordpress/demo/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link)
 
 = How to display a form in posts or pages? =
 Use the `[mc4wp_form]` shortcode.
@@ -160,7 +154,7 @@ You can use CSS rules to style the sign-up form, use the following CSS selectors
 .mc4wp-alert { ... } /* success & error messages */
 .mc4wp-success { ... } /* success message */
 .mc4wp-error { ... } /* error messages */
-` 
+`
 
 Add your custom CSS rules to the end of your theme stylesheet, **/wp-content/themes/your-theme-name/style.css**. Do not add them to the plugin stylesheet as they will be automatically overwritten on the next plugin update.
 
@@ -170,7 +164,7 @@ Add your custom CSS rules to the end of your theme stylesheet, **/wp-content/the
 [You can find your MailChimp API key here](http://kb.mailchimp.com/article/where-can-i-find-my-api-key)
 
 = How to add a sign-up checkbox to my Contact Form 7 forms? =
-Use the following shortcode in your CF7 form mark-up to display a sign-up checkbox. 
+Use the following shortcode in your CF7 form mark-up to display a sign-up checkbox.
 
 `[mc4wp_checkbox "My custom label text"]`
 
@@ -238,7 +232,7 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 1. Simple or advanced sign-up forms that blend in with your theme.
 2. A sign-up checkbox in your comment form is an amazing conversion booster.
 3. A simple form in the footer of the Twenty Thirteen theme.
-4. Add sign-up checkboxes to various places on your site. 
+4. Add sign-up checkboxes to various places on your site.
 5. Creating sign-up forms is easy. The Pro version allows you to create as many form as you like.
 6. Write your own HTML or have it generated for you. Many (optional) customization settings are availabl.
 7. **Pro only:** Gain valuable insights which method your visitors used to subscribe for any given time period using beautiful line charts.
