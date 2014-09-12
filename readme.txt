@@ -37,7 +37,7 @@ Add sign-up checkboxes to *any* form on your website. The plugin offers built-in
 > This plugin has a premium version which comes with the following features.<br />
 >
 > Multiple Forms. Each form can subscribe to one or multiple MailChimp lists<br />
-> Easy CSS Styles Builder & Custom Color Themes.**<br />
+> Easy CSS Styles Builder & Custom Color Themes.<br />
 > AJAX Forms** Forms do not require a page reload.<br />
 > Log & Statistics. Useful insights.<br />
 > WooCommerce and Easy Digital Downloads checkout integration.<br />
