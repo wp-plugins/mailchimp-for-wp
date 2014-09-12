@@ -33,15 +33,15 @@ Add sign-up checkboxes to *any* form on your website. The plugin offers built-in
 
 [Installation](http://wordpress.org/plugins/mailchimp-for-wp/installation/) | [Frequently Asked Questions](http://wordpress.org/plugins/mailchimp-for-wp/faq/) | [Screenshots](http://wordpress.org/plugins/mailchimp-for-wp/screenshots/)
 
-> ### MailChimp for WordPress Pro
+> #### MailChimp for WordPress Pro
 > This plugin has a premium version which comes with the following features.<br />
 >
 > Multiple Forms. Each form can subscribe to one or multiple MailChimp lists<br />
 > Easy CSS Styles Builder & Custom Color Themes.<br />
-> AJAX Forms** Forms do not require a page reload.<br />
+> AJAX Forms Forms do not require a page reload.<br />
 > Log & Statistics. Useful insights.<br />
 > WooCommerce and Easy Digital Downloads checkout integration.<br />
-> Priority Support<br /><br />
+> Priority Support<br />
 >
 > [More information](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Demo](https://mc4wp.com/demo/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link)
 
