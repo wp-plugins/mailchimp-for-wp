@@ -33,15 +33,15 @@ Add sign-up checkboxes to *any* form on your website. The plugin offers built-in
 
 [Installation](http://wordpress.org/plugins/mailchimp-for-wp/installation/) | [Frequently Asked Questions](http://wordpress.org/plugins/mailchimp-for-wp/faq/) | [Screenshots](http://wordpress.org/plugins/mailchimp-for-wp/screenshots/)
 
-> **MailChimp for WordPress Pro**<br />
-> This plugin has a premium version which comes with the following features.
+> ### MailChimp for WordPress Pro
+> This plugin has a premium version which comes with the following features.<br />
 >
-> - Multiple Forms, each form can subscribe to one or multiple MailChimp lists
-> - Easy CSS Styles Builder & Custom Color Themes.
-> - AJAX Forms. Forms do not require a page reload.
-> - Log & Statistics. Useful insights.
-> - WooCommerce and Easy Digital Downloads checkout integration.
-> - Priority Support
+> Multiple Forms. Each form can subscribe to one or multiple MailChimp lists<br />
+> Easy CSS Styles Builder & Custom Color Themes.**<br />
+> AJAX Forms** Forms do not require a page reload.<br />
+> Log & Statistics. Useful insights.<br />
+> WooCommerce and Easy Digital Downloads checkout integration.<br />
+> Priority Support<br /><br />
 >
 > [More information](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Demo](https://mc4wp.com/demo/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link)
 
@@ -113,10 +113,15 @@ If you like the plugin, [get the Pro version of MailChimp for WordPress](https:/
 == Frequently Asked Questions ==
 
 
-> **What are the main differences between Pro and Lite?**
+> **What are the main differences between Pro and Lite?**<br />
 >
-> MailChimp for WordPress Pro comes with some additional features like the ability to create multiple forms, AJAX forms, an easy Styles Builder and reports, providing useful insights.
-> [Demo](https://dannyvankooten.com/mailchimp-for-wordpress/demo/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link)
+> MailChimp for WordPress Pro comes with some additional features.<br />
+>
+> **Multiple Forms.** Each form can have unique settings. <br />
+> **AJAX Forms.** Submitting forms does not require a page reload.<br />
+> **Styles Builder..** Alter the design of your forms and have the styling rules generated for you.<br />
+> **Statistics & Logging.** Beautiful line charts and log tables, providing useful insights.<br /><br />
+> [Have a look](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link) | [Demo](https://mc4wp.com/demo/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=faq-link)
 
 = How to display a form in posts or pages? =
 Use the `[mc4wp_form]` shortcode.
