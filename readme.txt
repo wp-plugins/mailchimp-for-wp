@@ -4,7 +4,7 @@ Donate link: https://mc4wp.com/
 Tags: mailchimp,newsletter,optin,mailinglist,sign-up form,subscribe,form,shortcode,widget,checkbox,comment,buddypress,multisite,bbpress,woocommerce,easy digital downloads,contact form,contact form 7,events manager,comment form,registration form,captcha
 Requires at least: 3.6
 Tested up to: 4.0
-Stable tag: 2.1.4
+Stable tag: 2.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -246,6 +246,12 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 8. **Pro only:** Create your own CSS styles with the form designer in the Pro version.
 
 == Changelog ==
+
+= 2.1.5 - October 13, 2014 =
+
+**Fixes**
+
+- Error in `class-mailchimp.php`caused by update to v2.1.4
 
 = 2.1.4 - October 13, 2014 =
 
@@ -587,5 +593,5 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 == Upgrade Notice ==
 
-= 2.1.4 =
+= 2.1.5 =
 Updated & improved translations. Edge case bug fixes. Minor improvements and added filter hooks.

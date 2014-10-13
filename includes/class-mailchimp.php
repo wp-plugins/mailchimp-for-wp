@@ -63,14 +63,6 @@ class MC4WP_MailChimp {
 				set_transient( 'mc4wp_mailchimp_lists', $lists, ( 24 * 3600 ) ); // 1 day
 				set_transient( 'mc4wp_mailchimp_lists_fallback', $lists, 1209600 ); // 2 weeks
 
-				// check options for unexisting lists
-				$form_opts = mc4wp_get_options( 'form ');
-				foreach( $form_opts['lists'] as $form_opts_key => $form_opts_list ) {
-					if( ! array_key_exists( $form_opts_list, $lists ) ) {
-						unset( $form_opts['lists'][$form_opts_key] );
-					}
-				}
-
 				return $lists;
 			} else {
 				// api request failed, get fallback data (with longer lifetime)
