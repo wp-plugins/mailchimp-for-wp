@@ -51,9 +51,8 @@ class MC4WP_General_Integration extends MC4WP_Integration {
 	 * Maybe fire a general subscription request
 	 */
 	public function maybe_subscribe() {
-
 		if ( $this->checkbox_was_checked() === false ) {
-			return;
+			return false;
 		}
 
 		// don't run if this is a CF7 request
@@ -105,7 +104,7 @@ class MC4WP_General_Integration extends MC4WP_Integration {
 			} elseif( strtolower( substr( $key, 0, 6 ) ) === 'mc4wp-' ) {
 				// find extra fields which should be sent to MailChimp
 				$key = strtoupper( substr( $key, 6 ) );
-				$value = ( is_scalar( $value ) ) ? trim( $value ) : $value;
+				$value = ( is_scalar( $value ) ) ? sanitize_text_field( $value ) : $value;
 
 				switch( $key ) {
 					case 'EMAIL':
@@ -120,15 +119,15 @@ class MC4WP_General_Integration extends MC4WP_Integration {
 							$grouping = array();
 
 							// group ID or group name given?
-							if(is_numeric($grouping_id_or_name)) {
-								$grouping['id'] = $grouping_id_or_name;
+							if(is_numeric( $grouping_id_or_name ) ) {
+								$grouping['id'] = absint( $grouping_id_or_name );
 							} else {
-								$grouping['name'] = stripslashes( $grouping_id_or_name );
+								$grouping['name'] = sanitize_text_field( stripslashes( $grouping_id_or_name ) );
 							}
 
 							// comma separated list should become an array
 							if( ! is_array( $groups ) ) {
-								$groups = explode( ',', $groups );
+								$groups = explode( ',', sanitize_text_field( $groups ) );
 							}
 						
 							$grouping['groups'] = array_map( 'stripslashes', $groups );
@@ -140,18 +139,18 @@ class MC4WP_General_Integration extends MC4WP_Integration {
 					break;
 
 					default:
-						if( is_array( $value ) ) { 
-							$value = implode( ',', $value ); 
+						if( is_array( $value ) ) {
+							$value = sanitize_text_field( implode( ',', $value ) );
 						}
 
 						$merge_vars[$key] = $value;
 					break;
 				}
 
-			} elseif( ! $email && is_email( $value ) ) {
+			} elseif( ! $email && is_string( $value ) && is_email( $value ) ) {
 				// if no email is found yet, check if current field value is an email
 				$email = $value;
-			} elseif( ! $email && is_array( $value ) && isset( $value[0] ) && is_email( $value[0] ) ) {
+			} elseif( ! $email && is_array( $value ) && isset( $value[0] ) && is_string( $value[0] ) && is_email( $value[0] ) ) {
 				// if no email is found yet, check if current value is an array and if first array value is an email
 				$email = $value[0];
 			} else {

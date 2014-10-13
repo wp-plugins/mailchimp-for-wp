@@ -4,7 +4,7 @@ Donate link: https://mc4wp.com/
 Tags: mailchimp,newsletter,optin,mailinglist,sign-up form,subscribe,form,shortcode,widget,checkbox,comment,buddypress,multisite,bbpress,woocommerce,easy digital downloads,contact form,contact form 7,events manager,comment form,registration form,captcha
 Requires at least: 3.6
 Tested up to: 4.0
-Stable tag: 2.1.3
+Stable tag: 2.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,11 +51,12 @@ The MailChimp for WordPress plugin is fully translated into the following langua
 
 - English (en_US) - [Danny van Kooten](https://dannyvankooten.com)
 - Dutch (nl_NL) - [Danny van Kooten](https://dannyvankooten.com)
-- Spanish (es_ES) - [Paul Benitez ](http://www.tecnofilos.net/) & [Enrique Pinto](http://www.thehivecluster.com/en)
+- Spanish (es_ES) - [Paul Benitez ](http://www.administrandowp.com/) & [Enrique Pinto](http://www.thehivecluster.com/en)
 - Brazilian (pt_BR) - [Felipe Scuissiatto](http://www.evonline.com.br/)
 - German (de_DE) - [Jochen Gererstorfer](http://slotnerd.de/)
 - Italian (it_IT) - [Gianpaolo Rolando](http://www.gianpaolorolando.eu/) & [Tiziano D'Angelo](http://www.dangelos.it/)
 - Slovak (sk_SK) - [Henrich Koszegi](http://www.webworks.sk/)
+- Hungarian (hu_HU) - Németh Balázs
 
 If you want to help [translating the MailChimp for WordPress plugin](http://docs.mc4wp.com/article/41-translating-mailchimp-for-wordpress), head over to [translate.mc4wp.com](http://translate.mc4wp.com).
 
@@ -246,6 +247,29 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 == Changelog ==
 
+= 2.1.4 - October 13, 2014 =
+
+**Fixes**
+
+- Fixed `mc4wp_get_current_url()` function for IIS servers using `index.php` in URL's.
+- Nonce verification failing with aggressive caching
+- Only call `is_email()` on strings.
+
+**Improvements**
+
+- Minor improvements to memory usage and performance
+- Improved sanitization on third-party integrations
+- Translate debug messages for checkbox integrations
+- Updated Dutch translations
+
+**Additions**
+
+- Submitted form now get `mc4wp-form-submitted` CSS class.
+- Filter: `mc4wp_cookie_expiration_time` to alter expiration time of email cookie. Defaults to 30 days.
+- Hungarian translation, thanks to Németh Balázs
+- Partial French translations
+
+
 = 2.1.3 - September 15, 2014 =
 
 **Improvements**
@@ -383,7 +407,7 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 **Improvements**
 
 - Allowed translation of more strings in the settings screens.
-- Added Spanish translations, thanks [Paul Benitez - Tecnofilos](http://www.tecnofilos.net/)
+- Added Spanish translations, thanks [Paul Benitez - Tecnofilos](http://www.administrandowp.com/)
 - Minor code improvements
 
 **Additions**

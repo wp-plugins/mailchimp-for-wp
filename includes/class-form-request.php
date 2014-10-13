@@ -33,7 +33,7 @@ class MC4WP_Lite_Form_Request {
 	/**
 	 * @var array The form options
 	 */
-	private $options;
+	private $form_options;
 
 	/**
 	 * Constructor
@@ -41,6 +41,13 @@ class MC4WP_Lite_Form_Request {
 	 * Hooks into the `init` action to start the process of subscribing the person who filled out the form
 	 */
 	public function __construct() {
+
+		// store number of submitted form
+		$this->form_instance_number = absint( $_POST['_mc4wp_form_instance'] );
+
+		// store form options
+		$this->form_options = mc4wp_get_options( 'form' );
+
 		add_action( 'init', array( $this, 'act' ) );
 	}
 
@@ -83,14 +90,11 @@ class MC4WP_Lite_Form_Request {
 	 */
 	public function act() {
 
-		// store number of submitted form
-		$this->form_instance_number = absint( $_POST['_mc4wp_form_instance'] );
-
-		// store form options
-		$this->form_options = mc4wp_get_options( 'form' );
+		// detect caching plugin
+		$using_caching = ( defined( 'WP_CACHE' ) && WP_CACHE );
 
 		// validate form nonce
-		if ( ! isset( $_POST['_mc4wp_form_nonce'] ) || ! wp_verify_nonce( $_POST['_mc4wp_form_nonce'], '_mc4wp_form_nonce' ) ) {
+		if ( ! $using_caching && ( ! isset( $_POST['_mc4wp_form_nonce'] ) || ! wp_verify_nonce( $_POST['_mc4wp_form_nonce'], '_mc4wp_form_nonce' ) ) ) {
 			$this->error_code = 'invalid_nonce';
 			return false;
 		}
@@ -125,7 +129,7 @@ class MC4WP_Lite_Form_Request {
 		$data = $this->get_posted_data();
 
 		// validate email
-		if( ! isset( $data['EMAIL'] ) || ! is_email( $data['EMAIL'] ) ) {
+		if( ! isset( $data['EMAIL'] ) || ! is_string( $data['EMAIL'] ) || ! is_email( $data['EMAIL'] ) ) {
 			$this->error_code = 'invalid_email';
 			return false;
 		}
@@ -461,7 +465,114 @@ class MC4WP_Lite_Form_Request {
 	 * @param string $email
 	 */
 	private function set_email_cookie( $email ) {
-		setcookie( 'mc4wp_email', $email, strtotime( '+30 days' ), '/' );
+
+		/**
+		 * @filter `mc4wp_cookie_expiration_time`
+		 * @expects timestamp
+		 *
+		 * Timestamp indicating when the email cookie expires, defaults to 30 days
+		 */
+		$expiration_time = apply_filters( 'mc4wp_cookie_expiration_time', strtotime( '+30 days' ) );
+
+		setcookie( 'mc4wp_email', $email, $expiration_time, '/' );
 	}
+
+	/**
+	 * Returns the HTML for success or error messages
+	 *
+	 * @return string
+	 */
+	public function get_response_html() {
+
+		// get all form messages
+		$messages = $this->get_form_messages();
+
+		// retrieve correct message
+		$type = ( $this->is_successful() ) ? 'success' : $this->get_error_code();
+		$message = ( isset( $messages[ $type ] ) ) ? $messages[ $type ] : $messages['error'];
+
+		/**
+		 * @filter mc4wp_form_error_message
+		 * @deprecated 2.0.5
+		 * @use mc4wp_form_messages
+		 *
+		 * Used to alter the error message, don't use. Use `mc4wp_form_messages` instead.
+		 */
+		$message['text'] = apply_filters('mc4wp_form_error_message', $message['text'], $this->get_error_code() );
+
+		$html = '<div class="mc4wp-alert mc4wp-'. $message['type'].'">' . $message['text'] . '</div>';
+
+		// show additional MailChimp API errors to administrators
+		if( false === $this->is_successful() && current_user_can( 'manage_options' ) ) {
+
+			// show MailChimp error message (if any) to administrators
+			$api = mc4wp_get_api();
+
+			if( $api->has_error() ) {
+				$html .= '<div class="mc4wp-alert mc4wp-error"><strong>' . __( 'MailChimp Error:', 'mailchimp-for-wp' ) . '</strong><br />'. $api->get_error_message() . '</div>';
+			}
+		}
+
+		return $html;
+	}
+
+	/**
+	 * Returns the various error and success messages in array format
+	 *
+	 * Example:
+	 * array(
+	 *      'invalid_email' => array(
+	 *          'type' => 'css-class',
+	 *          'text' => 'Message text'
+	 *      ),
+	 *      ...
+	 * );
+	 *
+	 * @param   int     $form_id
+	 * @return array
+	 */
+	public function get_form_messages() {
+
+		$messages = array(
+			'already_subscribed' => array(
+				'type' => 'notice',
+				'text' => $this->form_options['text_already_subscribed']
+			),
+			'error' => array(
+				'type' => 'error',
+				'text' => $this->form_options['text_error']
+			),
+			'invalid_email' => array(
+				'type' => 'error',
+				'text' => $this->form_options['text_invalid_email']
+			),
+			'success' => array(
+				'type' => 'success',
+				'text' => $this->form_options['text_success']
+			),
+			'invalid_captcha' => array(
+				'type' => 'error',
+				'text' => $this->form_options['text_invalid_captcha']
+			),
+			'required_field_missing' => array(
+				'type' => 'error',
+				'text' => $this->form_options['text_required_field_missing']
+			),
+			'no_lists_selected' => array(
+				'type' => 'error',
+				'text' => __( 'Please select at least one list to subscribe to.', 'mailchimp-for-wp' )
+			)
+		);
+
+		/**
+		 * @filter mc4wp_form_messages
+		 *
+		 * Allows registering custom form messages, useful if you're using custom validation using the `mc4wp_valid_form_request` filter.
+		 */
+		$messages = apply_filters( 'mc4wp_form_messages', $messages );
+
+		return $messages;
+	}
+
 
 }

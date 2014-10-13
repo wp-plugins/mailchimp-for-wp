@@ -97,14 +97,21 @@ class MC4WP_Lite_Form_Manager {
 	*/
 	private function get_css_classes() {
 
-		// Allow devs to add CSS classes
+		/**
+		 * @filter mc4wp_form_css_classes
+		 * @expects array
+		 *
+		 * Can be used to add additional CSS classes to the form container
+		 */
 		$css_classes = apply_filters( 'mc4wp_form_css_classes', array( 'form' ) );
 
 		// the following classes MUST be used
 		$css_classes[] = 'mc4wp-form';
 
 		// Add form classes if a Form Request was captured
-		if( is_object( $this->form_request ) ) {
+		if( is_object( $this->form_request ) && $this->form_request->get_form_instance_number() === $this->form_instance_number ) {
+
+			$css_classes[] = 'mc4wp-form-submitted';
 
 			if( $this->form_request->is_successful() ) {
 				$css_classes[] = 'mc4wp-form-success';
@@ -203,7 +210,7 @@ class MC4WP_Lite_Form_Manager {
 			);
 
 			// get actual response html
-			$response_html = $this->get_form_message_html();
+			$response_html = $this->form_request->get_response_html();
 
 			// add form response after or before fields if no {response} tag
 			if( stristr( $visible_fields, '{response}' ) === false || $opts['hide_after_success']) {
@@ -246,106 +253,42 @@ class MC4WP_Lite_Form_Manager {
 			wp_enqueue_script( 'mc4wp-placeholders' );
 		}
 
+		// Print small JS snippet later on in the footer.
+		add_action( 'wp_footer', array( $this, 'print_js' ) );
+
 		// concatenate and return the HTML parts
 		return $opening_html . $before_fields . $visible_fields . $hidden_fields . $after_fields . $closing_html;
 	}
 
 	/**
-	 * Returns the HTML for success or error messages
+	 * Prints some JavaScript to enhance the form functionality
 	 *
-	 * @return string
+	 * This is only printed on pages that actually contain a form.
+	 * Uses jQuery if its loaded, otherwise falls back to vanilla JS.
 	 */
-	private function get_form_message_html( $form_id = 0 ) {
-
-		// don't show message if form wasn't submitted
-		if( ! is_object( $this->form_request ) ) {
-			return '';
+	public function print_js() {
+		if( wp_script_is( 'jquery', 'done' ) ) {
+			// print jQuery
+			?><script type="text/javascript">
+				jQuery('.mc4wp-form').find('[type="submit"]').click(function () {
+					jQuery(this).parents('.mc4wp-form').addClass('mc4wp-form-submitted');
+				});
+			</script><?php
+		} else {
+			// Print vanilla JavaScript
+			?><script type="text/javascript">
+				(function() {
+					var forms = document.querySelectorAll('.mc4wp-form');
+					for (var i = 0; i < forms.length; i++) {
+						(function(el) {
+							el.querySelector('[type="submit"]').addEventListener( 'click', function( event ) {
+								el.classList.toggle('mc4wp-form-submitted');
+							});
+						})(forms[i]);
+					}
+				})();
+			</script><?php
 		}
-
-		// get all form messages
-		$messages = $this->get_form_messages( $form_id );
-
-		// retrieve correct message
-		$type = ( $this->form_request->is_successful() ) ? 'success' : $this->form_request->get_error_code();
-		$message = ( isset( $messages[ $type ] ) ) ? $messages[ $type ] : $messages['error'];
-
-		/**
-		 * @filter mc4wp_form_error_message
-		 * @deprecated 2.0.5
-		 * @use mc4wp_form_messages
-		 *
-		 * Used to alter the error message, don't use. Use `mc4wp_form_messages` instead.
-		 */
-		$message['text'] = apply_filters('mc4wp_form_error_message', $message['text'], $this->form_request->get_error_code() );
-
-		$html = '<div class="mc4wp-alert mc4wp-'. $message['type'].'">' . $message['text'] . '</div>';
-
-		// show additional MailChimp API errors to administrators
-		if( false === $this->form_request->is_successful() && current_user_can( 'manage_options' ) ) {
-			// show MailChimp error message (if any) to administrators
-			$api = mc4wp_get_api();
-			if( $api->has_error() ) {
-				$html .= '<div class="mc4wp-alert mc4wp-error"><strong>Admin notice:</strong> '. $api->get_error_message() . '</div>';
-			}
-		}
-
-		return $html;
-	}
-
-	/**
-	 * Returns the various error and success messages in array format
-	 *
-	 * Example:
-	 * array(
-	 *      'invalid_email' => array(
-	 *          'type' => 'css-class',
-	 *          'text' => 'Message text'
-	 *      ),
-	 *      ...
-	 * );
-	 *
-	 * @param   int     $form_id
-	 * @return array
-	 */
-	public function get_form_messages( $form_id = 0 ) {
-
-		$opts = mc4wp_get_options( 'form' );
-
-		$messages = array(
-			'already_subscribed' => array(
-				'type' => 'notice',
-				'text' => $opts['text_already_subscribed']
-			),
-			'error' => array(
-				'type' => 'error',
-				'text' => $opts['text_error']
-			),
-			'invalid_email' => array(
-				'type' => 'error',
-				'text' => $opts['text_invalid_email']
-			),
-			'success' => array(
-				'type' => 'success',
-				'text' => $opts['text_success']
-			),
-			'invalid_captcha' => array(
-				'type' => 'error',
-				'text' => $opts['text_invalid_captcha']
-			),
-			'required_field_missing' => array(
-				'type' => 'error',
-				'text' => $opts['text_required_field_missing']
-			)
-		);
-
-		/**
-		 * @filter mc4wp_form_messages
-		 *
-		 * Allows registering custom form messages, useful if you're using custom validation using the `mc4wp_valid_form_request` filter.
-		 */
-		$messages = apply_filters( 'mc4wp_form_messages', $messages );
-
-		return $messages;
 	}
 
 }
