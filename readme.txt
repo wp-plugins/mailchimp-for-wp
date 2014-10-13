@@ -252,19 +252,19 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 **Fixes**
 
 - Fixed `mc4wp_get_current_url()` function for IIS servers using `index.php` in URL's.
-- Nonce verification failing with aggressive caching
+- Nonce verification was failing with aggressive caching
 - Only call `is_email()` on strings.
 
 **Improvements**
 
-- Minor improvements to memory usage and performance
-- Improved sanitization on third-party integrations
-- Translate debug messages for checkbox integrations
+- Minor improvements to memory usage and overall performance
+- Improved sanitization for third-party integrations
+- Wrapped debug messages for checkbox integrations in gettext calls so they can be translated
 - Updated Dutch translations
 
 **Additions**
 
-- Submitted form now get `mc4wp-form-submitted` CSS class.
+- Submitted forms now get `mc4wp-form-submitted` CSS class.
 - Filter: `mc4wp_cookie_expiration_time` to alter expiration time of email cookie. Defaults to 30 days.
 - Hungarian translation, thanks to Németh Balázs
 - Partial French translations
