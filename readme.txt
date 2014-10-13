@@ -251,7 +251,7 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 **Fixes**
 
-- Error in `class-mailchimp.php`caused by update to v2.1.4
+- Notice when fetching lists from MailChimp in `class-mailchimp.php`.
 
 = 2.1.4 - October 13, 2014 =
 
