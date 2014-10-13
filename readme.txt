@@ -587,5 +587,5 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 == Upgrade Notice ==
 
-= 2.1.2 =
-Added Events Manager integration and other minor improvements & edge case bug fixes.
+= 2.1.4 =
+Updated & improved translations. Edge case bug fixes. Minor improvements and added filter hooks.
