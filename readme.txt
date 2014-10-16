@@ -49,7 +49,7 @@ Add sign-up checkboxes to *any* form on your website. The plugin offers built-in
 
 The plugin is fully translated into the following languages: English, Dutch, Spanish, Brazilian, German, Italian, Slovak and Hungarian.
 
-The [MailChimp for WordPress translations](https://wordpress.org/plugins/mailchimp-for-wp/translations/) page lists all the wonderful people that helped translate the plugin.
+The [MailChimp for WordPress translations](https://wordpress.org/plugins/mailchimp-for-wp/other_notes/) page lists all the wonderful people that helped translate the plugin.
 
 Want to [translate the plugin into your own language](https://www.transifex.com/projects/p/mailchimp-for-wordpress/)?
 
