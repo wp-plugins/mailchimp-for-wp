@@ -4,7 +4,7 @@ Donate link: https://mc4wp.com/
 Tags: mailchimp,newsletter,optin,mailinglist,sign-up form,subscribe,form,shortcode,widget,checkbox,comment,buddypress,multisite,bbpress,woocommerce,easy digital downloads,contact form,contact form 7,events manager,comment form,registration form,captcha
 Requires at least: 3.6
 Tested up to: 4.0
-Stable tag: 2.1.5
+Stable tag: 2.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,29 +43,24 @@ Add sign-up checkboxes to *any* form on your website. The plugin offers built-in
 > WooCommerce and Easy Digital Downloads checkout integration.<br />
 > Priority Support<br />
 >
-> [More information](https://mc4wp.com/features/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link) | [Demo](https://mc4wp.com/demo/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link)
+> [Upgrade to MailChimp for WordPress Pro](https://mc4wp.com/features/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=after-features-link)
 
 **Translations**
 
-The MailChimp for WordPress plugin is fully translated into the following languages.
+The plugin is fully translated into the following languages: English, Dutch, Spanish, Brazilian, German, Italian, Slovak and Hungarian.
 
-- English (en_US) - [Danny van Kooten](https://dannyvankooten.com)
-- Dutch (nl_NL) - [Danny van Kooten](https://dannyvankooten.com)
-- Spanish (es_ES) - [Paul Benitez ](http://www.administrandowp.com/) & [Enrique Pinto](http://www.thehivecluster.com/en)
-- Brazilian (pt_BR) - [Felipe Scuissiatto](http://www.evonline.com.br/)
-- German (de_DE) - [Jochen Gererstorfer](http://slotnerd.de/)
-- Italian (it_IT) - [Gianpaolo Rolando](http://www.gianpaolorolando.eu/) & [Tiziano D'Angelo](http://www.dangelos.it/)
-- Slovak (sk_SK) - [Henrich Koszegi](http://www.webworks.sk/)
-- Hungarian (hu_HU) - Németh Balázs
+The [MailChimp for WordPress translations](https://wordpress.org/plugins/mailchimp-for-wp/other_notes/) page lists all the wonderful people that helped translate the plugin.
 
-If you want to help [translating the MailChimp for WordPress plugin](http://docs.mc4wp.com/article/41-translating-mailchimp-for-wordpress), head over to [translate.mc4wp.com](http://translate.mc4wp.com).
+Want to [translate the plugin into your own language](https://www.transifex.com/projects/p/mailchimp-for-wordpress/)?
+
 
 **More information**
 
 - [MailChimp for WordPress Pro](https://mc4wp.com/), containing [additional features](https://mc4wp.com/features/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=more-info-link).
+- [Translate the MailChimp for WordPress plugin into your language](https://www.transifex.com/projects/p/mailchimp-for-wordpress/)
+- Developers; follow or contribute to the [MailChimp for WP plugin on GitHub](https://github.com/dannyvankooten/mailchimp-for-wordpress)
 - Other [WordPress plugins](https://dannyvankooten.com/wordpress-plugins/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=more-info-link) by [Danny van Kooten](http://dannyvankooten.com#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=more-info-link)
 - [@DannyvanKooten](https://twitter.com/dannyvankooten) on Twitter
-- Developers; follow or contribute to the [MailChimp for WP plugin on GitHub](https://github.com/dannyvankooten/mailchimp-for-wordpress)
 
 
 == Installation ==
@@ -108,7 +103,7 @@ if( function_exists( 'mc4wp_form' ) ) {
 
 Need help? Please take a look at the [frequently asked questions](https://wordpress.org/plugins/mailchimp-for-wp/faq/) first. If you can't find your answer there, start a topic in the [MailChimp for WordPress plugin support forums](http://wordpress.org/support/plugin/mailchimp-for-wp).
 
-= Upgrade to Pro =
+= Upgrade to MailChimp for WordPress Pro =
 If you like the plugin, [get the Pro version of MailChimp for WordPress](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=link&utm_campaign=installation-instructions-link) for an even better plugin!
 
 == Frequently Asked Questions ==
@@ -234,6 +229,21 @@ Your theme probably does not support the necessary comment hook this plugin uses
 
 Your theme folder can be found by browsing to `/wp-content/themes/your-theme-name/`.
 
+== Translations ==
+
+The MailChimp for WordPress plugin is translated into the following languages.
+
+- English (en_US) - [Danny van Kooten](https://dannyvankooten.com)
+- Dutch (nl_NL) - [Danny van Kooten](https://dannyvankooten.com)
+- Spanish (es_ES) - [Paul Benitez ](http://www.administrandowp.com/) & [Enrique Pinto](http://www.thehivecluster.com/en)
+- Brazilian (pt_BR) - [Felipe Scuissiatto](http://www.evonline.com.br/)
+- German (de_DE) - [Jochen Gererstorfer](http://slotnerd.de/)
+- Italian (it_IT) - [Gianpaolo Rolando](http://www.gianpaolorolando.eu/) & [Tiziano D'Angelo](http://www.dangelos.it/)
+- Slovak (sk_SK) - [Henrich Koszegi](http://www.webworks.sk/)
+- Hungarian (hu_HU) - Németh Balázs
+
+It's easy to translate the plugin into your own language. Head over to the [translation project on Transifex](https://www.transifex.com/projects/p/mailchimp-for-wordpress/) and click on "[Help translate MailChimp for WordPress](https://www.transifex.com/signup/?join_project=mailchimp-for-wordpress)".
+
 == Screenshots ==
 
 1. Simple or advanced sign-up forms that blend in with your theme.
@@ -247,11 +257,22 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 == Changelog ==
 
+= 2.1.6 - November 18, 2014 =
+
+**Fixes**
+
+- Notice in `class-widget.php` when widget options are never saved.
+
+**Improvements**
+
+- Added some missing gettext calls so strings can be translated.
+- Updated translations
+
 = 2.1.5 - October 13, 2014 =
 
 **Fixes**
 
-- Notice when fetching lists from MailChimp in `class-mailchimp.php`.
+- Notice in `class-mailchimp.php` when fetching lists from MailChimp.
 
 = 2.1.4 - October 13, 2014 =
 
@@ -593,5 +614,5 @@ Your theme folder can be found by browsing to `/wp-content/themes/your-theme-nam
 
 == Upgrade Notice ==
 
-= 2.1.5 =
+= 2.1.4 =
 Updated & improved translations. Edge case bug fixes. Minor improvements and added filter hooks.
