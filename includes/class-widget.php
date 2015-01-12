@@ -1,6 +1,6 @@
 <?php
 
-if( ! defined("MC4WP_LITE_VERSION") ) {
+if( ! defined( 'MC4WP_LITE_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit;
@@ -18,7 +18,9 @@ class MC4WP_Lite_Widget extends WP_Widget {
 		parent::__construct(
 			'MC4WP_Widget', // Base ID
 			__( 'MailChimp Sign-Up Form', 'mailchimp-for-wp' ), // Name
-			array( 'description' => __( 'Displays your MailChimp for WordPress sign-up form', 'mailchimp-for-wp' ), ) // Args
+			array(
+				'description' => __( 'Displays your MailChimp for WordPress sign-up form', 'mailchimp-for-wp' ),
+			)
 		);
 	}
 
@@ -32,7 +34,8 @@ class MC4WP_Lite_Widget extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 
-		$title = apply_filters( 'widget_title', $instance['title'] );
+		$title = isset( $instance['title'] ) ? $instance['title'] : '';
+		$title = apply_filters( 'widget_title', $title );
 
 		echo $args['before_widget'];
 
@@ -45,7 +48,7 @@ class MC4WP_Lite_Widget extends WP_Widget {
 			include_once MC4WP_LITE_PLUGIN_DIR . 'includes/functions/template.php';
 		}
 
-		echo mc4wp_get_form(0);
+		echo mc4wp_get_form();
 
 		echo $args['after_widget'];
 	}
@@ -55,7 +58,9 @@ class MC4WP_Lite_Widget extends WP_Widget {
 	 *
 	 * @see WP_Widget::form()
 	 *
-	 * @param array   $instance Previously saved values from database.
+	 * @param array $instance Previously saved values from database.
+	 *
+	 * @return string|void
 	 */
 	public function form( $instance ) {
 		$title = isset( $instance['title'] ) ? $instance['title'] : __( 'Newsletter', 'mailchimp-for-wp' );

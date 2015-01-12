@@ -1,27 +1,37 @@
-(function($) { 
+(function($) {
 
-	$("tr.pro-feature, tr.pro-feature td :radio").change(function() {
-		this.checked = false;
-		alert("This option is only available in the premium version of MailChimp for WordPress.");
-		event.stopPropagation();
-	});
+	var $context = $('#mc4wp-admin');
 
-	$("tr.pro-feature, tr.pro-feature label").click(function() {
-		alert("This option is only available in the premium version of MailChimp for WordPress.");
-		event.stopPropagation();
-	});
+	function proOnlyNotice() {
 
-	(function() {
-		$lists = $("#mc4wp-lists :input");
-		$lists.change( toggleNotices );
-
-		function toggleNotices() {
-			var hasListSelected = $lists.filter(':checked').length > 0;
-			$(".mc4wp-notice.no-lists-selected").toggle( ! hasListSelected );
-			$('#mc4wp-fw-mailchimp-fields').toggle( hasListSelected );
+		// prevent checking of radio buttons
+		if( typeof this.checked === 'boolean' ) {
+			this.checked = false;
 		}
-	})();
 
+		alert( mc4wp.strings.proOnlyNotice );
+		event.stopPropagation();
+	}
+
+	$context.find(".pro-feature, .pro-feature label, .pro-feature :radio").click(proOnlyNotice);
+
+	$context.find('input[name$="[show_at_woocommerce_checkout]"]').change(function() {
+		$context.find('tr#woocommerce-settings').toggle( $(this).prop( 'checked') );
+	});
+
+	var $listInputs = $("#mc4wp-lists").find(':input');
+	$listInputs.change(
+		function() {
+			var hasListSelected = $listInputs.filter(':checked').length > 0;
+			$(".mc4wp-notice.no-lists-selected").toggle( ! hasListSelected );
+			$('#mc4wp-fw-fields, #mc4wp-fw-mailchimp-fields').toggle( hasListSelected );
+		}
+	);
+
+
+
+
+	// Allow tabs inside the form mark-up
 	$(document).delegate('#mc4wpformmarkup', 'keydown', function(e) {
 		var keyCode = e.keyCode || e.which;
 
@@ -54,7 +64,7 @@
 		QTags.addButton( 'mc4wp_response', 'form response', '{response}', '', 'response', 'Shows the form response' );
 		QTags.addButton( 'mc4wp_subscriber_count', '# of subscribers', '{subscriber_count}', '', 'subscribers', 'Shows number of subscribers of selected list(s)' );
 
-		if( window.mc4wp.has_captcha_plugin == true ) {
+		if( window.mc4wp.hasCaptchaPlugin == true ) {
 			QTags.addButton( 'mc4wp_captcha', 'CAPTCHA', '{captcha}', '', 'captcha', 'Display a CAPTCHA field' );
 		}
 	})();
@@ -80,6 +90,7 @@
 		var $wrapp = $("#mc4wp-fw-wrap-p");
 		var fieldType, fieldName;
 		var $codePreview = $("#mc4wp-fw-preview");
+		var strings = mc4wp.strings.fieldWizard;
 		// functions
 
 		// set the fields the user can choose from
@@ -90,12 +101,12 @@
 			
 			// loop through checked lists
 			$lists.filter(':checked').each(function() {
-				var listFields = $(this).data('list-fields');
-				var listGroupings = $(this).data('list-groupings');
+				var listId = $(this).val();
+				var list = mc4wp.mailchimpLists[listId];
 
 				// loop through merge fields from this list
-				for(var i = 0, fieldCount = listFields.length; i < fieldCount; i++) {
-					var listField = listFields[i];
+				for(var i = 0, fieldCount = list.merge_vars.length; i < fieldCount; i++) {
+					var listField = list.merge_vars[i];
 
 					// add field to select if no similar option exists yet
 					if($mailchimpMergeFields.find("option[value='"+ listField.tag +"']").length == 0) {
@@ -109,8 +120,8 @@
 							.data('list-field', listField);
 
 						// only enable 3 fields
-						if(i > 3) {
-							$option.text("(PRO ONLY) " + text)
+						if( i > 3 ) {
+							$option.text( strings.proOnly + " " + text)
 								.attr('disabled', 'disabled')
 								.data('field', null);
 						}
@@ -120,8 +131,8 @@
 				}
 
 				// loop through interest groupings
-				for(var i = 0, groupingsCount = listGroupings.length; i < groupingsCount; i++) {
-					var listGrouping = listGroupings[i];
+				for(var i = 0, groupingsCount = list.interest_groupings.length; i < groupingsCount; i++) {
+					var listGrouping = list.interest_groupings[i];
 
 					// add field to select if no similar option exists yet
 					if($mailchimpGroupings.find("option[value='"+ listGrouping.id +"']").length == 0) {
@@ -135,7 +146,7 @@
 
 						// only show 1 grouping
 						if(i >= 1) {
-							$option.text("(PRO ONLY) " + text)
+							$option.text( strings.proOnly + " " + text)
 								.attr('disabled', 'disabled')
 								.data('list-grouping', null);
 						}
@@ -160,14 +171,14 @@
 
 				case 'submit':
 					fieldType = 'submit';
-					$valueLabel.text("Button text");
+					$valueLabel.text( strings.buttonText );
+					$value.val( strings.subscribe );
 					$wizardFields.find('p.row').filter('.value, .wrap-p').show();
 					break;
 
 				case 'lists':
 					fieldType = 'lists';
 					$wizardFields.find('.wrap-p').show();
-					updateCodePreview();
 					break;
 
 				default:
@@ -203,7 +214,7 @@
 
 			fieldType = 'text';
 			fieldName = '';
-			$valueLabel.html("Initial value <small>(optional)</small>");
+			$valueLabel.html( strings.initialValue + " <small>" + strings.optional + "</small>" );
 		}
 
 		/**
@@ -215,7 +226,7 @@
 			for(var i = 0, groupsCount = groups.length; i < groupsCount; i++) {
 				$("<input />").attr('type', 'text')
 					.addClass('widefat').data('value', groups[i].name)
-					.attr('placeholder', 'Label for "' + groups[i].name + '" (or leave empty)')
+					.attr('placeholder', strings.labelFor + ' "' + groups[i].name + '" ' + strings.orLeaveEmpty )
 					.attr('value', groups[i].name)
 					.appendTo($multipleValues);
 			}
@@ -302,13 +313,13 @@
 				'select': [ 'label', 'required', 'wrap-p', 'values'],
 				'radio': [ 'label', 'required', 'wrap-p', 'values'],
 				'date':  [ 'label', 'required', 'wrap-p', 'value']
-			}
+			};
 
 			// map MailChimp field types to HTML5 field type
 			var fieldTypesMap = {
 				'text': 'text', 'email': 'email', 'phone': 'tel', 'address': 'text', 'number': 'number',
 				'dropdown': 'select', 'date': 'date', 'birthday': 'date', 'radio': 'radio',  'checkbox': 'checkbox'
-			}
+			};
 
 			if(fieldTypesMap[data.field_type] != undefined) {
 				fieldType = fieldTypesMap[data.field_type];
@@ -322,7 +333,7 @@
 				var visibleRows = visibleRowsMap["default"];
 			}
 
-			for(var i = 0, count = visibleRows.length; i < count; i++) {
+			for(var i = 0; i < visibleRows.length; i++) {
 				$wizardFields.find('p.row.' + visibleRows[i]).show();
 			}
 
@@ -339,8 +350,14 @@
 			$required.attr('checked', data.req);
 
 			if($multipleValues.is(":visible") && data.choices) {
-				for(var i = 0, count = data.choices.length; i < count; i++) {
-					$("<input />").attr('type', 'text').addClass('widefat').data('value', data.choices[i]).attr('placeholder', 'Label for "' + data.choices[i] + '" (or leave empty)').attr('value', data.choices[i]).appendTo($multipleValues);
+				for(var i = 0; i < data.choices.length; i++) {
+					$("<input />")
+						.attr('type', 'text')
+						.addClass('widefat')
+						.data('value', data.choices[i])
+						.attr('placeholder', strings.labelFor + ' "' + data.choices[i] + '" ' + strings.orLeaveEmpty )
+						.attr('value', data.choices[i])
+						.appendTo($multipleValues);
 				}
 			}
 			
@@ -364,7 +381,6 @@
 		function updateCodePreview()
 		{
 			var $code = $("<div></div>");
-			var inputs = [];
 			var $input;
 
 			switch(fieldType) {
@@ -372,7 +388,7 @@
 				case 'lists':
 					var html = getListChoiceHTML();
 
-					if($wrapp.is(':visible:checked')) {
+					if( wrapInParagraph() ) {
 						html = "<p>" + html + "</p>";
 					}
 
@@ -386,8 +402,7 @@
 					// add options to select
 					$multipleValues.find(":input").each(function() {
 						if($(this).val().length > 0) {
-							$el = $("<option />").val($(this).data("value")).text($(this).val());
-							$el.appendTo($input);
+							$("<option />").val($(this).data("value")).text($(this).val()).appendTo($input);
 						}					
 					});
 					break;
@@ -458,7 +473,7 @@
 			}
 
 			// wrap in paragraphs?
-			if($wrapp.is(':visible:checked')) {
+			if( wrapInParagraph() ) {
 				$code.wrapInner($("<p />"));
 			}
 			
@@ -480,9 +495,18 @@
 			
 			// fallback, just append
 			if(!result) {
-				$formContent = $("#mc4wpformmarkup");
-				$formContent.val($formContent.val() + "\n" + $codePreview.val());
+				var $formContent = $("#mc4wpformmarkup");
+				$("#mc4wpformmarkup").val($formContent.val() + "\n" + $codePreview.val());
 			}
+		}
+
+		/**
+		 * Should we wrap the HTML in paragraph tags?
+		 *
+		 * @returns {boolean}
+		 */
+		function wrapInParagraph() {
+			return ( $wrapp.is(':visible:checked') ) ? true: false;
 		}
 
 		// setup events
