@@ -45,6 +45,47 @@ abstract class MC4WP_Integration {
 	}
 
 	/**
+	 * Is this a spam request?
+	 *
+	 * @return bool
+	 */
+	protected function is_spam() {
+
+		// check if honeypot was filled
+		if( $this->is_honeypot_filled() ) {
+			return true;
+		}
+
+		// check user agent
+		$user_agent = substr( $_SERVER['HTTP_USER_AGENT'], 0, 254 );
+		if( strlen( $user_agent ) < 2 ) {
+			return true;
+		}
+
+		/**
+		 * @filter `mc4wp_is_spam`
+		 * @expects boolean True if this is a spam request
+		 * @default false
+		 */
+		return apply_filters( 'mc4wp_is_spam', false );
+	}
+
+	/**
+	 * Was the honeypot filled?
+	 *
+	 * @return bool
+	 */
+	protected function is_honeypot_filled() {
+
+		// Check if honeypot was filled (by spam bots)
+		if( isset( $_POST['_mc4wp_required_but_not_really'] ) && ! empty( $_POST['_mc4wp_required_but_not_really'] ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
 	 * Should the checkbox be pre-checked?
 	 *
 	 * @return bool
@@ -79,29 +120,9 @@ abstract class MC4WP_Integration {
 	}
 
 	/**
-	 * Was the honeypot filled?
-	 *
-	 * @return bool
-	 */
-	protected function is_honeypot_filled() {
-
-		// Check if honeypot was filled (by spam bots)
-		if( isset( $_POST['_mc4wp_required_but_not_really'] ) && ! empty( $_POST['_mc4wp_required_but_not_really'] ) ) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
 	* @return bool
 	*/
 	public function checkbox_was_checked() {
-
-		if( $this->is_honeypot_filled() ) {
-			return false;
-		}
-
 		return ( isset( $_POST[ $this->checkbox_name ] ) && $_POST[ $this->checkbox_name ] == 1 );
 	}
 
