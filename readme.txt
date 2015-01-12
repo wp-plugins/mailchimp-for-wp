@@ -671,5 +671,5 @@ It's easy to translate the plugin into your own language. Head over to the [tran
 
 == Upgrade Notice ==
 
-= 2.2 =
-Contains many code improvements, updated translations and checkbox integration with WooCommerce & EDD checkout.
+= 2.2.1 =
+Spam prevention improvements, updated translations & minor code improvements.
