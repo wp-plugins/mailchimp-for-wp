@@ -7,7 +7,7 @@ if( ! defined("MC4WP_LITE_VERSION") ) {
 }
 
 ?>
-<div id="mc4wp" class="wrap mc4wp-settings">
+<div id="mc4wp-admin" class="wrap mc4wp-settings">
 
 	<h2><img src="<?php echo MC4WP_LITE_PLUGIN_URL . 'assets/img/menu-icon.png'; ?>" /> <?php _e( 'MailChimp for WordPress', 'mailchimp-for-wp' ); ?>: <?php _e( 'MailChimp Settings', 'mailchimp-for-wp' ); ?></h2>
 
@@ -23,7 +23,7 @@ if( ! defined("MC4WP_LITE_VERSION") ) {
 				<?php if($connected) { ?>
 					<span class="status positive"><?php _e( 'CONNECTED' ,'mailchimp-for-wp' ); ?></span>
 				<?php } else { ?>
-					<span class="status negative"><?php _e( 'NOT CONNECTED', 'mailchimp-for-wp' ); ?></span>
+					<span class="status neutral"><?php _e( 'NOT CONNECTED', 'mailchimp-for-wp' ); ?></span>
 				<?php } ?>
 			</h3>
 			<table class="form-table">
