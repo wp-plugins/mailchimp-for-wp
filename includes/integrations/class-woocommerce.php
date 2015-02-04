@@ -70,7 +70,7 @@ class MC4WP_WooCommerce_Integration extends MC4WP_Integration {
 	public function subscribe_from_woocommerce_checkout( $order_id ) {
 
 		$do_optin = get_post_meta( $order_id, '_mc4wp_optin', true );
-		
+
 		if( $do_optin ) {
 
 			$order = new WC_Order( $order_id );
@@ -78,7 +78,7 @@ class MC4WP_WooCommerce_Integration extends MC4WP_Integration {
 			$merge_vars = array(
 				'NAME' => "{$order->billing_first_name} {$order->billing_last_name}",
 				'FNAME' => $order->billing_first_name,
-				'LNAME' => $order->billing_last_name
+				'LNAME' => $order->billing_last_name,
 
 			);
 

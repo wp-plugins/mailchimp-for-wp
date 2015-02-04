@@ -364,7 +364,7 @@ class MC4WP_Lite_Form_Request {
 					// format new grouping
 					$grouping = array(
 						'id' => $grouping->id,
-						'groups' => $group_data
+						'groups' => $group_data,
 					);
 
 					// make sure groups is an array
@@ -639,7 +639,7 @@ class MC4WP_Lite_Form_Request {
 		 *
 		 * Used to alter the error message, don't use. Use `mc4wp_form_messages` instead.
 		 */
-		$message['text'] = apply_filters('mc4wp_form_error_message', $message['text'], $this->error_code );
+		$message['text'] = apply_filters( 'mc4wp_form_error_message', $message['text'], $this->error_code );
 
 		$html = '<div class="mc4wp-alert mc4wp-'. $message['type'].'">' . $message['text'] . '</div>';
 
@@ -673,32 +673,32 @@ class MC4WP_Lite_Form_Request {
 		$messages = array(
 			'already_subscribed' => array(
 				'type' => 'notice',
-				'text' => $this->form_options['text_already_subscribed']
+				'text' => $this->form_options['text_already_subscribed'],
 			),
 			'error' => array(
 				'type' => 'error',
-				'text' => $this->form_options['text_error']
+				'text' => $this->form_options['text_error'],
 			),
 			'invalid_email' => array(
 				'type' => 'error',
-				'text' => $this->form_options['text_invalid_email']
+				'text' => $this->form_options['text_invalid_email'],
 			),
 			'success' => array(
 				'type' => 'success',
-				'text' => $this->form_options['text_success']
+				'text' => $this->form_options['text_success'],
 			),
 			'invalid_captcha' => array(
 				'type' => 'error',
-				'text' => $this->form_options['text_invalid_captcha']
+				'text' => $this->form_options['text_invalid_captcha'],
 			),
 			'required_field_missing' => array(
 				'type' => 'error',
-				'text' => $this->form_options['text_required_field_missing']
+				'text' => $this->form_options['text_required_field_missing'],
 			),
 			'no_lists_selected' => array(
 				'type' => 'error',
-				'text' => __( 'Please select at least one list to subscribe to.', 'mailchimp-for-wp' )
-			)
+				'text' => __( 'Please select at least one list to subscribe to.', 'mailchimp-for-wp' ),
+			),
 		);
 
 		/**
