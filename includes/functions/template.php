@@ -1,6 +1,6 @@
 <?php
 
-if( ! defined( "MC4WP_LITE_VERSION" ) ) {
+if( ! defined( 'MC4WP_LITE_VERSION' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit;
@@ -56,7 +56,7 @@ function mc4wp_replace_variables( $text, $list_ids = array() ) {
 
 	// replace general vars
 	$needles = array( '{ip}', '{current_url}', '{date}', '{time}', '{language}' );
-	$replacements = array( $_SERVER['REMOTE_ADDR'], mc4wp_get_current_url(), date( "m/d/Y" ), date( "H:i:s" ), $language );
+	$replacements = array( $_SERVER['REMOTE_ADDR'], mc4wp_get_current_url(), date( 'm/d/Y' ), date( 'H:i:s' ), $language );
 	$text = str_ireplace( $needles, $replacements, $text );
 
 	// subscriber count? only fetch these if the tag is actually used
@@ -66,11 +66,22 @@ function mc4wp_replace_variables( $text, $list_ids = array() ) {
 		$text = str_ireplace( '{subscriber_count}', $subscriber_count, $text );
 	}
 
+	// replace {email} tag
+	if( isset( $_GET['mc4wp_email'] ) ) {
+		$email = esc_attr( $_GET['mc4wp_email'] );
+	} elseif( isset( $_COOKIE['mc4wp_email'] ) ) {
+		$email = esc_attr( $_COOKIE['mc4wp_email'] );
+	} else {
+		$email = '';
+	}
+
+	$text = str_ireplace( '{email}', $email, $text );
+
 	// replace user variables
 	$needles = array( '{user_email}', '{user_firstname}', '{user_lastname}', '{user_name}', '{user_id}' );
 	if ( is_user_logged_in() && ( $user = wp_get_current_user() ) && ( $user instanceof WP_User ) ) {
 		// logged in user, replace vars by user vars
-		$replacements = array( $user->user_email, $user->user_firstname, $user->user_lastname, $user->display_name, $user->ID );
+		$replacements = array( $user->user_email, $user->first_name, $user->last_name, $user->display_name, $user->ID );
 		$text = str_replace( $needles, $replacements, $text );
 	} else {
 		// no logged in user, replace vars with empty string
