@@ -17,20 +17,18 @@ class MC4WP_Lite_Admin
 	/**
 	 * @var string The relative path to the main plugin file from the plugins dir
 	 */
-	private $plugin_file = 'mailchimp-for-wp/mailchimp-for-wp.php';
+	private $plugin_file;
 
 	/**
 	 * Constructor
 	 */
-	public function __construct()
-	{
-		$this->setup_hooks();
+	public function __construct() {
 
-		// did the user click on upgrade to pro link?
-		if( isset( $_GET['page'] ) && $_GET['page'] === 'mailchimp-for-wp-upgrade' && false === headers_sent() ) {
-			wp_redirect( 'https://mc4wp.com/#utm_source=lite-plugin&utm_medium=link&utm_campaign=menu-upgrade-link' );
-			exit;
-		}
+		$this->plugin_file = plugin_basename( MC4WP_LITE_PLUGIN_FILE );
+
+		$this->load_translations();
+		$this->setup_hooks();
+		$this->listen();
 	}
 
 	/**
@@ -57,14 +55,15 @@ class MC4WP_Lite_Admin
 	private function setup_hooks() {
 
 		global $pagenow;
+		$current_page = isset( $pagenow ) ? $pagenow : '';
 
-		// Actions used throughout WP Admin
+		// Actions used globally throughout WP Admin
 		add_action( 'admin_init', array( $this, 'initialize' ) );
 		add_action( 'admin_menu', array( $this, 'build_menu' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'load_css_and_js' ) );
 
-		// Hooks for Plugins overview
-		if( isset( $pagenow ) && $pagenow === 'plugins.php' ) {
+		// Hooks for Plugins overview page
+		if( $current_page === 'plugins.php' ) {
 			$this->plugin_file = plugin_basename( MC4WP_LITE_PLUGIN_FILE );
 
 			add_filter( 'plugin_action_links_' . $this->plugin_file, array( $this, 'add_plugin_settings_link' ), 10, 2 );
@@ -79,6 +78,14 @@ class MC4WP_Lite_Admin
 	}
 
 	/**
+	 * Load the plugin translations
+	 */
+	private function load_translations() {
+		// load the plugin text domain
+		load_plugin_textdomain( 'mailchimp-for-wp', false, dirname( $this->plugin_file ) . '/languages' );
+	}
+
+	/**
 	 * Initializes various stuff used in WP Admin
 	 *
 	 * - Registers settings
@@ -89,16 +96,24 @@ class MC4WP_Lite_Admin
 
 		// register settings
 		register_setting( 'mc4wp_lite_settings', 'mc4wp_lite', array( $this, 'validate_settings' ) );
-		register_setting( 'mc4wp_lite_checkbox_settings', 'mc4wp_lite_checkbox', array( $this, 'validate_checkbox_settings' ) );
-		register_setting( 'mc4wp_lite_form_settings', 'mc4wp_lite_form', array( $this, 'validate_form_settings' ) );
-
-		// load the plugin text domain
-		load_plugin_textdomain( 'mailchimp-for-wp', false, dirname( $this->plugin_file ) . '/languages/' );
+		register_setting( 'mc4wp_lite_checkbox_settings', 'mc4wp_lite_checkbox', array( $this, 'validate_settings' ) );
+		register_setting( 'mc4wp_lite_form_settings', 'mc4wp_lite_form', array( $this, 'validate_settings' ) );
 
 		// store whether this plugin has the BWS captcha plugin running (https://wordpress.org/plugins/captcha/)
 		$this->has_captcha_plugin = function_exists( 'cptch_display_captcha_custom' );
 
 		$this->upgrade();
+	}
+
+	/**
+	 * Listen to various mc4wp actions
+	 */
+	private function listen() {
+		// did the user click on upgrade to pro link?
+		if( isset( $_GET['page'] ) && $_GET['page'] === 'mailchimp-for-wp-upgrade' && false === headers_sent() ) {
+			wp_redirect( 'https://mc4wp.com/#utm_source=lite-plugin&utm_medium=link&utm_campaign=menu-upgrade-link' );
+			exit;
+		}
 	}
 
 	/**
@@ -132,7 +147,7 @@ class MC4WP_Lite_Admin
 			return $links;
 		}
 
-		 $settings_link = '<a href="admin.php?page=mailchimp-for-wp">'. __( 'Settings', 'mailchimp-for-wp' ) . '</a>';
+		 $settings_link = '<a href="' . admin_url( 'admin.php?page=mailchimp-for-wp' ) . '">'. __( 'Settings', 'mailchimp-for-wp' ) . '</a>';
 		 array_unshift( $links, $settings_link );
 		 return $links;
 	}
@@ -151,7 +166,7 @@ class MC4WP_Lite_Admin
 		}
 
 		$links[] = '<a href="https://wordpress.org/plugins/mailchimp-for-wp/faq/">FAQ</a>';
-		$links[] = '<a href="https://mc4wp.com/#utm_source=lite-plugin&utm_medium=link&utm_campaign=plugins-upgrade-link">' . __( 'Upgrade to Pro', 'mailchimp-for-wp' ) . '</a>';
+		$links[] = '<a href="https://mc4wp.com/#utm_source=lite-plugin&utm_medium=link&utm_campaign=plugins-upgrade-link">' . __( 'Upgrade to MailChimp for WordPress Pro', 'mailchimp-for-wp' ) . '</a>';
 		return $links;
 	}
 
@@ -214,104 +229,37 @@ class MC4WP_Lite_Admin
 	* @param array $settings
 	* @return array
 	*/
-	public function validate_settings( $settings ) {
+	public function validate_settings( array $settings ) {
 
-		if( isset( $settings['api_key'] ) ) {
-			$settings['api_key'] = sanitize_text_field( $settings['api_key'] );
-		}
-
-		return $settings;
-	}
-
-	/**
-	* Validates the Form settings
-	*
-	* @param array $settings
-	* @return array
-	*/
-	public function validate_form_settings( $settings ) {
-
-		// If settings is malformed, just store an empty array.
-		if( ! is_array( $settings ) ) {
-			return array();
-		}
-
-		// Loop through new settings
-		foreach( $settings as $key => $value ) {
-
-			// sanitize text fields
-			if( substr( $key, 0, 5 ) === 'text_' ) {
-				$settings[ $key ] = strip_tags( trim( $value ), '<a><b><strong><em><br><i><u><pre><script><abbr><strike>' );
-				continue;
+		// sanitize simple text fields (no HTML, just chars & numbers)
+		$simple_text_fields = array( 'api_key', 'redirect', 'css' );
+		foreach( $simple_text_fields as $field ) {
+			if( isset( $settings[ $field ] ) ) {
+				$settings[ $field ] = sanitize_text_field( $settings[ $field ] );
 			}
-
-			switch( $key ) {
-
-				// sanitize markup textarea
-				case 'markup' :
-					$settings[ $key ] = preg_replace( '/<\/?form(.|\s)*?>/i', '', $value );
-					break;
-
-				// sanitize select
-				case 'css':
-					$settings[ $key ] = sanitize_text_field( $value );
-					break;
-
-				// sanitize radio & checkbox inputs
-				case 'double_optin':
-				case 'hide_after_success':
-					$settings[ $key ] = ( $value == 1 )  ? 1 : 0;
-					break;
-			}
-
 		}
 
-		return $settings;
-	}
-
-	/**
-	 * Validates the Checkbox settings
-	 *
-	 * @param array $settings
-	 * @return array
-	 */
-	public function validate_checkbox_settings( $settings ) {
-
-		// If settings is malformed, just store an empty array.
-		if( ! is_array( $settings ) ) {
-			return array();
+		// validate woocommerce checkbox position
+		if( isset( $settings['woocommerce_position'] ) ) {
+			// make sure position is either 'order' or 'billing'
+			if( ! in_array( $settings['woocommerce_position'], array( 'order', 'billing' ) ) ) {
+				$settings['woocommerce_position'] = 'billing';
+			}
 		}
 
-		// Loop through new settings
-		foreach( $settings as $key => $value ) {
-
-			switch( $key ) {
-
-				case 'lists':
-					if( ! is_array( $value ) ) {
-						$settings[ $key ] = array();
-					} else {
-						foreach( $settings[ $key ] as $list_key => $list_value ) {
-							$settings[ $key ][$list_key] = sanitize_text_field( $list_value );
-						}
-					}
-					break;
-
-				// sanitize text inputs
-				case 'label' :
-					$settings[ $key ] = strip_tags( trim( $value ), '<a><b><strong><em><br><i><u><pre><script><abbr><strike>' );
-					break;
-
-				// sanitize radio & checkbox inputs
-				case 'double_optin':
-				case 'show_at_comment_form':
-				case 'show_at_registration_form':
-				case 'precheck':
-				case 'css':
-					$settings[ $key ] = ( $value == 1 )  ? 1 : 0;
-					break;
+		// dynamic sanitization
+		foreach( $settings as $setting => $value ) {
+			// strip special tags from text settings
+			if( substr( $setting, 0, 5 ) === 'text_' || $setting === 'label' ) {
+				$value = trim( $value );
+				$value = strip_tags( $value, '<a><b><strong><em><i><br><u><script><span><abbr><strike>' );
+				$settings[ $setting ] = $value;
 			}
+		}
 
+		// strip <form> from form mark-up
+		if( isset( $settings[ 'markup'] ) ) {
+			$settings[ 'markup' ] = preg_replace( '/<\/?form(.|\s)*?>/i', '', $settings[ 'markup'] );
 		}
 
 		return $settings;
