@@ -1,11 +1,5 @@
 <?php
 
-if( ! defined( 'MC4WP_LITE_VERSION' ) ) {
-	header( 'Status: 403 Forbidden' );
-	header( 'HTTP/1.1 403 Forbidden' );
-	exit;
-}
-
 /**
 * Gets the MailChimp for WP options from the database
 * Uses default values to prevent undefined index notices.
@@ -39,24 +33,29 @@ function mc4wp_get_options( $key = '' ) {
 				'show_at_edd_checkout' => 0,
 				'lists' => array(),
 				'double_optin' => 1,
+				'update_existing' => 0,
+				'replace_interests' => 1,
+				'send_welcome' => 0,
 				'woocommerce_position' => 'order',
 			),
 			'form' => array(
 				'css' => 'default',
 				'markup' => "<p>\n\t<label>{$email_label}: </label>\n\t<input type=\"email\" id=\"mc4wp_email\" name=\"EMAIL\" placeholder=\"{$email_placeholder}\" required />\n</p>\n\n<p>\n\t<input type=\"submit\" value=\"{$signup_button}\" />\n</p>",
-				'text_success' => __( 'Thank you, your sign-up request was successful! Please check your e-mail inbox.', 'mailchimp-for-wp' ),
+				'text_subscribed' => __( 'Thank you, your sign-up request was successful! Please check your e-mail inbox.', 'mailchimp-for-wp' ),
 				'text_error' => __( 'Oops. Something went wrong. Please try again later.', 'mailchimp-for-wp' ),
 				'text_invalid_email' => __( 'Please provide a valid email address.', 'mailchimp-for-wp' ),
 				'text_already_subscribed' => __( 'Given email address is already subscribed, thank you!', 'mailchimp-for-wp' ),
 				'text_invalid_captcha' => __( 'Please complete the CAPTCHA.', 'mailchimp-for-wp' ),
 				'text_required_field_missing' => __( 'Please fill in the required fields.', 'mailchimp-for-wp' ),
+				'text_unsubscribed' => __( 'You were successfully unsubscribed.', 'mailchimp-for-wp' ),
+				'text_not_subscribed' => __( 'Given email address is not subscribed.', 'mailchimp-for-wp' ),
 				'redirect' => '',
 				'lists' => array(),
-				'double_optin' => 1,
 				'hide_after_success' => 0,
-				'update_existing' => false,
-				'replace_interests' => true,
-				'send_welcome' => false,
+				'double_optin' => 1,
+				'update_existing' => 0,
+				'replace_interests' => 1,
+				'send_welcome' => 0,
 			),
 		);
 
@@ -92,6 +91,5 @@ function mc4wp_get_options( $key = '' ) {
 * @return MC4WP_API
 */
 function mc4wp_get_api() {
-	global $mc4wp;
-	return $mc4wp->get_api();
+	return MC4WP_Lite::instance()->get_api();
 }

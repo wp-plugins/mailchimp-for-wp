@@ -1,6 +1,7 @@
 <?php
 
-if( ! defined( 'MC4WP_LITE_VERSION' ) ) {
+// prevent direct file access
+if( ! defined( 'ABSPATH' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
 	exit;
@@ -70,7 +71,7 @@ class MC4WP_Lite_Widget extends WP_Widget {
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
         </p>
         <p class="help">
-			<?php printf( __( 'You can edit your sign-up form in the %sMailChimp for WordPress form settings%s.', 'mailchimp-for-wp' ), '<a href="' . admin_url( 'admin.php?page=mailchimp-for-wp-form-settings' ) . '">', '</a>' ); ?>
+			<?php printf( __( 'You can edit your sign-up form in the <a href="%s">MailChimp for WordPress form settings</a>.', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp-form-settings' ) ); ?>
         </p>
 		<?php
 	}
