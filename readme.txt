@@ -4,7 +4,7 @@ Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm-medium=mailchimp-f
 Tags: mailchimp,newsletter,sign-up,contact form 7,woocommerce,buddypress,widget,form
 Requires at least: 3.7
 Tested up to: 4.2.1
-Stable tag: 2.2.9
+Stable tag: 2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -265,6 +265,12 @@ Development of the plugin happens on GitHub: [dannyvankooten/mailchimp-for-wordp
 8. **Pro only:** Create your own CSS styles with the form designer in the Pro version.
 
 == Changelog ==
+
+= 2.3.1 - May 6, 2015 =
+
+**Fixes**
+
+- PHP notice in `includes/class-tools.php`, introduced by version 2.3.
 
 = 2.3 - May 6, 2015 =
 
@@ -810,5 +816,5 @@ Minor improvements and additions for compatibility with the [MailChimp Sync plug
 
 == Upgrade Notice ==
 
-= 2.3 =
+= 2.3.1 =
 Handle unsubscribe calls from your forms and use dynamic variables everywhere. Updated translations.
