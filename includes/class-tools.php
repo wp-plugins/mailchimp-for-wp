@@ -80,7 +80,7 @@ class MC4WP_Tools {
 
 		// replace dynamic variables
 		if( stristr( $string, '{data_' ) !== false ) {
-			$string = preg_replace_callback('/\{data_(.+)\}/', array( 'MC4WP_Tools', 'replace_request_data_variables' ), $string );
+			$string = preg_replace_callback('/\{data_([^}]+)\}/', array( 'MC4WP_Tools', 'replace_request_data_variables' ), $string );
 		}
 
 		return $string;
@@ -115,7 +115,7 @@ class MC4WP_Tools {
 			$email = $_REQUEST['EMAIL'];
 		} elseif( isset( $_REQUEST['mc4wp_email'] ) ) {
 			$email = $_REQUEST['mc4wp_email'];
-		} elseif( $_COOKIE['mc4wp_email'] ) {
+		} elseif( isset( $_COOKIE['mc4wp_email'] ) ) {
 			$email = $_COOKIE['mc4wp_email'];
 		} else {
 			$email = '';
@@ -130,7 +130,18 @@ class MC4WP_Tools {
 	 * @return string
 	 */
 	public static function get_client_ip() {
-		return strip_tags( $_SERVER['REMOTE_ADDR'] );
+
+		$headers = ( function_exists( 'apache_request_headers' ) ) ? apache_request_headers() : $_SERVER;
+
+		if ( array_key_exists( 'X-Forwarded-For', $headers ) && filter_var( $headers['X-Forwarded-For'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) ) {
+			$ip = $headers['X-Forwarded-For'];
+		} elseif ( array_key_exists( 'HTTP_X_FORWARDED_FOR', $headers ) && filter_var( $headers['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) ) {
+			$ip = $headers['HTTP_X_FORWARDED_FOR'];
+		} else {
+			$ip = filter_var( $_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 );
+		}
+
+		return $ip;
 	}
 
 	/**
