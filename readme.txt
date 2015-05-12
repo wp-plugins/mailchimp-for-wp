@@ -3,7 +3,7 @@ Contributors: DvanKooten, ibericode, iMazed, hchouhan
 Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm-medium=mailchimp-for-wp&utm_campaign=donate-link
 Tags: mailchimp,newsletter,sign-up,contact form 7,woocommerce,buddypress,widget,form
 Requires at least: 3.7
-Tested up to: 4.2.1
+Tested up to: 4.2.2
 Stable tag: 2.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
