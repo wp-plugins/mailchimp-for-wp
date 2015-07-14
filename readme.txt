@@ -65,12 +65,6 @@ If you do not yet have a MailChimp account, [creating one is 100% free and only 
 1. Activate the plugin
 1. Set [your MailChimp API key](https://admin.mailchimp.com/account/api) in the plugin settings.
 
-= Configuring Sign-Up Checkboxes =
-1. Go to *MailChimp for WP > Checkboxes*
-2. Select at least one of your MailChimp lists to subscribe to.
-3. Select the forms you want to [add a sign-up checkbox to your, like your comment form or WooCommerce checkout](https://mc4wp.com/kb/add-sign-checkbox-form-another-plugin/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=installation-instructions-link).
-4. Optionally, [add a sign-up checkbox to a Contact Form 7](https://mc4wp.com/kb/add-sign-checkbox-contact-form-7/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=installation-instructions-link) form or [any other form](https://mc4wp.com/kb/add-sign-checkbox-custom-form/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=installation-instructions-link).
-
 = Configuring Sign-Up Form(s) =
 1. Go to *MailChimp for WP > Forms*
 2. Select at least one MailChimp list to subscribe people to.
@@ -88,10 +82,7 @@ if( function_exists( 'mc4wp_form' ) ) {
 `
 
 = Need help? =
-Please take a look at the [MailChimp for WordPress documentation](https://mc4wp.com/kb/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=installation-instructions-link) or [plugin FAQ](https://wordpress.org/plugins/mailchimp-for-wp/faq/) first. If you can't find your answer there, please look through the [MailChimp for WordPress plugin support forums](https://wordpress.org/support/plugin/mailchimp-for-wp) or start your own topic.
-
-= Upgrade to MailChimp for WordPress Pro =
-If you like the plugin, consider [upgrading to the Pro version of MailChimp for WordPress](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=installation-instructions-link) for an even better plugin!
+Please take a look at the [MailChimp for WordPress knowledge base](https://mc4wp.com/kb/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=installation-instructions-link) first. If you can't find your answer there, please look through the [MailChimp for WordPress plugin support forums](https://wordpress.org/support/plugin/mailchimp-for-wp) or start your own topic.
 
 == Frequently Asked Questions ==
 
@@ -120,21 +111,12 @@ Use the following shortcode in your CF7 form to display a MailChimp sign-up chec
 [mc4wp_checkbox "Subscribe to our newsletter?"]
 `
 
-More information:
-
-- [Add a MailChimp subscribe checkbox to Contact Form 7](https://mc4wp.com/kb/add-sign-checkbox-contact-form-7/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=after-css-link)
-- [Send additional Contact Form 7 fields to MailChimp](https://mc4wp.com/kb/send-additional-cf7-fields-mailchimp/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=after-css-link).
-
 = I am getting spam sign-ups =
 
 To prevent bots from subscribing, you can take the following anti-spam measures.
 
 - Enable double opt-in in the plugin settings.
 - Install the [Goodbye Captcha](https://wordpress.org/plugins/goodbye-captcha/) plugin.
-
-More information:
-
-- [Prevent bots from subscribing to your MailChimp list](https://mc4wp.com/kb/preventing-bots-subscribing/)
 
 = The form shows a success message but subscribers are not added to my list(s)? =
 If the form shows a success message, there is no doubt that the sign-up request succeeded. MailChimp could have a slight delay sending the confirmation email though, please just be patient and make sure to check your SPAM folder.
@@ -158,8 +140,6 @@ You can use custom CSS to style the sign-up form if you do not like the themes t
 
 You can add your custom CSS to your theme stylesheet or (easier) by using a plugin like [Simple Custom CSS](https://wordpress.org/plugins/simple-custom-css/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=after-css-link)
 
-[>> With the Pro plugin it's really easy to design beautiful forms <<](https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=after-css-link)
-
 = Can I add a checkbox to third-party forms? =
 Yes, you can include the following HTML in any form.
 
@@ -171,11 +151,6 @@ Yes, you can include the following HTML in any form.
 `
 
 MailChimp for WordPress will automatically find the `name` and `email` field and subscribe to the list selected in **MailChimp for WP > Checkboxes**.
-
-More information:
-
-- [Add MailChimp subscribe checkbox to custom form](https://mc4wp.com/kb/add-sign-checkbox-custom-form/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=after-css-link)
-- [Add MailChimp sign-up checkbox to a form by another plugin](https://mc4wp.com/kb/add-sign-checkbox-form-another-plugin/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=after-css-link)
 
 = How do I add subscribers to certain interest groups? =
 
@@ -199,34 +174,14 @@ _Example (hidden field):_
 If you're getting an `HTTP Error` when trying to connect to your MailChimp account, please contact your webhost and ask them if they have PHP CURL installed and updated to the latest version (7.40.x).
 Also, please ask them to allow requests to `https://api.mailchimp.com/`.
 
-= What are the main differences between MailChimp for WordPress Pro and Lite? =
-Please have a look at the [MailChimp for WordPress Pro vs MailChimp for WordPress lite comparision](https://mc4wp.com/features/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=faq) page on our site.
-
 = More documentation =
 More detailed documentation can be found on the [MailChimp for WordPress documentation](https://mc4wp.com/kb/#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=faq) site.
 
 == Other Notes ==
 
-= Bug Reports =
-
-Bug reports for [MailChimp for WordPress are welcomed on GitHub](https://github.com/ibericode/mailchimp-for-wordpress). Please note that GitHub is _not_ a support forum.
-
 = Translations =
 
-The MailChimp for WordPress plugin is translated into the following languages.
-
-- English (en_US) - [Danny van Kooten](https://dannyvankooten.com#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=other-notes)
-- Dutch (nl_NL) - [Danny van Kooten](https://dannyvankooten.com#utm_source=wp-plugin-repo&utm_medium=mailchimp-for-wp&utm_campaign=other-notes)
-- German (de_DE) - [Stefan Oderbolz](http://metaodi.ch/)
-- Spanish (es_ES) - [Paul Benitez ](http://www.administrandowp.com/) & [Enrique Pinto](http://www.thehivecluster.com/en)
-- Brazilian (pt_BR) - [Felipe Scuissiatto](http://www.evonline.com.br/)
-- German (de_DE) - [Jochen Gererstorfer](http://slotnerd.de/)
-- Italian (it_IT) - [Gianpaolo Rolando](http://www.gianpaolorolando.eu/) & [Tiziano D'Angelo](http://www.dangelos.it/)
-- Slovak (sk_SK) - [Henrich Koszegi](http://www.webworks.sk/)
-- Hungarian (hu_HU) - Németh Balázs
-- Even more awesome people!
-
-It's easy to translate the plugin into your own language. Head over to the [translation project on Transifex](https://www.transifex.com/projects/p/mailchimp-for-wordpress/) and click on "[Help translate MailChimp for WordPress](https://www.transifex.com/signup/?join_project=mailchimp-for-wordpress)".
+The plugin is translated using Transifex. If you want to help out, please head over to the [translation project on Transifex](https://www.transifex.com/projects/p/mailchimp-for-wordpress/).
 
 = Development =
 
